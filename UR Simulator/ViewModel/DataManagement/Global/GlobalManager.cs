@@ -206,10 +206,10 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                     cardLevels.Add(new CardLevel(level, power, damage));
                 }
 
-                var card = ApiToCardBaseAdapter.ToCardBase(id, name, clanId, minLevel, maxLevel, rarityText, abilityText, abilityUnlockLevel, timeSinceRelease, cardLevels);
-
-                worker.ReportProgress((int)(100 * progress / idsToAnalyze.Count()), card.Name);
+                worker.ReportProgress((int)(100 * progress / idsToAnalyze.Count()), $"[{id}] {name}");
                 progress++;
+
+                var card = ApiToCardBaseAdapter.ToCardBase(id, name, clanId, minLevel, maxLevel, rarityText, abilityText, abilityUnlockLevel, timeSinceRelease, cardLevels);
 
                 managers.DatabaseManager.StoreCardBase(card);
                 managers.InMemoryManager.LoadToMemoryCardBase(card);
