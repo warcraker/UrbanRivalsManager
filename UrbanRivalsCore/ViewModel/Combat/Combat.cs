@@ -156,7 +156,7 @@ namespace UrbanRivalsCore.ViewModel
         /// <exception cref="InvalidOperationException">The combat already finished.</exception>
         public RoundResults PreviewRound(int leftUsedCard, int rightUsedCard, bool leftUsedFury, bool rightUsedFury, int leftUsedPillz, int rightUsedPillz, PlayerSide forceWinnerOnRandom = PlayerSide.None)
         {
-            throw new NotImplementedException("Implement Prefix Equalizer"); // TODO
+            throw new NotImplementedException("Implement Equalizer and Day/Night Prefixes"); // TODO
 
             /* DO NOT REFACTOR THIS METHOD !!!
              * Use the "PreviewRound() Steps.txt" document to orient yourself.

@@ -600,6 +600,9 @@
   <ItemGroup>
     <Resource Include="Resources\Clans\HIVE.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Clans\GHOSTOWN.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

@@ -38,6 +38,7 @@ namespace UrbanRivalsCore.Model
             new Clan(ClanId.Freaks,         "Freaks",          new Skill(SkillPrefix.None, SkillSuffix.PoisonXMinY, 2, 3)),
             new Clan(ClanId.Frozn,          "Frozn",           new Skill(SkillPrefix.Revenge, SkillSuffix.IncreasePowerAndDamageX, 2)),
             new Clan(ClanId.GHEIST,         "GHEIST",          new Skill(SkillPrefix.None, SkillSuffix.StopAbility)),
+            new Clan(ClanId.GhosTown,       "GhosTown",        new Skill(SkillPrefix.None, SkillSuffix.IncreasePowerAndDamageX, 1)), // TODO Prefix day / night
             new Clan(ClanId.Hive,           "Hive",            new Skill(SkillPrefix.Equalizer, SkillSuffix.DecreaseAttackXMinY, 3, 5)),
             new Clan(ClanId.Huracan,        "Huracan",         new Skill(SkillPrefix.None, SkillSuffix.IncreaseAttackXPerRemainingLife, 1)),
             new Clan(ClanId.Jungo,          "Jungo",           new Skill(SkillPrefix.None, SkillSuffix.IncreaseLifeX, 2)),

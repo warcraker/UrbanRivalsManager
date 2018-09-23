@@ -26,6 +26,7 @@ namespace UrbanRivalsManager.ViewModel
             images.Add(ClanId.Freaks, GetImage("FREAKS.png"));
             images.Add(ClanId.Frozn, GetImage("FROZN.png"));
             images.Add(ClanId.GHEIST, GetImage("GHEIST.png"));
+            images.Add(ClanId.GhosTown, GetImage("GHOSTOWN.png"));
             images.Add(ClanId.Hive, GetImage("HIVE.png"));
             images.Add(ClanId.Huracan, GetImage("HURACAN.png"));
             images.Add(ClanId.Jungo, GetImage("JUNGO.png"));

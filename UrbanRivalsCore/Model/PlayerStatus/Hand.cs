@@ -165,6 +165,8 @@ namespace UrbanRivalsCore.Model
                     return SupportIndex.Frozn;
                 case ClanId.GHEIST:
                     return SupportIndex.GHEIST;
+                case ClanId.GhosTown:
+                    return SupportIndex.GhosTown;
                 case ClanId.Hive:
                     return SupportIndex.Hive;
                 case ClanId.Huracan:
