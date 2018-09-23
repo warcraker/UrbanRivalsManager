@@ -14,7 +14,7 @@ namespace UrbanRivalsApiAdapter
         private static class UsedRegex
         {
             public static readonly Regex PrefixAndSuffix =
-                new Regex(@"^(?<prefix>Backlash|Confidence|Courage|Defeat|Equalizer|Growth|Killshot|Reprisal|Revenge|Stop|Support|Victory Or Defeat) ?: (?<suffix>[a-zA-Z0-9 .,:=&+-]+)$");
+                new Regex(@"^(?<prefix>Backlash|Brawl|Confidence|Courage|Defeat|Equalizer|Growth|Killshot|Reprisal|Revenge|Stop|Support|Victory Or Defeat) ?: (?<suffix>[a-zA-Z0-9 .,:=&+-]+)$");
             public static class Suffix
             {
                 public static readonly Regex CancelAttackModifier = new Regex(@"^Cancel Opp[.] Attack Modif[.]$");
@@ -166,6 +166,9 @@ namespace UrbanRivalsApiAdapter
             {
                 case "Backlash":
                     prefix = SkillPrefix.Backlash;
+                    break;
+                case "Brawl":
+                    prefix = SkillPrefix.Brawl;
                     break;
                 case "Confidence":
                     prefix = SkillPrefix.Confidence;

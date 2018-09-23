@@ -432,4 +432,7 @@
   <data name="skill_prefix_equalizer" xml:space="preserve">
     <value>Equalizer: </value>
   </data>
+  <data name="skill_prefix_brawl" xml:space="preserve">
+    <value>Brawl: </value>
+  </data>
 </root>

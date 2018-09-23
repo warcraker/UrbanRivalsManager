@@ -475,6 +475,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brawl: .
+        /// </summary>
+        public static string skill_prefix_brawl {
+            get {
+                return ResourceManager.GetString("skill_prefix_brawl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confidence: .
         /// </summary>
         public static string skill_prefix_confidence {

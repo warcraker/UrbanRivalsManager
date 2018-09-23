@@ -102,6 +102,7 @@ namespace UrbanRivalsCore.Model
         GrowthAndDefeat,
 
         Backlash,
+        Brawl,
         Confidence,
         Courage,
         Defeat,

@@ -223,6 +223,9 @@ namespace UrbanRivalsCore.Model
                     case SkillPrefix.Backlash:
                         result = Properties.GameStrings.skill_prefix_backlash;
                         break;
+                    case SkillPrefix.Brawl:
+                        result = Properties.GameStrings.skill_prefix_brawl;
+                        break;
                     case SkillPrefix.Confidence:
                         result = Properties.GameStrings.skill_prefix_confidence;
                         break;
