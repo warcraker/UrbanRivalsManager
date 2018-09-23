@@ -8,10 +8,10 @@ MANA = UR Manager Project
 3. CORE > Model > Enums.cs
 Add entry in ClanId and SupportIndex
 
-4. CORE > Model > Hand.cs
+4. CORE > Model > PlayerStatus > Hand.cs
 Add entry to switch in ConvertClanIdToSupportIndex
 
-5. CORE > Model > Clan.cs
+5. CORE > Model > Cards > Clan.cs
 Add entry to ClanList
 
 6. MANA > Resources > Clans (Folder)
