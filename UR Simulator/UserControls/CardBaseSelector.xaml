@@ -1,0 +1,27 @@
+﻿<UserControl x:Name="Control"
+             x:Class="UrbanRivalsManager.UserControls.CardBaseSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UrbanRivalsManager.UserControls"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:resx="clr-namespace:UrbanRivalsManager.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="100">
+    <Grid DataContext="{Binding ElementName=Control}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <local:CardBaseSearchComboBox Grid.ColumnSpan="2" HorizontalAlignment="Stretch"
+            SelectedCard="{Binding SelectedCardBase}" 
+            InMemoryManager="{Binding InMemoryManager}" />
+        <TextBlock Grid.Row="1" Text="{x:Static resx:UIStrings.ui_searchbox_level}" />
+        <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Level}" />
+    </Grid>
+</UserControl>

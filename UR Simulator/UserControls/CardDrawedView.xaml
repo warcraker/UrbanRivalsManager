@@ -1,0 +1,190 @@
+﻿<UserControl x:Class="UrbanRivalsManager.UserControls.CardDrawedView"
+             x:Name="Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sample="clr-namespace:UrbanRivalsManager.SampleData"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             IsHitTestVisible="True"
+             >
+
+    <Viewbox MaxHeight="218" MaxWidth="156"
+             d:DataContext="{d:DesignInstance Type=sample:CardDrawedViewSample, IsDesignTimeCreatable=True}"
+             DataContext="{Binding ElementName=Control}"
+             >
+        <Viewbox.Resources>
+            
+            <!--General Styles-->
+            <Style TargetType="FrameworkElement">
+                <Setter Property="AllowDrop" Value="False" />
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+            </Style>
+            <Style TargetType="Grid" BasedOn="{StaticResource {x:Type FrameworkElement}}" />
+            <Style TargetType="Image" BasedOn="{StaticResource {x:Type FrameworkElement}}" />
+
+            <!--Power, Damage and Name-->
+            <Style TargetType="Label" BasedOn="{StaticResource {x:Type FrameworkElement}}" >
+                <Setter Property="Width" Value="14" />
+                <Setter Property="Height" Value="12" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="FontFamily" Value="Arial" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Padding" Value="0" />
+            </Style>
+
+            <!--Ability and Bonus-->
+            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type FrameworkElement}}">
+                <Setter Property="Width" Value="97" />
+                <Setter Property="Height" Value="27" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="FontFamily" Value="Arial" />
+                <Setter Property="FontSize" Value="9" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="MaxLines" Value="2" />
+                <Setter Property="Padding" Value="0 3"/>
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </Style>
+
+            <!-- Global border -->
+            <Style x:Key="GlobalBorder" TargetType="Border">
+                <Setter Property="Focusable" Value="True"/>
+                <Setter Property="Width" Value="155"/>
+                <Setter Property="Height" Value="216"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Background" Value="#01000000" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsSelected}" Value="true">
+                        <Setter Property="Background" Value="#5544ff44"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding HasBattled}" Value="true">
+                        <Setter Property="Background" Value="#55222222"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- Fury -->
+            <Style x:Key="Fury" TargetType="Border">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding HasUsedFury}" Value="true">
+                        <Setter Property="Background" Value="Firebrick" />
+                        <Setter Property="BorderBrush" Value="Red" />
+                        <Setter Property="BorderThickness" Value="2" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding HasUsedFury}" Value="false">
+                        <Setter Property="Background" Value="Gray" />
+                        <Setter Property="BorderThickness" Value="0" />
+                    </DataTrigger>
+                </Style.Triggers>
+                <Setter Property="Width" Value="32"/>
+                <Setter Property="Height" Value="26"/>
+                <Setter Property="CornerRadius" Value="3"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+                
+            <!--Won or lost-->
+            <Style x:Key="WonOrLost" TargetType="Image">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding HasWon}" Value="true">
+                        <Setter Property="Source" Value="/UR Manager;component/Resources/Misc/cup.png"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding HasWon}" Value="false">
+                        <Setter Property="Source" Value="/UR Manager;component/Resources/Misc/skull.jpg"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--Pillz icon-->
+            <Style x:Key="PillzIcon" TargetType="Image" BasedOn="{StaticResource {x:Type Image}}">
+                <Setter Property="Margin" Value="4 4 0 0"/>
+                <Setter Property="Width" Value="9"/>
+                <Setter Property="Height" Value="17"/>
+                <Setter Property="Source" Value="/UR Manager;component/Resources/misc/pillz_vertical.png"/>
+            </Style>
+
+
+            <Style x:Key="UsedPillz" TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                <Setter Property="Margin" Value="12 6 0 0"/>
+                <Setter Property="Content" Value="{Binding UsedPillz}"/>
+                <Setter Property="Width" Value="16"/>
+                <Setter Property="Height" Value="16"/>
+                <Setter Property="FontSize" Value="13"/>
+            </Style>
+
+            <!-- FallBack Values -->
+            <BitmapImage x:Key="DefaultRarity" UriSource="/UR Manager;component/Resources/Rarity/common.png" />
+            <BitmapImage x:Key="DefaultLevel" UriSource="/UR Manager;component/Resources/Levels/15.png" />
+        </Viewbox.Resources>
+        
+        <Canvas Width="155" Height="216">
+
+            <!--Portrait-->
+            <Image Margin="8 22 0 0" Width="140" Height="112" Style="{StaticResource CardPortrait}"/>
+
+            <!--Back of the card-->
+            <Image Width="155" Height="216"  
+                   Source="{Binding CardDrawed.Rarity, Converter={StaticResource RarityConv}, ConverterParameter=Background, 
+                FallbackValue={StaticResource DefaultRarity}, TargetNullValue={StaticResource DefaultRarity}}" />
+
+            <!--Clan-->
+            <Image Margin="11 11 0 0" Width="17" Height="15" 
+                   Source="{Binding CardDrawed.Clan.ClanId, Converter={StaticResource ClanIdConv}, 
+                FallbackValue={StaticResource DefaultClan}, TargetNullValue={StaticResource DefaultClan}}" />
+            <!--Card's name-->
+            <Label Margin="36 6 0 0" Width="112" Height="13" FontSize="11" Content="{Binding CardDrawed.Name}">
+                <Label.Effect>
+                    <DropShadowEffect Color="Black" ShadowDepth="4" />
+                </Label.Effect>
+            </Label>
+            <!--Power-->
+            <Label Margin="9 140 0 0" Content="{Binding CardDrawed.Power, FallbackValue=0}"/>
+            <!--Damage-->
+            <Label Margin="9 178 0 0" Content="{Binding CardDrawed.Damage, FallbackValue=0}"/>
+            <!--Level-->
+            <Image Width="120" Height="17" Margin="30 138 0 0">
+                <Image.Source>
+                    <MultiBinding Converter="{StaticResource LevelConv}" FallbackValue="{StaticResource DefaultLevel}"
+                                  TargetNullValue="{StaticResource DefaultLevel}">
+                        <Binding Path="CardDrawed.Level"/>
+                        <Binding Path="CardDrawed.MaxLevel"/>
+                    </MultiBinding>
+                </Image.Source>
+            </Image>
+            <!--Ability-->
+            <TextBox Margin="52 156 0 0" Text="{Binding CardDrawed.Ability, Converter={StaticResource ToStringConv}, 
+                FallbackValue=No Ability}" />
+            <!--Bonus-->
+            <TextBox Margin="52 182 0 0" Text="{Binding CardDrawed.Bonus, Converter={StaticResource ToStringConv}, 
+                FallbackValue=No Bonus}" />
+            
+            <!--Battle info-->
+            <Canvas Margin="113 26 0 0" Visibility="{Binding HasBattled, Converter={StaticResource BooleanToVisibilityConv}, FallbackValue=Collapsed}">
+                <!--Won or lost-->
+                <Grid Margin="2 0 0 0" Width="28" Height="28">
+                    <Image Style="{StaticResource WonOrLost}"/>
+                </Grid>
+                <!--Used pillz & fury-->
+                <Grid x:Name="Pillz" Margin="0 29 0 0" >
+                    <Border Style="{StaticResource Fury}"/>
+                    <Image Style="{StaticResource PillzIcon}"/>
+                    <!--Used Pillz-->
+                    <Label Style="{StaticResource UsedPillz}"/>
+                </Grid>
+            </Canvas>
+
+            <!--Facade-->
+            <Border Style="{StaticResource GlobalBorder}" />
+
+        </Canvas>
+    </Viewbox>
+</UserControl>

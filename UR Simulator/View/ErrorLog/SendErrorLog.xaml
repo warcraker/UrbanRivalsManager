@@ -1,0 +1,57 @@
+﻿<Window x:Class="UrbanRivalsManager.View.SendErrorLog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SendErrorLog" Height="350" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label x:Name="Disclaimer" Grid.Row="0">Disclaimer</Label>
+        <Label x:Name="FirstTimeLabel" Grid.Row="1">First Time you see this?</Label>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <RadioButton x:Name="FirstTimeYes" GroupName="FirstTimeGroup" Grid.Column="0">Yes</RadioButton>
+            <RadioButton x:Name="FirstTimeNo" GroupName="FirstTimeGroup" Grid.Column="1">No</RadioButton>
+        </Grid>
+        <Label x:Name="RetraceLabel" Grid.Row="3">Steps to retrace</Label>
+        <TextBox x:Name="RetraceTextbox" Grid.Row="4">
+            1.
+            2.
+            3.
+            .
+            .
+            .
+            . BOOM!
+        </TextBox>
+        <Label x:Name="ObservationsLabel" Grid.Row="5">Observations</Label>
+        <TextBox x:Name="ObservationsTextbox" Grid.Row="6">Other things</TextBox>
+        <Label x:Name="ContactInfo" Grid.Row="7">Contact Info</Label>
+        <Grid Grid.Row="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>     
+            <Label x:Name="NameLabel" Grid.Row="0" Grid.Column="0">Name:</Label>
+            <TextBox x:Name="NameTextbox" Grid.Row="0" Grid.Column="1">User</TextBox>
+            <Label x:Name="EmailLabel" Grid.Row="1" Grid.Column="0">Email</Label>
+            <TextBox x:Name="EmailTextbox" Grid.Row="1" Grid.Column="1">user@gmail.com</TextBox>
+        </Grid>
+        <Button x:Name="Send" Grid.Row="9">Send</Button>
+    </Grid>
+</Window>

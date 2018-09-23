@@ -1,0 +1,27 @@
+﻿<Window x:Class="UrbanRivalsManager.View.DeckSaveLoadDeleteView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UrbanRivalsManager.View"
+        xmlns:resx="clr-namespace:UrbanRivalsManager.Properties"
+        mc:Ignorable="d"
+        Title="{Binding Title}" 
+        Icon="{Binding Icon}"
+        Height="300" Width="300">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Label DockPanel.Dock="Left">Deck</Label>
+            <TextBox Text="{Binding DeckName}" Visibility="{Binding EditableName, Converter={StaticResource BooleanToVisibilityConv}}"/>
+        </DockPanel>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="{Binding ButtonText}" Command="{Binding Action}"/>
+            <Button Grid.Column="1" Content="{x:Static resx:UIStrings.ui_general_cancel}" Click="Cancel"/>
+        </Grid>
+        <ListBox SelectedItem="{Binding DeckName}"/>
+    </DockPanel>
+</Window>

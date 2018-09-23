@@ -1,0 +1,34 @@
+CORE = UrbanRivalsCore Project
+ADAP = UrbanRivalsApiCardAdapter Project
+
+1. Make backup of database (and Regex if modified, or version-control it)
+
+2. CORE > Model > Enums.cs
+(Prefix) Add entry in SkillPrefix
+(Suffix) Add entry in SkillSuffix
+
+3. CORE > Properties > GameStrings.resx (for each language)
+Add string 
+
+4. CORE > Model > Cards > Skill.cs
+Add cases to the correct switch on ToString()
+
+5. ADAP > ApiCardBaseAdapter.cs
+(Prefix) On UsedRegex:
+Modify PrefixAndSufix Regex
+(Suffix) On UsedRegex.Suffix:
+Add a new Regex
+
+6. ADAP > ApiCardBaseAdapter.cs
+(Prefix) Add case to the corresponding switch on ParseAbility()
+(Suffix) Add case to the corresponding else-if on ParseAbility()
+
+7. Build solution, and rebuild database from scratch.
+Check consistency of EVERY CARD against database backup.
+(If wrong) Go back to step 5
+(If right) Go next to step 8
+
+8. CORE > ViewModel > Combat > Combat.cs
+Make the necessary changes on PreviewCombat function
+
+9. On release version, program a reset on database

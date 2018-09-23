@@ -1,0 +1,105 @@
+﻿<UserControl x:Name="Control"
+             x:Class="UrbanRivalsManager.UserControls.PlayerStatusView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:resx="clr-namespace:UrbanRivalsManager.Properties"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d"
+             >
+    <UserControl.Resources>
+        <Style x:Key="Background" TargetType="Border">
+            <Setter Property="Background" Value="#011627" />
+            <Setter Property="BorderBrush" Value="#FF9F1C" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Padding" Value="4" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FDFFFC" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+        <Style TargetType="xctk:IntegerUpDown">
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style x:Key="Icon" TargetType="Image">
+            <Setter Property="Height" Value="16" />
+            <Setter Property="Width" Value="16" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+        <Style x:Key="LifeIcon" TargetType="Image" BasedOn="{StaticResource Icon}">
+            <Setter Property="Source" Value="/UR Manager;component/Resources/Misc/heart.png" />
+        </Style>
+        <Style x:Key="PillzIcon" TargetType="Image" BasedOn="{StaticResource Icon}">
+            <Setter Property="Source" Value="/UR Manager;component/Resources/Misc/pillz_vertical.png" />
+        </Style>
+        <Style x:Key="PoisonIcon" TargetType="Image" BasedOn="{StaticResource Icon}">
+            <Setter Property="Source" Value="/UR Manager;component/Resources/Misc/poison.png" />
+        </Style>
+        <Style x:Key="HealIcon" TargetType="Image" BasedOn="{StaticResource Icon}">
+            <Setter Property="Source" Value="/UR Manager;component/Resources/Misc/heal.png" />
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#FDFFFC" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+    </UserControl.Resources>
+    <Border Style="{StaticResource Background}">
+        <Grid DataContext="{Binding PlayerStatus, ElementName=Control}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Grid.Column="0" Style="{StaticResource LifeIcon}" />
+                <xctk:IntegerUpDown Grid.Row="0" Grid.Column="1" Value="{Binding Life}" />
+                <ContentControl/>
+            
+                <Image Grid.Row="0" Grid.Column="2" Style="{StaticResource PillzIcon}" />
+                <xctk:IntegerUpDown Grid.Row="0" Grid.Column="3" Value="{Binding Pillz}" />
+
+                <Image Grid.Row="1" Grid.Column="0" Style="{StaticResource PoisonIcon}" />
+                <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Poison.Value}" />
+                <TextBlock Grid.Row="1" Grid.Column="2">min</TextBlock>
+                <xctk:IntegerUpDown Grid.Row="1" Grid.Column="3" Value="{Binding Poison.Min}" />
+
+                <Image Grid.Row="2" Grid.Column="0" Style="{StaticResource HealIcon}" />
+                <xctk:IntegerUpDown Grid.Row="2" Grid.Column="1" Value="{Binding Heal.Value}" />
+                <TextBlock Grid.Row="2" Grid.Column="2">max</TextBlock>
+                <xctk:IntegerUpDown Grid.Row="2" Grid.Column="3" Value="{Binding Heal.Max}" />
+            </Grid>
+
+            <Grid Grid.Row="1" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Courage}" Content="{x:Static resx:UIStrings.ui_playerstatus_courage}" FlowDirection="RightToLeft" />
+                <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding Reprisal}" Content="{x:Static resx:UIStrings.ui_playerstatus_reprisal}" />
+                <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding Confidence}" Content="{x:Static resx:UIStrings.ui_playerstatus_confidence}" FlowDirection="RightToLeft" />
+                <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding Revenge}" Content="{x:Static resx:UIStrings.ui_playerstatus_revenge}" />
+            </Grid>
+
+        </Grid>
+    </Border>
+</UserControl>

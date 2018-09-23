@@ -1,0 +1,653 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:resx="clr-namespace:UrbanRivalsManager.Properties"
+                    xmlns:core="clr-namespace:UrbanRivalsCore.Model;assembly=UrbanRivalsCore"
+                    >
+
+    <BitmapImage x:Key="DefaultPortrait" UriSource="/UR Manager;component/Resources/Misc/nochar.gif" />
+    <BitmapImage x:Key="DefaultClan" UriSource="/UR Manager;component/Resources/Clans/leader.png" />
+
+    <Style x:Key="CardPortrait" TargetType="Image">
+        <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant" />
+        <Setter Property="Source">
+            <Setter.Value>
+                <MultiBinding Converter="{StaticResource PortraitConv}" 
+                              FallbackValue="{StaticResource DefaultPortrait}" TargetNullValue="{StaticResource DefaultPortrait}">
+                    <Binding Path="CardBaseId" />
+                    <Binding Path="Level" />
+                </MultiBinding>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="MaxedCardPortrait" TargetType="Image" BasedOn="{StaticResource CardPortrait}">
+        <Setter Property="Source">
+            <Setter.Value>
+                <MultiBinding Converter="{StaticResource PortraitConv}" 
+                              FallbackValue="{StaticResource DefaultPortrait}" TargetNullValue="{StaticResource DefaultPortrait}">
+                    <Binding Path="CardBaseId" />
+                    <Binding Path="MaxLevel" />
+                </MultiBinding>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="MaxedCardTemplate">
+        <DataTemplate.Resources>
+            <!-- Portrait Size: 
+                Base Width (Bw) = 800
+                Base Height (Bh) = 640 
+                Final Width (Fw) = ??
+                Final Height (Fh) = ??
+                     User Defined:
+                Separation Big (Sb)     = 2 
+                Separation Small (Ss)   = 1
+                CellSize (Cs)           = 28 
+                PortratitWidth (Pw)     = ??
+                     Now some math:
+                Pw = Sb + Ss + Fw
+                Fw / Fh = Bw / Bh
+                Fh = 2 * (Cs - Sb)
+                Fw = (Bw * (2 * (Cs - Sb)) / Bh
+                = (800 * (2 * (28 - 2))) / 640 = 65
+                Pw = 2 + 1 + 65 = 68 -->
+            <system:Double x:Key="SeparationBig">2</system:Double>
+            <system:Double x:Key="SeparationSmall">1</system:Double>
+            <GridLength x:Key="CellSize">28</GridLength>
+            <GridLength x:Key="PortraitWidth">68</GridLength>
+
+            <Style TargetType="Border">
+                <Setter Property="BorderBrush" Value="#50000000" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Background" Value="White" />
+            </Style>
+            <Style x:Key="GlobalBackground" TargetType="Border" BasedOn="{StaticResource {x:Type Border}}">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" >
+                            <GradientStop Color="DarkSlateBlue" Offset="0"/>
+                            <GradientStop Color="CadetBlue" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="Left" TargetType="FrameworkElement">
+                <Setter Property="Margin">
+                    <Setter.Value>
+                        <Thickness 
+                        Top="{StaticResource SeparationBig}"
+                        Left="{StaticResource SeparationBig}"
+                        Right="{StaticResource SeparationSmall}"
+                        Bottom="{StaticResource SeparationBig}"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="TopRow" TargetType="FrameworkElement">
+                <Setter Property="Margin">
+                    <Setter.Value>
+                        <Thickness 
+                        Top="{StaticResource SeparationBig}"
+                        Left="{StaticResource SeparationSmall}"
+                        Right="{StaticResource SeparationSmall}"
+                        Bottom="{StaticResource SeparationSmall}"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="TopRowLast" TargetType="FrameworkElement">
+                <Setter Property="Margin">
+                    <Setter.Value>
+                        <Thickness 
+                        Top="{StaticResource SeparationBig}"
+                        Left="{StaticResource SeparationSmall}"
+                        Right="{StaticResource SeparationBig}"
+                        Bottom="{StaticResource SeparationSmall}"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="BottomRow" TargetType="FrameworkElement">
+                <Setter Property="Margin">
+                    <Setter.Value>
+                        <Thickness 
+                        Top="{StaticResource SeparationSmall}"
+                        Left="{StaticResource SeparationSmall}"
+                        Right="{StaticResource SeparationSmall}"
+                        Bottom="{StaticResource SeparationBig}"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="BottomRowLast" TargetType="FrameworkElement">
+                <Setter Property="Margin">
+                    <Setter.Value>
+                        <Thickness 
+                        Top="{StaticResource SeparationSmall}"
+                        Left="{StaticResource SeparationSmall}"
+                        Right="{StaticResource SeparationBig}"
+                        Bottom="{StaticResource SeparationBig}"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="Number" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="FontWeight" Value="ExtraBold" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Padding" Value="0,0,0,1" />
+            </Style>
+            <Style x:Key="PowerImage" TargetType="Image">
+                <Setter Property="Source" Value="/UR Manager;component/Resources/Card/power.png" />
+            </Style>
+            <Style x:Key="DamageImage" TargetType="Image">
+                <Setter Property="Source" Value="/UR Manager;component/Resources/Card/damage.png" />
+            </Style>
+            <Style x:Key="LevelImage" TargetType="Image">
+                <Setter Property="Source" Value="/UR Manager;component/Resources/Card/star.png" />
+            </Style>
+            <Style x:Key="AbilityImage" TargetType="Image">
+                <Setter Property="Source" Value="/UR Manager;component/Resources/Card/ability.png" />
+            </Style>
+
+            <Style x:Key="ClanImage" TargetType="Image">
+                <Setter Property="Source" Value="{Binding Path=Clan.ClanId, Converter={StaticResource ClanIdConv}}" />
+                <Setter Property="Margin" Value="1" />
+            </Style>
+            <Style x:Key="ClanBackground" TargetType="Border" BasedOn="{StaticResource {x:Type Border}}">
+                <Setter Property="Background" Value="Gray" />
+            </Style>
+            <Style x:Key="CardNameText" TargetType="TextBlock">
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Padding" Value="1,0,0,1" />
+            </Style>
+            <Style x:Key="CardNameBackground" TargetType="Border" BasedOn="{StaticResource {x:Type Border}}">
+                <Setter Property="Background" Value="{Binding Path=Rarity, Converter={StaticResource RarityConv}, ConverterParameter=Brush}" />
+            </Style>
+            <Style x:Key="AbilityText" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Padding" Value="3,0,0,1" />
+            </Style>
+            <Style x:Key="AbilityBackground" TargetType="Border" BasedOn="{StaticResource {x:Type Border}}">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Color="DarkCyan" Offset="0" />
+                            <GradientStop Color="DarkSlateGray" Offset="0.4" />
+                            <GradientStop Color="DarkSlateGray" Offset="0.6" />
+                            <GradientStop Color="DarkCyan" Offset="1" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </DataTemplate.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource CellSize}" />
+                <RowDefinition Height="{StaticResource CellSize}" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource PortraitWidth}" />
+                <ColumnDefinition Width="{StaticResource CellSize}" />
+                <ColumnDefinition Width="{StaticResource CellSize}" />
+                <ColumnDefinition Width="{StaticResource CellSize}" />
+                <ColumnDefinition Width="{StaticResource CellSize}" />
+                <ColumnDefinition Width="{StaticResource CellSize}" />
+                <ColumnDefinition Width="{StaticResource CellSize}" />
+                <ColumnDefinition Width="{StaticResource CellSize}" />
+                <ColumnDefinition Width="{StaticResource CellSize}" />
+                <ColumnDefinition Width="{StaticResource CellSize}" />
+                <ColumnDefinition Width="{StaticResource CellSize}" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="14" Grid.RowSpan="2" Style="{StaticResource GlobalBackground}" />
+
+            <!-- Portrait -->
+            <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource Left}">
+                <Border>
+                    <Image Style="{StaticResource MaxedCardPortrait}" />
+                </Border>
+            </Grid>
+
+            <!-- Top Row -->
+            <!-- Power -->
+            <Grid Grid.Row="0" Grid.Column="1" Style="{StaticResource TopRow}">
+                <Image Style="{StaticResource PowerImage}" />
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="2" Style="{StaticResource TopRow}">
+                <Border>
+                    <TextBlock Style="{StaticResource Number}" Text="{Binding Path=MaxPower}" />
+                </Border>
+            </Grid>
+            <!-- Damage -->
+            <Grid Grid.Row="0" Grid.Column="3" Style="{StaticResource TopRow}">
+                <Image Style="{StaticResource DamageImage}" />
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="4" Style="{StaticResource TopRow}">
+                <Border Grid.Column="1">
+                    <TextBlock Style="{StaticResource Number}" Text="{Binding Path=MaxDamage}" />
+                </Border>
+            </Grid>
+            <!-- Clan -->
+            <Grid Grid.Row="0" Grid.Column="5" Style="{StaticResource TopRow}">
+                <Border Grid.Column="0" Style="{StaticResource ClanBackground}">
+                    <Image Style="{StaticResource ClanImage}" />
+                </Border>
+            </Grid>
+            <!-- Name & Rarity -->
+            <Grid Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="5" Style="{StaticResource TopRowLast}">
+                <Border Style="{StaticResource CardNameBackground}">
+                    <!-- FAIL -->
+                    <TextBlock Style="{StaticResource CardNameText}" Text="{Binding Path=Name}" />
+                </Border>
+            </Grid>
+
+            <!-- Bottom Row -->
+            <!-- Level -->
+            <Grid Grid.Row="1" Grid.Column="1" Style="{StaticResource BottomRow}">
+                <Image Style="{StaticResource LevelImage}" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="2" Style="{StaticResource BottomRow}">
+                <Border>
+                    <TextBlock Style="{StaticResource Number}" Text="{Binding Path=MaxLevel}" />
+                </Border>
+            </Grid>
+            <!-- Ability -->
+            <Grid Grid.Row="1" Grid.Column="3" Style="{StaticResource BottomRow}">
+                <Image Style="{StaticResource AbilityImage}" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="7" Style="{StaticResource BottomRowLast}">
+                <Border Style="{StaticResource AbilityBackground}">
+                    <TextBlock Style="{StaticResource AbilityText}" Text="{Binding Path=Ability}" />
+                </Border>
+            </Grid>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="MaxedCardSelectedTemplate">
+    </DataTemplate>
+    <DataTemplate x:Key="GameModeComboboxItem">
+        <!-- TODO: FINISH IT -->
+        <Grid>
+            <TextBlock/> 
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="RoundResultTemplate" >
+        <StackPanel>
+            <StackPanel.Resources>
+                <Style x:Key="Background" TargetType="Border">
+                    <Setter Property="Background" Value="#011627" />
+                    <Setter Property="BorderBrush" Value="#FF9F1C" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="Padding" Value="4" />
+                </Style>
+
+                <Style TargetType="Image">
+                    <Setter Property="Margin" Value="1,0" />
+                    <Setter Property="Width" Value="16" />
+                    <Setter Property="Height" Value="16" />
+                </Style>
+                <Style x:Key="ArrowIcon" TargetType="Image" BasedOn="{StaticResource {x:Type Image}}">
+                    <Setter Property="Source" Value="/Resources/Misc/right.png" />
+                </Style>
+                <Style x:Key="CrossIcon" TargetType="Image" BasedOn="{StaticResource {x:Type Image}}">
+                    <Setter Property="Source" Value="/Resources/Misc/cancel.png" />
+                </Style>
+                <Style x:Key="VsIcon" TargetType="Image" BasedOn="{StaticResource {x:Type Image}}">
+                    <Setter Property="Source" Value="/Resources/Misc/vs.png" />
+                </Style>
+                <Style x:Key="PowerDamageIcon" TargetType="Image" BasedOn="{StaticResource {x:Type Image}}">
+                    <Setter Property="Source" Value="/Resources/Card/pow_dam_2_16.png" />
+                </Style>
+                <Style x:Key="AttackIcon" TargetType="Image" BasedOn="{StaticResource {x:Type Image}}">
+                    <Setter Property="Source" Value="/Resources/Misc/sword.png" />
+                </Style>
+                <Style x:Key="WinnerIcon" TargetType="Image" BasedOn="{StaticResource {x:Type Image}}">
+                    <Setter Property="Source" Value="/Resources/Misc/cup.png" />
+                </Style>
+                <Style x:Key="PillzIcon" TargetType="Image" BasedOn="{StaticResource {x:Type Image}}">
+                    <Setter Property="Source" Value="/Resources/Misc/pillz_vertical.png" />
+                </Style>
+                <Style x:Key="LivesIcon" TargetType="Image" BasedOn="{StaticResource {x:Type Image}}">
+                    <Setter Property="Source" Value="/Resources/Misc/heart.png" />
+                </Style>
+                <Style x:Key="PoisonIcon" TargetType="Image" BasedOn="{StaticResource {x:Type Image}}">
+                    <Setter Property="Source" Value="/Resources/Misc/poison.png" />
+                </Style>
+                <Style x:Key="HealIcon" TargetType="Image" BasedOn="{StaticResource {x:Type Image}}">
+                    <Setter Property="Source" Value="/Resources/Misc/heal.png" />
+                </Style>
+
+                <Style x:Key="TooltipArea" TargetType="Border">
+                    <Setter Property="Background" Value="#01000000" />
+                </Style>
+                <Style x:Key="UsedPillzTooltip" TargetType="Border" BasedOn="{StaticResource TooltipArea}">
+                    <Setter Property="ToolTip" Value="{x:Static resx:UIStrings.ui_roundresults_usedpillz}" />
+                </Style>
+                <Style x:Key="PowerDamageTooltip" TargetType="Border" BasedOn="{StaticResource TooltipArea}">
+                    <Setter Property="ToolTip" Value="{x:Static resx:UIStrings.ui_roundresults_powerdamage}" />
+                </Style>
+                <Style x:Key="AttackTooltip" TargetType="Border" BasedOn="{StaticResource TooltipArea}">
+                    <Setter Property="ToolTip" Value="{x:Static resx:UIStrings.ui_roundresults_attack}" />
+                </Style>
+                <Style x:Key="WinnerTooltip" TargetType="Border" BasedOn="{StaticResource TooltipArea}">
+                    <Setter Property="ToolTip" Value="{x:Static resx:UIStrings.ui_roundresults_winner}" />
+                </Style>
+                <Style x:Key="ResultPillzTooltip" TargetType="Border" BasedOn="{StaticResource TooltipArea}">
+                    <Setter Property="ToolTip" Value="{x:Static resx:UIStrings.ui_roundresults_resultpillz}" />
+                </Style>
+                <Style x:Key="ResultLivesTooltip" TargetType="Border" BasedOn="{StaticResource TooltipArea}">
+                    <Setter Property="ToolTip" Value="{x:Static resx:UIStrings.ui_roundresults_resultlives}" />
+                </Style>
+                <Style x:Key="PoisonTooltip" TargetType="Border" BasedOn="{StaticResource TooltipArea}">
+                    <Setter Property="ToolTip" Value="{x:Static resx:UIStrings.ui_roundresults_poison}" />
+                </Style>
+                <Style x:Key="HealTooltip" TargetType="Border" BasedOn="{StaticResource TooltipArea}">
+                    <Setter Property="ToolTip" Value="{x:Static resx:UIStrings.ui_roundresults_heal}" />
+                </Style>
+
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="2" />
+                </Style>
+                <Style x:Key="TopPlayerText" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Setter Property="Foreground" Value="#E71D36" />
+                </Style>
+                <Style x:Key="BottomPlayerText" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Setter Property="Foreground" Value="#2EC4B6" />
+                </Style>
+                <Style x:Key="TopPlayerCardName" TargetType="TextBlock" BasedOn="{StaticResource TopPlayerText}">
+                    <Setter Property="Text">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource HandToNameConv}">
+                                <Binding Path="RightPlayerStatus.Hand" />
+                                <Binding Path="RightPlayerStatistics.UsedCard" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style x:Key="BottomPlayerCardName" TargetType="TextBlock" BasedOn="{StaticResource BottomPlayerText}">
+                    <Setter Property="Text">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource HandToNameConv}">
+                                <Binding Path="LeftPlayerStatus.Hand" />
+                                <Binding Path="LeftPlayerStatistics.UsedCard" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style x:Key="TopIsWinner" TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RoundWinner, Converter={StaticResource EnumConv}, ConverterParameter={x:Static core:PlayerSide.Right}}" Value="true">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <Style x:Key="BottomIsWinner" TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RoundWinner, Converter={StaticResource EnumConv}, ConverterParameter={x:Static core:PlayerSide.Left}}" Value="true">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+
+                <Style x:Key="TopUsedFury" TargetType="Run">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RightPlayerStatistics.UsedFury}" Value="true">
+                            <Setter Property="Text" Value=" (+3)" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <Style x:Key="BottomUsedFury" TargetType="Run">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LeftPlayerStatistics.UsedFury}" Value="true">
+                            <Setter Property="Text" Value=" (+3)" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+
+                <Style x:Key="PoisonRow" TargetType="RowDefinition">
+                    <Style.Triggers>
+                        <DataTrigger Value="true">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource AreBothFalseConv}">
+                                    <Binding Path="LeftPlayerStatistics.PoisonChanges" />
+                                    <Binding Path="RightPlayerStatistics.PoisonChanges" />
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter Property="Height" Value="0" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <Style x:Key="TopPoisonChanges" TargetType="TextBlock" BasedOn="{StaticResource TopPlayerText}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RightPlayerStatistics.PoisonChanges}" Value="false">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <Style x:Key="TopPoisonNotChanges" TargetType="Image" BasedOn="{StaticResource CrossIcon}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RightPlayerStatistics.PoisonChanges}" Value="true">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <Style x:Key="BottomPoisonChanges" TargetType="TextBlock" BasedOn="{StaticResource BottomPlayerText}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LeftPlayerStatistics.PoisonChanges}" Value="false">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <Style x:Key="BottomPoisonNotChanges" TargetType="Image" BasedOn="{StaticResource CrossIcon}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LeftPlayerStatistics.PoisonChanges}" Value="true">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+
+                <Style x:Key="HealRow" TargetType="RowDefinition">
+                    <Style.Triggers>
+                        <DataTrigger Value="true">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource AreBothFalseConv}">
+                                    <Binding Path="LeftPlayerStatistics.HealChanges" />
+                                    <Binding Path="RightPlayerStatistics.HealChanges" />
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter Property="Height" Value="0" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <Style x:Key="TopHealChanges" TargetType="TextBlock" BasedOn="{StaticResource TopPlayerText}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RightPlayerStatistics.HealChanges}" Value="false">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <Style x:Key="TopHealNotChanges" TargetType="Image" BasedOn="{StaticResource CrossIcon}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RightPlayerStatistics.HealChanges}" Value="true">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <Style x:Key="BottomHealChanges" TargetType="TextBlock" BasedOn="{StaticResource BottomPlayerText}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LeftPlayerStatistics.HealChanges}" Value="false">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <Style x:Key="BottomHealNotChanges" TargetType="Image" BasedOn="{StaticResource CrossIcon}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LeftPlayerStatistics.HealChanges}" Value="true">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Resources>
+            <Border Style="{StaticResource Background}">
+                <Grid>
+                    <Grid.Resources>
+
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <!-- Name -->
+                        <RowDefinition />
+                        <!-- Used Pillz -->
+                        <RowDefinition Height="0" />
+                        <!-- Power / Damage -->
+                        <RowDefinition />
+                        <!-- Attack -->
+                        <RowDefinition />
+                        <!-- Winner -->
+                        <RowDefinition />
+                        <!-- Separator -->
+                        <RowDefinition />
+                        <!-- Pillz Result -->
+                        <RowDefinition />
+                        <!-- Lives Result -->
+                        <RowDefinition Style="{StaticResource PoisonRow}" />
+                        <!-- Poison -->
+                        <RowDefinition Style="{StaticResource HealRow}" />
+                        <!-- Heal -->
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock  Grid.Row="0" Grid.Column="1" Style="{StaticResource TopPlayerCardName}" />
+                    <Image      Grid.Row="0" Grid.Column="2" Style="{StaticResource VsIcon}" />
+                    <TextBlock  Grid.Row="0" Grid.Column="3" Style="{StaticResource BottomPlayerCardName}" />
+
+                    <Image      Grid.Row="1" Grid.Column="0" Style="{StaticResource PillzIcon}" />
+                    <TextBlock  Grid.Row="1" Grid.Column="1" Style="{StaticResource TopPlayerText}">
+                    <Run Text="{Binding RightPlayerStatistics.UsedPillz, Mode=OneTime}" /><Run Style="{StaticResource TopUsedFury}" />
+                    </TextBlock>
+                    <TextBlock  Grid.Row="1" Grid.Column="2" Text="-" />
+                    <TextBlock  Grid.Row="1" Grid.Column="3" Style="{StaticResource BottomPlayerText}">
+                    <Run Text="{Binding LeftPlayerStatistics.UsedPillz, Mode=OneTime}" /><Run Style="{StaticResource BottomUsedFury}" />
+                    </TextBlock>
+                    <Border     Grid.Row="1" Grid.ColumnSpan="4" Style="{StaticResource UsedPillzTooltip}"/>
+
+                    <Image      Grid.Row="2" Grid.Column="0" Style="{StaticResource PowerDamageIcon}" />
+                    <TextBlock  Grid.Row="2" Grid.Column="1" Style="{StaticResource TopPlayerText}">
+                    <Run Text="{Binding RightPlayerStatistics.FinalPower, Mode=OneTime}" />
+                    <Run Text="/" />
+                    <Run Text="{Binding RightPlayerStatistics.FinalDamage, Mode=OneTime}" />
+                    </TextBlock>
+                    <TextBlock  Grid.Row="2" Grid.Column="2" Text="-" />
+                    <TextBlock  Grid.Row="2" Grid.Column="3" Style="{StaticResource BottomPlayerText}">
+                    <Run Text="{Binding LeftPlayerStatistics.FinalPower, Mode=OneTime}" />
+                    <Run Text="/" />
+                    <Run Text="{Binding LeftPlayerStatistics.FinalDamage, Mode=OneTime}" />
+                    </TextBlock>
+                    <Border     Grid.Row="2" Grid.ColumnSpan="4" Style="{StaticResource PowerDamageTooltip}"/>
+
+                    <Image      Grid.Row="3" Grid.Column="0" Style="{StaticResource AttackIcon}" />
+                    <TextBlock  Grid.Row="3" Grid.Column="1" Style="{StaticResource TopPlayerText}" Text="{Binding RightPlayerStatistics.FinalAttack}" />
+                    <TextBlock  Grid.Row="3" Grid.Column="2" Text="-"/>
+                    <TextBlock  Grid.Row="3" Grid.Column="3" Style="{StaticResource BottomPlayerText}" Text="{Binding LeftPlayerStatistics.FinalAttack}" />
+                    <Border     Grid.Row="3" Grid.ColumnSpan="4" Style="{StaticResource AttackTooltip}"/>
+
+                    <Image      Grid.Row="4" Grid.Column="0" Style="{StaticResource WinnerIcon}" />
+                    <Grid       Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource TopIsWinner}">
+                        <TextBlock Style="{StaticResource BottomPlayerCardName}" />
+                    </Grid>
+                    <Grid       Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource BottomIsWinner}">
+                        <TextBlock Style="{StaticResource TopPlayerCardName}" />
+                    </Grid>
+                    <Border     Grid.Row="4" Grid.ColumnSpan="4" Style="{StaticResource WinnerTooltip}"/>
+
+                    <Separator  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5"/>
+
+                    <Image      Grid.Row="6" Grid.Column="0" Style="{StaticResource PillzIcon}" />
+                    <Grid       Grid.Row="6" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Style="{StaticResource TopPlayerText}" Text="{Binding RightPlayerStatistics.InitialPillz}" />
+                        <Image      Grid.Column="1" Style="{StaticResource ArrowIcon}" />
+                        <TextBlock  Grid.Column="2" Style="{StaticResource TopPlayerText}" Text="{Binding RightPlayerStatus.Pillz}" />
+                    </Grid>
+                    <TextBlock  Grid.Row="6" Grid.Column="2" Text="-" />
+                    <Grid       Grid.Row="6" Grid.Column="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Style="{StaticResource BottomPlayerText}" Text="{Binding LeftPlayerStatistics.InitialPillz}" />
+                        <Image      Grid.Column="1" Style="{StaticResource ArrowIcon}" />
+                        <TextBlock  Grid.Column="2" Style="{StaticResource BottomPlayerText}" Text="{Binding LeftPlayerStatus.Pillz}" />
+                    </Grid>
+                    <Border     Grid.Row="6" Grid.ColumnSpan="4" Style="{StaticResource ResultPillzTooltip}"/>
+
+                    <Image      Grid.Row="7" Grid.Column="0" Style="{StaticResource LivesIcon}" />
+                    <Grid       Grid.Row="7" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Style="{StaticResource TopPlayerText}" Text="{Binding RightPlayerStatistics.InitialLives}" />
+                        <Image      Grid.Column="1" Style="{StaticResource ArrowIcon}" />
+                        <TextBlock  Grid.Column="2" Style="{StaticResource TopPlayerText}" Text="{Binding RightPlayerStatus.Life}"/>
+                    </Grid>
+                    <TextBlock  Grid.Row="7" Grid.Column="2" Text="-" />
+                    <Grid       Grid.Row="7" Grid.Column="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Grid.Column="0" Style="{StaticResource BottomPlayerText}" Text="{Binding LeftPlayerStatistics.InitialLives}" />
+                        <Image      Grid.Column="1" Style="{StaticResource ArrowIcon}" />
+                        <TextBlock  Grid.Column="2" Style="{StaticResource BottomPlayerText}" Text="{Binding LeftPlayerStatus.Life}"/>
+                    </Grid>
+                    <Border     Grid.Row="7" Grid.ColumnSpan="4" Style="{StaticResource ResultLivesTooltip}"/>
+
+                    <Image      Grid.Row="8" Grid.Column="0" Style="{StaticResource PoisonIcon}" />
+                    <TextBlock  Grid.Row="8" Grid.Column="1" Style="{StaticResource TopPoisonChanges}">
+                    <Run Text="{Binding RightPlayerStatus.Poison.Value}" /><Run Text=" (min " /><Run Text="{Binding RightPlayerStatus.Poison.Min}" /><Run Text=")" />
+                    </TextBlock>
+                    <Image      Grid.Row="8" Grid.Column="1" Style="{StaticResource TopPoisonNotChanges}" />
+                    <TextBlock  Grid.Row="8" Grid.Column="2" Text="-" />
+                    <TextBlock  Grid.Row="8" Grid.Column="3" Style="{StaticResource BottomPoisonChanges}">
+                    <Run Text="{Binding LeftPlayerStatus.Poison.Value}" /><Run Text=" (min " /><Run Text="{Binding LeftPlayerStatus.Poison.Min}" /><Run Text=")" />
+                    </TextBlock>
+                    <Image      Grid.Row="8" Grid.Column="3" Style="{StaticResource BottomPoisonNotChanges}" />
+                    <Border     Grid.Row="8" Grid.ColumnSpan="4" Style="{StaticResource PoisonTooltip}"/>
+
+                    <Image      Grid.Row="9" Grid.Column="0" Style="{StaticResource HealIcon}" />
+                    <TextBlock  Grid.Row="9" Grid.Column="1" Style="{StaticResource TopHealChanges}">
+                    <Run Text="{Binding RightPlayerStatus.Heal.Value}" /><Run Text=" (max " /><Run Text="{Binding RightPlayerStatus.Heal.Max}" /><Run Text=")" />
+                    </TextBlock>
+                    <Image      Grid.Row="9" Grid.Column="1" Style="{StaticResource TopHealNotChanges}" />
+                    <TextBlock  Grid.Row="9" Grid.Column="2" Text="-" />
+                    <TextBlock  Grid.Row="9" Grid.Column="3" Style="{StaticResource BottomHealChanges}">
+                    <Run Text="{Binding LeftPlayerStatus.Heal.Value}" /><Run Text=" (max " /><Run Text="{Binding LeftPlayerStatus.Heal.Max}" /><Run Text=")" />
+                    </TextBlock>
+                    <Image      Grid.Row="9" Grid.Column="3" Style="{StaticResource BottomPoisonNotChanges}" />
+                    <Border     Grid.Row="9" Grid.ColumnSpan="4" Style="{StaticResource HealTooltip}"/>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

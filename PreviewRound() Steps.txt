@@ -1,0 +1,55 @@
+// --- Check for invalid calls and parameters ---
+// --- PREPARATION STEP: Initial arrangements ---
+// --- STEP 1: Apply Confidence, Courage, Growth, Reprisal, Revenge and Support Prefixes ---
+// --- STEP 2: Apply Copy Bonus Suffix ---
+// --- STEP 3: Apply Stop and Protect Ability/Bonus Suffixes ---
+// --- STEP 4: Apply Stop Prefix ---
+// --- STEP 5: Apply Cancel and Protect Suffixes  ---
+// --- STEP 6: Calculate Power (Ambre, Eyrik) ---
+// --- STEP 6.1: Calculate Base Power ---
+// --- STEP 6.2: Apply Copy Power ---
+// --- STEP 6.3: Calculate Power Increments ---
+// --- STEP 6.3.1: Ambre ---
+// --- STEP 6.3.2: Other Skills ---
+// --- STEP 6.3.3: Apply Increments ---
+// --- STEP 6.4: Calculate Power Decrements ---
+// --- STEP 6.4.1: Eyrik ---
+// --- STEP 6.4.2: Other Skills ---
+// --- STEP 6.4.3: Apply Decrements ---
+// --- STEP 7: Calculate Attack (Hugo) ---
+// --- STEP 7.1: Calculate Base Attack ---
+// --- STEP 7.2: Calculate Attack Increments ---
+// --- STEP 7.2.1: Hugo ---
+// --- STEP 7.2.2: Other Skills ---
+// --- STEP 7.2.3: Apply Increments ---
+// --- STEP 7.3: Calculate Attack Decrements ---
+// --- STEP 7.3.1: Apply Decrements ---
+// --- STEP 8: Determine Round Winner ---
+// --- STEP 9: Calculate Killshot Prefix ---
+// --- STEP 10: Calculate Damage (Timber, Vholt) ---
+// --- STEP 10.1: Calculate Base Damage ---
+// --- STEP 10.2: Apply Copy Damage ---
+// --- STEP 10.3: Calculate Damage Increments ---
+// --- STEP 10.3.1: Fury ---
+// --- STEP 10.3.2: Timber ---
+// --- STEP 10.3.3: Other Skills ---
+// --- STEP 10.3.4: Apply Increments ---
+// --- STEP 10.4: Calculate Damage Decrements ---
+// --- STEP 10.4.1: Vholt ---
+// --- STEP 10.4.2: Other Skills ---
+// --- STEP 10.4.3: Apply Decrements ---
+// --- STEP 11: Apply Damage ---
+// --- STEP 12: Calculate Backlash, Defeat and VictoryOrDefeat Prefixes ---
+// --- STEP 13: Calculate Post-Round Suffixes (Melody) ---
+// --- STEP 13.1: Melody ---
+// --- STEP 13.2: Other Skills ---
+// --- STEP 14: Apply Pillz Changes ---
+// --- STEP 14.1: Apply Pillz Increments ---
+// --- STEP 14.2: Apply Pillz Decrements ---
+// --- STEP 15: Apply Life Changes --- (Pun not intended =)
+// --- STEP 15.1: +Life ---
+// --- STEP 15.2: -Life ---
+// --- STEP 15.3: Heal ---
+// --- STEP 15.4: Poison ---
+// --- STEP 16 Apply Post-Round Leader effects (Bridget, Morphun, Eklore) ---
+// --- LAST STEP: Final arrangements ---

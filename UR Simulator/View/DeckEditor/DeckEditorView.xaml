@@ -1,0 +1,41 @@
+﻿<Window x:Class="UrbanRivalsManager.View.DeckEditorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UrbanRivalsManager.View"
+        mc:Ignorable="d"
+        Title="DeckEditor" Height="300" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+            <Label>Library</Label>
+            <ListBox/>
+            
+        </StackPanel>
+        
+        <StackPanel Grid.Column="1" Grid.Row="0">
+            <Label>Deck</Label>
+            <ListBox/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Button>Save deck</Button>
+            <Button>Set as current deck</Button>
+            <StackPanel Orientation="Horizontal">
+                <Label>Current deck:</Label>
+                <Label>...</Label>
+            </StackPanel>
+            <Button>Load deck</Button>
+            <Button>Delete deck</Button>
+        </StackPanel>
+    </Grid>
+</Window>

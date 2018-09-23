@@ -1,0 +1,37 @@
+Reasons for having commented code
+---------------------------------
+
+Before UrbanRivalsApiManager build 151221a, the ApiCall Urc.GetCharacters was not available, so the procedure to check for new existing cards was as follows:
+A) Check what new cards we need to download
+B) Download those cards and update the DB
+
+Step (A) worked like this:
+a) Identify what cards we currenly have on our DB
+b) Identify all existing cards on the game
+c) Intersect both lists, getting only existing cards
+
+Step (b) has to be done in a concrete way because:
+- Each card has an unique numerical Id
+- There are cards that were removed at one point in the game
+So:
+- We need to detect what cards exist and what not
+- That is done checking EVERY Id from the beginning, until an arbitrary max value is reached
+
+And for these reasons, step (b) works like this:
+1) Set a maximum id so the code is not checking until "infinity" 
+2) Set a minimum id so the code can skip several iterations of unused Ids
+3) Check each Id between minimum and maximum and return only those that the server ensures that exist
+
+Step (3) needed around 1500 calls to the API, which in practice wasted around 5 minutes of the application frozen with I/O.
+
+With Urc.GetCharacters we can do step (3) in a simple call, so we must edit all that code.
+
+What to do with that commented code
+-----------------------------------
+
+I'll keep the old code in case the ApiCall is removed. 
+I'll assume the call is safe to use and will not be removed if 6 months have passed and the call remains available.
+
+Today is 22/12/2015
+
+Commented code (and therefore this file too) will be safe to be removed on 22/06/2016

@@ -1,0 +1,20 @@
+CORE = UrbanRivalsCore Project
+MANA = UR Manager Project
+
+1. Create bonus skill if it doesn't exists (see creating new skill)
+
+2. Make backup of database (again)
+
+3. CORE > Model > Enums.cs
+Add entry in ClanId and SupportIndex
+
+4. CORE > Model > Clan.cs
+Add entry to ClanList
+
+5. MANA > Resources > Clans (Folder)
+Add Icon (17x15)
+
+6. MANA > Converters > ClanIdConverter.cs
+Add entry to constructor
+
+7. On release version, program a reset on database

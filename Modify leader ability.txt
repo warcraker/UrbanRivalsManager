@@ -1,0 +1,11 @@
+CORE = UrbanRivalsCore Project
+ADAP = UrbanRivalsApiAdapter Project
+
+1. ADAP > ApiCardBaseAdapter.cs
+Modify function ParseAbility
+
+2. CORE > ViewModel > Combat > Combat.cs
+Modify function PreviewRound
+
+3. CORE > Properties > GameStrings.resx (for each language)
+Modify strings

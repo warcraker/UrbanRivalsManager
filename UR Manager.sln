@@ -1,0 +1,77 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UR Manager", "UR Simulator\UR Manager.csproj", "{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanRivalsCore", "UrbanRivalsCore\UrbanRivalsCore.csproj", "{EEA283D8-1F37-4F9D-8292-BCD541546903}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanRivalsApiAdapter", "UrbanRivalsApiCardBaseAdapter\UrbanRivalsApiAdapter.csproj", "{69942A29-C91A-433A-B915-D1839264C9B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{95C79914-BE28-4005-AF9B-61F1706D9F75}"
+	ProjectSection(SolutionItems) = preProject
+		Creating new clan.txt = Creating new clan.txt
+		Creating new skill.txt = Creating new skill.txt
+		Modify leader ability.txt = Modify leader ability.txt
+		PreviewRound() Steps.txt = PreviewRound() Steps.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}.Debug|x64.ActiveCfg = Debug|x64
+		{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}.Debug|x64.Build.0 = Debug|x64
+		{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}.Debug|x86.ActiveCfg = Debug|x86
+		{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}.Debug|x86.Build.0 = Debug|x86
+		{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}.Release|x64.ActiveCfg = Release|x64
+		{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}.Release|x64.Build.0 = Release|x64
+		{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}.Release|x86.ActiveCfg = Release|x86
+		{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}.Release|x86.Build.0 = Release|x86
+		{EEA283D8-1F37-4F9D-8292-BCD541546903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEA283D8-1F37-4F9D-8292-BCD541546903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEA283D8-1F37-4F9D-8292-BCD541546903}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EEA283D8-1F37-4F9D-8292-BCD541546903}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EEA283D8-1F37-4F9D-8292-BCD541546903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEA283D8-1F37-4F9D-8292-BCD541546903}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEA283D8-1F37-4F9D-8292-BCD541546903}.Release|x64.ActiveCfg = Release|Any CPU
+		{EEA283D8-1F37-4F9D-8292-BCD541546903}.Release|x86.ActiveCfg = Release|Any CPU
+		{69942A29-C91A-433A-B915-D1839264C9B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69942A29-C91A-433A-B915-D1839264C9B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69942A29-C91A-433A-B915-D1839264C9B8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{69942A29-C91A-433A-B915-D1839264C9B8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{69942A29-C91A-433A-B915-D1839264C9B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69942A29-C91A-433A-B915-D1839264C9B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69942A29-C91A-433A-B915-D1839264C9B8}.Release|x64.ActiveCfg = Release|Any CPU
+		{69942A29-C91A-433A-B915-D1839264C9B8}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://warcraker.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = UR\u0020Simulator\\UR\u0020Manager.csproj
+		SccProjectName1 = UR\u0020Simulator
+		SccLocalPath1 = UR\u0020Simulator
+		SccProjectUniqueName2 = UrbanRivalsApiCardBaseAdapter\\UrbanRivalsApiAdapter.csproj
+		SccProjectName2 = UrbanRivalsApiCardBaseAdapter
+		SccLocalPath2 = UrbanRivalsApiCardBaseAdapter
+		SccProjectUniqueName3 = UrbanRivalsCore\\UrbanRivalsCore.csproj
+		SccProjectName3 = UrbanRivalsCore
+		SccLocalPath3 = UrbanRivalsCore
+	EndGlobalSection
+EndGlobal
