@@ -435,4 +435,7 @@
   <data name="skill_prefix_brawl" xml:space="preserve">
     <value>Brawl: </value>
   </data>
+  <data name="skill_prefix_degrowth" xml:space="preserve">
+    <value>Degrowth: </value>
+  </data>
 </root>

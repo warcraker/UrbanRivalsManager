@@ -511,6 +511,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Degrowth: .
+        /// </summary>
+        public static string skill_prefix_degrowth {
+            get {
+                return ResourceManager.GetString("skill_prefix_degrowth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Equalizer: .
         /// </summary>
         public static string skill_prefix_equalizer {
