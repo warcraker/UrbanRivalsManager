@@ -8,13 +8,16 @@ MANA = UR Manager Project
 3. CORE > Model > Enums.cs
 Add entry in ClanId and SupportIndex
 
-4. CORE > Model > Clan.cs
+4. CORE > Model > Hand.cs
+Add entry to switch in ConvertClanIdToSupportIndex
+
+5. CORE > Model > Clan.cs
 Add entry to ClanList
 
-5. MANA > Resources > Clans (Folder)
+6. MANA > Resources > Clans (Folder)
 Add Icon (17x15)
 
-6. MANA > Converters > ClanIdConverter.cs
+7. MANA > Converters > ClanIdConverter.cs
 Add entry to constructor
 
-7. On release version, program a reset on database
+8. On release version, program a reset on database
