@@ -31,7 +31,7 @@ namespace UrbanRivalsApiAdapter
                 public static readonly Regex DecreaseDamageXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?D(?:amage|mg),? Min (?<y>[0-9]+)$");
                 public static readonly Regex DecreaseLifeXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Life[.,]? (Opp[.]? )?Min (?<y>[0-9]+)$");
                 public static readonly Regex DecreasePillzXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pillz[.,]? (Opp[.]? )?Min (?<y>[0-9]+)$");
-                public static readonly Regex DecreasePowerAndDamageXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pow(er)?[.]? (And|&) D(amage|mg|am)[.]?,? ?[Mm]in (?<y>[0-9]+)$"); //new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pow(er)?[.]? (And|&) D(amage|mg),? ?[Mm]in (?<y>[0-9]+)$");
+                public static readonly Regex DecreasePowerAndDamageXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pow(er)?[.]? (And|&) D(amage|mg|am)[.]?,? ?[Mm]in (?<y>[0-9]+)$");
                 public static readonly Regex DecreasePowerXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pow(er)?[,.]? Min (?<y>[0-9]+)$");
                 public static readonly Regex HealXMaxY = new Regex(@"^Heal (?<x>[0-9]+) Max[.]? (?<y>[0-9]+)$");
                 public static readonly Regex IncreaseAttackX = new Regex(@"^At(tac)?k[.]? [+](?<x>[0-9]+)$");
