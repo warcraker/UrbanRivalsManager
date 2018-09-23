@@ -65,7 +65,8 @@ namespace UrbanRivalsManager.ViewModel
 
             ApiManagerInstance = new ApiManager
                 (Properties.Settings.Default.ConsumerKey, Properties.Settings.Default.ConsumerSecret, 
-                Properties.Settings.Default.AccessKey, Properties.Settings.Default.AccessSecret);
+                Properties.Settings.Default.AccessKey, Properties.Settings.Default.AccessSecret,
+                Properties.Settings.Default.RequestKey, Properties.Settings.Default.RequestSecret);
 
             ServerQueriesManagerInstance = new ServerQueriesManager(ApiManagerInstance, InMemoryManagerInstance);
 

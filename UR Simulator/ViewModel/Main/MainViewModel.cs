@@ -80,12 +80,19 @@ namespace UrbanRivalsManager.ViewModel
 
         public string GetApiAutenticateUrl()
         {
-            ApiManager.GetRequestToken();
+            string[] requestToken;
+
+            requestToken = new string[2];
+            ApiManager.GetRequestToken(out requestToken[0], out requestToken[1]);
+            Properties.Settings.Default.RequestKey = requestToken[0];
+            Properties.Settings.Default.RequestSecret = requestToken[0];
             return ApiManager.GetAuthorizeRequestTokenURL();
         }
         public void ValidateAccessTokenAndStoreInSettings()
         {
-            var accessToken = new string[2];
+            string[] accessToken;
+
+            accessToken = new string[2];
             ApiManager.GetAccessToken(out accessToken[0], out accessToken[1]);
             Properties.Settings.Default.AccessKey = accessToken[0];
             Properties.Settings.Default.AccessSecret = accessToken[1];
