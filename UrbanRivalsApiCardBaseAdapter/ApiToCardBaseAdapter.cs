@@ -78,6 +78,8 @@ namespace UrbanRivalsApiAdapter
                     return CardRarity.Collector;
                 case "rb":
                     return CardRarity.Rebirth;
+                case "m":
+                    return CardRarity.Mythic;
                 default:
                     throw new Exception("Rarity has a not defined value = " + rarityString);
             }

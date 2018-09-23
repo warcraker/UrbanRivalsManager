@@ -22,6 +22,7 @@ namespace UrbanRivalsCore.Model
         Collector,
         Legendary,
         Rebirth,
+        Mythic,
     }
 
     /// <summary>

@@ -18,6 +18,7 @@ namespace UrbanRivalsManager.ViewModel
 
         static RarityConverter()
         {
+            // TODO: Add Mythic
             Brushes = new Dictionary<CardRarity, Brush>();
             Brushes.Add(CardRarity.Common, FormBrush(Colors.Sienna, Colors.Chocolate));
             Brushes.Add(CardRarity.Uncommon, FormBrush(Colors.Gray, Colors.Silver));
