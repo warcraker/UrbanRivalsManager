@@ -104,6 +104,7 @@ namespace UrbanRivalsCore.Model
         Confidence,
         Courage,
         Defeat,
+        Equalizer,
         Growth,
         Killshot,
         Reprisal,

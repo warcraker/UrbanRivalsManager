@@ -429,4 +429,7 @@
   <data name="skill_leader_melody" xml:space="preserve">
     <value>Team: Defeat: Recover 1 Pillz Out Of 3</value>
   </data>
+  <data name="skill_prefix_equalizer" xml:space="preserve">
+    <value>Equalizer: </value>
+  </data>
 </root>

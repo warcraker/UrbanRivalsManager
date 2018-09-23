@@ -232,6 +232,9 @@ namespace UrbanRivalsCore.Model
                     case SkillPrefix.Defeat:
                         result = Properties.GameStrings.skill_prefix_defeat;
                         break;
+                    case SkillPrefix.Equalizer:
+                        result = Properties.GameStrings.skill_prefix_equalizer;
+                        break;
                     case SkillPrefix.Growth:
                         result = Properties.GameStrings.skill_prefix_growth;
                         break;
