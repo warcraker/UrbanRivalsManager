@@ -157,6 +157,8 @@ namespace UrbanRivalsCore.Model
                     return SupportIndex.Bangers;
                 case ClanId.Berzerk:
                     return SupportIndex.Berzerk;
+                case ClanId.Dominion:
+                    return SupportIndex.Dominion;
                 case ClanId.FangPiClang:
                     return SupportIndex.FangPiClang;
                 case ClanId.Freaks:

@@ -34,6 +34,7 @@ namespace UrbanRivalsCore.Model
             new Clan(ClanId.AllStars,       "All Stars",       new Skill(SkillPrefix.None, SkillSuffix.DecreasePowerXMinY, 2, 1)),
             new Clan(ClanId.Bangers,        "Bangers",         new Skill(SkillPrefix.None, SkillSuffix.IncreasePowerX, 2)),
             new Clan(ClanId.Berzerk,        "Berzerk",         new Skill(SkillPrefix.None, SkillSuffix.DecreaseLifeXMinY, 2, 2)),
+            new Clan(ClanId.Dominion,       "Dominion",        new Skill(SkillPrefix.Growth, SkillSuffix.DecreasePowerXMinY, 1, 4)),
             new Clan(ClanId.FangPiClang,    "Fang Pi Clang",   new Skill(SkillPrefix.None, SkillSuffix.IncreaseDamageX, 2)),
             new Clan(ClanId.Freaks,         "Freaks",          new Skill(SkillPrefix.None, SkillSuffix.PoisonXMinY, 2, 3)),
             new Clan(ClanId.Frozn,          "Frozn",           new Skill(SkillPrefix.Revenge, SkillSuffix.IncreasePowerAndDamageX, 2)),
