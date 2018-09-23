@@ -63,7 +63,8 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                     catch (Exception ex)
                     {
                         // TODO: log errors, catch WebException
-                        throw new Exception("Failed DownloadImagesQueueProcessing_DoWork", ex);
+                        Console.WriteLine(ex.Message);
+                        //throw new Exception("Failed DownloadImagesQueueProcessing_DoWork", ex);
                     }
                 }
             }
