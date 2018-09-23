@@ -228,3 +228,6 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+
+# Other Visual Studio Folders
+.vs/*
