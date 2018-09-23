@@ -95,6 +95,11 @@ namespace UrbanRivalsCore.Model
     public enum SkillPrefix
     {
         None= 0,
+        /// <summary>
+        /// Special case. Growth + Defeat prefixes. There is one card (DJ Korps Id=1260) that has 2 prefixes, so this one must exist for that card.
+        /// </summary>
+        GrowthAndDefeat,
+
         Backlash,
         Confidence,
         Courage,
@@ -106,10 +111,6 @@ namespace UrbanRivalsCore.Model
         Stop,
         Support,
         VictoryOrDefeat,
-        /// <summary>
-        /// Special case. Growth + Defeat prefixes. There is one card (DJ Korps Id=1260) that has 2 prefixes, so this one must exist for that card.
-        /// </summary>
-        GrowthAndDefeat,
     }
 
     /// <summary>
