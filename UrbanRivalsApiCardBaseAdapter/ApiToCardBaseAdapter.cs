@@ -198,11 +198,9 @@ namespace UrbanRivalsApiAdapter
                 case "Victory Or Defeat":
                     prefix = SkillPrefix.VictoryOrDefeat;
                     break;
-                case "":
+                default:
                     prefix = SkillPrefix.None;
                     break;
-                default:
-                    throw new Exception("Invalid prefix");
             }
             // -- End Prefix
 
