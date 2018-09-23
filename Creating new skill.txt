@@ -29,6 +29,6 @@ Check consistency of EVERY CARD against database backup.
 (If right) Go next to step 8
 
 8. CORE > ViewModel > Combat > Combat.cs
-Make the necessary changes on PreviewCombat function
+Make the necessary changes on PreviewRound function
 
 9. On release version, program a reset on database
