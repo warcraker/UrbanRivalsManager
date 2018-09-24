@@ -444,4 +444,7 @@
   <data name="skill_suffix_cancel_pillz_and_life_modifier" xml:space="preserve">
     <value>Cancel Opp Pillz And Life Modifier</value>
   </data>
+  <data name="skill_suffix_exchange_damage" xml:space="preserve">
+    <value>Damage Exchange</value>
+  </data>
 </root>

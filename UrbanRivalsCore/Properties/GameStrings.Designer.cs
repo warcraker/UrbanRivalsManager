@@ -781,6 +781,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Damage Exchange.
+        /// </summary>
+        public static string skill_suffix_exchange_damage {
+            get {
+                return ResourceManager.GetString("skill_suffix_exchange_damage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Heal {0}, Max {1}.
         /// </summary>
         public static string skill_suffix_heal_x_max_y {

@@ -324,6 +324,9 @@ namespace UrbanRivalsCore.Model
                 case SkillSuffix.DopeXMaxY:
                     result += String.Format(Properties.GameStrings.skill_suffix_dope_x_max_y, X, Y);
                     break;
+                case SkillSuffix.ExchangeDamage:
+                    result += String.Format(Properties.GameStrings.skill_suffix_exchange_damage);
+                    break;
                 case SkillSuffix.HealXMaxY:
                     result += String.Format(Properties.GameStrings.skill_suffix_heal_x_max_y, X, Y);
                     break;
