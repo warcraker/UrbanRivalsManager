@@ -154,6 +154,7 @@ namespace UrbanRivalsCore.Model
         IncreaseLifeXMaxY,
         IncreaseLifeXPerDamage,
         IncreaseLifeXPerDamageMaxY,
+        IncreasePillzAndLifeX,
         IncreasePillzX,
         IncreasePillzXMaxY,
         IncreasePillzXPerDamage,

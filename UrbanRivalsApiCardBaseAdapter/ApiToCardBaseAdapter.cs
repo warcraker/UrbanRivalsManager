@@ -47,6 +47,7 @@ namespace UrbanRivalsApiAdapter
                 public static readonly Regex IncreaseLifeXMaxY = new Regex(@"^[+] ?(?<x>[0-9]+) Life[,]? Max[.] (?<y>[0-9]+)$");
                 public static readonly Regex IncreaseLifeXPerDamage = new Regex(@"^[+] ?(?<x>[0-9]+) Life Per D(amage|mg[.]?)$");
                 public static readonly Regex IncreaseLifeXPerDamageMaxY = new Regex(@"^[+] ?(?<x>[0-9]+) Life Per D(amage|mg[.]?) Max[.] (?<y>[0-9]+)$");
+                public static readonly Regex IncreasePillzAndLifeX = new Regex(@"+1 Pillz And Life");
                 public static readonly Regex IncreasePillzX = new Regex(@"^[+] ?(?<x>[0-9]+) Pillz$");
                 public static readonly Regex IncreasePillzXMaxY = new Regex(@"^[+] ?(?<x>[0-9]+) Pillz Max[.] (?<y>[0-9]+)$");
                 public static readonly Regex IncreasePillzXPerDamage = new Regex(@"^[+] ?(?<x>[0-9]+) Pillz Per D(amage|mg[.]?)$");
@@ -385,6 +386,12 @@ namespace UrbanRivalsApiAdapter
                 x = match.Groups["x"].Captures[0].Value;
                 y = match.Groups["y"].Captures[0].Value;
                 suffix = SkillSuffix.IncreaseLifeXPerDamageMaxY;
+            }
+            else if (UsedRegex.Suffix.IncreasePillzAndLifeX.IsMatch(suffixText))
+            {
+                match = UsedRegex.Suffix.IncreasePillzAndLifeX.Match(suffixText);
+                x = match.Groups["x"].Captures[0].Value;
+                suffix = SkillSuffix.IncreasePillzAndLifeX;
             }
             else if (UsedRegex.Suffix.IncreasePillzX.IsMatch(suffixText))
             {

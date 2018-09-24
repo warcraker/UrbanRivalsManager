@@ -889,6 +889,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Increase Pillz And Life +{0}.
+        /// </summary>
+        public static string skill_suffix_increase_pillz_and_life_x {
+            get {
+                return ResourceManager.GetString("skill_suffix_increase_pillz_and_life_x", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to +{0} Pillz.
         /// </summary>
         public static string skill_suffix_increase_pillz_x {

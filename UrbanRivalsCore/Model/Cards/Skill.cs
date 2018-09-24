@@ -360,6 +360,9 @@ namespace UrbanRivalsCore.Model
                 case SkillSuffix.IncreaseLifeXPerDamageMaxY:
                     result += String.Format(Properties.GameStrings.skill_suffix_increase_life_x_per_damage_max_y, X, Y);
                     break;
+                case SkillSuffix.IncreasePillzAndLifeX:
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_pillz_and_life_x, X);
+                    break;
                 case SkillSuffix.IncreasePillzX:
                     result += String.Format(Properties.GameStrings.skill_suffix_increase_pillz_x, X);
                     break;
