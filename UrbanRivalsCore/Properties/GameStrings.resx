@@ -450,6 +450,9 @@
   <data name="skill_suffix_exchange_power" xml:space="preserve">
     <value>Power Exchange</value>
   </data>
+  <data name="skill_suffix_cancel_power_and_damage_modifier" xml:space="preserve">
+    <value>Cancel Opp Power And Damage Modifier</value>
+  </data>
   <data name="skill_suffix_consume_x_min_y" xml:space="preserve">
     <value>Consume {0}, Min {1}</value>
   </data>

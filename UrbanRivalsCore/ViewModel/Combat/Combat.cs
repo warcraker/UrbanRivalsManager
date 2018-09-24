@@ -166,6 +166,8 @@ namespace UrbanRivalsCore.ViewModel
             throw new NotImplementedException("Implement Exchange Power Suffix"); // TODO
             throw new NotImplementedException("Implement Consume Suffix"); // TODO
             throw new NotImplementedException("Implement Increase Pillz And Life Suffix"); // TODO
+            throw new NotImplementedException("Implement Cancel Power and Damage Suffix"); // TODO
+
 
             /* DO NOT REFACTOR THIS METHOD !!!
              * Use the "PreviewRound() Steps.txt" document to orient yourself.

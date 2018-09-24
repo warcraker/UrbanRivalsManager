@@ -646,6 +646,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel Opp Power And Damage Modifier.
+        /// </summary>
+        public static string skill_suffix_cancel_power_and_damage_modifier {
+            get {
+                return ResourceManager.GetString("skill_suffix_cancel_power_and_damage_modifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel Opp Power Modifier.
         /// </summary>
         public static string skill_suffix_cancel_power_modifier {

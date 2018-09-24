@@ -285,6 +285,9 @@ namespace UrbanRivalsCore.Model
                 case SkillSuffix.CancelPillzModifier:
                     result += Properties.GameStrings.skill_suffix_cancel_pillz_modifier;
                     break;
+                case SkillSuffix.CancelPowerAndDamageModifier:
+                    result += Properties.GameStrings.skill_suffix_cancel_power_and_damage_modifier;
+                    break;
                 case SkillSuffix.CancelPowerModifier:
                     result += Properties.GameStrings.skill_suffix_cancel_power_modifier;
                     break;

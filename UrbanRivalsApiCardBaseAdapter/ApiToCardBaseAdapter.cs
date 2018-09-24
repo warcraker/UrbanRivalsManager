@@ -22,6 +22,7 @@ namespace UrbanRivalsApiAdapter
                 public static readonly Regex CancelLifeModifier = new Regex(@"^Cancel Opp[.] Life Modif[.]$");
                 public static readonly Regex CancelPillzAndLifeModifier = new Regex(@"^Cancel Opp[.] Pillz & Life Modif[.]$");
                 public static readonly Regex CancelPillzModifier = new Regex(@"^Cancel Opp[.] Pillz Modif[.]$");
+                public static readonly Regex CancelPowerAndDamageModifier = new Regex(@"^Cancel Opp Power And Damage Mod$");
                 public static readonly Regex CancelPowerModifier = new Regex(@"^Cancel Opp[.] Power Modif[.]$");
                 public static readonly Regex ConsumeXMinY = new Regex(@"^Consume (?<x>[0-9]+), Min (?<y>[0-9]+)$");
                 public static readonly Regex CopyBonus = new Regex(@"^Copy:? (Bonus Opp[.]|Opp[.] Bonus)?$");
@@ -239,6 +240,10 @@ namespace UrbanRivalsApiAdapter
             else if (UsedRegex.Suffix.CancelPillzModifier.IsMatch(suffixText))
             {
                 suffix = SkillSuffix.CancelPillzModifier;
+            }
+            else if (UsedRegex.Suffix.CancelPowerAndDamageModifier.IsMatch(suffixText))
+            {
+                suffix = SkillSuffix.CancelPowerAndDamageModifier;
             }
             else if (UsedRegex.Suffix.CancelPowerModifier.IsMatch(suffixText))
             {
