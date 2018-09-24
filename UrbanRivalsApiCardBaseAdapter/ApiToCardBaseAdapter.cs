@@ -33,6 +33,7 @@ namespace UrbanRivalsApiAdapter
                 public static readonly Regex DecreasePillzXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pillz[.,]? (Opp[.]? )?Min (?<y>[0-9]+)$");
                 public static readonly Regex DecreasePowerAndDamageXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pow(er)?[.]? (And|&) D(amage|mg|am)[.]?,? ?[Mm]in (?<y>[0-9]+)$");
                 public static readonly Regex DecreasePowerXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pow(er)?[,.]? Min (?<y>[0-9]+)$");
+                public static readonly Regex DopeXMaxY = new Regex(@"^Dope (?<x>[0-9]), Max[.] (?<y>[0-9]+)$");
                 public static readonly Regex HealXMaxY = new Regex(@"^Heal (?<x>[0-9]+) Max[.]? (?<y>[0-9]+)$");
                 public static readonly Regex IncreaseAttackX = new Regex(@"^At(tac)?k[.]? [+](?<x>[0-9]+)$");
                 public static readonly Regex IncreaseAttackXPerRemainingLife = new Regex(@"^[+] ?(?<x>[0-9]+) At(tac)?k Per Life Left$");
@@ -298,6 +299,13 @@ namespace UrbanRivalsApiAdapter
                 x = match.Groups["x"].Captures[0].Value;
                 y = match.Groups["y"].Captures[0].Value;
                 suffix = SkillSuffix.DecreasePowerXMinY;
+            }
+            else if (UsedRegex.Suffix.DopeXMaxY.IsMatch(suffixText))
+            {
+                match = UsedRegex.Suffix.DopeXMaxY.Match(suffixText);
+                x = match.Groups["x"].Captures[0].Value;
+                y = match.Groups["y"].Captures[0].Value;
+                suffix = SkillSuffix.DopeXMaxY;
             }
             else if (UsedRegex.Suffix.HealXMaxY.IsMatch(suffixText))
             {

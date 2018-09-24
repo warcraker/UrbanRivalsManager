@@ -160,6 +160,7 @@ namespace UrbanRivalsCore.ViewModel
             throw new NotImplementedException("Implement Day/Night Prefix"); // TODO
             throw new NotImplementedException("Implement Brawl Prefix"); // TODO
             throw new NotImplementedException("Implement Degrowth Prefix"); // TODO
+            throw new NotImplementedException("Implement Dope Suffix"); // TODO
 
             /* DO NOT REFACTOR THIS METHOD !!!
              * Use the "PreviewRound() Steps.txt" document to orient yourself.

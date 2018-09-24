@@ -438,4 +438,7 @@
   <data name="skill_prefix_degrowth" xml:space="preserve">
     <value>Degrowth: </value>
   </data>
+  <data name="skill_suffix_dope_x_max_y" xml:space="preserve">
+    <value>Dope {0}, Max {1}</value>
+  </data>
 </root>
