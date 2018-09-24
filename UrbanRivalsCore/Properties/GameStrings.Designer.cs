@@ -655,6 +655,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Consume {0}, Min {1}.
+        /// </summary>
+        public static string skill_suffix_consume_x_min_y {
+            get {
+                return ResourceManager.GetString("skill_suffix_consume_x_min_y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy Opp Bonus.
         /// </summary>
         public static string skill_suffix_copy_bonus {

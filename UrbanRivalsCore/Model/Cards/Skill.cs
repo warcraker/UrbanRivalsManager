@@ -288,6 +288,9 @@ namespace UrbanRivalsCore.Model
                 case SkillSuffix.CancelPowerModifier:
                     result += Properties.GameStrings.skill_suffix_cancel_power_modifier;
                     break;
+                case SkillSuffix.ConsumeXMinY:
+                    result += String.Format(Properties.GameStrings.skill_suffix_consume_x_min_y, X, Y);
+                    break;
                 case SkillSuffix.CopyBonus:
                     result += Properties.GameStrings.skill_suffix_copy_bonus;
                     break;
