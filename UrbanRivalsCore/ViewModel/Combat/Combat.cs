@@ -167,6 +167,7 @@ namespace UrbanRivalsCore.ViewModel
             throw new NotImplementedException("Implement Consume Suffix"); // TODO
             throw new NotImplementedException("Implement Increase Pillz And Life Suffix"); // TODO
             throw new NotImplementedException("Implement Cancel Power and Damage Suffix"); // TODO
+            throw new NotImplementedException("Implement Decrease Atk Per Pillz Left Suffix"); // TODO
 
 
             /* DO NOT REFACTOR THIS METHOD !!!

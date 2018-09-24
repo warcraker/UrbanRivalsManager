@@ -727,6 +727,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -{0} Opp Attack Per Pillz Left, Min {1}.
+        /// </summary>
+        public static string skill_suffix_decrease_attack_x_per_remaining_pillz_min_y {
+            get {
+                return ResourceManager.GetString("skill_suffix_decrease_attack_x_per_remaining_pillz_min_y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -{0} Opp Damage, Min {1}.
         /// </summary>
         public static string skill_suffix_decrease_damage_x_min_y {

@@ -138,6 +138,7 @@ namespace UrbanRivalsCore.Model
         CopyPowerAndDamage,
         DecreaseAttackXMinY,
         DecreaseAttackXPerRemainingLifeMinY,
+        DecreaseAttackXPerRemainingPillzMinY,
         DecreaseDamageXMinY,
         DecreaseLifeXMinY,
         DecreasePillzXMinY,

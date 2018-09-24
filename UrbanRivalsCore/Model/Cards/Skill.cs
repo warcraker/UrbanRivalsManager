@@ -312,6 +312,9 @@ namespace UrbanRivalsCore.Model
                 case SkillSuffix.DecreaseAttackXPerRemainingLifeMinY:
                     result += String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_per_remaining_life_min_y, X, Y);
                     break;
+                case SkillSuffix.DecreaseAttackXPerRemainingPillzMinY:
+                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_per_remaining_pillz_min_y, X, Y);
+                    break;
                 case SkillSuffix.DecreaseDamageXMinY:
                     result += String.Format(Properties.GameStrings.skill_suffix_decrease_damage_x_min_y, X, Y);
                     break;

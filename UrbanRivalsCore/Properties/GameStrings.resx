@@ -456,6 +456,9 @@
   <data name="skill_suffix_consume_x_min_y" xml:space="preserve">
     <value>Consume {0}, Min {1}</value>
   </data>
+  <data name="skill_suffix_decrease_attack_x_per_remaining_pillz_min_y" xml:space="preserve">
+    <value>-{0} Opp Attack Per Pillz Left, Min {1}</value>
+  </data>
   <data name="skill_suffix_increase_pillz_and_life_x" xml:space="preserve">
     <value>Increase Pillz And Life +{0}</value>
   </data>
