@@ -470,6 +470,8 @@ namespace UrbanRivalsApiAdapter
         /// <returns></returns>
         public static CardBase ToCardBase(int id, string name, int clan_id, int level_min, int level_max, string rarity, string ability, int ability_unlock_level, int release_date, List<CardLevel> cardLevels)
         {
+            if (ability.Contains("Day:") || ability.Contains("Night:")) return null; // TODO: Remove this line if day/night is implemented, or after 11/2018, whatever happens first
+
             var parsedClan = Clan.GetClanById((ClanId)clan_id);
             var parsedAbility = ParseAbility(ability);
             var parsedRarity = ParseRarity(rarity);

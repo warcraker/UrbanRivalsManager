@@ -211,6 +211,8 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 
                 var card = ApiToCardBaseAdapter.ToCardBase(id, name, clanId, minLevel, maxLevel, rarityText, abilityText, abilityUnlockLevel, timeSinceRelease, cardLevels);
 
+                if (card == null) continue; // TODO: Remove this line if day/night is implemented, or after 11/2018, whatever happens first
+
                 managers.DatabaseManager.StoreCardBase(card);
                 managers.InMemoryManager.LoadToMemoryCardBase(card);
                 managers.ImageDownloader.AddCardBaseToDownloadQueue(card, CharacterImageFormat.Color800x640);
