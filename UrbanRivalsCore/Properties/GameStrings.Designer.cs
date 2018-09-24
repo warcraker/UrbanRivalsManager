@@ -628,6 +628,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel Opp Pillz And Life Modifier.
+        /// </summary>
+        public static string skill_suffix_cancel_pillz_and_life_modifier {
+            get {
+                return ResourceManager.GetString("skill_suffix_cancel_pillz_and_life_modifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel Opp Pillz Modifier.
         /// </summary>
         public static string skill_suffix_cancel_pillz_modifier {

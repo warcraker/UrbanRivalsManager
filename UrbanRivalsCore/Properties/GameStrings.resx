@@ -441,4 +441,7 @@
   <data name="skill_suffix_dope_x_max_y" xml:space="preserve">
     <value>Dope {0}, Max {1}</value>
   </data>
+  <data name="skill_suffix_cancel_pillz_and_life_modifier" xml:space="preserve">
+    <value>Cancel Opp Pillz And Life Modifier</value>
+  </data>
 </root>

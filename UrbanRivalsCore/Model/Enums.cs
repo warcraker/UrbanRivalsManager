@@ -128,6 +128,7 @@ namespace UrbanRivalsCore.Model
         CancelLeader,
         CancelLifeModifier,
         CancelPillzModifier,
+        CancelPillzAndLifeModifier,
         CancelPowerModifier,
         CopyBonus,
         CopyDamage,

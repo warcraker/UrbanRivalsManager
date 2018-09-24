@@ -161,6 +161,7 @@ namespace UrbanRivalsCore.ViewModel
             throw new NotImplementedException("Implement Brawl Prefix"); // TODO
             throw new NotImplementedException("Implement Degrowth Prefix"); // TODO
             throw new NotImplementedException("Implement Dope Suffix"); // TODO
+            throw new NotImplementedException("Implement Cancel Pillz&Life Suffix"); // TODO
 
             /* DO NOT REFACTOR THIS METHOD !!!
              * Use the "PreviewRound() Steps.txt" document to orient yourself.
