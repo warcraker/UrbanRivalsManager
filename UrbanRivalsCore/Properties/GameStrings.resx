@@ -447,4 +447,7 @@
   <data name="skill_suffix_exchange_damage" xml:space="preserve">
     <value>Damage Exchange</value>
   </data>
+  <data name="skill_suffix_exchange_power" xml:space="preserve">
+    <value>Power Exchange</value>
+  </data>
 </root>

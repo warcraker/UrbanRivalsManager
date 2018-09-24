@@ -143,6 +143,7 @@ namespace UrbanRivalsCore.Model
         DecreasePowerXMinY,
         DopeXMaxY,
         ExchangeDamage,
+        ExchangePower,
         HealXMaxY,
         IncreaseAttackX,
         IncreaseAttackXPerRemainingLife,
