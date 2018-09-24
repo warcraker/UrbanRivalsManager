@@ -171,7 +171,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             string response;
             HttpStatusCode statusCode = managers.GlobalManager.ApiManagerInstance.SendRequest(request, out response);
             if (statusCode != HttpStatusCode.OK)
-                throw new Exception("GetCardBase SendRequest returned: " + statusCode.ToString()); // TODO: Manage timeouts gracefully
+                throw new Exception("GetCardBase SendRequest returned: " + statusCode.ToString()); // TODO: Manage timeouts gracefully (GatewayTimeout)
             dynamic decoded = JsonDecoder.Decode(response);
 
             int progress = 0;
