@@ -114,7 +114,7 @@ namespace UrbanRivalsApiAdapter
 
             // Exceptional case: DJ Korps (ID = 1260). Every card has a single prefix, or none. This one has a double prefix
             // Why: The alternative is add a loop that calls (at least) two times the regex "PrefixAndSuffix" for each parse
-            if (abilityString == "Growth: Defeat -1 Opp. Life, Min 1")
+            if (abilityString == "Defeat: Growth: -1 Opp. Life, Min 1")
                 return new Skill(SkillPrefix.GrowthAndDefeat, SkillSuffix.DecreaseLifeXMinY, 1, 1);
 
             // -- End Exceptional cases --
