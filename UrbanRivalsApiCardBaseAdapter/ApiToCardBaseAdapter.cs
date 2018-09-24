@@ -47,7 +47,7 @@ namespace UrbanRivalsApiAdapter
                 public static readonly Regex IncreaseLifeXMaxY = new Regex(@"^[+] ?(?<x>[0-9]+) Life[,]? Max[.] (?<y>[0-9]+)$");
                 public static readonly Regex IncreaseLifeXPerDamage = new Regex(@"^[+] ?(?<x>[0-9]+) Life Per D(amage|mg[.]?)$");
                 public static readonly Regex IncreaseLifeXPerDamageMaxY = new Regex(@"^[+] ?(?<x>[0-9]+) Life Per D(amage|mg[.]?) Max[.] (?<y>[0-9]+)$");
-                public static readonly Regex IncreasePillzAndLifeX = new Regex(@"+1 Pillz And Life");
+                public static readonly Regex IncreasePillzAndLifeX = new Regex(@"^[+](?<x>[0-9]+) Pillz And Life$");
                 public static readonly Regex IncreasePillzX = new Regex(@"^[+] ?(?<x>[0-9]+) Pillz$");
                 public static readonly Regex IncreasePillzXMaxY = new Regex(@"^[+] ?(?<x>[0-9]+) Pillz Max[.] (?<y>[0-9]+)$");
                 public static readonly Regex IncreasePillzXPerDamage = new Regex(@"^[+] ?(?<x>[0-9]+) Pillz Per D(amage|mg[.]?)$");
