@@ -117,6 +117,16 @@ namespace UrbanRivalsApiAdapter
             if (abilityString == "Defeat: Growth: -1 Opp. Life, Min 1")
                 return new Skill(SkillPrefix.GrowthAndDefeat, SkillSuffix.DecreaseLifeXMinY, 1, 1);
 
+            // Exceptional case: Excess LD (ID = 1678). Every card has a single prefix, or none. This one has a double prefix
+            // Why: The alternative is add a loop that calls (at least) two times the regex "PrefixAndSuffix" for each parse
+            if (abilityString == "Stop: Victory Or Defeat : +3 Life")
+                return null;
+
+            // Exceptional case: Ghoonbones (ID = 1755). Every card has a single prefix, or none. This one has a double prefix
+            // Why: The alternative is add a loop that calls (at least) two times the regex "PrefixAndSuffix" for each parse
+            if (abilityString == "Backlash: Growth: - 1 Life Min 2") 
+                return null;
+
             // -- End Exceptional cases --
 
             // Leaders 
@@ -531,6 +541,8 @@ namespace UrbanRivalsApiAdapter
             // UR says that Rebirth cards have "common" rarity, and I feel like breaking the law ;)
             if (name.EndsWith(" Rb"))
                 parsedRarity = CardRarity.Rebirth;
+
+            if (ability == null) return null; // TODO: Remove this line if double prefix is implemented, or after 11/2018, whatever happens first
 
             return new CardBase(id, name, parsedClan, level_min, level_max, cardLevels, parsedAbility, ability_unlock_level, parsedRarity, parsedReleaseDate);
         }
