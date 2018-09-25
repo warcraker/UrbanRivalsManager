@@ -22,7 +22,7 @@ namespace UrbanRivalsApiAdapter
                 public static readonly Regex CancelLifeModifier = new Regex(@"^Cancel Opp[.] Life Modif[.]$");
                 public static readonly Regex CancelPillzAndLifeModifier = new Regex(@"^Cancel Opp[.] Pillz & Life Modif[.]$");
                 public static readonly Regex CancelPillzModifier = new Regex(@"^Cancel Opp[.] Pillz Modif[.]$");
-                public static readonly Regex CancelPowerAndDamageModifier = new Regex(@"^Cancel Opp[.] Power And Damage Modif[.]$");
+                public static readonly Regex CancelPowerAndDamageModifier = new Regex(@"^Cancel Opp[.]? Power And Damage( Modif[.]| Mod)?$");
                 public static readonly Regex CancelPowerModifier = new Regex(@"^Cancel Opp[.] Power Modif[.]$");
                 public static readonly Regex ConsumeXMinY = new Regex(@"^Consume (?<x>[0-9]+), Min (?<y>[0-9]+)$");
                 public static readonly Regex CopyBonus = new Regex(@"^Copy:? (Bonus Opp[.]|Opp[.] Bonus)?$");
