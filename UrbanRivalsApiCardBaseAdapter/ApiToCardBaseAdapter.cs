@@ -55,6 +55,7 @@ namespace UrbanRivalsApiAdapter
                 public static readonly Regex IncreasePillzXPerDamage = new Regex(@"^[+] ?(?<x>[0-9]+) Pillz Per D(amage|mg[.]?)$");
                 public static readonly Regex IncreasePowerAndDamageX = new Regex(@"^Pow(er[.]?) (And|&) D(amage|mg[.]?) ?[+] ?(?<x>[0-9]+)$");
                 public static readonly Regex IncreasePowerX = new Regex(@"^Pow(er[.]?) [+] ?(?<x>[0-9]+)$");
+                public static readonly Regex InfectionXMinY = new Regex(@"^Infection (?<x>[0-9]), Min (?<y>[0-9])$");
                 public static readonly Regex PoisonXMinY = new Regex(@"^Poison (?<x>[0-9]),? Min (?<y>[0-9])$");
                 public static readonly Regex ProtectAbility = new Regex(@"^Protection ?: Ability$");
                 public static readonly Regex ProtectAttack = new Regex(@"^Protection ?: Attack$");
@@ -445,6 +446,13 @@ namespace UrbanRivalsApiAdapter
             {
                 match = UsedRegex.Suffix.IncreasePowerX.Match(suffixText);
                 x = match.Groups["x"].Captures[0].Value;
+                suffix = SkillSuffix.IncreasePowerX;
+            }
+            else if (UsedRegex.Suffix.InfectionXMinY.IsMatch(suffixText))
+            {
+                match = UsedRegex.Suffix.InfectionXMinY.Match(suffixText);
+                x = match.Groups["x"].Captures[0].Value;
+                y = match.Groups["y"].Captures[0].Value;
                 suffix = SkillSuffix.IncreasePowerX;
             }
             else if (UsedRegex.Suffix.PoisonXMinY.IsMatch(suffixText))

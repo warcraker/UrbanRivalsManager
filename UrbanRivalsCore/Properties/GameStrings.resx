@@ -462,4 +462,7 @@
   <data name="skill_suffix_increase_pillz_and_life_x" xml:space="preserve">
     <value>Increase Pillz And Life +{0}</value>
   </data>
+  <data name="skill_suffix_infection_x_min_y" xml:space="preserve">
+    <value>Infection {0}, Min {1}</value>
+  </data>
 </root>

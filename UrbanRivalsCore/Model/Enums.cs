@@ -162,6 +162,7 @@ namespace UrbanRivalsCore.Model
         IncreasePillzXPerDamage,
         IncreasePowerAndDamageX,
         IncreasePowerX,
+        InfectionXMinY,
         PoisonXMinY,
         ProtectAbility,
         ProtectAttack,

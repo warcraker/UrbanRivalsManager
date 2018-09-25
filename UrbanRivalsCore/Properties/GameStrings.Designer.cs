@@ -961,6 +961,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Infection {0}, Min {1}.
+        /// </summary>
+        public static string skill_suffix_infection_x_min_y {
+            get {
+                return ResourceManager.GetString("skill_suffix_infection_x_min_y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Poison {0}, Min {1}.
         /// </summary>
         public static string skill_suffix_poison_x_min_y {
