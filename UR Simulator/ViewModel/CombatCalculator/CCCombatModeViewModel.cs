@@ -376,7 +376,7 @@ namespace UrbanRivalsManager.ViewModel
             return Combat.RoundCounter > 0;
         }
 
-        private IEnumerable<RoundResults> CalculateCardInteractionsOneVsAll(PlayerSide attackerSide, int attackerCard, int attackerUsedPills, bool attackerUsedFury)
+        private IEnumerable<RoundResults> CalculateCardInteractionsOneVsAll(PlayerSide attackerSide, int attackerCard, int attackerUsedPillz, bool attackerUsedFury)
         {
             PlayerStatus attacker = (attackerSide == PlayerSide.Left) ? Combat.LeftPlayerStatus : Combat.RightPlayerStatus;
             PlayerStatus defender = (attackerSide == PlayerSide.Left) ? Combat.RightPlayerStatus : Combat.LeftPlayerStatus;
@@ -384,7 +384,7 @@ namespace UrbanRivalsManager.ViewModel
             for (int defenderCard = 0; defenderCard <= 3; defenderCard++)
             {
                 if (!defender.Hand.Status.HasCardBeingPlayed[defenderCard])
-                    yield return CalculateCardInteractionsOneVsOne(attackerSide, attackerCard, defenderCard, attackerUsedPills, attackerUsedFury);
+                    yield return CalculateCardInteractionsOneVsOne(attackerSide, attackerCard, defenderCard, attackerUsedPillz, attackerUsedFury);
             }
         }
         private RoundResults CalculateCardInteractionsOneVsOne(PlayerSide attackerSide, int cardAttackerNumber, int cardDefenderNumber, int attackerUsedPillz, bool attackerUsedFury)

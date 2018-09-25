@@ -35,7 +35,7 @@ namespace UrbanRivalsCore.Model
 
         private List<int?> _UsedPillzPerRound;
         /// <summary>
-        /// Gets the amount of pills used per round. Fury not included. <c>null</c> means that round has not been played.
+        /// Gets the amount of pillz used per round. Fury not included. <c>null</c> means that round has not been played.
         /// <example>[3, 0, null, null] means that 3 pillz were used on round 1, and 0 pillz were used on round 2. Rounds 3 and 4 hasn't been played yet.</example>
         /// </summary>
         public ReadOnlyCollection<int?> UsedPillzPerRound { get { return _UsedPillzPerRound.AsReadOnly(); } }
