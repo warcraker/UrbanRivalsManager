@@ -147,11 +147,16 @@ namespace UrbanRivalsApiAdapter
             // Why: The alternative is add a loop that calls (at least) two times the regex "PrefixAndSuffix" for each parse
             if (abilityString == "Defeat: Equalizer: +1 Life")
                 return null;
-            
+
+            // Exceptional case: Xantiax Robb Cr (ID = 1573). Is the only card with this prefix.
+            // Why: It is a new prefix that resembles to Backlash and Victory or Defeat. Needs to much work for a single card by now.
+            if (abilityString == "Xantiax: -3 Life, Min. 0")
+                return null;
+
 
             // -- End Exceptional cases --
 
-            // Leaders 
+            // Leaders
             switch (abilityString)
             {
                 case "Team: Courage, Power +3, Max. 10":
