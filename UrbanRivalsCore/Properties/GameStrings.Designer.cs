@@ -745,6 +745,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -{0} Opp Life And Pillz, Min {1}.
+        /// </summary>
+        public static string skill_suffix_decrease_life_and_pillz_x_min_y {
+            get {
+                return ResourceManager.GetString("skill_suffix_decrease_life_and_pillz_x_min_y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -{0} Opp Life, Min {1}.
         /// </summary>
         public static string skill_suffix_decrease_life_x_min_y {

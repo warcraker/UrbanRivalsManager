@@ -169,7 +169,7 @@ namespace UrbanRivalsCore.ViewModel
             throw new NotImplementedException("Implement Cancel Power and Damage Suffix"); // TODO
             throw new NotImplementedException("Implement Decrease Atk Per Pillz Left Suffix"); // TODO
             throw new NotImplementedException("Implement Infection Suffix"); // TODO
-
+            throw new NotImplementedException("Implement DecreaseLifeAndPillzXMinY Suffix"); // TODO
 
             /* DO NOT REFACTOR THIS METHOD !!!
              * Use the "PreviewRound() Steps.txt" document to orient yourself.

@@ -140,6 +140,7 @@ namespace UrbanRivalsCore.Model
         DecreaseAttackXPerRemainingLifeMinY,
         DecreaseAttackXPerRemainingPillzMinY,
         DecreaseDamageXMinY,
+        DecreaseLifeAndPillzXMinY,
         DecreaseLifeXMinY,
         DecreasePillzXMinY,
         DecreasePowerAndDamageXMinY,
