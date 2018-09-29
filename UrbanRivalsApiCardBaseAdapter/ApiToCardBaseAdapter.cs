@@ -166,7 +166,7 @@ namespace UrbanRivalsApiAdapter
                     return new Skill(SkillLeader.Eyrik);
                 case "Team: +6 Attack":
                     return new Skill(SkillLeader.Hugo);
-                case "Team: Defeat: Rec. 1 Pillz Out Of 3":
+                case "Team: Defeat: Rec. 1 Pillz Out Of 2":
                     return new Skill(SkillLeader.Melody);
                 case "+1 Pillz Per Round, Max. 10":
                     return new Skill(SkillLeader.Morphun);

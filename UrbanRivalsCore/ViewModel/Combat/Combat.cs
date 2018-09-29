@@ -939,7 +939,7 @@ namespace UrbanRivalsCore.ViewModel
         private static void ApplyLeaderMelody(SkillLeader leader, PlayerSide roundWinner, int usedPillz, bool usedFury, BatchAdder pillzBatchAdder)
         {
             if (leader == SkillLeader.Melody && roundWinner == PlayerSide.Right)
-                pillzBatchAdder.InsertAddition(CalculateRecoveredPillz(usedPillz, usedFury, 1, 3));
+                pillzBatchAdder.InsertAddition(CalculateRecoveredPillz(usedPillz, usedFury, 1, 2));
         }
         private static void ApplyLeaderTimber(SkillLeader leader, BatchAdder damageBatchAdder)
         {
