@@ -77,6 +77,8 @@ namespace UrbanRivalsApiAdapter
 
                 public static readonly Regex ReanimateX = new Regex(@"^Reanimate: [+](?<x>[0-9]) Life$");
 
+                public static readonly Regex RebirthXMaxY = new Regex(@"^Rebirth (?<x>[0-9]), Max[.] (?<y>[0-9])$");
+
                 public static readonly Regex RecoverXPillzOutOfY = new Regex(@"^Recover (?<x>[0-9]) Pillz Out Of (?<y>[0-9])$");
 
                 public static readonly Regex RegenXMaxY = new Regex(@"^Regen (?<x>[0-9]),? Max[.]? (?<y>[0-9]+)$");
@@ -535,6 +537,13 @@ namespace UrbanRivalsApiAdapter
                 match = UsedRegex.Suffix.ReanimateX.Match(suffixText);
                 x = match.Groups["x"].Captures[0].Value;
                 suffix = SkillSuffix.ReanimateX;
+            }
+            else if (UsedRegex.Suffix.RebirthXMaxY.IsMatch(suffixText))
+            {
+                match = UsedRegex.Suffix.RebirthXMaxY.Match(suffixText);
+                x = match.Groups["x"].Captures[0].Value;
+                y = match.Groups["y"].Captures[0].Value;
+                suffix = SkillSuffix.RebirthXMaxY;
             }
             else if (UsedRegex.Suffix.RecoverXPillzOutOfY.IsMatch(suffixText))
             {

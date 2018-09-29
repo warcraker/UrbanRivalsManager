@@ -1060,6 +1060,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rebirth {0}, Max {1}.
+        /// </summary>
+        public static string skill_suffix_rebirth_x_max_y {
+            get {
+                return ResourceManager.GetString("skill_suffix_rebirth_x_max_y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recover {0} Pillz Out Of {1}.
         /// </summary>
         public static string skill_suffix_recover_x_pillz_out_of_y {

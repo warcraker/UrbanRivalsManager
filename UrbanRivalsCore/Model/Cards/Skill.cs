@@ -411,6 +411,9 @@ namespace UrbanRivalsCore.Model
                 case SkillSuffix.ReanimateX:
                     result += String.Format(Properties.GameStrings.skill_suffix_reanimate_x, X);
                     break;
+                case SkillSuffix.RebirthXMaxY:
+                    result += String.Format(Properties.GameStrings.skill_suffix_rebirth_x_max_y, X, Y);
+                    break;
                 case SkillSuffix.RecoverXPillzOutOfY:
                     result += String.Format(Properties.GameStrings.skill_suffix_recover_x_pillz_out_of_y, X, Y);
                     break;
