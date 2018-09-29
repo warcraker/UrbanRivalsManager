@@ -155,6 +155,12 @@ namespace UrbanRivalsApiAdapter
             if (abilityString == "Xantiax: -3 Life, Min. 0")
                 return null;
 
+            // Exceptional case: Silvano (ID = 1714). Every card has a single prefix, or none. This one has a double prefix
+            // Why: The alternative is add a loop that calls (at least) two times the regex "PrefixAndSuffix" for each parse
+            if (abilityString == "Defeat: Brawl: +1 Life")
+                return null;
+            //
+
 
             // -- End Exceptional cases --
 
