@@ -73,7 +73,7 @@ namespace UrbanRivalsApiAdapter
                 public static readonly Regex ProtectBonus           = new Regex(@"^Protection ?: Bonus|Bonus Protection$");
                 public static readonly Regex ProtectDamage          = new Regex(@"^Protection ?: Damage$");
                 public static readonly Regex ProtectPower           = new Regex(@"^Protection ?: Power$");
-                public static readonly Regex ProtectPowerAndDamage  = new Regex(@"^(Protec[.]|Protect[.]|Protection:) Power And (Dmg|Damage)$");
+                public static readonly Regex ProtectPowerAndDamage  = new Regex(@"^(Prot[.]:|Protec[.]|Protect[.]|Protection:) Power (And|&) (Dmg|Damage)$");
 
                 public static readonly Regex RecoverXPillzOutOfY = new Regex(@"^Recover (?<x>[0-9]) Pillz Out Of (?<y>[0-9])$");
 
