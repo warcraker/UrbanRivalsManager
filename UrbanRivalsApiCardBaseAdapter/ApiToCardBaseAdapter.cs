@@ -17,57 +17,71 @@ namespace UrbanRivalsApiAdapter
                 new Regex(@"^(?<prefix>Backlash|Brawl|Confidence|Courage|Defeat|Degrowth|Equalizer|Growth|Killshot|Reprisal|Revenge|Stop|Support|Victory Or Defeat|Vict[.] Or Def[.]) ?: (?<suffix>[a-zA-Z0-9 .,:=&+-]+)$");
             public static class Suffix
             {
-                public static readonly Regex CancelAttackModifier = new Regex(@"^Cancel Opp[.] Attack Modif[.]$");
-                public static readonly Regex CancelDamageModifier = new Regex(@"^Cancel Opp[.] Damage Modif[.]$");
-                public static readonly Regex CancelLifeModifier = new Regex(@"^Cancel Opp[.] Life Modif[.]$");
-                public static readonly Regex CancelPillzAndLifeModifier = new Regex(@"^Cancel Opp[.] Pillz & Life Modif[.]$");
-                public static readonly Regex CancelPillzModifier = new Regex(@"^Cancel Opp[.] Pillz Modif[.]$");
-                public static readonly Regex CancelPowerAndDamageModifier = new Regex(@"^Cancel Opp[.]? Power And Damage( Modif[.]| Mod)?$");
-                public static readonly Regex CancelPowerModifier = new Regex(@"^Cancel Opp[.] Power Modif[.]$");
+                public static readonly Regex CancelAttackModifier           = new Regex(@"^Cancel Opp[.] Attack Modif[.]$");
+                public static readonly Regex CancelDamageModifier           = new Regex(@"^Cancel Opp[.] Damage Modif[.]$");
+                public static readonly Regex CancelLifeModifier             = new Regex(@"^Cancel Opp[.] Life Modif[.]$");
+                public static readonly Regex CancelPillzAndLifeModifier     = new Regex(@"^Cancel Opp[.] Pillz & Life Modif[.]$");
+                public static readonly Regex CancelPillzModifier            = new Regex(@"^Cancel Opp[.] Pillz Modif[.]$");
+                public static readonly Regex CancelPowerAndDamageModifier   = new Regex(@"^Cancel Opp[.]? Power And Damage( Modif[.]| Mod)?$");
+                public static readonly Regex CancelPowerModifier            = new Regex(@"^Cancel Opp[.] Power Modif[.]$");
+
                 public static readonly Regex ConsumeXMinY = new Regex(@"^Consume (?<x>[0-9]+), Min (?<y>[0-9]+)$");
-                public static readonly Regex CopyBonus = new Regex(@"^Copy:? (Bonus Opp[.]|Opp[.] Bonus)?$");
-                public static readonly Regex CopyDamage = new Regex(@"^Copy: Opp[.] Damage$");
-                public static readonly Regex CopyPower = new Regex(@"^Copy: Opp[.] Power|Power = Power Opp$");
+
+                public static readonly Regex CopyBonus          = new Regex(@"^Copy:? (Bonus Opp[.]|Opp[.] Bonus)?$");
+                public static readonly Regex CopyDamage         = new Regex(@"^Copy: Opp[.] Damage$");
+                public static readonly Regex CopyPower          = new Regex(@"^Copy: Opp[.] Power|Power = Power Opp$");
                 public static readonly Regex CopyPowerAndDamage = new Regex(@"^Copy: Power And Damage Opp[.]?$");
-                public static readonly Regex DecreaseAttackXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Attack,? Min (?<y>[0-9]+)$");
-                public static readonly Regex DecreaseAttackXPerRemainingLifeMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?(Attack|Att[.]) Per Life Left,? Min (?<y>[0-9]+)$");
-                public static readonly Regex DecreaseAttackXPerRemainingPillzMinY = new Regex(@"^-(?<x>[0-9]+) Opp Att[.] Per Pillz Left, Min (?<y>[0-9]+)$");
-                public static readonly Regex DecreaseDamageXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?D(?:amage|mg),? Min (?<y>[0-9]+)$");
-                public static readonly Regex DecreaseLifeAndPillzXMinY = new Regex(@"^- ?(?<x>[0-9]+) Opp( Life & Pillz Min|[.] Pillz And Life, Min) (?<y>[0-9]+)$");
-                public static readonly Regex DecreaseLifeXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Life[.,]? (Opp[.]? )?Min (?<y>[0-9]+)$");
-                public static readonly Regex DecreasePillzXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pillz[.,]? (Opp[.]? )?Min (?<y>[0-9]+)$");
-                public static readonly Regex DecreasePowerAndDamageXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pow(er)?[.]? (And|&) D(amage|mg|am)[.]?,? ?[Mm]in (?<y>[0-9]+)$");
-                public static readonly Regex DecreasePowerXMinY = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pow(er)?[,.]? Min (?<y>[0-9]+)$");
+
+                public static readonly Regex DecreaseAttackXMinY                    = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Attack,? Min (?<y>[0-9]+)$");
+                public static readonly Regex DecreaseAttackXPerRemainingLifeMinY    = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?(Attack|Att[.]) Per Life Left,? Min (?<y>[0-9]+)$");
+                public static readonly Regex DecreaseAttackXPerRemainingPillzMinY   = new Regex(@"^-(?<x>[0-9]+) Opp Att[.] Per Pillz Left, Min (?<y>[0-9]+)$");
+                public static readonly Regex DecreaseDamageXMinY                    = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?D(?:amage|mg),? Min (?<y>[0-9]+)$");
+                public static readonly Regex DecreaseLifeAndPillzXMinY              = new Regex(@"^-(?<x>[0-9]+) Opp( Life & Pillz Min|[.] Pillz And Life, Min) (?<y>[0-9]+)$");
+                public static readonly Regex DecreaseLifeXMinY                      = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Life[.,]? (Opp[.]? )?Min (?<y>[0-9]+)$");
+                public static readonly Regex DecreasePillzXMinY                     = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pillz[.,]? (Opp[.]? )?Min (?<y>[0-9]+)$");
+                public static readonly Regex DecreasePowerAndDamageXMinY            = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pow(er)?[.]? (And|&) D(amage|mg|am)[.]?,? ?[Mm]in (?<y>[0-9]+)$");
+                public static readonly Regex DecreasePowerXMinY                     = new Regex(@"^- ?(?<x>[0-9]+) (Opp[.]? )?Pow(er)?[,.]? Min (?<y>[0-9]+)$");
+
                 public static readonly Regex DopeXMaxY = new Regex(@"^Dope (?<x>[0-9]), Max[.] (?<y>[0-9]+)$");
+
                 public static readonly Regex ExchangeDamage = new Regex(@"^Damage Exchange$");
-                public static readonly Regex ExchangePower = new Regex(@"^Power Exchange$");
+                public static readonly Regex ExchangePower  = new Regex(@"^Power Exchange$");
+
                 public static readonly Regex HealXMaxY = new Regex(@"^Heal (?<x>[0-9]+) Max[.]? (?<y>[0-9]+)$");
-                public static readonly Regex IncreaseAttackX = new Regex(@"^At(tac)?k[.]? [+](?<x>[0-9]+)$");
-                public static readonly Regex IncreaseAttackXPerRemainingLife = new Regex(@"^[+] ?(?<x>[0-9]+) At(tac)?k Per Life Left$");
-                public static readonly Regex IncreaseAttackXPerRemainingPillz = new Regex(@"^[+] ?(?<x>[0-9]+) At(tac)?k Per Pillz Left$");
-                public static readonly Regex IncreaseDamageX = new Regex(@"^D(amage|mg[.]?) [+] ?(?<x>[0-9]+)$");
-                public static readonly Regex IncreaseLifeX = new Regex(@"^[+] ?(?<x>[0-9]+) Life$");
-                public static readonly Regex IncreaseLifeXMaxY = new Regex(@"^[+] ?(?<x>[0-9]+) Life[,]? Max[.] (?<y>[0-9]+)$");
-                public static readonly Regex IncreaseLifeXPerDamage = new Regex(@"^[+] ?(?<x>[0-9]+) Life Per D(amage|mg[.]?)$");
-                public static readonly Regex IncreaseLifeXPerDamageMaxY = new Regex(@"^[+] ?(?<x>[0-9]+) Life Per D(amage|mg[.]?) Max[.] (?<y>[0-9]+)$");
-                public static readonly Regex IncreasePillzAndLifeX = new Regex(@"^[+](?<x>[0-9]+) Pillz And Life$");
-                public static readonly Regex IncreasePillzX = new Regex(@"^[+] ?(?<x>[0-9]+) Pillz$");
-                public static readonly Regex IncreasePillzXMaxY = new Regex(@"^[+] ?(?<x>[0-9]+) Pillz Max[.] (?<y>[0-9]+)$");
-                public static readonly Regex IncreasePillzXPerDamage = new Regex(@"^[+] ?(?<x>[0-9]+) Pillz Per D(amage|mg[.]?)$");
-                public static readonly Regex IncreasePowerAndDamageX = new Regex(@"^Pow(er[.]?) (And|&) D(amage|mg[.]?) ?[+] ?(?<x>[0-9]+)$");
-                public static readonly Regex IncreasePowerX = new Regex(@"^Pow(er[.]?) [+] ?(?<x>[0-9]+)$");
+
+                public static readonly Regex IncreaseAttackX                    = new Regex(@"^At(tac)?k[.]? [+](?<x>[0-9]+)$");
+                public static readonly Regex IncreaseAttackXPerRemainingLife    = new Regex(@"^[+] ?(?<x>[0-9]+) At(tac)?k Per Life Left$");
+                public static readonly Regex IncreaseAttackXPerRemainingPillz   = new Regex(@"^[+] ?(?<x>[0-9]+) At(tac)?k Per Pillz Left$");
+                public static readonly Regex IncreaseDamageX                    = new Regex(@"^D(amage|mg[.]?) [+] ?(?<x>[0-9]+)$");
+                public static readonly Regex IncreaseLifeX                      = new Regex(@"^[+] ?(?<x>[0-9]+) Life$");
+                public static readonly Regex IncreaseLifeXMaxY                  = new Regex(@"^[+] ?(?<x>[0-9]+) Life[,]? Max[.] (?<y>[0-9]+)$");
+                public static readonly Regex IncreaseLifeXPerDamage             = new Regex(@"^[+] ?(?<x>[0-9]+) Life Per D(amage|mg[.]?)$");
+                public static readonly Regex IncreaseLifeXPerDamageMaxY         = new Regex(@"^[+] ?(?<x>[0-9]+) Life Per D(amage|mg[.]?) Max[.] (?<y>[0-9]+)$");
+                public static readonly Regex IncreasePillzAndLifeX              = new Regex(@"^[+](?<x>[0-9]+) Pillz And Life$");
+                public static readonly Regex IncreasePillzX                     = new Regex(@"^[+] ?(?<x>[0-9]+) Pillz$");
+                public static readonly Regex IncreasePillzXMaxY                 = new Regex(@"^[+] ?(?<x>[0-9]+) Pillz Max[.] (?<y>[0-9]+)$");
+                public static readonly Regex IncreasePillzXPerDamage            = new Regex(@"^[+] ?(?<x>[0-9]+) Pillz Per D(amage|mg[.]?)$");
+                public static readonly Regex IncreasePowerAndDamageX            = new Regex(@"^Pow(er[.]?) (And|&) D(amage|mg[.]?) ?[+] ?(?<x>[0-9]+)$");
+                public static readonly Regex IncreasePowerX                     = new Regex(@"^Pow(er[.]?) [+] ?(?<x>[0-9]+)$");
+
                 public static readonly Regex InfectionXMinY = new Regex(@"^Infection (?<x>[0-9]), Min (?<y>[0-9])$");
+
                 public static readonly Regex PoisonXMinY = new Regex(@"^Poison (?<x>[0-9]),? Min (?<y>[0-9])$");
-                public static readonly Regex ProtectAbility = new Regex(@"^Protection ?: Ability$");
-                public static readonly Regex ProtectAttack = new Regex(@"^Protection ?: Attack$");
-                public static readonly Regex ProtectBonus = new Regex(@"^Protection ?: Bonus|Bonus Protection$");
-                public static readonly Regex ProtectDamage = new Regex(@"^Protection ?: Damage$");
-                public static readonly Regex ProtectPower = new Regex(@"^Protection ?: Power$");
-                public static readonly Regex ProtectPowerAndDamage = new Regex(@"^Prot(ection|tion|ec[.]|t[.]|[.])(:| :)? Pow(er|[.]) (And|&) D(amage|mg[.]?)$");
+
+                public static readonly Regex ProtectAbility         = new Regex(@"^Protection ?: Ability$");
+                public static readonly Regex ProtectAttack          = new Regex(@"^Protection ?: Attack$");
+                public static readonly Regex ProtectBonus           = new Regex(@"^Protection ?: Bonus|Bonus Protection$");
+                public static readonly Regex ProtectDamage          = new Regex(@"^Protection ?: Damage$");
+                public static readonly Regex ProtectPower           = new Regex(@"^Protection ?: Power$");
+                public static readonly Regex ProtectPowerAndDamage  = new Regex(@"^Prot(ection|tion|ec[.]|t[.]|[.])(:| :)? Pow(er|[.]) (And|&) D(amage|mg[.]?)$");
+
                 public static readonly Regex RecoverXPillzOutOfY = new Regex(@"^Recover (?<x>[0-9]) Pillz Out Of (?<y>[0-9])$");
+
                 public static readonly Regex RegenXMaxY = new Regex(@"^Regen (?<x>[0-9]),? Max[.]? (?<y>[0-9]+)$");
-                public static readonly Regex StopAbility = new Regex(@"^Stop( Opp[.]?)? Ability$");
-                public static readonly Regex StopBonus = new Regex(@"^Stop( Opp[.]?)? Bonus$");
+
+                public static readonly Regex StopAbility    = new Regex(@"^Stop( Opp[.]?)? Ability$");
+                public static readonly Regex StopBonus      = new Regex(@"^Stop( Opp[.]?)? Bonus$");
+
                 public static readonly Regex ToxinXMinY = new Regex(@"^Toxin (?<x>[0-9]),? Min (?<y>[0-9])$");
             }
         }
