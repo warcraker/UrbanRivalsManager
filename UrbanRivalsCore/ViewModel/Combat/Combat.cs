@@ -172,6 +172,7 @@ namespace UrbanRivalsCore.ViewModel
             throw new NotImplementedException("Implement DecreaseLifeAndPillzXMinY Suffix"); // TODO
             throw new NotImplementedException("Implement Leaders John Doom, Mr Bug Duke and Robbert Cobb"); // TODO
             throw new NotImplementedException("Implement Reanimate suffix"); // TODO
+            throw new NotImplementedException("Implement Rebirth suffix"); // TODO
 
             /* DO NOT REFACTOR THIS METHOD !!!
              * Use the "PreviewRound() Steps.txt" document to orient yourself.

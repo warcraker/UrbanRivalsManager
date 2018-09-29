@@ -175,6 +175,7 @@ namespace UrbanRivalsCore.Model
         ProtectPower,
         ProtectPowerAndDamage,
         ReanimateX,
+        RebirthXMaxY,
         RecoverXPillzOutOfY,
         RegenXMaxY,
         StopAbility,
