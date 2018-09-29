@@ -471,6 +471,9 @@
   <data name="skill_suffix_reanimate_x" xml:space="preserve">
     <value>Reanimate: +{0} Life</value>
   </data>
+  <data name="skill_suffix_corrosion_x_min_y" xml:space="preserve">
+    <value>Corrosion {0}, Min {1}</value>
+  </data>
   <data name="skill_suffix_rebirth_x_max_y" xml:space="preserve">
     <value>Rebirth {0}, Max {1}</value>
   </data>
