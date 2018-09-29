@@ -144,6 +144,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             var existingIds = managers.ServerQueriesManager.GetAllCardBaseIds();
             var storedIds = managers.DatabaseManager.GetAllCardBaseIds();
             var idsToAnalyze = existingIds.Except(storedIds).ToList();
+            idsToAnalyze.Sort();
 
             /* There are 3 API calls to get characters details:
              * - characters.getCharacters (labeled "oldGetCharacters")
