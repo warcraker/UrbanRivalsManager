@@ -306,6 +306,9 @@ namespace UrbanRivalsCore.Model
                 case SkillSuffix.CopyPowerAndDamage:
                     result += Properties.GameStrings.skill_suffix_copy_power_and_damage;
                     break;
+                case SkillSuffix.CorrosionXMinY:
+                    result = String.Format(Properties.GameStrings.skill_suffix_corrosion_x_min_y, X, Y);
+                    break;
                 case SkillSuffix.DecreaseAttackXMinY:
                     result += String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_min_y, X, Y);
                     break;
