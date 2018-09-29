@@ -75,6 +75,8 @@ namespace UrbanRivalsApiAdapter
                 public static readonly Regex ProtectPower           = new Regex(@"^Protection ?: Power$");
                 public static readonly Regex ProtectPowerAndDamage  = new Regex(@"^(Prot[.]:|Protec[.]|Protect[.]|Protection:) Power (And|&) (Dmg|Damage)$");
 
+                public static readonly Regex ReanimateX = new Regex(@"^Reanimate: [+](?<x>[0-9]) Life$");
+
                 public static readonly Regex RecoverXPillzOutOfY = new Regex(@"^Recover (?<x>[0-9]) Pillz Out Of (?<y>[0-9])$");
 
                 public static readonly Regex RegenXMaxY = new Regex(@"^Regen (?<x>[0-9]),? Max[.]? (?<y>[0-9]+)$");
@@ -521,6 +523,12 @@ namespace UrbanRivalsApiAdapter
             else if (UsedRegex.Suffix.ProtectPowerAndDamage.IsMatch(suffixText))
             {
                 suffix = SkillSuffix.ProtectPowerAndDamage;
+            }
+            else if (UsedRegex.Suffix.ReanimateX.IsMatch(suffixText))
+            {
+                match = UsedRegex.Suffix.ReanimateX.Match(suffixText);
+                x = match.Groups["x"].Captures[0].Value;
+                suffix = SkillSuffix.ReanimateX;
             }
             else if (UsedRegex.Suffix.RecoverXPillzOutOfY.IsMatch(suffixText))
             {

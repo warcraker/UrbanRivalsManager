@@ -1051,6 +1051,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reanimate: +{0} Life.
+        /// </summary>
+        public static string skill_suffix_reanimate_x {
+            get {
+                return ResourceManager.GetString("skill_suffix_reanimate_x", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recover {0} Pillz Out Of {1}.
         /// </summary>
         public static string skill_suffix_recover_x_pillz_out_of_y {

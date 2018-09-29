@@ -408,6 +408,9 @@ namespace UrbanRivalsCore.Model
                 case SkillSuffix.ProtectPowerAndDamage:
                     result += Properties.GameStrings.skill_suffix_protect_power_and_damage;
                     break;
+                case SkillSuffix.ReanimateX:
+                    result += String.Format(Properties.GameStrings.skill_suffix_reanimate_x, X);
+                    break;
                 case SkillSuffix.RecoverXPillzOutOfY:
                     result += String.Format(Properties.GameStrings.skill_suffix_recover_x_pillz_out_of_y, X, Y);
                     break;
