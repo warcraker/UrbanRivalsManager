@@ -27,8 +27,8 @@ namespace UrbanRivalsApiAdapter
 
                 public static readonly Regex ConsumeXMinY = new Regex(@"^Consume (?<x>[0-9]+), Min (?<y>[0-9]+)$");
 
-                public static readonly Regex CopyBonus          = new Regex(@"^Copy:? (Bonus Opp[.]|Opp[.] Bonus)?$");
-                public static readonly Regex CopyDamage         = new Regex(@"^Copy: Opp[.] Damage$");
+                public static readonly Regex CopyBonus          = new Regex(@"^Copy:? Opp[.] Bonus$");
+                public static readonly Regex CopyDamage         = new Regex(@"^Copy: Opp[.] Damage|Damage = Damage Opp[.]$");
                 public static readonly Regex CopyPower          = new Regex(@"^Copy: Opp[.] Power|Power = Power Opp$");
                 public static readonly Regex CopyPowerAndDamage = new Regex(@"^Copy: Power And Damage Opp[.]?$");
 
@@ -73,7 +73,7 @@ namespace UrbanRivalsApiAdapter
                 public static readonly Regex ProtectBonus           = new Regex(@"^Protection ?: Bonus|Bonus Protection$");
                 public static readonly Regex ProtectDamage          = new Regex(@"^Protection ?: Damage$");
                 public static readonly Regex ProtectPower           = new Regex(@"^Protection ?: Power$");
-                public static readonly Regex ProtectPowerAndDamage  = new Regex(@"^Prot(ection|tion|ec[.]|t[.]|[.])(:| :)? Pow(er|[.]) (And|&) D(amage|mg[.]?)$");
+                public static readonly Regex ProtectPowerAndDamage  = new Regex(@"^(Protec[.]|Protect[.]|Protection:) Power And (Dmg|Damage)$");
 
                 public static readonly Regex RecoverXPillzOutOfY = new Regex(@"^Recover (?<x>[0-9]) Pillz Out Of (?<y>[0-9])$");
 
@@ -166,10 +166,16 @@ namespace UrbanRivalsApiAdapter
                     return new Skill(SkillLeader.Eyrik);
                 case "Team: +6 Attack":
                     return new Skill(SkillLeader.Hugo);
+                case "Team: Reprisal: -2 Pow. & Dmg, Min 3":
+                    return new Skill(SkillLeader.JonhDoom);
                 case "Team: Defeat: Rec. 1 Pillz Out Of 2":
                     return new Skill(SkillLeader.Melody);
                 case "+1 Pillz Per Round, Max. 10":
                     return new Skill(SkillLeader.Morphun);
+                case "Nuke":
+                    return new Skill(SkillLeader.MrBigDuke);
+                case "Bypass":
+                    return new Skill(SkillLeader.RobbertCobb);
                 case "Tie-break":
                     return new Skill(SkillLeader.Solomon);
                 case "Team: +1 Damage":

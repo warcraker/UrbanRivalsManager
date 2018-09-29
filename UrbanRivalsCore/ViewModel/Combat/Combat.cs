@@ -170,6 +170,7 @@ namespace UrbanRivalsCore.ViewModel
             throw new NotImplementedException("Implement Decrease Atk Per Pillz Left Suffix"); // TODO
             throw new NotImplementedException("Implement Infection Suffix"); // TODO
             throw new NotImplementedException("Implement DecreaseLifeAndPillzXMinY Suffix"); // TODO
+            throw new NotImplementedException("Implement Leaders John Doom, Mr Bug Duke and Robbert Cobb");
 
             /* DO NOT REFACTOR THIS METHOD !!!
              * Use the "PreviewRound() Steps.txt" document to orient yourself.
