@@ -6,6 +6,7 @@ using System.Windows.Threading;
 using UrbanRivalsManager.Utils;
 using UrbanRivalsManager.ViewModel;
 using UrbanRivalsManager.View;
+using System.Net;
 
 namespace UrbanRivalsManager
 {
@@ -80,7 +81,27 @@ namespace UrbanRivalsManager
         {
             this.InvokeIfRequired(() =>
             {
-                AutenticadoURL.Text = MainViewModel.GetApiAutenticateUrl();
+                HttpStatusCode statusCode;
+                string url;
+
+                statusCode = MainViewModel.GetApiAutenticateUrl(out url);
+
+                switch (statusCode)
+                {
+                    case HttpStatusCode.OK:
+                        AutenticadoURL.Text = url;
+                        break;
+                    case HttpStatusCode.Unauthorized:
+                        MessageBox.Show("Unauthorized");
+                        break;
+                    case HttpStatusCode.MethodNotAllowed:
+                        MessageBox.Show("MethodNotAllowed");
+                        break;
+                    default:
+                        MessageBox.Show($"Something happened. Error code: {statusCode}");
+                        break;
+                }
+
             }, DispatcherPriority.Background);
         }
 

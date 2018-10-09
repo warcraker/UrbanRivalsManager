@@ -155,9 +155,8 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
              * "getCharacterLevels" will not be used, all the details that we can obtain from it we can get it from the "new" one too.
              */
 
-            var request = new ApiRequest();
             var setLocaleToEnglishCall = new ApiCallList.Players.SetLanguages(new List<string> { ServerQueriesManager.EnglishLocale });
-            request.EnqueueApiCall(setLocaleToEnglishCall);
+            var request = new ApiRequest(setLocaleToEnglishCall);
             var oldGetCharactersCall = new ApiCallList.Characters.GetCharacters
             {
                 // This call is painfully slow, so we optimize it as much as we can, asking only for the info we need 
@@ -236,8 +235,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 ContextFilter = new List<string>() { "totalPages" }
             };
 
-            var request = new ApiRequest();
-            request.EnqueueApiCall(getCardsFromCollectionPageCall);
+            var request = new ApiRequest(getCardsFromCollectionPageCall);
 
             int page = 0;
             int totalPages = 1;

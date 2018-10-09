@@ -53,8 +53,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             getCardLevelsCall.levelMax = -1; // Get all the levels
             getCardLevelsCall.ItemsFilter = new List<string>() { "level", "power", "damage" };
 
-            var request = new ApiRequest();
-            request.EnqueueApiCall(setEnglishLocaleCall);
+            var request = new ApiRequest(setEnglishLocaleCall);
             request.EnqueueApiCall(getCardBaseInfoCall);
             request.EnqueueApiCall(getCardLevelsCall);
 
@@ -100,8 +99,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             var getLocaleCall = new ApiCallList.General.GetPlayer();
             getLocaleCall.ContextFilter = new List<string>() { "player.locale" };
 
-            var request = new ApiRequest();
-            request.EnqueueApiCall(getLocaleCall);
+            var request = new ApiRequest(getLocaleCall);
 
             string response;
             HttpStatusCode statusCode = ApiManagerInstance.SendRequest(request, out response);
@@ -120,8 +118,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             var getLocaleCall = new ApiCallList.General.GetPlayer();
             getLocaleCall.ContextFilter = new List<string>() { "player.locale" };
 
-            var request = new ApiRequest();
-            request.EnqueueApiCall(setLocaleCall);
+            var request = new ApiRequest(setLocaleCall);
             request.EnqueueApiCall(getLocaleCall);
 
             string response;
@@ -142,8 +139,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             var getExistingCardBaseIdsCall = new ApiCallList.Urc.GetCharacters();
             getExistingCardBaseIdsCall.ItemsFilter = new List<string>() { "id" };
 
-            var request = new ApiRequest();
-            request.EnqueueApiCall(getExistingCardBaseIdsCall);
+            var request = new ApiRequest(getExistingCardBaseIdsCall);
 
             string response;
             HttpStatusCode statusCode = ApiManagerInstance.SendRequest(request, out response);
@@ -158,10 +154,14 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
         
         public IEnumerable<Deck> GetDeckList()
         {
-            var getPresetsCall = new ApiCallList.Collections.GetPresets();
-
+            ApiCall getPresetsCall;
+            ApiRequest request;
             string response;
-            HttpStatusCode statusCode = ApiManagerInstance.SendRequest(getPresetsCall, out response);
+
+            getPresetsCall = new ApiCallList.Collections.GetPresets();
+            request = new ApiRequest(getPresetsCall);
+
+            HttpStatusCode statusCode = ApiManagerInstance.SendRequest(request, out response);
             if (statusCode != HttpStatusCode.OK)
                 throw new Exception("GetDeckList SendRequest returned: " + statusCode.ToString());
             dynamic decoded = JsonDecoder.Decode(response);

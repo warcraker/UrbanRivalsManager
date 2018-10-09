@@ -57,16 +57,31 @@ namespace UrbanRivalsManager.ViewModel
 
         private void InitializeManagers()
         {
+            string consumerKey;
+            string consumerSecret;
+            string accessKey;
+            string accessSecret;
+
+
             FilepathManagerInstance = new FilepathManager(GetFileManagerPath());
 
             DatabaseManagerInstance = new SQLiteDatabaseManager(FilepathManagerInstance);
 
             InMemoryManagerInstance = new InMemoryManager(DatabaseManagerInstance);
 
-            ApiManagerInstance = new ApiManager
-                (Properties.Settings.Default.ConsumerKey, Properties.Settings.Default.ConsumerSecret, 
-                Properties.Settings.Default.AccessKey, Properties.Settings.Default.AccessSecret,
-                Properties.Settings.Default.RequestKey, Properties.Settings.Default.RequestSecret);
+            consumerKey = Properties.Settings.Default.ConsumerKey;
+            consumerSecret = Properties.Settings.Default.ConsumerSecret;
+            accessKey = Properties.Settings.Default.AccessKey;
+            accessSecret = Properties.Settings.Default.AccessSecret;
+
+            if (String.IsNullOrWhiteSpace(accessKey) == false && String.IsNullOrWhiteSpace(accessSecret) == false)
+            {
+                ApiManagerInstance = ApiManager.CreateApiManagerReadyForRequests(consumerKey, consumerSecret, accessKey, accessSecret);
+            }
+            else
+            {
+                ApiManagerInstance = ApiManager.CreateApiManager(consumerKey, consumerSecret);
+            }
 
             ServerQueriesManagerInstance = new ServerQueriesManager(ApiManagerInstance, InMemoryManagerInstance);
 

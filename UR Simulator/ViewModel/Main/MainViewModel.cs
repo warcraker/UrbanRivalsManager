@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -78,15 +79,13 @@ namespace UrbanRivalsManager.ViewModel
             DependencyProperty.Register("GlobalManager", typeof(GlobalManager), typeof(MainViewModel), new PropertyMetadata(null));
 
 
-        public string GetApiAutenticateUrl()
+        public HttpStatusCode GetApiAutenticateUrl(out string url)
         {
-            string[] requestToken;
+            HttpStatusCode statusCode;
 
-            requestToken = new string[2];
-            ApiManager.GetRequestToken(out requestToken[0], out requestToken[1]);
-            Properties.Settings.Default.RequestKey = requestToken[0];
-            Properties.Settings.Default.RequestSecret = requestToken[0];
-            return ApiManager.GetAuthorizeRequestTokenURL();
+            statusCode = ApiManager.GetAuthorizeURL(out url);
+
+            return statusCode;
         }
         public void ValidateAccessTokenAndStoreInSettings()
         {

@@ -262,29 +262,5 @@ namespace UrbanRivalsManager.Properties {
                 this["CalculatorStayOnTop"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string RequestKey {
-            get {
-                return ((string)(this["RequestKey"]));
-            }
-            set {
-                this["RequestKey"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string RequestSecret {
-            get {
-                return ((string)(this["RequestSecret"]));
-            }
-            set {
-                this["RequestSecret"] = value;
-            }
-        }
     }
 }
