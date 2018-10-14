@@ -93,18 +93,14 @@ namespace UrbanRivalsCore.Model
         /// <exception cref="ArgumentException"><paramref name="cardLevels"/> must contain a definition for all valid levels</exception>
         /// <exception cref="ArgumentException"><paramref name="ability"/> must be a valid <see cref="Skill"/></exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="rarity"/> must be a valid <see cref="CardRarity"/></exception>
-        public CardBase(int id, String name, Clan clan, int minLevel, int maxLevel, List<CardLevel> cardLevels, Skill ability = null, int abilityUnlockLevel = 0, CardRarity rarity = CardRarity.Common, DateTime? publishedDate = null)
+        public CardBase(int id, String name, Clan clan, int minLevel, int maxLevel, List<CardLevel> cardLevels, Skill ability, int abilityUnlockLevel, CardRarity rarity, DateTime? publishedDate = null)
         {
+            if (id <= 0)
+                throw new ArgumentException("Must be greater than zero", nameof(id));
             if (String.IsNullOrWhiteSpace(name))
                 throw new ArgumentNullException(nameof(name));
             if (clan == null)
                 throw new ArgumentNullException(nameof(clan));
-            if (ability == Skill.NoBonus || 
-                ability == Skill.UnlockedAtLevel2 ||
-                ability == Skill.UnlockedAtLevel3 ||
-                ability == Skill.UnlockedAtLevel4 ||
-                ability == Skill.UnlockedAtLevel5)
-                throw new ArgumentException("Must be a valid " + nameof(Skill), nameof(ability));
             if (minLevel < 0 || minLevel > 5)
                 throw new ArgumentOutOfRangeException(nameof(minLevel), minLevel, "Must be between 1 and 5 inclusive");
             if (maxLevel < minLevel || maxLevel > 5)
@@ -114,6 +110,12 @@ namespace UrbanRivalsCore.Model
             for (int level = minLevel; level <= maxLevel; level++)
                 if (cardLevels.Find(item => item.Level == level) == null)
                     throw new ArgumentException("Must contain a definition for all valid levels. Doesn't contain a definition for level " + level, nameof(cardLevels));
+            if (ability == Skill.NoBonus ||
+                ability == Skill.UnlockedAtLevel2 ||
+                ability == Skill.UnlockedAtLevel3 ||
+                ability == Skill.UnlockedAtLevel4 ||
+                ability == Skill.UnlockedAtLevel5)
+                throw new ArgumentException("Must be a valid skill", nameof(ability));
             if ((int)rarity < 0 || (int)rarity > Constants.EnumMaxAllowedValues.CardRarity)
                 throw new ArgumentOutOfRangeException(nameof(rarity), rarity, "Must be a valid " + nameof(CardRarity));
 
@@ -123,20 +125,8 @@ namespace UrbanRivalsCore.Model
             MinLevel = minLevel;
             MaxLevel = maxLevel;
             CardLevels = new List<CardLevel>(cardLevels);
-
-            if (Ability == null)
-                Ability = Skill.NoAbility;
-
-            if (Ability == Skill.NoAbility)
-            {
-                AbilityUnlockLevel = MinLevel;
-            }
-            else
-            {
-                Ability = ability;
-                AbilityUnlockLevel = Math.Max(Math.Min(abilityUnlockLevel, MaxLevel), MinLevel);
-            }
-
+            Ability = ability;
+            AbilityUnlockLevel = abilityUnlockLevel;
             Rarity = rarity;
             PublishedDate = (publishedDate == null || publishedDate < Constants.UrbanRivalsReleaseDate) 
                 ? PublishedDate = Constants.UrbanRivalsReleaseDate : (DateTime)publishedDate;

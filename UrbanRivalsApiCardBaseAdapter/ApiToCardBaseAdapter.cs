@@ -611,6 +611,8 @@ namespace UrbanRivalsApiAdapter
         /// <returns></returns>
         public static CardBase ToCardBase(int id, string name, int clan_id, int level_min, int level_max, string rarity, string ability, int ability_unlock_level, int release_date, List<CardLevel> cardLevels)
         {
+            CardBase card;
+
             if (ability.Contains("Day:") || ability.Contains("Night:")) return null; // TODO: Remove this line if day/night is implemented, or after 11/2018, whatever happens first
 
             var parsedClan = Clan.GetClanById((ClanId)clan_id);
@@ -624,7 +626,9 @@ namespace UrbanRivalsApiAdapter
 
             if (ability == null) return null; // TODO: Remove this line if double prefix is implemented, or after 11/2018, whatever happens first
 
-            return new CardBase(id, name, parsedClan, level_min, level_max, cardLevels, parsedAbility, ability_unlock_level, parsedRarity, parsedReleaseDate);
+            card = new CardBase(id, name, parsedClan, level_min, level_max, cardLevels, parsedAbility, ability_unlock_level, parsedRarity, parsedReleaseDate);
+
+            return card;
         }
     }
 }
