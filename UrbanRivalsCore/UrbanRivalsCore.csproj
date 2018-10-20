@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="Utils.cs" />
     <Compile Include="Model\Cards\CardBase.cs" />
     <Compile Include="Model\Cards\CardDrawed.cs" />
     <Compile Include="Model\Cards\CardInstance.cs" />
@@ -76,6 +75,12 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>GameStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\UrbanRivalsUtils.csproj">
+      <Project>{1fc53705-4a54-4cac-9886-b63e90a0a3ad}</Project>
+      <Name>UrbanRivalsUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
