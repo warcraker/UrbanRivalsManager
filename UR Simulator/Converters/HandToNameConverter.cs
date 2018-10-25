@@ -11,7 +11,7 @@ namespace UrbanRivalsManager.ViewModel
         {
             Hand hand = (Hand)values[0];
             int selectedCard = (int)values[1];
-            return hand[selectedCard].Name;
+            return hand[selectedCard].name;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)

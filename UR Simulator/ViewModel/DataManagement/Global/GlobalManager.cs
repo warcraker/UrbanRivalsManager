@@ -126,7 +126,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
         public IEnumerable<int> GetAllCardBaseIdsNotInDatabase()
         {
             var existingIds = ServerQueriesManagerInstance.GetAllCardBaseIds();
-            var storedIds = DatabaseManagerInstance.GetAllCardBaseIds();
+            var storedIds = DatabaseManagerInstance.getAllCardBaseIds();
             return existingIds.Except(storedIds);
         }
 
@@ -142,7 +142,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             string userLocale = managers.ServerQueriesManager.GetUserLocale();
 
             var existingIds = managers.ServerQueriesManager.GetAllCardBaseIds();
-            var storedIds = managers.DatabaseManager.GetAllCardBaseIds();
+            var storedIds = managers.DatabaseManager.getAllCardBaseIds();
             var idsToAnalyze = existingIds.Except(storedIds).ToList();
             idsToAnalyze.Sort();
 
@@ -209,11 +209,11 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 worker.ReportProgress((int)(100 * progress / idsToAnalyze.Count()), $"[{id}] {name}");
                 progress++;
 
-                var card = ApiToCardBaseAdapter.ToCardBase(id, name, clanId, minLevel, maxLevel, rarityText, abilityText, abilityUnlockLevel, timeSinceRelease, cardLevels);
+                var card = ApiToCardBaseAdapter.ToCardBase(id, name, clanId, rarityText, abilityText, abilityUnlockLevel, cardLevels);
 
                 if (card == null) continue; // TODO: Remove this line if day/night is implemented, or after 11/2018, whatever happens first
 
-                managers.DatabaseManager.StoreCardBase(card);
+                managers.DatabaseManager.storeCardBase(card);
                 managers.InMemoryManager.LoadToMemoryCardBase(card);
                 managers.ImageDownloader.AddCardBaseToDownloadQueue(card, CharacterImageFormat.Color800x640);
             }
@@ -271,12 +271,21 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 dynamic items = decoded[getCardsFromCollectionPageCall.Call]["items"];
                 foreach (dynamic item in items)
                 {
-                    int cardBaseId = int.Parse(item["id"].ToString());
-                    int cardInstanceId = int.Parse(item["id_player_character"].ToString());
-                    int level = int.Parse(item["level"].ToString());
-                    int experience = int.Parse(item["xp"].ToString());
+                    int cardBaseId;
+                    int cardInstanceId;
+                    int level;
+                    int experience;
+                    CardBase cardBase;
+                    CardInstance cardInstance;
 
-                    instances.Add(new CardInstance(managers.InMemoryManager.GetCardBase(cardBaseId), cardInstanceId, level, experience));
+                    cardBaseId = int.Parse(item["id"].ToString());
+                    cardBase = managers.InMemoryManager.GetCardBase(cardBaseId);
+                    cardInstanceId = int.Parse(item["id_player_character"].ToString());
+                    level = int.Parse(item["level"].ToString());
+                    experience = int.Parse(item["xp"].ToString());
+                    cardInstance = CardInstance.createCardInstance(cardBase, cardInstanceId, level, experience);
+
+                    instances.Add(cardInstance);
                 }
 
                 page++;

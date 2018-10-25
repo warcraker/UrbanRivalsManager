@@ -44,7 +44,7 @@ namespace UrbanRivalsManager.UserControls
             if (e.NewValue == null)
                 control.Level = null;
             else
-                control.Level = ((CardBase)e.NewValue).MaxLevel;
+                control.Level = ((CardBase)e.NewValue).maxLevel;
         }
 
         public int? Level
@@ -64,7 +64,7 @@ namespace UrbanRivalsManager.UserControls
 
             var level = (int?)baseValue;
             if (level.HasValue)
-                return Math.Min(Math.Max(level.Value, card.MinLevel), card.MaxLevel);
+                return Math.Min(Math.Max(level.Value, card.minLevel), card.maxLevel);
 
             return control.Level;
         }

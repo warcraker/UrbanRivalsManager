@@ -103,7 +103,7 @@ namespace UrbanRivalsManager.ViewModel
             List<CardDrawed> leftCards = new List<CardDrawed>();
             for (int i = 0; i < 4; i++)
 			{
-                CardInstance instance = InMemoryManager.GetFakeCardInstance(CreationLeftCards[i].CardBaseId, CreationLeftLevels[i].Value);
+                CardInstance instance = InMemoryManager.GetFakeCardInstance(CreationLeftCards[i].cardBaseId, CreationLeftLevels[i].Value);
                 //CardInstance instance = new CardInstance(CreationLeftCards[i], 0, CreationLeftLevels[i].Value);
                 leftCards.Add(new CardDrawed(instance));
 			}
@@ -112,7 +112,7 @@ namespace UrbanRivalsManager.ViewModel
             List<CardDrawed> rightCards = new List<CardDrawed>();
             for (int i = 0; i < 4; i++)
 			{
-                CardInstance instance = InMemoryManager.GetFakeCardInstance(CreationRightCards[i].CardBaseId, CreationRightLevels[i].Value);
+                CardInstance instance = InMemoryManager.GetFakeCardInstance(CreationRightCards[i].cardBaseId, CreationRightLevels[i].Value);
                 //CardInstance instance = new CardInstance(CreationRightCards[i], 0, CreationRightLevels[i].Value);
                 rightCards.Add(new CardDrawed(instance));
 			}

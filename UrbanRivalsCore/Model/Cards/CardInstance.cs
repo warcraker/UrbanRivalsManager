@@ -1,163 +1,118 @@
 ﻿using System;
+using UrbanRivalsUtils;
 
 namespace UrbanRivalsCore.Model
 {
-    /// <summary>
-    /// Represents one specific copy of a card. This copy (instance) can be owned by a single user, or none. 
-    /// </summary>
     public class CardInstance
     {
-        private CardBase CardBase;
+        public readonly int cardInstanceId;
+        public readonly int cardBaseId;
+        public readonly string name;
+        public readonly int level;
+        public readonly int experience;
+        public readonly int minLevel;
+        public readonly int maxLevel;
+        public readonly Clan clan;
+        public readonly CardRarity rarity;
+        public readonly Skill ability;
+        public readonly int power;
+        public readonly int damage;
 
-        /// <summary>
-        /// Gets the identifier that UR uses to identify this instance of the card.
-        /// </summary>
-        public int CardInstanceId { get; private set; }
-
-        /// <summary>
-        /// Gets the current level of the card.
-        /// </summary>
-        public int Level { get; private set; }
-
-        /// <summary>
-        /// Gets the current experience of the card.
-        /// </summary>
-        public int Experience { get; private set; }
-
-        // From CardBase
-
-        /// <summary>
-        /// Gets the unique identifier of the card.
-        /// </summary>
-        public int CardBaseId { get { return CardBase.CardBaseId; } }
-
-        /// <summary>
-        /// Gets the name of the card.
-        /// </summary>
-        public string Name { get { return CardBase.Name; } }
-
-        /// <summary>
-        /// Gets the clan of the card.
-        /// </summary>
-        public Clan Clan { get { return CardBase.Clan; } }
-
-        /// <summary>
-        /// Gets the rarity of the card.
-        /// </summary>
-        public CardRarity Rarity { get { return CardBase.Rarity; } }
-
-        /// <summary>
-        /// Gets the publishing date of the card.
-        /// </summary>
-        public DateTime PublishedDate { get { return CardBase.PublishedDate; } }
-
-        /// <summary>
-        /// Gets the level at which the card starts.
-        /// </summary>
-        public int MinLevel { get { return CardBase.MinLevel; } }
-
-        /// <summary>
-        /// Gets the maximum level that the card can achieve.
-        /// </summary>
-        public int MaxLevel { get { return CardBase.MaxLevel; } }
-
-        /// <summary>
-        /// Gets the level at which the card unlocks its ability. Zero if the ability is "No Ability".
-        /// </summary>
-        public int AbilityUnlockLevel { get { return CardBase.AbilityUnlockLevel; } }
-
-        /// <summary>
-        /// Gets the bonus of the card.
-        /// </summary>
-        public Skill Bonus { get { return CardBase.Clan.Bonus; } }
-
-        // From level
-
-        /// <summary>
-        /// Gets the power of the card at the current level.
-        /// </summary>
-        public int Power { get { return CardBase[Level].Power; } }
-
-        /// <summary>
-        /// Gets the damage of the card at the current level.
-        /// </summary>
-        public int Damage { get { return CardBase[Level].Damage; } }
-
-        /// <summary>
-        /// Gets the ability (if unlocked) at current level. Gets its "Unlocked at level X" value otherwise.
-        /// </summary>
-        public Skill Ability
+        public static CardInstance createCardInstance(CardBase cardBase, int instanceId, int level, int experience)
         {
-            get
+            CardInstance cardInstance;
+
+            cardInstance = new CardInstance(cardBase, instanceId, level, experience);
+
+            return cardInstance;
+        }
+        public static CardInstance createCardInstanceAtMaxLevel(CardBase cardBase, int instanceId)
+        {
+            CardInstance cardInstance;
+            int level;
+            int experience;
+
+            level = cardBase.maxLevel;
+            experience = 1;
+            cardInstance = new CardInstance(cardBase, instanceId, level, experience);
+
+            return cardInstance;
+        }
+        private CardInstance(CardBase cardBase, int instanceId, int level, int experience)
+        {
+            int minLevel;
+            int maxLevel;
+            Skill abilityFromBase;
+            Skill ability;
+            CardLevel cardStats;
+
+            AssertArgument.isNotNull(cardBase, nameof(cardBase));
+            AssertArgument.checkIntegerRange(instanceId > 0, "Must be greater than 0", instanceId, nameof(instanceId));
+            minLevel = cardBase.minLevel;
+            maxLevel = cardBase.maxLevel;
+            AssertArgument.checkIntegerRange(minLevel <= level && level <= maxLevel, $"Must be between {minLevel} and {maxLevel} inclusive", level, nameof(level));
+            AssertArgument.checkIntegerRange(experience >= 0, "Must be greater or equal to 0", experience, nameof(experience));
+            if (level == maxLevel)
             {
-                if (Level >= AbilityUnlockLevel)
-                    return CardBase.Ability;
+                AssertArgument.check(experience == 1, $"When {nameof(level)} is max, experience must be 1", nameof(experience));
+            }
+
+            abilityFromBase = cardBase.ability;
+            if (abilityFromBase == Skill.NoAbility)
+            {
+                ability = Skill.NoAbility;
+            }
+            else
+            {
+                int abilityUnlockLevel;
+
+                abilityUnlockLevel = cardBase.abilityUnlockLevel;
+                if (level >= abilityUnlockLevel)
+                {
+                    ability = abilityFromBase;
+                }
                 else
                 {
-                    switch (AbilityUnlockLevel)
+                    switch (abilityUnlockLevel)
                     {
                         case 2:
-                            return Skill.UnlockedAtLevel2;
+                            ability = Skill.UnlockedAtLevel2;
+                            break;
                         case 3:
-                            return Skill.UnlockedAtLevel3;
+                            ability = Skill.UnlockedAtLevel3;
+                            break;
                         case 4:
-                            return Skill.UnlockedAtLevel4;
+                            ability = Skill.UnlockedAtLevel4;
+                            break;
                         case 5:
-                            return Skill.UnlockedAtLevel5;
+                            ability = Skill.UnlockedAtLevel5;
+                            break;
+                        default:
+                            ability = null;
+                            Asserts.fail("Invalid unlock level");
+                            break;
                     }
                 }
-                throw new Exception("Ability get failed"); // Sanity check
             }
+
+            cardStats = cardBase.getCardLevel(level);
+
+            this.cardInstanceId = instanceId;
+            this.cardBaseId = cardBase.cardBaseId;
+            this.name = cardBase.name;
+            this.level = level;
+            this.experience = experience;
+            this.minLevel = cardBase.minLevel;
+            this.maxLevel = cardBase.maxLevel;
+            this.rarity = cardBase.rarity;
+            this.ability = ability;
+            this.power = cardStats.power;
+            this.damage = cardStats.damage;
         }
 
-        // Constructors
-
-        private CardInstance() { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CardInstance"/> class. 
-        /// </summary>
-        /// <param name="cardBase">Base card from which it is instantiated.</param>
-        /// <param name="instanceId">Identifier of the instance.</param>
-        /// <param name="level">Level of the instance.</param>
-        /// <param name="experience">Experience of the instance. Overridden to 1 if <paramref name="level"/> is maxed.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="cardBase"/> can't be null</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="level"/> must be a valid level</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="experience"/> must be greater or equal to 0</exception>
-        public CardInstance(CardBase cardBase, int instanceId, int level = 0, int experience = 0)
-        {
-            if (cardBase == null)
-                throw new ArgumentNullException(nameof(cardBase));
-
-            CardBase = cardBase;
-
-            if (level != 0 && (level < MinLevel || level > MaxLevel))
-                throw new ArgumentOutOfRangeException(nameof(level), level, $"Must be between {MinLevel} ({nameof(MinLevel)}) and {MaxLevel} ({nameof(MaxLevel)}) inclusive, or be 0");
-            if (experience < 0)
-                throw new ArgumentOutOfRangeException(nameof(experience), experience, "Must be greater or equal to 0");
-
-            CardInstanceId = instanceId;
-
-            if (level == 0)
-                Level = CardBase.MaxLevel;
-            else
-                Level = level;
-
-            if (level == MaxLevel)
-                Experience = 1; // In-game, when level is maxed, experience = 1.
-            else
-                Experience = experience;
-        }
-
-        // Functions
-
-        /// <summary>
-        /// Returns the string representation of the card.
-        /// </summary>
-        /// <returns>[CardInstance Id] Name of the card</returns>
         public override string ToString()
         {
-            return $"[{CardInstanceId}] {Name}";
+            return $"[{cardInstanceId}] {name}";
         }
     }
 }

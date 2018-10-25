@@ -15,7 +15,7 @@ namespace UrbanRivalsManager.SampleData
         public CardDrawedViewSample()
         {
             int baseId = 123;
-            Clan clan = Clan.GetClanById(ClanId.Raptors);
+            Clan clan = Clan.getClanById(ClanId.Raptors);
             string cardName = "Tester";
             Skill ability = new Skill(SkillPrefix.Courage, SkillSuffix.DecreasePillzXMinY, 2, 3);
             int minLevel = 2;
@@ -31,9 +31,9 @@ namespace UrbanRivalsManager.SampleData
             int currentLevel = 4;
             int instanceId = 222;
 
+            CardBase cardBase = CardBase.createCardWithAbility(baseId, cardName, clan, cardLevels, rarity, ability, abilityUnlockLevel);
+            CardInstance cardInstance = CardInstance.createCardInstance(cardBase, instanceId, currentLevel, 0);
 
-            CardBase cardBase = new CardBase(baseId, cardName, clan, minLevel, maxLevel, cardLevels, ability, abilityUnlockLevel, rarity);
-            CardInstance cardInstance = new CardInstance(cardBase, instanceId, currentLevel);
             card = new CardDrawed(cardInstance);
         }
 

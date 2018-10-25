@@ -52,7 +52,7 @@ namespace UrbanRivalsManager.UserControls
             if (newCard == null)
                 instance.SearchBox.SetTextWithoutSearching(instance.DefaultText);
             else
-                instance.SearchBox.SetTextWithoutSearching(newCard.Name);
+                instance.SearchBox.SetTextWithoutSearching(newCard.name);
         }
 
         public int MinimumSearchChars
@@ -92,14 +92,14 @@ namespace UrbanRivalsManager.UserControls
             if (SelectedCard == null)
                 SearchBox.SetTextWithoutSearching(DefaultText);
             else
-                SearchBox.SetTextWithoutSearching(SelectedCard.Name);
+                SearchBox.SetTextWithoutSearching(SelectedCard.name);
         }
         private void SearchBox_DropDownClosed(object sender, EventArgs e)
         {
             if (SearchBox.SelectedIndex != -1)
                 SelectedCard = (CardBase)SearchBox.SelectedItem;
             if (SelectedCard != null)
-                SearchBox.Text = SelectedCard.Name;
+                SearchBox.Text = SelectedCard.name;
         }
 
         private IEnumerable<CardBase> Search(string partialName)

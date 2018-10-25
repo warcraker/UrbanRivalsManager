@@ -104,10 +104,14 @@ namespace UrbanRivalsCore.Model
         }
         private static int[] CalculateSupports(List<CardDrawed> cards)
         {
-            int[] result = new int[Clan.NumberOfClans];
+            int[] supportsArray;
+            int numberOfClans;
+
+            numberOfClans = Clan.getNumberOfClans();
+            supportsArray = new int[numberOfClans];
             foreach (CardDrawed card in cards)
-                result[(int)ConvertClanIdToSupportIndex(card.Clan.ClanId)]++;
-            return result;
+                supportsArray[(int)ConvertClanIdToSupportIndex(card.clan.id)]++;
+            return supportsArray;
         }
         private static void ApplyCancelLeader(List<CardDrawed> cards)
         {
@@ -126,8 +130,8 @@ namespace UrbanRivalsCore.Model
                 {
                     if (i == j)
                         continue;
-                    if (cards[i].Clan.ClanId == cards[j].Clan.ClanId
-                        && cards[i].CardBaseId != cards[j].CardBaseId)
+                    if (cards[i].clan.id == cards[j].clan.id
+                        && cards[i].cardBaseId != cards[j].cardBaseId)
                     {
                         active = true;
                         break;

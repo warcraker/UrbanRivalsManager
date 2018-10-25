@@ -99,7 +99,7 @@ namespace UrbanRivalsCore.Model
         /// <returns><c>false</c> if the card doesn't exists, or the deck has 8 cards, and the card will not be removed. <c>true</c> otherwise</returns>
         public bool RemoveCard(int instanceId)
         {
-            CardInstance card = Cards.FirstOrDefault(a => a.CardInstanceId == instanceId);
+            CardInstance card = Cards.FirstOrDefault(a => a.cardInstanceId == instanceId);
 
             return this.RemoveCard(card);
         }

@@ -35,12 +35,12 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 
         public bool LoadToMemoryCardBase(CardBase card)
         {
-            if (CardBases.ContainsKey(card.CardBaseId))
+            if (CardBases.ContainsKey(card.cardBaseId))
                 return false;
 
-            CardBases[card.CardBaseId] = card;
-            CardBaseIdsByName[card.Name] = card.CardBaseId;
-            CardNames.Add(card.Name);
+            CardBases[card.cardBaseId] = card;
+            CardBaseIdsByName[card.name] = card.cardBaseId;
+            CardNames.Add(card.name);
             LoadToMemoryFakeCardInstances(card);
             return true;
         }
@@ -51,7 +51,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 
             CardInstances.Clear();
             foreach (CardInstance instance in instances)
-                CardInstances[instance.CardInstanceId] = instance;
+                CardInstances[instance.cardInstanceId] = instance;
         }
 
         public CardBase GetCardBase(int id)
@@ -97,16 +97,16 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 
         private void LoadToMemoryFromDatabase(IDatabaseManager databaseManager)
         {
-            var ids = databaseManager.GetAllCardBaseIds();
+            var ids = databaseManager.getAllCardBaseIds();
             foreach (int id in ids)
-                LoadToMemoryCardBase(databaseManager.GetCardBase(id));
+                LoadToMemoryCardBase(databaseManager.getCardBase(id));
         }
         private void LoadToMemoryFakeCardInstances(CardBase card)
         {
-            for (int level = card.MinLevel; level <= card.MaxLevel; level++)
+            for (int level = card.minLevel; level <= card.maxLevel; level++)
             {
-                int id = CalculateFakeInstanceId(card.CardBaseId, level);
-                FakeCardInstances[id] = new CardInstance(card, id, level);
+                int id = CalculateFakeInstanceId(card.cardBaseId, level);
+                FakeCardInstances[id] = CardInstance.createCardInstance(card, id, level, 0);
             }
         }
 

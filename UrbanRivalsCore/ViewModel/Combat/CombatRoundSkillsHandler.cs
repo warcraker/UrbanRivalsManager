@@ -609,7 +609,7 @@ namespace UrbanRivalsCore.ViewModel
         }
         private static int CalculateSupportValue(PlayerStatus player, CardDrawed card)
         {
-            return card.Ability.X * player.Hand.GetSupportMultiplier(card.Clan.ClanId);
+            return card.Ability.X * player.Hand.GetSupportMultiplier(card.clan.id);
         }
         private static int CalculateRecoveredPillz(int usedPillz, bool usedFury, int x, int y)
         {

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using UrbanRivalsCore.Model;
+using UrbanRivalsUtils;
 
 namespace UrbanRivalsCore.ViewModel
 {
@@ -332,7 +333,7 @@ namespace UrbanRivalsCore.ViewModel
             PlayerSide whoHasSolomonActive = DetermineWhoHasSolomonActive(leftLeader, rightLeader);
 
             PlayerSide roundWinner = (RandomFactor == RandomFactor.NonRandom)
-                ? DetermineRoundWinnerWithoutRandom(leftAttack, rightAttack, leftCard.Level, rightCard.Level, LeftPlayerStatus.Courage, whoHasSolomonActive)
+                ? DetermineRoundWinnerWithoutRandom(leftAttack, rightAttack, leftCard.level, rightCard.level, LeftPlayerStatus.Courage, whoHasSolomonActive)
                 : DetermineRoundWinnerWithRandom(leftAttack, rightAttack, forceWinnerOnRandom, out finisherMoveTriggers);
 
             /* activationStatusBeforeDuel is used to track skills that we know are stopped before knowing who wins the round.
@@ -1024,11 +1025,11 @@ namespace UrbanRivalsCore.ViewModel
         }
         private static int CalculateBasePower(PlayerStatus playerStatus, int usedCard)
         {
-            return playerStatus.Hand[usedCard].Power;
+            return playerStatus.Hand[usedCard].power;
         }
         private static int CalculateBaseDamage(PlayerStatus playerStatus, int usedCard)
         {
-            return playerStatus.Hand[usedCard].Damage;
+            return playerStatus.Hand[usedCard].damage;
         }
         private static int CalculateUsedPillz(int usedPillz, bool usedFury)
         {

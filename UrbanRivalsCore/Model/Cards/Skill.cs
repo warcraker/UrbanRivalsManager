@@ -2,70 +2,25 @@
 
 namespace UrbanRivalsCore.Model
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class Skill
     {
-        private EmptySkillCases EmptySkillFlags;
+        public static readonly Skill UnlockedAtLevel2 = prv_createEmptySkill(EmptySkill.UnlockedAt2);
+        public static readonly Skill UnlockedAtLevel3 = prv_createEmptySkill(EmptySkill.UnlockedAt3);
+        public static readonly Skill UnlockedAtLevel4 = prv_createEmptySkill(EmptySkill.UnlockedAt4);
+        public static readonly Skill UnlockedAtLevel5 = prv_createEmptySkill(EmptySkill.UnlockedAt5);
+        public static readonly Skill NoAbility = prv_createEmptySkill(EmptySkill.NoAbility);
+        public static readonly Skill NoBonus = prv_createEmptySkill(EmptySkill.NoBonus);
 
-        /// <summary>
-        /// The skill will be unlocked when the card gets to level 2.
-        /// </summary>
-        public static readonly Skill UnlockedAtLevel2 = new Skill(EmptySkillCases.UnlockedAt2);
-        /// <summary>
-        /// The skill will be unlocked when the card gets to level 3.
-        /// </summary>
-        public static readonly Skill UnlockedAtLevel3 = new Skill(EmptySkillCases.UnlockedAt3);
-        /// <summary>
-        /// The skill will be unlocked when the card gets to level 4.
-        /// </summary>
-        public static readonly Skill UnlockedAtLevel4 = new Skill(EmptySkillCases.UnlockedAt4);
-        /// <summary>
-        /// The skill will be unlocked when the card gets to level 5.
-        /// </summary>
-        public static readonly Skill UnlockedAtLevel5 = new Skill(EmptySkillCases.UnlockedAt5);
-        /// <summary>
-        /// The card doesn't have ability.
-        /// </summary>
-        public static readonly Skill NoAbility = new Skill(EmptySkillCases.NoAbility);
-        /// <summary>
-        /// The card doesn't have bonus.
-        /// </summary>
-        public static readonly Skill NoBonus = new Skill(EmptySkillCases.NoBonus);
-        
-        /// <summary>
-        /// Gets the leader skill identifier. Gets None if it isn't a leader skill.
-        /// </summary>
+        private static readonly int PRV_MAX_VALUE_PREFIX = Enum.GetValues(typeof(SkillPrefix)).Length - 1;
+
         public SkillLeader Leader { get; }
-        /// <summary>
-        /// Gets the prefix.
-        /// </summary>
         public SkillPrefix Prefix { get; }
-        /// <summary>
-        /// Gets the suffix.
-        /// </summary>
         public SkillSuffix Suffix { get; }
-        /// <summary>
-        /// Gets the primary modifier of the skill if applicable.
-        /// <example>"Power + 3" and "Poison 3, Min 4" have both X = 3</example>
-        /// </summary>
         public int X { get; }
-        /// <summary>
-        /// Gets the secondary modifier of the skill if applicable.
-        /// <example>"Poison 3, Min 4" have Y = 4</example>
-        /// </summary>
         public int Y { get; }
 
-        // Constructors
+        private EmptySkill EmptySkillFlags;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Skill"/> class.
-        /// </summary>
-        /// <param name="prefix">Prefix.</param>
-        /// <param name="suffix">Suffix.</param>
-        /// <param name="x">Primary modifier.</param>
-        /// <param name="y">Secondary modifier.</param>
         public Skill(SkillPrefix prefix, SkillSuffix suffix, int x = 0, int y = 0)
         {
             if ((int)prefix < 0 || (int)prefix > Constants.EnumMaxAllowedValues.SkillPrefix)
@@ -93,34 +48,34 @@ namespace UrbanRivalsCore.Model
 
             Leader = leader;
         }
-
-        private Skill(EmptySkillCases flags)
+        private Skill() { }
+        private static Skill prv_createEmptySkill(EmptySkill flag)
         {
-            EmptySkillFlags = flags;
+            Skill skill;
+
+            skill = new Skill();
+            skill.EmptySkillFlags = flag;
+
+            return skill;
         }
 
-        // Functions
-        /// <summary>
-        /// Returns a new instance as a copy of this instance.
-        /// </summary>
-        /// <returns></returns>
         public Skill Copy()
         {
-            if (this.EmptySkillFlags != EmptySkillCases.None)
+            if (this.EmptySkillFlags != EmptySkill.None)
             {
                 switch (this.EmptySkillFlags)
                 {
-                    case EmptySkillCases.UnlockedAt2:
+                    case EmptySkill.UnlockedAt2:
                         return UnlockedAtLevel2;
-                    case EmptySkillCases.UnlockedAt3:
+                    case EmptySkill.UnlockedAt3:
                         return UnlockedAtLevel3;
-                    case EmptySkillCases.UnlockedAt4:
+                    case EmptySkill.UnlockedAt4:
                         return UnlockedAtLevel4;
-                    case EmptySkillCases.UnlockedAt5:
+                    case EmptySkill.UnlockedAt5:
                         return UnlockedAtLevel5;
-                    case EmptySkillCases.NoAbility:
+                    case EmptySkill.NoAbility:
                         return NoAbility;
-                    case EmptySkillCases.NoBonus:
+                    case EmptySkill.NoBonus:
                         return NoBonus;
                     default:
                         throw new Exception("Unexpected EmptySkillFlags: " + this.EmptySkillFlags.ToString()); // Sanity check
@@ -130,38 +85,27 @@ namespace UrbanRivalsCore.Model
                 return new Skill(this.Leader);
             return new Skill(this.Prefix, this.Suffix, this.X, this.Y);
         }
-
-        /// <summary>
-        /// Returns a copy of the <see cref="Skill"/> with a different <see cref="X"/> value.
-        /// </summary>
-        /// <param name="newX">New value for X.</param>
-        /// <returns></returns>
         internal Skill CopyWithDifferentX(int newX)
         {
             if (this.Leader != SkillLeader.None)
                 return new Skill(this.Leader);
             return new Skill(this.Prefix, this.Suffix, newX, this.Y);
         }
-
-        /// <summary>
-        /// Returns the string representation of the skill.
-        /// </summary>
-        /// <returns></returns>
         public override string ToString()
         {
-            if (EmptySkillFlags != EmptySkillCases.None)
+            if (EmptySkillFlags != EmptySkill.None)
             {
-                if (EmptySkillFlags.HasFlag(EmptySkillCases.UnlockedAt2))
+                if (EmptySkillFlags.HasFlag(EmptySkill.UnlockedAt2))
                     return String.Format(Properties.GameStrings.skill_not_unlocked, 2);
-                if (EmptySkillFlags.HasFlag(EmptySkillCases.UnlockedAt3))
+                if (EmptySkillFlags.HasFlag(EmptySkill.UnlockedAt3))
                     return String.Format(Properties.GameStrings.skill_not_unlocked, 3);
-                if (EmptySkillFlags.HasFlag(EmptySkillCases.UnlockedAt4))
+                if (EmptySkillFlags.HasFlag(EmptySkill.UnlockedAt4))
                     return String.Format(Properties.GameStrings.skill_not_unlocked, 4);
-                if (EmptySkillFlags.HasFlag(EmptySkillCases.UnlockedAt5))
+                if (EmptySkillFlags.HasFlag(EmptySkill.UnlockedAt5))
                     return String.Format(Properties.GameStrings.skill_not_unlocked, 5);
-                if (EmptySkillFlags.HasFlag(EmptySkillCases.NoAbility))
+                if (EmptySkillFlags.HasFlag(EmptySkill.NoAbility))
                     return Properties.GameStrings.skill_no_ability;
-                if (EmptySkillFlags.HasFlag(EmptySkillCases.NoBonus))
+                if (EmptySkillFlags.HasFlag(EmptySkill.NoBonus))
                     return Properties.GameStrings.skill_no_bonus;
             }
 

@@ -109,7 +109,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
         }
         public void AddCardBaseToDownloadQueue(CardBase card, CharacterImageFormat imageFormat)
         {
-            for (int level = card.MinLevel; level <= card.MaxLevel; level++)
+            for (int level = card.minLevel; level <= card.maxLevel; level++)
             {
                 ImagesQueue.Enqueue(new CharacterImageIdentifier(card, level, imageFormat));
             }
@@ -122,7 +122,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
         {
             List<CharacterImageIdentifier> images = new List<CharacterImageIdentifier>();
             foreach (CardBase cardBase in InMemoryManagerInstance.GetAllCardBases())
-                for (int level = cardBase.MinLevel; level <= cardBase.MaxLevel; level++)
+                for (int level = cardBase.minLevel; level <= cardBase.maxLevel; level++)
                     images.Add(new CharacterImageIdentifier(cardBase, level, format));
 
             foreach (CharacterImageIdentifier image in images)
