@@ -10,7 +10,7 @@ namespace UrbanRivalsManager.SampleData
 {
     class CardDrawedViewSample : DependencyObject
     {
-        CardDrawed card;
+        private readonly CardDrawed card;
 
         public CardDrawedViewSample()
         {
@@ -18,8 +18,6 @@ namespace UrbanRivalsManager.SampleData
             Clan clan = Clan.getClanById(ClanId.Raptors);
             string cardName = "Tester";
             Skill ability = new Skill(SkillPrefix.Courage, SkillSuffix.DecreasePillzXMinY, 2, 3);
-            int minLevel = 2;
-            int maxLevel = 4;
             List<CardLevel> cardLevels = new List<CardLevel>
             {
                 new CardLevel(2,2,3),
@@ -34,7 +32,7 @@ namespace UrbanRivalsManager.SampleData
             CardBase cardBase = CardBase.createCardWithAbility(baseId, cardName, clan, cardLevels, rarity, ability, abilityUnlockLevel);
             CardInstance cardInstance = CardInstance.createCardInstance(cardBase, instanceId, currentLevel, 0);
 
-            card = new CardDrawed(cardInstance);
+            this.card = new CardDrawed(cardInstance);
         }
 
         public bool IsSelected { get { return true; } }

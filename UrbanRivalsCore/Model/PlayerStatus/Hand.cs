@@ -142,15 +142,6 @@ namespace UrbanRivalsCore.Model
             }
         }
 
-        private static int[] CreateLeaderWarsSupportsArray()
-        {
-            int[] result = new int[Clan.NumberOfClans];
-            for (int i = 0; i < Clan.NumberOfClans; i++)
-                result[i] = 3;
-            result[(int)SupportIndex.Leader] = 0;
-            return result;
-        }
-
         private static SupportIndex ConvertClanIdToSupportIndex(ClanId clanId)
         {
             switch (clanId)

@@ -11,9 +11,6 @@ namespace UrbanRivalsCore.Model
      * If SkillLeader is modified, all leader cards info on the database must be rebuilt.
      */
 
-    /// <summary>
-    /// Represents the rarity of a card.
-    /// </summary>
     public enum CardRarity
     {
         Common = 0,
@@ -25,24 +22,12 @@ namespace UrbanRivalsCore.Model
         Mythic,
     }
 
-    /// <summary>
-    /// Represents if a combat uses random factor to calculate winner of the round.
-    /// </summary>
     public enum RandomFactor
     {
-        /// <summary>
-        /// Doesn't use random factor.
-        /// </summary>
         NonRandom,
-        /// <summary>
-        /// Uses random factor.
-        /// </summary>
         Random,
     }
 
-    /// <summary>
-    /// Represents the winner of the combat.
-    /// </summary>
     public enum CombatWinner
     {
         None = 0,
@@ -51,9 +36,6 @@ namespace UrbanRivalsCore.Model
         Right,
     }
 
-    /// <summary>
-    /// Represents one player or the other.
-    /// </summary>
     public enum PlayerSide
     {
         /// <summary>
@@ -70,9 +52,6 @@ namespace UrbanRivalsCore.Model
         Right,
     }
 
-    /// <summary>
-    /// Represents a leader skill.
-    /// </summary>
     public enum SkillLeader
     {
         None = 0,
@@ -93,15 +72,9 @@ namespace UrbanRivalsCore.Model
         Vholt,
     }
 
-    /// <summary>
-    /// Represents a skill prefix.
-    /// </summary>
     public enum SkillPrefix
     {
         None= 0,
-        /// <summary>
-        /// Special case. Growth + Defeat prefixes. There is one card (DJ Korps Id=1260) that has 2 prefixes, so this one must exist for that card.
-        /// </summary>
         GrowthAndDefeat,
 
         Backlash,
@@ -120,9 +93,6 @@ namespace UrbanRivalsCore.Model
         VictoryOrDefeat,
     }
 
-    /// <summary>
-    /// Represents a skill suffix.
-    /// </summary>
     public enum SkillSuffix
     {
         None = 0,
@@ -184,9 +154,7 @@ namespace UrbanRivalsCore.Model
         ToxinXMinY,
     }
 
-    /// <summary>
-    /// Represents starting conditions in a survivor game.
-    /// </summary>
+    // TODO Remove if not used
     public enum SurvivorStage
     {
         Stage1Pillz12Lives12,
@@ -196,9 +164,6 @@ namespace UrbanRivalsCore.Model
         Stage5to9Pillz8Lives15,
     }
 
-    /// <summary>
-    /// Represents the identifier used by UR to identify a clan.
-    /// </summary>
     public enum ClanId
     {
         None = 0,
@@ -233,10 +198,11 @@ namespace UrbanRivalsCore.Model
         Vortex = 45,
     }
 
+    // TODO move to Hand class
     internal enum SupportIndex
     {
         None = -1,
-        Leader = 0, // Leaders supporting each other? XD... just kidding, someone had to be zero =)
+        Leader = 0,
         AllStars,
         Bangers,
         Berzerk,
@@ -275,8 +241,9 @@ namespace UrbanRivalsCore.Model
         RB = 3, // Right Bonus
     }
 
+    // TODO move to Skill class
     [Flags]
-    internal enum EmptySkillCases
+    internal enum EmptySkill
     {
         // Unlocked skill
         None = 0,
@@ -293,6 +260,8 @@ namespace UrbanRivalsCore.Model
         // The card is the only of his Clan being drawn
         NoBonus = 0x10, 
     }
+
+    // TODO move to StopProtectCalculator class
     [Flags]
     internal enum ActivationCases
     {
@@ -308,12 +277,14 @@ namespace UrbanRivalsCore.Model
         Stop = 0x08,
         Protect = 0x10,
     }
+
     [Flags]
     internal enum ActivationStatus
     {
         Normal = 0,
         Stopped,
     }
+
     [Flags]
     internal enum ProtectedStats
     {
@@ -378,6 +349,4 @@ namespace UrbanRivalsCore.Model
             return (setOfFlags & flag) == flag;
         }
     }
-
-
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UrbanRivalsUtils;
 
 namespace UrbanRivalsCore.Model
 {
+    // TODO Remove if not used
     public class Deck
     {
         /// <summary>
