@@ -162,7 +162,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 // This call is painfully slow, so we optimize it as much as we can, asking only for the info we need 
                 charactersIDs = new List<int>(idsToAnalyze),
                 maxLevels = true,
-                ItemsFilter = new List<string>() { "id", "level_min", "level_max", "ability", "ability_unlock_level", "release_date" }
+                ItemsFilter = new List<string>() { "id", "ability", "ability_unlock_level" },
             };
             request.EnqueueApiCall(oldGetCharactersCall);
             var newGetCharactersCall = new ApiCallList.Urc.GetCharacters();
@@ -176,6 +176,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 
             int progress = 0;
 
+            // TODO: Check if new data returns id, ability and ability_unlock_level
             var oldData = SortServerCharacterDataIntoDictionary(oldGetCharactersCall.Call, decoded);
             var newData = SortServerCharacterDataIntoDictionary(newGetCharactersCall.Call, decoded);
 
@@ -187,11 +188,8 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                     break;
                 }
 
-                int minLevel = int.Parse(oldData[id]["level_min"].ToString());
-                int maxLevel = int.Parse(oldData[id]["level_max"].ToString());
                 string abilityText = oldData[id]["ability"].ToString();
                 int abilityUnlockLevel = int.Parse(oldData[id]["ability_unlock_level"].ToString());
-                int timeSinceRelease = int.Parse(oldData[id]["release_date"].ToString());
 
                 string name = newData[id]["name"].ToString();
                 int clanId = int.Parse(newData[id]["clanID"].ToString());

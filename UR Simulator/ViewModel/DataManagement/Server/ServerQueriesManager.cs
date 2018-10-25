@@ -47,7 +47,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             var getCardBaseInfoCall = new ApiCallList.Characters.GetCharacters();
             getCardBaseInfoCall.charactersIDs = new List<int>() { id };
             getCardBaseInfoCall.maxLevels = true;
-            getCardBaseInfoCall.ItemsFilter = new List<string>() { "name", "clan_id", "level_min", "level_max", "rarity", "ability", "ability_unlock_level", "release_date" };
+            getCardBaseInfoCall.ItemsFilter = new List<string>() { "name", "clan_id", "rarity", "ability", "ability_unlock_level" };
 
             var getCardLevelsCall = new ApiCallList.Characters.GetCharacterLevels(id);
             getCardLevelsCall.levelMax = -1; // Get all the levels
@@ -76,12 +76,9 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 
             string name = dynBaseCard["name"].ToString();
             int clan_id = int.Parse(dynBaseCard["clan_id"].ToString());
-            int level_min = int.Parse(dynBaseCard["level_min"].ToString());
-            int level_max = int.Parse(dynBaseCard["level_max"].ToString());
             string rarity = dynBaseCard["rarity"].ToString();
             string ability = dynBaseCard["ability"].ToString();
             int ability_unlock_level = int.Parse(dynBaseCard["ability_unlock_level"].ToString());
-            int release_date = int.Parse(dynBaseCard["release_date"].ToString());
 
             var levels = new List<CardLevel>();
             foreach (dynamic item in decoded[getCardLevelsCall.Call]["items"])
@@ -92,7 +89,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 levels.Add(new CardLevel(level, power, damage));
             }
 
-            return ApiToCardBaseAdapter.ToCardBase(id, name, clan_id, level_min, level_max, rarity, ability, ability_unlock_level, release_date, levels);
+            return ApiToCardBaseAdapter.ToCardBase(id, name, clan_id, rarity, ability, ability_unlock_level, levels);
         }
         public string GetUserLocale()
         {

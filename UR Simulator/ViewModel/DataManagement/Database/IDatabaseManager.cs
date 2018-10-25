@@ -7,11 +7,10 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 {
     public interface IDatabaseManager
     {
-        void Purge();
+        void purge();
 
-        CardBase GetCardBase(int id);
-        IEnumerable<int> GetAllCardBaseIds();
-        bool StoreCardBase(CardBase card);
-        bool StoreCardBase(List<CardBase> list);
+        CardBase getCardBase(int id);
+        IEnumerable<int> getAllCardBaseIds();
+        void storeCardBase(CardBase card);
     }
 }

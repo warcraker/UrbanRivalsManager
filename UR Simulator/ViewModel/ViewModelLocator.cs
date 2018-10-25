@@ -65,7 +65,7 @@ namespace UrbanRivalsManager.ViewModel
 
             FilepathManagerInstance = new FilepathManager(GetFileManagerPath());
 
-            DatabaseManagerInstance = new SQLiteDatabaseManager(FilepathManagerInstance);
+            DatabaseManagerInstance = new SQLiteDatabaseManager(FilepathManagerInstance.PersistentDatabase);
 
             InMemoryManagerInstance = new InMemoryManager(DatabaseManagerInstance);
 

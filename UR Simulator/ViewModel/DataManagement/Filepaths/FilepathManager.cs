@@ -42,7 +42,6 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
         // -- Database -- //
         public string DatabaseDirectory { get { return Path.Combine(RootDirectory, "Database"); } }
         public string PersistentDatabase { get { return Path.Combine(DatabaseDirectory, "Persistent.db"); } }
-        public string UserDatabase { get { return Path.Combine(DatabaseDirectory, "User.db"); } }
 
         private static void CreateDirectoryIfNotExists(string path)
         {
