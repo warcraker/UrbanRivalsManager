@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 	ProjectSection(SolutionItems) = preProject
 		Creating new clan.txt = Creating new clan.txt
 		Creating new skill.txt = Creating new skill.txt
+		Misc.txt = Misc.txt
 		Modify leader ability.txt = Modify leader ability.txt
 		PreviewRound() Steps.txt = PreviewRound() Steps.txt
 	EndProjectSection
