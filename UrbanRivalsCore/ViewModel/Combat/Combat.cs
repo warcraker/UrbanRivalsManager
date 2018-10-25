@@ -192,8 +192,8 @@ namespace UrbanRivalsCore.ViewModel
 
             CardDrawed leftCard = LeftPlayerStatus.Hand[leftUsedCard];
             CardDrawed rightCard = RightPlayerStatus.Hand[rightUsedCard];
-            SkillLeader leftLeader = LeftPlayerStatus.Hand[leftUsedCard].Ability.Leader;
-            SkillLeader rightLeader = RightPlayerStatus.Hand[rightUsedCard].Ability.Leader;
+            SkillLeader leftLeader = LeftPlayerStatus.Hand[leftUsedCard].ability.Leader;
+            SkillLeader rightLeader = RightPlayerStatus.Hand[rightUsedCard].ability.Leader;
             int initialLeftLife = LeftPlayerStatus.Life;
             int initialRightLife = RightPlayerStatus.Life;
             int initialLeftPillz = LeftPlayerStatus.Pillz;
@@ -206,8 +206,8 @@ namespace UrbanRivalsCore.ViewModel
             finalRightPlayerStatus.Pillz -= CalculateUsedPillz(rightUsedPillz, rightUsedFury);
 
             CombatRoundSkillsHandler skills = new CombatRoundSkillsHandler(
-                LeftPlayerStatus.Hand[leftUsedCard].Ability,    RightPlayerStatus.Hand[rightUsedCard].Ability,
-                LeftPlayerStatus.Hand[leftUsedCard].Bonus,      RightPlayerStatus.Hand[rightUsedCard].Bonus);
+                LeftPlayerStatus.Hand[leftUsedCard].ability,    RightPlayerStatus.Hand[rightUsedCard].ability,
+                LeftPlayerStatus.Hand[leftUsedCard].bonus,      RightPlayerStatus.Hand[rightUsedCard].bonus);
 
             // There is one exceptional case where the card has a double prefix (DJ Korps, Id=1260) so we treat that one before
             skills.FixDJCorpsDoublePrefix(RoundCounter);

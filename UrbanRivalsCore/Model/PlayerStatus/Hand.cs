@@ -92,9 +92,9 @@ namespace UrbanRivalsCore.Model
             SkillLeader result = SkillLeader.None;
             foreach (CardDrawed card in cards)
             {
-                if (card.Ability.Leader != SkillLeader.None)
+                if (card.ability.Leader != SkillLeader.None)
                 {
-                    result = card.Ability.Leader;
+                    result = card.ability.Leader;
                     numberOfLeaders++;
                 }
             }
@@ -117,8 +117,8 @@ namespace UrbanRivalsCore.Model
         {
             foreach (CardDrawed card in cards)
             {
-                if (card.Ability.Leader != SkillLeader.None)
-                    card.Ability = Skill.NoAbility;
+                if (card.ability.Leader != SkillLeader.None)
+                    card.ability = Skill.NoAbility;
             }
         }
         private static void ClearNonActiveBonuses(List<CardDrawed> cards)
@@ -138,7 +138,7 @@ namespace UrbanRivalsCore.Model
                     }
                 }
                 if (!active)
-                    cards[i].Bonus = Skill.NoBonus;
+                    cards[i].bonus = Skill.NoBonus;
             }
         }
 
