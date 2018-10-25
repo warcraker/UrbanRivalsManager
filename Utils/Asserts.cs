@@ -18,6 +18,11 @@ namespace UrbanRivalsUtils
             if (condition == false)
                 throw new PrvAssertException(message);
         }
+
+        public static void fail(string message)
+        {
+            throw new PrvAssertException(message);
+        }
     }
 
     public static class GlobalRandom
@@ -37,6 +42,11 @@ namespace UrbanRivalsUtils
 
     public static class AssertArgument
     {
+        public static void fail(string message, string paramName)
+        {
+            throw new ArgumentException(paramName, message);
+        }
+
         public static void check(bool condition, string message, string paramName)
         {
             if (condition == false)
