@@ -90,7 +90,7 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Prefix)
+                switch (this[i].Prefix)  // TODO check as flag
                 {
                     case SkillPrefix.Courage:
                         if (!((isLeft) ? leftPlayerStatus.Courage : rightPlayerStatus.Courage))
@@ -115,7 +115,7 @@ namespace UrbanRivalsCore.ViewModel
         {
             for (int i = 0; i < 4; i++)
             {
-                if (this[i].Prefix == SkillPrefix.Growth)
+                if (this[i].Prefix == SkillPrefix.Growth)  // TODO check as flag
                     skills[i] = skills[i].CopyWithDifferentX(CalculateGrowth(skills[i], roundCounter));
             }
         }
@@ -124,7 +124,7 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Prefix)
+                switch (this[i].Prefix) // TODO check as flag
                 {
                     case SkillPrefix.Support:
                         if (isLeft)
@@ -139,7 +139,7 @@ namespace UrbanRivalsCore.ViewModel
         {
             for (int i = 0; i < 4; i++)
             {
-                if (skills[i].Prefix == SkillPrefix.Stop)
+                if (skills[i].Prefix == SkillPrefix.Stop) // TODO check as flag
                 {
                     if (GetStatus(i) == ActivationStatus.Stopped)
                         UnfreezeSkill(i);
@@ -153,7 +153,7 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Prefix)
+                switch (this[i].Prefix) // TODO check as flag
                 {
                     case SkillPrefix.Killshot:
                         if (isLeft)
@@ -175,7 +175,7 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Prefix)
+                switch (this[i].Prefix) // TODO check as flag
                 {
                     case SkillPrefix.None:
                     case SkillPrefix.Backlash:
@@ -404,7 +404,7 @@ namespace UrbanRivalsCore.ViewModel
             {
                 bool isLeft = IsLeft(i);
                 // Backlash has some distinctions so we treat it in an individual loop
-                if (skills[i].Prefix == SkillPrefix.Backlash)
+                if (skills[i].Prefix == SkillPrefix.Backlash) // TODO check as flag
                 {
                     switch (skills[i].Suffix)
                     {
@@ -593,7 +593,7 @@ namespace UrbanRivalsCore.ViewModel
         public void FixDJCorpsDoublePrefix(int roundCounter)
         {
             for (int i = 0; i < 4; i++)
-                if (skills[i].Prefix == (SkillPrefix.GrowthAndDefeat))
+                if (skills[i].Prefix == (SkillPrefix.GrowthAndDefeat)) // TODO check as flag
                     skills[i] = new Skill(SkillPrefix.Defeat, SkillSuffix.DecreaseLifeXMinY, CalculateGrowth(skills[i], roundCounter), 1);
         }
 

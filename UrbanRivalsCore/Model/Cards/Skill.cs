@@ -141,7 +141,7 @@ namespace UrbanRivalsCore.Model
             } 
 
             // Only a few abilities can have the Backlash prefix, and those have different text
-            if (Prefix == SkillPrefix.Backlash)
+            if (Prefix == SkillPrefix.Backlash) // TODO check as flag
             {
                 switch (Suffix)
                 {
@@ -158,7 +158,7 @@ namespace UrbanRivalsCore.Model
 
             if (Prefix != SkillPrefix.None)
             {
-                switch (Prefix)
+                switch (Prefix)  // TODO check as flag
                 {
                     // There is one case (DJ Korps ID=1260) where it has double prefix. Here we take care of it
                     case SkillPrefix.GrowthAndDefeat:
