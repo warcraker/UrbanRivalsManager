@@ -11,6 +11,40 @@ namespace UrbanRivalsCore.Model
 {
     public class Hand : INotifyPropertyChanged
     {
+        private enum SupportIndex
+        {
+            None = -1,
+            Leader = 0,
+            AllStars,
+            Bangers,
+            Berzerk,
+            Dominion,
+            FangPiClang,
+            Freaks,
+            Frozn,
+            GHEIST,
+            GhosTown,
+            Hive,
+            Huracan,
+            Jungo,
+            Junkz,
+            LaJunta,
+            Montana,
+            Nightmare,
+            Piranas,
+            Pussycats,
+            Raptors,
+            Rescue,
+            Riots,
+            Roots,
+            Sakrohm,
+            Sentinel,
+            Skeelz,
+            UluWatu,
+            Uppers,
+            Vortex,
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private List<CardDrawed> Cards;

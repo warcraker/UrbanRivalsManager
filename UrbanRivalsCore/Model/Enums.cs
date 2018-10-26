@@ -198,84 +198,12 @@ namespace UrbanRivalsCore.Model
         Vortex = 45,
     }
 
-    // TODO move to Hand class
-    internal enum SupportIndex
-    {
-        None = -1,
-        Leader = 0,
-        AllStars,
-        Bangers,
-        Berzerk,
-        Dominion,
-        FangPiClang,
-        Freaks,
-        Frozn,
-        GHEIST,
-        GhosTown,
-        Hive,
-        Huracan,
-        Jungo,
-        Junkz,
-        LaJunta,
-        Montana,
-        Nightmare,
-        Piranas,
-        Pussycats,
-        Raptors,
-        Rescue,
-        Riots,
-        Roots,
-        Sakrohm,
-        Sentinel,
-        Skeelz,
-        UluWatu,
-        Uppers,
-        Vortex,
-    }
-
     internal enum SkillIndex
     {
         LA = 0, // Left Ability
         RA = 1, // Right Ability
         LB = 2, // Left Bonus
         RB = 3, // Right Bonus
-    }
-
-    // TODO move to Skill class
-    [Flags]
-    internal enum EmptySkill
-    {
-        // Unlocked skill
-        None = 0,
-
-        // Mutually exclusive. 
-        // Ability not yet unlocked. This must not be assigned to a Bonus Skill. 
-        UnlockedAt2 = 0x01 | NoAbility,
-        UnlockedAt3 = 0x02 | NoAbility,
-        UnlockedAt4 = 0x03 | NoAbility,
-        UnlockedAt5 = 0x04 | NoAbility,
-
-        // The card has no Ability, or it is canceled
-        NoAbility = 0x08,
-        // The card is the only of his Clan being drawn
-        NoBonus = 0x10, 
-    }
-
-    // TODO move to StopProtectCalculator class
-    [Flags]
-    internal enum ActivationCases
-    {
-        NoChain = 0,
-
-        // Mutually exclusive
-        StopAbility = 0x01,
-        StopBonus = 0x02,
-        ProtectAbility = 0x03,
-        ProtectBonus = 0x04,
-
-        // Mutually exclusive
-        Stop = 0x08,
-        Protect = 0x10,
     }
 
     [Flags]

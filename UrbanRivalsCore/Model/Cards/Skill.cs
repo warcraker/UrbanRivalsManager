@@ -4,6 +4,18 @@ namespace UrbanRivalsCore.Model
 {
     public class Skill
     {
+        [Flags]
+        private enum EmptySkill
+        {
+            None = 0,
+            UnlockedAt2 = 0x01 | NoAbility,
+            UnlockedAt3 = 0x02 | NoAbility,
+            UnlockedAt4 = 0x03 | NoAbility,
+            UnlockedAt5 = 0x04 | NoAbility,
+            NoAbility = 0x08,
+            NoBonus = 0x10,
+        }
+
         public static readonly Skill UnlockedAtLevel2 = prv_createEmptySkill(EmptySkill.UnlockedAt2);
         public static readonly Skill UnlockedAtLevel3 = prv_createEmptySkill(EmptySkill.UnlockedAt3);
         public static readonly Skill UnlockedAtLevel4 = prv_createEmptySkill(EmptySkill.UnlockedAt4);
