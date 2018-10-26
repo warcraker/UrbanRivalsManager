@@ -3,19 +3,33 @@ using UrbanRivalsCore.Model;
 
 namespace UrbanRivalsCore.ViewModel
 {
-    internal class StopProtectLink
-    {
-        public bool isLeft;
-        public bool inspected;
-        public StopProtectLink Prev;
-        public StopProtectLink Next;
-        public ActivationStatus Status = ActivationStatus.Normal;
-        public ActivationCases Action = ActivationCases.NoChain;
-
-        public StopProtectLink() { }
-    }
+ 
     internal static class StopProtectCalculator
     {
+        [Flags]
+        private enum ActivationCases
+        {
+            NoChain = 0,
+            StopAbility = 0x01,
+            StopBonus = 0x02,
+            ProtectAbility = 0x03,
+            ProtectBonus = 0x04,
+            Stop = 0x08,
+            Protect = 0x10,
+        }
+
+        private class PrvStopProtectLink
+        {
+            public bool isLeft;
+            public bool inspected;
+            public PrvStopProtectLink Prev;
+            public PrvStopProtectLink Next;
+            public ActivationStatus Status = ActivationStatus.Normal;
+            public ActivationCases Action = ActivationCases.NoChain;
+
+            public PrvStopProtectLink() { }
+        }
+
         public static void CalculateAndApplyStopProtectChains(CombatRoundSkillsHandler skillsHandler)
         {
             ActivationStatus[] status = new ActivationStatus[4];
@@ -38,7 +52,7 @@ namespace UrbanRivalsCore.ViewModel
         }
         public static ActivationStatus[] CalculateStopProtectChains(ActivationStatus[] initialActivationStatus, Skill leftAbility, Skill rightAbility, Skill leftBonus, Skill rightBonus)
         {
-            StopProtectLink[] Links = GenerateInitialChainLinks(initialActivationStatus, leftAbility, rightAbility, leftBonus, rightBonus);
+            PrvStopProtectLink[] Links = GenerateInitialChainLinks(initialActivationStatus, leftAbility, rightAbility, leftBonus, rightBonus);
 
             // If there are 4 stops, or none, we can end this right here
             if (Links[(int)SkillIndex.LA].Action.HasFlag(ActivationCases.Stop) &&
@@ -88,11 +102,11 @@ namespace UrbanRivalsCore.ViewModel
                     return ActivationCases.NoChain;
             }
         }
-        private static StopProtectLink[] GenerateInitialChainLinks(ActivationStatus[] initialActivationStatus, Skill leftAbility, Skill rightAbility, Skill leftBonus, Skill rightBonus)
+        private static PrvStopProtectLink[] GenerateInitialChainLinks(ActivationStatus[] initialActivationStatus, Skill leftAbility, Skill rightAbility, Skill leftBonus, Skill rightBonus)
         {
-            StopProtectLink[] Links = new StopProtectLink[4];
+            PrvStopProtectLink[] Links = new PrvStopProtectLink[4];
             for (int i = 0; i < 4; i++)
-                Links[i] = new StopProtectLink();
+                Links[i] = new PrvStopProtectLink();
             Links[(int)SkillIndex.LA].isLeft = true;
             Links[(int)SkillIndex.LB].isLeft = true;
 
@@ -112,16 +126,16 @@ namespace UrbanRivalsCore.ViewModel
 
             return Links;
         }
-        private static StopProtectLink[] ResetInspectedState(StopProtectLink[] links)
+        private static PrvStopProtectLink[] ResetInspectedState(PrvStopProtectLink[] links)
         {
             for (int i = 0; i < 4; i++)
                 links[i].inspected = false;
             return links;
         }
-        private static void SetStopChains(StopProtectLink[] links)
+        private static void SetStopChains(PrvStopProtectLink[] links)
         {
             // Sets the chains of stops, we will check protects at the end
-            foreach (StopProtectLink link in links)
+            foreach (PrvStopProtectLink link in links)
             {
                 if (link.inspected)
                     continue;
@@ -140,17 +154,17 @@ namespace UrbanRivalsCore.ViewModel
 
             ResetInspectedState(links);
         }
-        private static void ApplyStops(StopProtectLink[] links)
+        private static void ApplyStops(PrvStopProtectLink[] links)
         {
             // Mark as Stopped any Skill that is the target of other Stop
-            foreach (StopProtectLink link in links)
+            foreach (PrvStopProtectLink link in links)
             {
                 if (link.inspected)
                     continue;
 
                 // Go to the head of the queue
                 int i = 0;
-                StopProtectLink head = link;
+                PrvStopProtectLink head = link;
                 bool infiniteLoop = false;
                 while (head.Prev != null)
                 {
@@ -183,10 +197,10 @@ namespace UrbanRivalsCore.ViewModel
                 }
             }
         }
-        private static void ApplyProtects(StopProtectLink[] links)
+        private static void ApplyProtects(PrvStopProtectLink[] links)
         {
             // Any Protect Skill that is not already Stopped cleans the stop from its target
-            foreach (StopProtectLink link in links)
+            foreach (PrvStopProtectLink link in links)
             {
                 if (link.Status == ActivationStatus.Stopped)
                     continue;
