@@ -400,7 +400,7 @@ namespace UrbanRivalsManager.ViewModel
                     ? Combat.PreviewRound(cardAttackerNumber, cardDefenderNumber, attackerUsedFury, false,            attackerUsedPillz,   usedPillzByDefender)
                     : Combat.PreviewRound(cardDefenderNumber, cardAttackerNumber, false,            attackerUsedFury, usedPillzByDefender, attackerUsedPillz);
 
-                if (roundResults.RoundWinner != attackerSide)
+                if (roundResults.roundWinner != attackerSide)
                     break;
             }
 

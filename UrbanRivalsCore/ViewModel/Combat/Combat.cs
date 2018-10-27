@@ -575,58 +575,23 @@ namespace UrbanRivalsCore.ViewModel
             int leftProbabilityToWin = CalculateWinProbability(leftAttack, rightAttack);
             int rightProbabilityToWin = 100 - leftProbabilityToWin;
 
-            RoundStatistics leftStatistics = new RoundStatistics()
-            {
-                UsedCard = leftUsedCard,
-                UsedPillz = leftUsedPillz,
-                UsedFury = leftUsedFury,
+            RoundStatistics leftStatistics = new RoundStatistics(leftUsedCard, leftUsedPillz, leftUsedFury, initialLeftPillz, initialLeftLife,
+                leftAttack, leftDamage, leftPower,
+                (activationStatusBeforeDuel[(int)SkillIndex.LA] == ActivationStatus.Normal),
+                (activationStatusBeforeDuel[(int)SkillIndex.LB] == ActivationStatus.Normal),
+                (activationStatusAfterDuel[(int)SkillIndex.LA] == ActivationStatus.Normal),
+                (activationStatusAfterDuel[(int)SkillIndex.LB] == ActivationStatus.Normal),
+                (roundWinner == PlayerSide.Left && finisherMoveTriggers),
+                (poisonToLeft != null), (healToLeft != null), leftProbabilityToWin);
 
-                InitialPillz = initialLeftPillz,
-                InitialLives = initialLeftLife,
-
-                FinalAttack = leftAttack,
-                FinalDamage = leftDamage,
-                FinalPower = leftPower,
-
-                AbilityActivated = (activationStatusBeforeDuel[(int)SkillIndex.LA] == ActivationStatus.Normal),
-                BonusActivated = (activationStatusBeforeDuel[(int)SkillIndex.LB] == ActivationStatus.Normal),
-                AbilityActivatedEnd = (activationStatusAfterDuel[(int)SkillIndex.LA] == ActivationStatus.Normal),
-                BonusActivatedEnd = (activationStatusAfterDuel[(int)SkillIndex.LB] == ActivationStatus.Normal),
-
-                PoisonChanges = (poisonToLeft != null),
-                HealChanges = (healToLeft != null),
-
-                ProbabilityToWin = leftProbabilityToWin,
-            };
-
-            RoundStatistics rightStatistics = new RoundStatistics()
-            {
-                UsedCard = rightUsedCard,
-                UsedPillz = rightUsedPillz,
-                UsedFury = rightUsedFury,
-
-                InitialPillz = initialRightPillz,
-                InitialLives = initialRightLife,
-
-                FinalAttack = rightAttack,
-                FinalDamage = rightDamage,
-                FinalPower = rightPower,
-
-                AbilityActivated = (activationStatusBeforeDuel[(int)SkillIndex.RA] == ActivationStatus.Normal),
-                BonusActivated = (activationStatusBeforeDuel[(int)SkillIndex.RB] == ActivationStatus.Normal),
-                AbilityActivatedEnd = (activationStatusAfterDuel[(int)SkillIndex.RA] == ActivationStatus.Normal),
-                BonusActivatedEnd = (activationStatusAfterDuel[(int)SkillIndex.RB] == ActivationStatus.Normal),
-
-                PoisonChanges = (poisonToRight != null),
-                HealChanges = (healToRight != null),
-
-                ProbabilityToWin = rightProbabilityToWin,
-            };
-
-            if (roundWinner == PlayerSide.Left)
-                leftStatistics.FinisherMoveTriggers = finisherMoveTriggers;
-            else
-                rightStatistics.FinisherMoveTriggers = finisherMoveTriggers;
+            RoundStatistics rightStatistics = new RoundStatistics(rightUsedCard, rightUsedPillz, rightUsedFury, initialRightPillz, initialRightLife,
+                rightAttack, rightDamage, rightPower,
+                (activationStatusBeforeDuel[(int)SkillIndex.RA] == ActivationStatus.Normal),
+                (activationStatusBeforeDuel[(int)SkillIndex.RB] == ActivationStatus.Normal),
+                (activationStatusAfterDuel[(int)SkillIndex.RA] == ActivationStatus.Normal),
+                (activationStatusAfterDuel[(int)SkillIndex.RB] == ActivationStatus.Normal),
+                (roundWinner == PlayerSide.Right && finisherMoveTriggers),
+                (poisonToRight != null), (healToRight != null), rightProbabilityToWin);
 
             // Return Round Results
 
@@ -658,10 +623,10 @@ namespace UrbanRivalsCore.ViewModel
 
             RoundResults RoundResultsThisRound = PreviewRound(leftUsedCard, rightUsedCard, leftUsedFury, rightUsedFury, leftUsedPillz, rightUsedPillz, forceWinnerOnRandom);
 
-            LeftPlayerStatus = RoundResultsThisRound.LeftPlayerStatus;
-            RightPlayerStatus = RoundResultsThisRound.RightPlayerStatus;
+            LeftPlayerStatus = RoundResultsThisRound.leftPlayerStatus;
+            RightPlayerStatus = RoundResultsThisRound.rightPlayerStatus;
 
-            CombatWinner = RoundResultsThisRound.CombatWinner;
+            CombatWinner = RoundResultsThisRound.combatWinner;
             RoundCounter++; // Even if the combat ended, the counter is increased.
 
             return RoundResultsThisRound;
