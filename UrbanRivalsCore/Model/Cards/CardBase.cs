@@ -96,7 +96,7 @@ namespace UrbanRivalsCore.Model
         {
             CardLevel cardLevel;
 
-            AssertArgument.checkIntegerRange(minLevel <= level && level <= maxLevel, $"Must be between {minLevel} and {maxLevel} inclusive", level, nameof(level));
+            AssertArgument.checkIntegerRange(this.minLevel <= level && level <= maxLevel, $"Must be between {minLevel} and {maxLevel} inclusive", level, nameof(level));
 
             cardLevel = cardLevels.Single(item => item.level == level);
             return cardLevel;
