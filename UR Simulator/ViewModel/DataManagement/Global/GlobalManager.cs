@@ -195,19 +195,19 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 int clanId = int.Parse(newData[id]["clanID"].ToString());
                 string rarityText = newData[id]["rarity"].ToString();
 
-                var cardLevels = new List<CardLevel>();
+                var cardStatsPerLevel = new List<CardStats>();
                 foreach(dynamic levelItem in newData[id]["levels"])
                 {
                     int level = int.Parse(levelItem["level"].ToString());
                     int power = int.Parse(levelItem["power"].ToString());
                     int damage = int.Parse(levelItem["damage"].ToString());
-                    cardLevels.Add(new CardLevel(level, power, damage));
+                    cardStatsPerLevel.Add(new CardStats(level, power, damage));
                 }
 
                 worker.ReportProgress((int)(100 * progress / idsToAnalyze.Count()), $"[{id}] {name}");
                 progress++;
 
-                var card = ApiToCardBaseAdapter.ToCardBase(id, name, clanId, rarityText, abilityText, abilityUnlockLevel, cardLevels);
+                var card = ApiToCardBaseAdapter.ToCardBase(id, name, clanId, rarityText, abilityText, abilityUnlockLevel, cardStatsPerLevel);
 
                 if (card == null) continue; // TODO: Remove this line if day/night is implemented, or after 11/2018, whatever happens first
 

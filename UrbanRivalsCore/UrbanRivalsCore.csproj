@@ -49,7 +49,7 @@
     <Compile Include="Model\Cards\CardBase.cs" />
     <Compile Include="Model\Cards\CardDrawed.cs" />
     <Compile Include="Model\Cards\CardInstance.cs" />
-    <Compile Include="Model\Cards\CardLevel.cs" />
+    <Compile Include="Model\Cards\CardStats.cs" />
     <Compile Include="Model\Cards\Clan.cs" />
     <Compile Include="Model\Cards\Deck.cs" />
     <Compile Include="Model\Cards\Skill.cs" />

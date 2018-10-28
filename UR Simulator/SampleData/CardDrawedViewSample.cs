@@ -18,18 +18,18 @@ namespace UrbanRivalsManager.SampleData
             Clan clan = Clan.getClanById(ClanId.Raptors);
             string cardName = "Tester";
             Skill ability = new Skill(SkillPrefix.Courage, SkillSuffix.DecreasePillzXMinY, 2, 3);
-            List<CardLevel> cardLevels = new List<CardLevel>
+            List<CardStats> cardStatsPerLevel = new List<CardStats>
             {
-                new CardLevel(2,2,3),
-                new CardLevel(3,3,4),
-                new CardLevel(4,6,5),
+                new CardStats(2,2,3),
+                new CardStats(3,3,4),
+                new CardStats(4,6,5),
             };
             int abilityUnlockLevel = 3;
             CardRarity rarity = CardRarity.Legendary;
             int currentLevel = 4;
             int instanceId = 222;
 
-            CardBase cardBase = CardBase.createCardWithAbility(baseId, cardName, clan, cardLevels, rarity, ability, abilityUnlockLevel);
+            CardBase cardBase = CardBase.createCardWithAbility(baseId, cardName, clan, cardStatsPerLevel, rarity, ability, abilityUnlockLevel);
             CardInstance cardInstance = CardInstance.createCardInstance(cardBase, instanceId, currentLevel, 0);
 
             this.card = new CardDrawed(cardInstance);

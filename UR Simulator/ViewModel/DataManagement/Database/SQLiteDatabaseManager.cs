@@ -32,7 +32,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
         public CardBase getCardBase(int id)
         {
             CardBase card;
-            List<CardLevel> levels;
+            List<CardStats> cardStatsPerLevel;
             Clan clan;
             Skill ability;
             string name;
@@ -47,7 +47,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 
                 prv_addParameter(command, 1, id);
                 table = prv_executeSelect(command, this.persistentDatabasePath);
-                levels = new List<CardLevel>();
+                cardStatsPerLevel = new List<CardStats>();
                 foreach (DataRow cardLevelRow in table.Rows)
                 {
                     int level, power, damage;
@@ -55,7 +55,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                     level = prv_getInteger(cardLevelRow, "level");
                     power = prv_getInteger(cardLevelRow, "power");
                     damage = prv_getInteger(cardLevelRow, "damage");
-                    levels.Add(new CardLevel(level, power, damage));
+                    cardStatsPerLevel.Add(new CardStats(level, power, damage));
                 }
             }
 
@@ -100,7 +100,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 rarity = prv_getEnum<CardRarity>(row, "rarity");
             }
 
-            card = CardBase.createCardWithAbility(id, name, clan, levels, rarity, ability, unlocklevel);
+            card = CardBase.createCardWithAbility(id, name, clan, cardStatsPerLevel, rarity, ability, unlocklevel);
 
             return card;
         }
@@ -172,13 +172,13 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             for (int currentLevel = card.minLevel, max = card.maxLevel; currentLevel <= max; currentLevel++)
             {
                 SQLiteCommand addCardLevelCommand;
-                CardLevel cardLevel;
+                CardStats cardStats;
                 int power;
                 int damage;
 
-                cardLevel = card.getCardLevel(currentLevel);
-                power = cardLevel.power;
-                damage = cardLevel.damage;
+                cardStats = card.getCardStatsByLevel(currentLevel);
+                power = cardStats.power;
+                damage = cardStats.damage;
 
                 addCardLevelCommand = new SQLiteCommand(
                     "INSERT INTO cardlevel (baseid, level, power, damage) " +

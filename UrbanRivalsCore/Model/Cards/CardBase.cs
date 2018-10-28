@@ -18,17 +18,17 @@ namespace UrbanRivalsCore.Model
         public readonly int abilityUnlockLevel;
         public readonly CardRarity rarity;
 
-        private readonly List<CardLevel> cardLevels;
+        private readonly List<CardStats> cardStatsPerLevel;
 
-        public static CardBase createCardWithoutAbility(int cardBaseId, String name, Clan clan, List<CardLevel> cardLevels, CardRarity rarity)
+        public static CardBase createCardWithoutAbility(int cardBaseId, String name, Clan clan, List<CardStats> cardStatsPerLevel, CardRarity rarity)
         {
             CardBase card;
 
-            card = new CardBase(cardBaseId, name, clan, cardLevels, rarity, Skill.NoAbility, 0);
+            card = new CardBase(cardBaseId, name, clan, cardStatsPerLevel, rarity, Skill.NoAbility, 0);
 
             return card;
         }
-        public static CardBase createCardWithAbility(int id, String name, Clan clan, List<CardLevel> cardLevels, CardRarity rarity, Skill ability, int abilityUnlockLevel)
+        public static CardBase createCardWithAbility(int id, String name, Clan clan, List<CardStats> cardStatsPerLevel, CardRarity rarity, Skill ability, int abilityUnlockLevel)
         {
             CardBase card;
             bool abilityIsUnlockable;
@@ -42,7 +42,7 @@ namespace UrbanRivalsCore.Model
 
             AssertArgument.check(abilityIsUnlockable, "Must be an unlockable ability", nameof(ability));
 
-            card = new CardBase(id, name, clan, cardLevels, rarity, ability, abilityUnlockLevel);
+            card = new CardBase(id, name, clan, cardStatsPerLevel, rarity, ability, abilityUnlockLevel);
 
             minLevel = card.minLevel;
             maxLevel = card.maxLevel;
@@ -52,7 +52,7 @@ namespace UrbanRivalsCore.Model
 
             return card;
         }
-        private CardBase(int id, String name, Clan clan, List<CardLevel> cardLevels, CardRarity rarity, Skill ability, int abilityUnlockLevel)
+        private CardBase(int id, String name, Clan clan, List<CardStats> cardStatsPerLevel, CardRarity rarity, Skill ability, int abilityUnlockLevel)
         {
             int minLevel;
             int maxLevel;
@@ -61,24 +61,24 @@ namespace UrbanRivalsCore.Model
             AssertArgument.checkIntegerRange(id > 0, "Must be greater than 0", id, nameof(id));
             AssertArgument.stringIsFilled(name, nameof(name));
             AssertArgument.isNotNull(clan, nameof(clan));
-            AssertArgument.isNotNull(cardLevels, nameof(cardLevels));
+            AssertArgument.isNotNull(cardStatsPerLevel, nameof(cardStatsPerLevel));
             AssertArgument.checkIntegerRange(0 >= rarity && (int)rarity <= PRV_MAX_CARD_RARITY_VALUE, "Must be a valid " + nameof(CardRarity), (int)rarity, nameof(rarity));
 
-            minLevel = cardLevels.Min(item => item.level);
-            maxLevel = cardLevels.Max(item => item.level);
-            AssertArgument.checkIntegerRange(1 <= minLevel && minLevel <= 5, "Minimum level must be between 1 and 5 inclusive", minLevel, nameof(cardLevels));
-            AssertArgument.checkIntegerRange(1 <= maxLevel && maxLevel <= 5, "Maximum level must be between 1 and 5 inclusive", maxLevel, nameof(cardLevels));
+            minLevel = cardStatsPerLevel.Min(item => item.level);
+            maxLevel = cardStatsPerLevel.Max(item => item.level);
+            AssertArgument.checkIntegerRange(1 <= minLevel && minLevel <= 5, "Minimum level must be between 1 and 5 inclusive", minLevel, nameof(cardStatsPerLevel));
+            AssertArgument.checkIntegerRange(1 <= maxLevel && maxLevel <= 5, "Maximum level must be between 1 and 5 inclusive", maxLevel, nameof(cardStatsPerLevel));
             AssertArgument.check(minLevel < maxLevel, $"Minimum level ({minLevel}) must be lower than Maximum level ({maxLevel})", nameof(minLevel));
 
             amountOfLevels = maxLevel - minLevel + 1;
-            AssertArgument.checkIntegerRange(cardLevels.Count == amountOfLevels, $"There must be {amountOfLevels} level definitions", cardLevels.Count, nameof(cardLevels));
+            AssertArgument.checkIntegerRange(cardStatsPerLevel.Count == amountOfLevels, $"There must be {amountOfLevels} level definitions", cardStatsPerLevel.Count, nameof(cardStatsPerLevel));
 
             for (int level = minLevel; level <= maxLevel; level++)
             {
-                CardLevel current;
+                CardStats cardStats;
 
-                current = cardLevels.SingleOrDefault(item => item.level == level);
-                AssertArgument.check(current != null, $"There must be a definition for level and it must be unique. Level {level} fails this", nameof(cardLevels));
+                cardStats = cardStatsPerLevel.SingleOrDefault(item => item.level == level);
+                AssertArgument.check(cardStats != null, $"There must be a definition for level and it must be unique. Level {level} fails this", nameof(cardStatsPerLevel));
             }
 
             this.cardBaseId = id;
@@ -87,19 +87,19 @@ namespace UrbanRivalsCore.Model
             this.minLevel = minLevel;
             this.maxLevel = maxLevel;
             this.rarity = rarity;
-            this.cardLevels = cardLevels;
+            this.cardStatsPerLevel = cardStatsPerLevel;
             this.ability = ability;
             this.abilityUnlockLevel = abilityUnlockLevel;
         }
 
-        public CardLevel getCardLevel(int level)
+        public CardStats getCardStatsByLevel(int level)
         {
-            CardLevel cardLevel;
+            CardStats cardStats;
 
-            AssertArgument.checkIntegerRange(this.minLevel <= level && level <= maxLevel, $"Must be between {minLevel} and {maxLevel} inclusive", level, nameof(level));
+            AssertArgument.checkIntegerRange(this.minLevel <= level && level <= this.maxLevel, $"Must be between {this.minLevel} and {this.maxLevel} inclusive", level, nameof(level));
 
-            cardLevel = cardLevels.Single(item => item.level == level);
-            return cardLevel;
+            cardStats = this.cardStatsPerLevel.Single(item => item.level == level);
+            return cardStats;
         }
         public override string ToString()
         {

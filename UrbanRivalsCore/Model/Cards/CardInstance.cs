@@ -44,7 +44,7 @@ namespace UrbanRivalsCore.Model
             int maxLevel;
             Skill abilityFromBase;
             Skill ability;
-            CardLevel cardStats;
+            CardStats cardStats;
 
             AssertArgument.isNotNull(cardBase, nameof(cardBase));
             AssertArgument.checkIntegerRange(instanceId > 0, "Must be greater than 0", instanceId, nameof(instanceId));
@@ -95,7 +95,7 @@ namespace UrbanRivalsCore.Model
                 }
             }
 
-            cardStats = cardBase.getCardLevel(level);
+            cardStats = cardBase.getCardStatsByLevel(level);
 
             this.cardInstanceId = instanceId;
             this.cardBaseId = cardBase.cardBaseId;

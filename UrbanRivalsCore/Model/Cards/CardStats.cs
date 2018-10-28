@@ -2,13 +2,13 @@
 
 namespace UrbanRivalsCore.Model
 {
-    public class CardLevel
+    public class CardStats
     {
         public readonly int level;
         public readonly int power;
         public readonly int damage;
 
-        public CardLevel(int level, int power, int damage)
+        public CardStats(int level, int power, int damage)
         {
             AssertArgument.checkIntegerRange(level >= 1 && level <= 5, "Must be between 1 and 5 inclusive", level, nameof(level));
             AssertArgument.checkIntegerRange(power > 0, "Must be greater than 0", power, nameof(power));

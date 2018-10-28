@@ -80,16 +80,16 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             string ability = dynBaseCard["ability"].ToString();
             int ability_unlock_level = int.Parse(dynBaseCard["ability_unlock_level"].ToString());
 
-            var levels = new List<CardLevel>();
+            var cardStatsPerLevel = new List<CardStats>();
             foreach (dynamic item in decoded[getCardLevelsCall.Call]["items"])
             {
                 int level = int.Parse(item["level"].ToString());
                 int power = int.Parse(item["power"].ToString());
                 int damage = int.Parse(item["damage"].ToString());
-                levels.Add(new CardLevel(level, power, damage));
+                cardStatsPerLevel.Add(new CardStats(level, power, damage));
             }
 
-            return ApiToCardBaseAdapter.ToCardBase(id, name, clan_id, rarity, ability, ability_unlock_level, levels);
+            return ApiToCardBaseAdapter.ToCardBase(id, name, clan_id, rarity, ability, ability_unlock_level, cardStatsPerLevel);
         }
         public string GetUserLocale()
         {

@@ -597,7 +597,7 @@ namespace UrbanRivalsApiAdapter
         /// <summary>
         /// Returns a new instance of <see cref="CardBase"/> using server data.
         /// </summary>
-        /// <remark>This method does not do data validation. Parameter names on this function (except <paramref name="cardLevels"/>) use the nomenclature used by the API call "characters.getCharacters" </remark>
+        /// <remark>This method does not do data validation. Parameter names on this function (except <paramref name="cardStatsPerLevel"/>) use the nomenclature used by the API call "characters.getCharacters" </remark>
         /// <param name="id">Unique identifier of the card.</param>
         /// <param name="name">Name. If this ends in " Rb" it will override <paramref name="rarity"/> and will set it to <seealso cref="UrbanRivalsCore.Model.CardRarity.Rebirth"/>.</param>
         /// <param name="clan_id">Unique identifier of the clan.</param>
@@ -607,9 +607,9 @@ namespace UrbanRivalsApiAdapter
         /// <param name="ability">Ability text.</param>
         /// <param name="ability_unlock_level">Level at which the card unlocks its ability.</param>
         /// <param name="release_date">Release date of the card.</param>
-        /// <param name="cardLevels">Levels of the cards. This must be fabricated using the server data.</param>
+        /// <param name="cardStatsPerLevel">Levels of the cards. This must be fabricated using the server data.</param>
         /// <returns></returns>
-        public static CardBase ToCardBase(int id, string name, int clan_id, string rarity, string ability, int ability_unlock_level, List<CardLevel> cardLevels)
+        public static CardBase ToCardBase(int id, string name, int clan_id, string rarity, string ability, int ability_unlock_level, List<CardStats> cardStatsPerLevel)
         {
             CardBase card;
 
@@ -625,11 +625,11 @@ namespace UrbanRivalsApiAdapter
 
             if (ability == null) // TODO: Remove this line if double prefix is implemented, or after 11/2018, whatever happens first
             {
-                card = CardBase.createCardWithoutAbility(id, name, parsedClan, cardLevels, parsedRarity);
+                card = CardBase.createCardWithoutAbility(id, name, parsedClan, cardStatsPerLevel, parsedRarity);
             }
             else
             {
-                card = CardBase.createCardWithAbility(id, name, parsedClan, cardLevels, parsedRarity, parsedAbility, ability_unlock_level);
+                card = CardBase.createCardWithAbility(id, name, parsedClan, cardStatsPerLevel, parsedRarity, parsedAbility, ability_unlock_level);
             }
 
             return card;
