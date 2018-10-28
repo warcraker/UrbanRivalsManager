@@ -107,7 +107,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 Worker.CancelAsync();
             }
         }
-        public void AddCardBaseToDownloadQueue(CardBase card, CharacterImageFormat imageFormat)
+        public void AddCardDefinitionToDownloadQueue(CardDefinition card, CharacterImageFormat imageFormat)
         {
             for (int level = card.minLevel; level <= card.maxLevel; level++)
             {
@@ -121,9 +121,9 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
         public void CheckAndEnqueueNotDownloadedImages(CharacterImageFormat format)
         {
             List<CharacterImageIdentifier> images = new List<CharacterImageIdentifier>();
-            foreach (CardBase cardBase in InMemoryManagerInstance.GetAllCardBases())
-                for (int level = cardBase.minLevel; level <= cardBase.maxLevel; level++)
-                    images.Add(new CharacterImageIdentifier(cardBase, level, format));
+            foreach (CardDefinition cardDefinition in InMemoryManagerInstance.GetAllCardBases())
+                for (int level = cardDefinition.minLevel; level <= cardDefinition.maxLevel; level++)
+                    images.Add(new CharacterImageIdentifier(cardDefinition, level, format));
 
             foreach (CharacterImageIdentifier image in images)
             {

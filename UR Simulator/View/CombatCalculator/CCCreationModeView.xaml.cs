@@ -132,7 +132,7 @@ namespace UrbanRivalsManager.View
 
         private void FillValues(object sender, RoutedEventArgs e)
         {
-            CardBase card = CombatCalculatorCreationModeViewModel.InMemoryManager.GetCardBase(444);
+            CardDefinition card = CombatCalculatorCreationModeViewModel.InMemoryManager.GetCardDefinition(444);
             int level = card.maxLevel;
             CombatCalculatorCreationModeViewModel.CreationLeftCards[0] = card;
             CombatCalculatorCreationModeViewModel.CreationLeftCards[1] = card;

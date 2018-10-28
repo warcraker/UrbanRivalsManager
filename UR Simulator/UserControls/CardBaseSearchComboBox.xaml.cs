@@ -36,19 +36,19 @@ namespace UrbanRivalsManager.UserControls
         public static readonly DependencyProperty InMemoryManagerProperty =
             DependencyProperty.Register("InMemoryManager", typeof(InMemoryManager), typeof(CardBaseSearchComboBox), new PropertyMetadata(null));        
 
-        public CardBase SelectedCard
+        public CardDefinition SelectedCard
         {
-            get { return (CardBase)GetValue(SelectedCardProperty); }
+            get { return (CardDefinition)GetValue(SelectedCardProperty); }
             set { SetValue(SelectedCardProperty, value); }
         }
         public static readonly DependencyProperty SelectedCardProperty =
-            DependencyProperty.Register("SelectedCard", typeof(CardBase), typeof(CardBaseSearchComboBox), 
+            DependencyProperty.Register("SelectedCard", typeof(CardDefinition), typeof(CardBaseSearchComboBox), 
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,SelectedCardChanged));
 
         private static void SelectedCardChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             CardBaseSearchComboBox instance = (CardBaseSearchComboBox)d;
-            CardBase newCard = (CardBase)e.NewValue;
+            CardDefinition newCard = (CardDefinition)e.NewValue;
             if (newCard == null)
                 instance.SearchBox.SetTextWithoutSearching(instance.DefaultText);
             else
@@ -97,18 +97,18 @@ namespace UrbanRivalsManager.UserControls
         private void SearchBox_DropDownClosed(object sender, EventArgs e)
         {
             if (SearchBox.SelectedIndex != -1)
-                SelectedCard = (CardBase)SearchBox.SelectedItem;
+                SelectedCard = (CardDefinition)SearchBox.SelectedItem;
             if (SelectedCard != null)
                 SearchBox.Text = SelectedCard.name;
         }
 
-        private IEnumerable<CardBase> Search(string partialName)
+        private IEnumerable<CardDefinition> Search(string partialName)
         {
             if (InMemoryManager == null || partialName.Length < MinimumSearchChars)
                 yield break;
 
             foreach (string name in InMemoryManager.LookForCardNames(partialName))
-                yield return InMemoryManager.GetCardBase(name);
+                yield return InMemoryManager.GetCardDefinition(name);
         }
     }
 

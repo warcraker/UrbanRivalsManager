@@ -9,8 +9,8 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
     {
         void purge();
 
-        CardBase getCardBase(int id);
-        IEnumerable<int> getAllCardBaseIds();
-        void storeCardBase(CardBase card);
+        CardDefinition getCardDefinitionById(int id);
+        IEnumerable<int> getAllCardDefinitionIds();
+        void storeCardDefinition(CardDefinition card);
     }
 }

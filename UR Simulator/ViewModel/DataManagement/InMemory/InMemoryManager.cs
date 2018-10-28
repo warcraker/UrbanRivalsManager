@@ -8,8 +8,8 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
     public class InMemoryManager
     {
         private List<string> CardNames;
-        private Dictionary<string, int> CardBaseIdsByName;
-        private Dictionary<int, CardBase> CardBases;
+        private Dictionary<string, int> CardDefinitionIdsByName;
+        private Dictionary<int, CardDefinition> CardDefinitions;
         private Dictionary<int, CardInstance> CardInstances;
         /// <summary>
         /// The key of a fake CardInstance is: (-1) * (CardBaseId * 10 + Level)
@@ -18,11 +18,11 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 
         private InMemoryManager() 
         { 
-            CardBases = new Dictionary<int, CardBase>();
+            CardDefinitions = new Dictionary<int, CardDefinition>();
             CardInstances = new Dictionary<int, CardInstance>();
             FakeCardInstances = new Dictionary<int, CardInstance>();
             CardNames = new List<string>();
-            CardBaseIdsByName = new Dictionary<string, int>();
+            CardDefinitionIdsByName = new Dictionary<string, int>();
         }
         public InMemoryManager(IDatabaseManager databaseManager)
             : this()
@@ -33,13 +33,13 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             LoadToMemoryFromDatabase(databaseManager);
         }
 
-        public bool LoadToMemoryCardBase(CardBase card)
+        public bool LoadToMemoryCardDefinition(CardDefinition card)
         {
-            if (CardBases.ContainsKey(card.cardBaseId))
+            if (CardDefinitions.ContainsKey(card.id))
                 return false;
 
-            CardBases[card.cardBaseId] = card;
-            CardBaseIdsByName[card.name] = card.cardBaseId;
+            CardDefinitions[card.id] = card;
+            CardDefinitionIdsByName[card.name] = card.id;
             CardNames.Add(card.name);
             LoadToMemoryFakeCardInstances(card);
             return true;
@@ -54,14 +54,14 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 CardInstances[instance.cardInstanceId] = instance;
         }
 
-        public CardBase GetCardBase(int id)
+        public CardDefinition GetCardDefinition(int id)
         {
-            return CardBases[id];
+            return CardDefinitions[id];
         }
-        public CardBase GetCardBase(string name)
+        public CardDefinition GetCardDefinition(string name)
         {
-            int id = CardBaseIdsByName[name];
-            return GetCardBase(id);
+            int id = CardDefinitionIdsByName[name];
+            return GetCardDefinition(id);
         }
         public CardInstance GetCardInstance(int id)
         {
@@ -72,10 +72,10 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             int id = CalculateFakeInstanceId(cardBaseId, level);
             return FakeCardInstances[id];
         }
-        public IEnumerable<CardBase> SearchCardsByName(string partialName)
+        public IEnumerable<CardDefinition> SearchCardsByName(string partialName)
         {
             foreach (string name in LookForCardNames(partialName))
-                yield return GetCardBase(name);
+                yield return GetCardDefinition(name);
         }
         public IEnumerable<string> LookForCardNames(string partialName)
         {
@@ -86,26 +86,26 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
         }
         public IEnumerable<int> GetAllCardBaseIds()
         {
-            foreach (int id in CardBases.Keys)
+            foreach (int id in CardDefinitions.Keys)
                 yield return id;
         }
-        public IEnumerable<CardBase> GetAllCardBases()
+        public IEnumerable<CardDefinition> GetAllCardBases()
         {
-            foreach (CardBase card in CardBases.Values)
+            foreach (CardDefinition card in CardDefinitions.Values)
                 yield return card;
         }
 
         private void LoadToMemoryFromDatabase(IDatabaseManager databaseManager)
         {
-            var ids = databaseManager.getAllCardBaseIds();
+            var ids = databaseManager.getAllCardDefinitionIds();
             foreach (int id in ids)
-                LoadToMemoryCardBase(databaseManager.getCardBase(id));
+                LoadToMemoryCardDefinition(databaseManager.getCardDefinitionById(id));
         }
-        private void LoadToMemoryFakeCardInstances(CardBase card)
+        private void LoadToMemoryFakeCardInstances(CardDefinition card)
         {
             for (int level = card.minLevel; level <= card.maxLevel; level++)
             {
-                int id = CalculateFakeInstanceId(card.cardBaseId, level);
+                int id = CalculateFakeInstanceId(card.id, level);
                 FakeCardInstances[id] = CardInstance.createCardInstance(card, id, level, 0);
             }
         }

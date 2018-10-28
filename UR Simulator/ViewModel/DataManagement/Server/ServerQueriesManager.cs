@@ -31,13 +31,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             InMemoryManagerInstance = inMemoryManager;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id">Must be a valid ID</param>
-        /// <exception cref="ArgumentException"></exception>
-        /// <returns></returns>
-        public CardBase GetCardBase(int id)
+        public CardDefinition GetCardDefinition(int id)
         {
             if (id <= 0)
                 throw new ArgumentOutOfRangeException(nameof(id), id, "Must be greater than 0");
@@ -89,7 +83,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 cardStatsPerLevel.Add(new CardStats(level, power, damage));
             }
 
-            return ApiToCardBaseAdapter.ToCardBase(id, name, clan_id, rarity, ability, ability_unlock_level, cardStatsPerLevel);
+            return ApiToCardDefinitionAdapter.ToCardDefinition(id, name, clan_id, rarity, ability, ability_unlock_level, cardStatsPerLevel);
         }
         public string GetUserLocale()
         {

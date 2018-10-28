@@ -116,8 +116,8 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
         public CharacterImageIdentifier(CardInstance cardInstance, CharacterImageFormat format)
             : this(cardInstance.cardBaseId, cardInstance.name, cardInstance.clan.name, cardInstance.level, format)
         { }
-        public CharacterImageIdentifier(CardBase cardBase, int level, CharacterImageFormat format)
-            : this(cardBase.cardBaseId, cardBase.name, cardBase.clan.name, level, format)
+        public CharacterImageIdentifier(CardDefinition cardDefinition, int level, CharacterImageFormat format)
+            : this(cardDefinition.id, cardDefinition.name, cardDefinition.clan.name, level, format)
         { }
         public CharacterImageIdentifier(int cardBaseId, string cardName, string clanName, int level, CharacterImageFormat format)
         {

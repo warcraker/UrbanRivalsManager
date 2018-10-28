@@ -52,21 +52,21 @@ namespace UrbanRivalsManager.ViewModel
         public static readonly DependencyProperty IsRandomProperty =
             DependencyProperty.Register("IsRandom", typeof(bool), typeof(CombatCalculatorCreationModeViewModel), new PropertyMetadata(false));
 
-        public ObservableCollection<CardBase> CreationLeftCards
+        public ObservableCollection<CardDefinition> CreationLeftCards
         {
-            get { return (ObservableCollection<CardBase>)GetValue(CreationLeftCardsProperty); }
+            get { return (ObservableCollection<CardDefinition>)GetValue(CreationLeftCardsProperty); }
             set { SetValue(CreationLeftCardsProperty, value); }
         }
         public static readonly DependencyProperty CreationLeftCardsProperty =
-            DependencyProperty.Register("CreationLeftCards", typeof(ObservableCollection<CardBase>), typeof(CombatCalculatorCreationModeViewModel), new PropertyMetadata(new ObservableCollection<CardBase>() { null, null, null, null }));
+            DependencyProperty.Register("CreationLeftCards", typeof(ObservableCollection<CardDefinition>), typeof(CombatCalculatorCreationModeViewModel), new PropertyMetadata(new ObservableCollection<CardDefinition>() { null, null, null, null }));
 
-        public ObservableCollection<CardBase> CreationRightCards
+        public ObservableCollection<CardDefinition> CreationRightCards
         {
-            get { return (ObservableCollection<CardBase>)GetValue(CreationRightCardsProperty); }
+            get { return (ObservableCollection<CardDefinition>)GetValue(CreationRightCardsProperty); }
             set { SetValue(CreationRightCardsProperty, value); }
         }
         public static readonly DependencyProperty CreationRightCardsProperty =
-            DependencyProperty.Register("CreationRightCards", typeof(ObservableCollection<CardBase>), typeof(CombatCalculatorCreationModeViewModel), new PropertyMetadata(new ObservableCollection<CardBase>() { null, null, null, null }));
+            DependencyProperty.Register("CreationRightCards", typeof(ObservableCollection<CardDefinition>), typeof(CombatCalculatorCreationModeViewModel), new PropertyMetadata(new ObservableCollection<CardDefinition>() { null, null, null, null }));
 
         public ObservableCollection<int?> CreationLeftLevels
         {
@@ -103,7 +103,7 @@ namespace UrbanRivalsManager.ViewModel
             List<CardDrawed> leftCards = new List<CardDrawed>();
             for (int i = 0; i < 4; i++)
 			{
-                CardInstance instance = InMemoryManager.GetFakeCardInstance(CreationLeftCards[i].cardBaseId, CreationLeftLevels[i].Value);
+                CardInstance instance = InMemoryManager.GetFakeCardInstance(CreationLeftCards[i].id, CreationLeftLevels[i].Value);
                 //CardInstance instance = new CardInstance(CreationLeftCards[i], 0, CreationLeftLevels[i].Value);
                 leftCards.Add(new CardDrawed(instance));
 			}
@@ -112,7 +112,7 @@ namespace UrbanRivalsManager.ViewModel
             List<CardDrawed> rightCards = new List<CardDrawed>();
             for (int i = 0; i < 4; i++)
 			{
-                CardInstance instance = InMemoryManager.GetFakeCardInstance(CreationRightCards[i].cardBaseId, CreationRightLevels[i].Value);
+                CardInstance instance = InMemoryManager.GetFakeCardInstance(CreationRightCards[i].id, CreationRightLevels[i].Value);
                 //CardInstance instance = new CardInstance(CreationRightCards[i], 0, CreationRightLevels[i].Value);
                 rightCards.Add(new CardDrawed(instance));
 			}

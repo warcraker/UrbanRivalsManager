@@ -6,10 +6,7 @@ using UrbanRivalsCore.Model;
 
 namespace UrbanRivalsApiAdapter
 {
-    /// <summary>
-    /// Creates a <see cref="CardBase"/> instance out of server data.
-    /// </summary>
-    public static class ApiToCardBaseAdapter
+    public static class ApiToCardDefinitionAdapter
     {
         private static class UsedRegex
         {
@@ -595,7 +592,7 @@ namespace UrbanRivalsApiAdapter
         }
 
         /// <summary>
-        /// Returns a new instance of <see cref="CardBase"/> using server data.
+        /// Returns a new instance of <see cref="CardDefinition"/> using server data.
         /// </summary>
         /// <remark>This method does not do data validation. Parameter names on this function (except <paramref name="cardStatsPerLevel"/>) use the nomenclature used by the API call "characters.getCharacters" </remark>
         /// <param name="id">Unique identifier of the card.</param>
@@ -609,9 +606,9 @@ namespace UrbanRivalsApiAdapter
         /// <param name="release_date">Release date of the card.</param>
         /// <param name="cardStatsPerLevel">Levels of the cards. This must be fabricated using the server data.</param>
         /// <returns></returns>
-        public static CardBase ToCardBase(int id, string name, int clan_id, string rarity, string ability, int ability_unlock_level, List<CardStats> cardStatsPerLevel)
+        public static CardDefinition ToCardDefinition(int id, string name, int clan_id, string rarity, string ability, int ability_unlock_level, List<CardStats> cardStatsPerLevel)
         {
-            CardBase card;
+            CardDefinition cardDefinition;
 
             if (ability.Contains("Day:") || ability.Contains("Night:")) return null; // TODO: Remove this line if day/night is implemented, or after 11/2018, whatever happens first
 
@@ -625,14 +622,14 @@ namespace UrbanRivalsApiAdapter
 
             if (ability == null) // TODO: Remove this line if double prefix is implemented, or after 11/2018, whatever happens first
             {
-                card = CardBase.createCardWithoutAbility(id, name, parsedClan, cardStatsPerLevel, parsedRarity);
+                cardDefinition = CardDefinition.createCardWithoutAbility(id, name, parsedClan, cardStatsPerLevel, parsedRarity);
             }
             else
             {
-                card = CardBase.createCardWithAbility(id, name, parsedClan, cardStatsPerLevel, parsedRarity, parsedAbility, ability_unlock_level);
+                cardDefinition = CardDefinition.createCardWithAbility(id, name, parsedClan, cardStatsPerLevel, parsedRarity, parsedAbility, ability_unlock_level);
             }
 
-            return card;
+            return cardDefinition;
         }
     }
 }

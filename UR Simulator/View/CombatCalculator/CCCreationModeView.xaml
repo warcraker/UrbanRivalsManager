@@ -181,10 +181,10 @@
                     <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <usercontrol:CardBaseSelector Grid.Column="1" InMemoryManager="{Binding InMemoryManager}" SelectedCardBase="{Binding CreationRightCards[0]}" Level="{Binding CreationRightLevels[0]}" />
-                <usercontrol:CardBaseSelector Grid.Column="3" InMemoryManager="{Binding InMemoryManager}" SelectedCardBase="{Binding CreationRightCards[1]}" Level="{Binding CreationRightLevels[1]}" />
-                <usercontrol:CardBaseSelector Grid.Column="5" InMemoryManager="{Binding InMemoryManager}" SelectedCardBase="{Binding CreationRightCards[2]}" Level="{Binding CreationRightLevels[2]}" />
-                <usercontrol:CardBaseSelector Grid.Column="7" InMemoryManager="{Binding InMemoryManager}" SelectedCardBase="{Binding CreationRightCards[3]}" Level="{Binding CreationRightLevels[3]}" />
+                <usercontrol:CardDefinitionSelector Grid.Column="1" InMemoryManager="{Binding InMemoryManager}" SelectedCardDefinition="{Binding CreationRightCards[0]}" Level="{Binding CreationRightLevels[0]}" />
+                <usercontrol:CardDefinitionSelector Grid.Column="3" InMemoryManager="{Binding InMemoryManager}" SelectedCardDefinition="{Binding CreationRightCards[1]}" Level="{Binding CreationRightLevels[1]}" />
+                <usercontrol:CardDefinitionSelector Grid.Column="5" InMemoryManager="{Binding InMemoryManager}" SelectedCardDefinition="{Binding CreationRightCards[2]}" Level="{Binding CreationRightLevels[2]}" />
+                <usercontrol:CardDefinitionSelector Grid.Column="7" InMemoryManager="{Binding InMemoryManager}" SelectedCardDefinition="{Binding CreationRightCards[3]}" Level="{Binding CreationRightLevels[3]}" />
             </Grid>
                 
             <!-- Your Cards (Left/Bottom) -->
@@ -200,10 +200,10 @@
                     <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <usercontrol:CardBaseSelector Grid.Column="1" InMemoryManager="{Binding InMemoryManager}" SelectedCardBase="{Binding CreationLeftCards[0]}" Level="{Binding CreationLeftLevels[0]}" />
-                <usercontrol:CardBaseSelector Grid.Column="3" InMemoryManager="{Binding InMemoryManager}" SelectedCardBase="{Binding CreationLeftCards[1]}" Level="{Binding CreationLeftLevels[1]}" />
-                <usercontrol:CardBaseSelector Grid.Column="5" InMemoryManager="{Binding InMemoryManager}" SelectedCardBase="{Binding CreationLeftCards[2]}" Level="{Binding CreationLeftLevels[2]}" />
-                <usercontrol:CardBaseSelector Grid.Column="7" InMemoryManager="{Binding InMemoryManager}" SelectedCardBase="{Binding CreationLeftCards[3]}" Level="{Binding CreationLeftLevels[3]}" />
+                <usercontrol:CardDefinitionSelector Grid.Column="1" InMemoryManager="{Binding InMemoryManager}" SelectedCardDefinition="{Binding CreationLeftCards[0]}" Level="{Binding CreationLeftLevels[0]}" />
+                <usercontrol:CardDefinitionSelector Grid.Column="3" InMemoryManager="{Binding InMemoryManager}" SelectedCardDefinition="{Binding CreationLeftCards[1]}" Level="{Binding CreationLeftLevels[1]}" />
+                <usercontrol:CardDefinitionSelector Grid.Column="5" InMemoryManager="{Binding InMemoryManager}" SelectedCardDefinition="{Binding CreationLeftCards[2]}" Level="{Binding CreationLeftLevels[2]}" />
+                <usercontrol:CardDefinitionSelector Grid.Column="7" InMemoryManager="{Binding InMemoryManager}" SelectedCardDefinition="{Binding CreationLeftCards[3]}" Level="{Binding CreationLeftLevels[3]}" />
             </Grid>
 
         <!-- End Preparation State -->

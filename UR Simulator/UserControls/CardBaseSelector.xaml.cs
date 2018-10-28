@@ -21,7 +21,7 @@ namespace UrbanRivalsManager.UserControls
     /// <summary>
     /// Interaction logic for CardBaseSelector.xaml
     /// </summary>
-    public partial class CardBaseSelector : UserControl
+    public partial class CardDefinitionSelector : UserControl
     {
         public InMemoryManager InMemoryManager
         {
@@ -29,22 +29,22 @@ namespace UrbanRivalsManager.UserControls
             set { SetValue(InMemoryManagerProperty, value); }
         }
         public static readonly DependencyProperty InMemoryManagerProperty =
-            DependencyProperty.Register("InMemoryManager", typeof(InMemoryManager), typeof(CardBaseSelector), new PropertyMetadata(null));
+            DependencyProperty.Register("InMemoryManager", typeof(InMemoryManager), typeof(CardDefinitionSelector), new PropertyMetadata(null));
 
-        public CardBase SelectedCardBase
+        public CardDefinition SelectedCardDefinition
         {
-            get { return (CardBase)GetValue(SelectedCardBaseProperty); }
-            set { SetValue(SelectedCardBaseProperty, value); }
+            get { return (CardDefinition)GetValue(SelectedCardDefinitionProperty); }
+            set { SetValue(SelectedCardDefinitionProperty, value); }
         }
-        public static readonly DependencyProperty SelectedCardBaseProperty =
-            DependencyProperty.Register("SelectedCardBase", typeof(CardBase), typeof(CardBaseSelector), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(SelectedCardBaseChanged)));
+        public static readonly DependencyProperty SelectedCardDefinitionProperty =
+            DependencyProperty.Register(nameof(SelectedCardDefinition), typeof(CardDefinition), typeof(CardDefinitionSelector), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(SelectedCardBaseChanged)));
         private static void SelectedCardBaseChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = (CardBaseSelector)d;
+            var control = (CardDefinitionSelector)d;
             if (e.NewValue == null)
                 control.Level = null;
             else
-                control.Level = ((CardBase)e.NewValue).maxLevel;
+                control.Level = ((CardDefinition)e.NewValue).maxLevel;
         }
 
         public int? Level
@@ -53,11 +53,11 @@ namespace UrbanRivalsManager.UserControls
             set { SetValue(LevelProperty, value); }
         }
         public static readonly DependencyProperty LevelProperty =
-            DependencyProperty.Register("Level", typeof(int?), typeof(CardBaseSelector), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, null, new CoerceValueCallback(LevelCoerce)));
+            DependencyProperty.Register(nameof(Level), typeof(int?), typeof(CardDefinitionSelector), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, null, new CoerceValueCallback(LevelCoerce)));
         private static object LevelCoerce(DependencyObject d, object baseValue)
         {
-            var control = ((CardBaseSelector)d);
-            var card = control.SelectedCardBase;
+            var control = ((CardDefinitionSelector)d);
+            var card = control.SelectedCardDefinition;
 
             if (card == null) 
                 return null;
@@ -69,7 +69,7 @@ namespace UrbanRivalsManager.UserControls
             return control.Level;
         }
         
-        public CardBaseSelector()
+        public CardDefinitionSelector()
         {
             InitializeComponent();
         }

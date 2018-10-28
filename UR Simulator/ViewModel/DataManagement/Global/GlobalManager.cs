@@ -126,7 +126,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
         public IEnumerable<int> GetAllCardBaseIdsNotInDatabase()
         {
             var existingIds = ServerQueriesManagerInstance.GetAllCardBaseIds();
-            var storedIds = DatabaseManagerInstance.getAllCardBaseIds();
+            var storedIds = DatabaseManagerInstance.getAllCardDefinitionIds();
             return existingIds.Except(storedIds);
         }
 
@@ -142,7 +142,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             string userLocale = managers.ServerQueriesManager.GetUserLocale();
 
             var existingIds = managers.ServerQueriesManager.GetAllCardBaseIds();
-            var storedIds = managers.DatabaseManager.getAllCardBaseIds();
+            var storedIds = managers.DatabaseManager.getAllCardDefinitionIds();
             var idsToAnalyze = existingIds.Except(storedIds).ToList();
             idsToAnalyze.Sort();
 
@@ -207,13 +207,13 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 worker.ReportProgress((int)(100 * progress / idsToAnalyze.Count()), $"[{id}] {name}");
                 progress++;
 
-                var card = ApiToCardBaseAdapter.ToCardBase(id, name, clanId, rarityText, abilityText, abilityUnlockLevel, cardStatsPerLevel);
+                var card = ApiToCardDefinitionAdapter.ToCardDefinition(id, name, clanId, rarityText, abilityText, abilityUnlockLevel, cardStatsPerLevel);
 
                 if (card == null) continue; // TODO: Remove this line if day/night is implemented, or after 11/2018, whatever happens first
 
-                managers.DatabaseManager.storeCardBase(card);
-                managers.InMemoryManager.LoadToMemoryCardBase(card);
-                managers.ImageDownloader.AddCardBaseToDownloadQueue(card, CharacterImageFormat.Color800x640);
+                managers.DatabaseManager.storeCardDefinition(card);
+                managers.InMemoryManager.LoadToMemoryCardDefinition(card);
+                managers.ImageDownloader.AddCardDefinitionToDownloadQueue(card, CharacterImageFormat.Color800x640);
             }
 
             managers.ServerQueriesManager.SetUserLocale(userLocale);
@@ -273,15 +273,15 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                     int cardInstanceId;
                     int level;
                     int experience;
-                    CardBase cardBase;
+                    CardDefinition cardDefinition;
                     CardInstance cardInstance;
 
                     cardBaseId = int.Parse(item["id"].ToString());
-                    cardBase = managers.InMemoryManager.GetCardBase(cardBaseId);
+                    cardDefinition = managers.InMemoryManager.GetCardDefinition(cardBaseId);
                     cardInstanceId = int.Parse(item["id_player_character"].ToString());
                     level = int.Parse(item["level"].ToString());
                     experience = int.Parse(item["xp"].ToString());
-                    cardInstance = CardInstance.createCardInstance(cardBase, cardInstanceId, level, experience);
+                    cardInstance = CardInstance.createCardInstance(cardDefinition, cardInstanceId, level, experience);
 
                     instances.Add(cardInstance);
                 }

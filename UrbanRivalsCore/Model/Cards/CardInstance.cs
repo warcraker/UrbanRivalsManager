@@ -18,27 +18,27 @@ namespace UrbanRivalsCore.Model
         public readonly int power;
         public readonly int damage;
 
-        public static CardInstance createCardInstance(CardBase cardBase, int instanceId, int level, int experience)
+        public static CardInstance createCardInstance(CardDefinition cardDefinition, int instanceId, int level, int experience)
         {
             CardInstance cardInstance;
 
-            cardInstance = new CardInstance(cardBase, instanceId, level, experience);
+            cardInstance = new CardInstance(cardDefinition, instanceId, level, experience);
 
             return cardInstance;
         }
-        public static CardInstance createCardInstanceAtMaxLevel(CardBase cardBase, int instanceId)
+        public static CardInstance createCardInstanceAtMaxLevel(CardDefinition cardDefinition, int instanceId)
         {
             CardInstance cardInstance;
             int level;
             int experience;
 
-            level = cardBase.maxLevel;
+            level = cardDefinition.maxLevel;
             experience = 1;
-            cardInstance = new CardInstance(cardBase, instanceId, level, experience);
+            cardInstance = new CardInstance(cardDefinition, instanceId, level, experience);
 
             return cardInstance;
         }
-        private CardInstance(CardBase cardBase, int instanceId, int level, int experience)
+        private CardInstance(CardDefinition cardDefinition, int instanceId, int level, int experience)
         {
             int minLevel;
             int maxLevel;
@@ -46,10 +46,10 @@ namespace UrbanRivalsCore.Model
             Skill ability;
             CardStats cardStats;
 
-            AssertArgument.isNotNull(cardBase, nameof(cardBase));
+            AssertArgument.isNotNull(cardDefinition, nameof(cardDefinition));
             AssertArgument.checkIntegerRange(instanceId > 0, "Must be greater than 0", instanceId, nameof(instanceId));
-            minLevel = cardBase.minLevel;
-            maxLevel = cardBase.maxLevel;
+            minLevel = cardDefinition.minLevel;
+            maxLevel = cardDefinition.maxLevel;
             AssertArgument.checkIntegerRange(minLevel <= level && level <= maxLevel, $"Must be between {minLevel} and {maxLevel} inclusive", level, nameof(level));
             AssertArgument.checkIntegerRange(experience >= 0, "Must be greater or equal to 0", experience, nameof(experience));
             if (level == maxLevel)
@@ -57,7 +57,7 @@ namespace UrbanRivalsCore.Model
                 AssertArgument.check(experience == 1, $"When {nameof(level)} is max, experience must be 1", nameof(experience));
             }
 
-            abilityFromBase = cardBase.ability;
+            abilityFromBase = cardDefinition.ability;
             if (abilityFromBase == Skill.NoAbility)
             {
                 ability = Skill.NoAbility;
@@ -66,7 +66,7 @@ namespace UrbanRivalsCore.Model
             {
                 int abilityUnlockLevel;
 
-                abilityUnlockLevel = cardBase.abilityUnlockLevel;
+                abilityUnlockLevel = cardDefinition.abilityUnlockLevel;
                 if (level >= abilityUnlockLevel)
                 {
                     ability = abilityFromBase;
@@ -95,16 +95,16 @@ namespace UrbanRivalsCore.Model
                 }
             }
 
-            cardStats = cardBase.getCardStatsByLevel(level);
+            cardStats = cardDefinition.getCardStatsByLevel(level);
 
             this.cardInstanceId = instanceId;
-            this.cardBaseId = cardBase.cardBaseId;
-            this.name = cardBase.name;
+            this.cardBaseId = cardDefinition.id;
+            this.name = cardDefinition.name;
             this.level = level;
             this.experience = experience;
-            this.minLevel = cardBase.minLevel;
-            this.maxLevel = cardBase.maxLevel;
-            this.rarity = cardBase.rarity;
+            this.minLevel = cardDefinition.minLevel;
+            this.maxLevel = cardDefinition.maxLevel;
+            this.rarity = cardDefinition.rarity;
             this.ability = ability;
             this.power = cardStats.power;
             this.damage = cardStats.damage;

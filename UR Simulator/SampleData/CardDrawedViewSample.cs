@@ -29,8 +29,8 @@ namespace UrbanRivalsManager.SampleData
             int currentLevel = 4;
             int instanceId = 222;
 
-            CardBase cardBase = CardBase.createCardWithAbility(baseId, cardName, clan, cardStatsPerLevel, rarity, ability, abilityUnlockLevel);
-            CardInstance cardInstance = CardInstance.createCardInstance(cardBase, instanceId, currentLevel, 0);
+            CardDefinition cardDefinition = CardDefinition.createCardWithAbility(baseId, cardName, clan, cardStatsPerLevel, rarity, ability, abilityUnlockLevel);
+            CardInstance cardInstance = CardInstance.createCardInstance(cardDefinition, instanceId, currentLevel, 0);
 
             this.card = new CardDrawed(cardInstance);
         }

@@ -29,9 +29,9 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             prv_createPersistentDatabase(this.persistentDatabasePath);
         }
 
-        public CardBase getCardBase(int id)
+        public CardDefinition getCardDefinitionById(int id)
         {
-            CardBase card;
+            CardDefinition cardDefinition;
             List<CardStats> cardStatsPerLevel;
             Clan clan;
             Skill ability;
@@ -100,11 +100,11 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 rarity = prv_getEnum<CardRarity>(row, "rarity");
             }
 
-            card = CardBase.createCardWithAbility(id, name, clan, cardStatsPerLevel, rarity, ability, unlocklevel);
+            cardDefinition = CardDefinition.createCardWithAbility(id, name, clan, cardStatsPerLevel, rarity, ability, unlocklevel);
 
-            return card;
+            return cardDefinition;
         }
-        public IEnumerable<int> getAllCardBaseIds()
+        public IEnumerable<int> getAllCardDefinitionIds()
         {
             DataTable table;
 
@@ -121,10 +121,10 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 yield return returnedId;
             }
         }
-        public void storeCardBase(CardBase card)
+        public void storeCardDefinition(CardDefinition card)
         {
             List<SQLiteCommand> commands;
-            SQLiteCommand addCardBaseCommand;
+            SQLiteCommand addCardDefinitionCommand;
             int cardId;
             Clan clan;
             int clanId;
@@ -141,7 +141,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 
             commands = new List<SQLiteCommand>();
 
-            cardId = card.cardBaseId;
+            cardId = card.id;
             clan = card.clan;
             clanId = (int)clan.id;
             name = card.name;
@@ -154,20 +154,20 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             y = ability.Y;
             rarity = (int)card.rarity;
 
-            addCardBaseCommand = new SQLiteCommand(
+            addCardDefinitionCommand = new SQLiteCommand(
                 "INSERT INTO cardbase (baseid, clanid, name, unlocklevel, leader, prefix, suffix, x, y, rarity) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-            prv_addParameter(addCardBaseCommand, 1, cardId);
-            prv_addParameter(addCardBaseCommand, 2, clanId);
-            prv_addParameter(addCardBaseCommand, 3, name);
-            prv_addParameter(addCardBaseCommand, 4, unlockLevel);
-            prv_addParameter(addCardBaseCommand, 5, leader);
-            prv_addParameter(addCardBaseCommand, 6, prefix);
-            prv_addParameter(addCardBaseCommand, 7, suffix);
-            prv_addParameter(addCardBaseCommand, 8, x);
-            prv_addParameter(addCardBaseCommand, 9, y);
-            prv_addParameter(addCardBaseCommand, 10, rarity);
-            commands.Add(addCardBaseCommand);
+            prv_addParameter(addCardDefinitionCommand, 1, cardId);
+            prv_addParameter(addCardDefinitionCommand, 2, clanId);
+            prv_addParameter(addCardDefinitionCommand, 3, name);
+            prv_addParameter(addCardDefinitionCommand, 4, unlockLevel);
+            prv_addParameter(addCardDefinitionCommand, 5, leader);
+            prv_addParameter(addCardDefinitionCommand, 6, prefix);
+            prv_addParameter(addCardDefinitionCommand, 7, suffix);
+            prv_addParameter(addCardDefinitionCommand, 8, x);
+            prv_addParameter(addCardDefinitionCommand, 9, y);
+            prv_addParameter(addCardDefinitionCommand, 10, rarity);
+            commands.Add(addCardDefinitionCommand);
 
             for (int currentLevel = card.minLevel, max = card.maxLevel; currentLevel <= max; currentLevel++)
             {

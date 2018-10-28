@@ -5,11 +5,11 @@ using UrbanRivalsUtils;
 
 namespace UrbanRivalsCore.Model
 {
-    public class CardBase
+    public class CardDefinition
     {
         private static readonly int PRV_MAX_CARD_RARITY_VALUE = Enum.GetValues(typeof(CardRarity)).Length - 1;
 
-        public readonly int cardBaseId;
+        public readonly int id;
         public readonly string name;
         public readonly Clan clan;
         public readonly Skill ability;
@@ -20,17 +20,17 @@ namespace UrbanRivalsCore.Model
 
         private readonly List<CardStats> cardStatsPerLevel;
 
-        public static CardBase createCardWithoutAbility(int cardBaseId, String name, Clan clan, List<CardStats> cardStatsPerLevel, CardRarity rarity)
+        public static CardDefinition createCardWithoutAbility(int id, string name, Clan clan, List<CardStats> cardStatsPerLevel, CardRarity rarity)
         {
-            CardBase card;
+            CardDefinition cardDefinition;
 
-            card = new CardBase(cardBaseId, name, clan, cardStatsPerLevel, rarity, Skill.NoAbility, 0);
+            cardDefinition = new CardDefinition(id, name, clan, cardStatsPerLevel, rarity, Skill.NoAbility, 0);
 
-            return card;
+            return cardDefinition;
         }
-        public static CardBase createCardWithAbility(int id, String name, Clan clan, List<CardStats> cardStatsPerLevel, CardRarity rarity, Skill ability, int abilityUnlockLevel)
+        public static CardDefinition createCardWithAbility(int id, string name, Clan clan, List<CardStats> cardStatsPerLevel, CardRarity rarity, Skill ability, int abilityUnlockLevel)
         {
-            CardBase card;
+            CardDefinition cardDefinition;
             bool abilityIsUnlockable;
             int minLevel;
             int maxLevel;
@@ -42,17 +42,17 @@ namespace UrbanRivalsCore.Model
 
             AssertArgument.check(abilityIsUnlockable, "Must be an unlockable ability", nameof(ability));
 
-            card = new CardBase(id, name, clan, cardStatsPerLevel, rarity, ability, abilityUnlockLevel);
+            cardDefinition = new CardDefinition(id, name, clan, cardStatsPerLevel, rarity, ability, abilityUnlockLevel);
 
-            minLevel = card.minLevel;
-            maxLevel = card.maxLevel;
+            minLevel = cardDefinition.minLevel;
+            maxLevel = cardDefinition.maxLevel;
 
             AssertArgument.checkIntegerRange(minLevel <= abilityUnlockLevel && abilityUnlockLevel <= maxLevel,
                 $"Must be between {minLevel} and {maxLevel} inclusive", abilityUnlockLevel, nameof(abilityUnlockLevel));
 
-            return card;
+            return cardDefinition;
         }
-        private CardBase(int id, String name, Clan clan, List<CardStats> cardStatsPerLevel, CardRarity rarity, Skill ability, int abilityUnlockLevel)
+        private CardDefinition(int id, String name, Clan clan, List<CardStats> cardStatsPerLevel, CardRarity rarity, Skill ability, int abilityUnlockLevel)
         {
             int minLevel;
             int maxLevel;
@@ -81,7 +81,7 @@ namespace UrbanRivalsCore.Model
                 AssertArgument.check(cardStats != null, $"There must be a definition for level and it must be unique. Level {level} fails this", nameof(cardStatsPerLevel));
             }
 
-            this.cardBaseId = id;
+            this.id = id;
             this.name = name;
             this.clan = clan;
             this.minLevel = minLevel;
@@ -103,7 +103,7 @@ namespace UrbanRivalsCore.Model
         }
         public override string ToString()
         {
-            return name;
+            return this.name;
         }
     }
 }

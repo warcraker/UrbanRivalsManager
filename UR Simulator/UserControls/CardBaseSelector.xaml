@@ -1,5 +1,5 @@
 ﻿<UserControl x:Name="Control"
-             x:Class="UrbanRivalsManager.UserControls.CardBaseSelector"
+             x:Class="UrbanRivalsManager.UserControls.CardDefinitionSelector"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -19,7 +19,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <local:CardBaseSearchComboBox Grid.ColumnSpan="2" HorizontalAlignment="Stretch"
-            SelectedCard="{Binding SelectedCardBase}" 
+            SelectedCard="{Binding SelectedCardDefinition}" 
             InMemoryManager="{Binding InMemoryManager}" />
         <TextBlock Grid.Row="1" Text="{x:Static resx:UIStrings.ui_searchbox_level}" />
         <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Level}" />
