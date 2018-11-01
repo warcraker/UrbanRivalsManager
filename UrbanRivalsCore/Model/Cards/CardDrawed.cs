@@ -18,7 +18,7 @@ namespace UrbanRivalsCore.Model
             set
             {
                 if (value == null)
-                    m_ability = Skill.NoAbility;
+                    m_ability = Skill.NO_ABILITY;
                 else
                     m_ability = value;
                 if (PropertyChanged != null)
@@ -35,7 +35,7 @@ namespace UrbanRivalsCore.Model
             set
             {
                 if (value == null)
-                    m_bonus = Skill.NoBonus;
+                    m_bonus = Skill.NO_BONUS;
                 else
                     m_bonus = value;
                 if (PropertyChanged != null)

@@ -39,9 +39,9 @@ namespace UrbanRivalsCore.ViewModel
                     return skills[index];
 
                 if (index == (int)SkillIndex.LA || index == (int)SkillIndex.RA)
-                    return Skill.NoAbility;
+                    return Skill.NO_ABILITY;
 
-                return Skill.NoBonus;
+                return Skill.NO_BONUS;
             }
             private set
             {

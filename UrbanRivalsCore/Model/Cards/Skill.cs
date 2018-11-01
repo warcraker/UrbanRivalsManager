@@ -16,12 +16,12 @@ namespace UrbanRivalsCore.Model
             NoBonus = 0x10,
         }
 
-        public static readonly Skill UnlockedAtLevel2 = prv_createEmptySkill(EmptySkill.UnlockedAt2);
-        public static readonly Skill UnlockedAtLevel3 = prv_createEmptySkill(EmptySkill.UnlockedAt3);
-        public static readonly Skill UnlockedAtLevel4 = prv_createEmptySkill(EmptySkill.UnlockedAt4);
-        public static readonly Skill UnlockedAtLevel5 = prv_createEmptySkill(EmptySkill.UnlockedAt5);
-        public static readonly Skill NoAbility = prv_createEmptySkill(EmptySkill.NoAbility);
-        public static readonly Skill NoBonus = prv_createEmptySkill(EmptySkill.NoBonus);
+        public static readonly Skill UNLOCKED_AT_LEVEL_2 = prv_createEmptySkill(EmptySkill.UnlockedAt2);
+        public static readonly Skill UNLOCKED_AT_LEVEL_3 = prv_createEmptySkill(EmptySkill.UnlockedAt3);
+        public static readonly Skill UNLOCKED_AT_LEVEL_4 = prv_createEmptySkill(EmptySkill.UnlockedAt4);
+        public static readonly Skill UNLOCKED_AT_LEVEL_5 = prv_createEmptySkill(EmptySkill.UnlockedAt5);
+        public static readonly Skill NO_ABILITY = prv_createEmptySkill(EmptySkill.NoAbility);
+        public static readonly Skill NO_BONUS = prv_createEmptySkill(EmptySkill.NoBonus);
 
         private static readonly int PRV_MAX_VALUE_PREFIX = Enum.GetValues(typeof(SkillPrefix)).Length - 1;
 
@@ -78,17 +78,17 @@ namespace UrbanRivalsCore.Model
                 switch (this.EmptySkillFlags)
                 {
                     case EmptySkill.UnlockedAt2:
-                        return UnlockedAtLevel2;
+                        return UNLOCKED_AT_LEVEL_2;
                     case EmptySkill.UnlockedAt3:
-                        return UnlockedAtLevel3;
+                        return UNLOCKED_AT_LEVEL_3;
                     case EmptySkill.UnlockedAt4:
-                        return UnlockedAtLevel4;
+                        return UNLOCKED_AT_LEVEL_4;
                     case EmptySkill.UnlockedAt5:
-                        return UnlockedAtLevel5;
+                        return UNLOCKED_AT_LEVEL_5;
                     case EmptySkill.NoAbility:
-                        return NoAbility;
+                        return NO_ABILITY;
                     case EmptySkill.NoBonus:
-                        return NoBonus;
+                        return NO_BONUS;
                     default:
                         throw new Exception("Unexpected EmptySkillFlags: " + this.EmptySkillFlags.ToString()); // Sanity check
                 }
@@ -105,25 +105,25 @@ namespace UrbanRivalsCore.Model
         }
         public override string ToString()
         {
-            if (EmptySkillFlags != EmptySkill.None)
+            if (this.EmptySkillFlags != EmptySkill.None)
             {
-                if (EmptySkillFlags.HasFlag(EmptySkill.UnlockedAt2))
+                if (this.EmptySkillFlags.HasFlag(EmptySkill.UnlockedAt2))
                     return String.Format(Properties.GameStrings.skill_not_unlocked, 2);
-                if (EmptySkillFlags.HasFlag(EmptySkill.UnlockedAt3))
+                if (this.EmptySkillFlags.HasFlag(EmptySkill.UnlockedAt3))
                     return String.Format(Properties.GameStrings.skill_not_unlocked, 3);
-                if (EmptySkillFlags.HasFlag(EmptySkill.UnlockedAt4))
+                if (this.EmptySkillFlags.HasFlag(EmptySkill.UnlockedAt4))
                     return String.Format(Properties.GameStrings.skill_not_unlocked, 4);
-                if (EmptySkillFlags.HasFlag(EmptySkill.UnlockedAt5))
+                if (this.EmptySkillFlags.HasFlag(EmptySkill.UnlockedAt5))
                     return String.Format(Properties.GameStrings.skill_not_unlocked, 5);
-                if (EmptySkillFlags.HasFlag(EmptySkill.NoAbility))
+                if (this.EmptySkillFlags.HasFlag(EmptySkill.NoAbility))
                     return Properties.GameStrings.skill_no_ability;
-                if (EmptySkillFlags.HasFlag(EmptySkill.NoBonus))
+                if (this.EmptySkillFlags.HasFlag(EmptySkill.NoBonus))
                     return Properties.GameStrings.skill_no_bonus;
             }
 
-            if (Leader != SkillLeader.None)
+            if (this.Leader != SkillLeader.None)
             {
-                switch (Leader)
+                switch (this.Leader)
                 {
                     case SkillLeader.Ambre:
                         return Properties.GameStrings.skill_leader_ambre;
@@ -153,9 +153,9 @@ namespace UrbanRivalsCore.Model
             } 
 
             // Only a few abilities can have the Backlash prefix, and those have different text
-            if (Prefix == SkillPrefix.Backlash) // TODO check as flag
+            if (this.Prefix == SkillPrefix.Backlash) // TODO check as flag
             {
-                switch (Suffix)
+                switch (this.Suffix)
                 {
                     case SkillSuffix.DecreaseLifeXMinY:
                         return String.Format(Properties.GameStrings.skill_suffix_decrease_life_x_min_y_backlash, X, Y);
@@ -168,9 +168,9 @@ namespace UrbanRivalsCore.Model
 
             string result = "";
 
-            if (Prefix != SkillPrefix.None)
+            if (this.Prefix != SkillPrefix.None)
             {
-                switch (Prefix)  // TODO check as flag
+                switch (this.Prefix)  // TODO check as flag
                 {
                     // There is one case (DJ Korps ID=1260) where it has double prefix. Here we take care of it
                     case SkillPrefix.GrowthAndDefeat:
@@ -221,7 +221,7 @@ namespace UrbanRivalsCore.Model
                 } // End switch
             } // End if (prefix != none)
 
-            switch (Suffix)
+            switch (this.Suffix)
             {
                 case SkillSuffix.CancelAttackModifier:
                     result += Properties.GameStrings.skill_suffix_cancel_attack_modifier;
@@ -248,7 +248,7 @@ namespace UrbanRivalsCore.Model
                     result += Properties.GameStrings.skill_suffix_cancel_power_modifier;
                     break;
                 case SkillSuffix.ConsumeXMinY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_consume_x_min_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_consume_x_min_y, this.X, this.Y);
                     break;
                 case SkillSuffix.CopyBonus:
                     result += Properties.GameStrings.skill_suffix_copy_bonus;
@@ -263,34 +263,34 @@ namespace UrbanRivalsCore.Model
                     result += Properties.GameStrings.skill_suffix_copy_power_and_damage;
                     break;
                 case SkillSuffix.CorrosionXMinY:
-                    result = String.Format(Properties.GameStrings.skill_suffix_corrosion_x_min_y, X, Y);
+                    result = String.Format(Properties.GameStrings.skill_suffix_corrosion_x_min_y, this.X, this.Y);
                     break;
                 case SkillSuffix.DecreaseAttackXMinY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_min_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_min_y, this.X, this.Y);
                     break;
                 case SkillSuffix.DecreaseAttackXPerRemainingLifeMinY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_per_remaining_life_min_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_per_remaining_life_min_y, this.X, this.Y);
                     break;
                 case SkillSuffix.DecreaseAttackXPerRemainingPillzMinY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_per_remaining_pillz_min_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_per_remaining_pillz_min_y, this.X, this.Y);
                     break;
                 case SkillSuffix.DecreaseDamageXMinY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_damage_x_min_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_damage_x_min_y, this.X, this.Y);
                     break;
                 case SkillSuffix.DecreaseLifeXMinY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_life_x_min_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_life_x_min_y, this.X, this.Y);
                     break;
                 case SkillSuffix.DecreasePillzXMinY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_pillz_x_min_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_pillz_x_min_y, this.X, this.Y);
                     break;
                 case SkillSuffix.DecreasePowerAndDamageXMinY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_power_and_damage_x_min_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_power_and_damage_x_min_y, this.X, this.Y);
                     break;
                 case SkillSuffix.DecreasePowerXMinY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_power_x_min_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_decrease_power_x_min_y, this.X, this.Y);
                     break;
                 case SkillSuffix.DopeXMaxY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_dope_x_max_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_dope_x_max_y, this.X, this.Y);
                     break;
                 case SkillSuffix.ExchangeDamage:
                     result += String.Format(Properties.GameStrings.skill_suffix_exchange_damage);
@@ -299,55 +299,55 @@ namespace UrbanRivalsCore.Model
                     result += String.Format(Properties.GameStrings.skill_suffix_exchange_power);
                     break;
                 case SkillSuffix.HealXMaxY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_heal_x_max_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_heal_x_max_y, this.X, this.Y);
                     break;
                 case SkillSuffix.IncreaseAttackX:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_attack_x, X);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_attack_x, this.X);
                     break;
                 case SkillSuffix.IncreaseAttackXPerRemainingLife:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_attack_x_per_remaining_life, X);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_attack_x_per_remaining_life, this.X);
                     break;
                 case SkillSuffix.IncreaseAttackXPerRemainingPillz:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_attack_x_per_remaining_pillz, X);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_attack_x_per_remaining_pillz, this.X);
                     break;
                 case SkillSuffix.IncreaseDamageX:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_damage_x, X);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_damage_x, this.X);
                     break;
                 case SkillSuffix.IncreaseLifeX:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_life_x, X);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_life_x, this.X);
                     break;
                 case SkillSuffix.IncreaseLifeXMaxY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_life_x_max_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_life_x_max_y, this.X, this.Y);
                     break;
                 case SkillSuffix.IncreaseLifeXPerDamage:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_life_x_per_damage, X);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_life_x_per_damage, this.X);
                     break;
                 case SkillSuffix.IncreaseLifeXPerDamageMaxY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_life_x_per_damage_max_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_life_x_per_damage_max_y, this.X, this.Y);
                     break;
                 case SkillSuffix.IncreasePillzAndLifeX:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_pillz_and_life_x, X);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_pillz_and_life_x, this.X);
                     break;
                 case SkillSuffix.IncreasePillzX:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_pillz_x, X);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_pillz_x, this.X);
                     break;
                 case SkillSuffix.IncreasePillzXMaxY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_pillz_x_max_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_pillz_x_max_y, this.X, this.Y);
                     break;
                 case SkillSuffix.IncreasePillzXPerDamage:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_pillz_x_per_damage, X);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_pillz_x_per_damage, this.X);
                     break;
                 case SkillSuffix.IncreasePowerAndDamageX:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_power_and_damage_x, X);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_power_and_damage_x, this.X);
                     break;
                 case SkillSuffix.IncreasePowerX:
-                    result += String.Format(Properties.GameStrings.skill_suffix_increase_power_x, X);
+                    result += String.Format(Properties.GameStrings.skill_suffix_increase_power_x, this.X);
                     break;
                 case SkillSuffix.InfectionXMinY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_infection_x_min_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_infection_x_min_y, this.X, this.Y);
                     break;
                 case SkillSuffix.PoisonXMinY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_poison_x_min_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_poison_x_min_y, this.X, this.Y);
                     break;
                 case SkillSuffix.ProtectAbility:
                     result += Properties.GameStrings.skill_suffix_protect_ability;
@@ -368,16 +368,16 @@ namespace UrbanRivalsCore.Model
                     result += Properties.GameStrings.skill_suffix_protect_power_and_damage;
                     break;
                 case SkillSuffix.ReanimateX:
-                    result += String.Format(Properties.GameStrings.skill_suffix_reanimate_x, X);
+                    result += String.Format(Properties.GameStrings.skill_suffix_reanimate_x, this.X);
                     break;
                 case SkillSuffix.RebirthXMaxY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_rebirth_x_max_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_rebirth_x_max_y, this.X, this.Y);
                     break;
                 case SkillSuffix.RecoverXPillzOutOfY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_recover_x_pillz_out_of_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_recover_x_pillz_out_of_y, this.X, this.Y);
                     break;
                 case SkillSuffix.RegenXMaxY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_regen_x_max_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_regen_x_max_y, this.X, this.Y);
                     break;
                 case SkillSuffix.StopAbility:
                     result += Properties.GameStrings.skill_suffix_stop_ability;
@@ -386,7 +386,7 @@ namespace UrbanRivalsCore.Model
                     result += Properties.GameStrings.skill_suffix_stop_bonus;
                     break;
                 case SkillSuffix.ToxinXMinY:
-                    result += String.Format(Properties.GameStrings.skill_suffix_toxin_x_min_y, X, Y);
+                    result += String.Format(Properties.GameStrings.skill_suffix_toxin_x_min_y, this.X, this.Y);
                     break;
             } // End Switch Suffix
 

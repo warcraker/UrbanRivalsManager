@@ -131,7 +131,7 @@ namespace UrbanRivalsApiToCoreAdapter
 
             if (abilityString == "No ability")
             {
-                ability = Skill.NoAbility;
+                ability = Skill.NO_ABILITY;
             }
             else
             {

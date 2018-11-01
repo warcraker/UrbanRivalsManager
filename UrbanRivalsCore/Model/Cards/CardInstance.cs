@@ -58,9 +58,9 @@ namespace UrbanRivalsCore.Model
             }
 
             abilityFromBase = cardDefinition.ability;
-            if (abilityFromBase == Skill.NoAbility)
+            if (abilityFromBase == Skill.NO_ABILITY)
             {
-                ability = Skill.NoAbility;
+                ability = Skill.NO_ABILITY;
             }
             else
             {
@@ -76,16 +76,16 @@ namespace UrbanRivalsCore.Model
                     switch (abilityUnlockLevel)
                     {
                         case 2:
-                            ability = Skill.UnlockedAtLevel2;
+                            ability = Skill.UNLOCKED_AT_LEVEL_2;
                             break;
                         case 3:
-                            ability = Skill.UnlockedAtLevel3;
+                            ability = Skill.UNLOCKED_AT_LEVEL_3;
                             break;
                         case 4:
-                            ability = Skill.UnlockedAtLevel4;
+                            ability = Skill.UNLOCKED_AT_LEVEL_4;
                             break;
                         case 5:
-                            ability = Skill.UnlockedAtLevel5;
+                            ability = Skill.UNLOCKED_AT_LEVEL_5;
                             break;
                         default:
                             ability = null;

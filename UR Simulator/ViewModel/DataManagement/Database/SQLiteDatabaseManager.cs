@@ -82,7 +82,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 }
                 else if (suffix == SkillSuffix.None)
                 {
-                    ability = Skill.NoAbility;
+                    ability = Skill.NO_ABILITY;
                 }
                 else
                 {

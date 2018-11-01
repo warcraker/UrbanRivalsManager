@@ -24,7 +24,7 @@ namespace UrbanRivalsCore.Model
         {
             CardDefinition cardDefinition;
 
-            cardDefinition = new CardDefinition(id, name, clan, cardStatsPerLevel, rarity, Skill.NoAbility, 0);
+            cardDefinition = new CardDefinition(id, name, clan, cardStatsPerLevel, rarity, Skill.NO_ABILITY, 0);
 
             return cardDefinition;
         }
@@ -37,8 +37,8 @@ namespace UrbanRivalsCore.Model
 
             AssertArgument.isNotNull(ability, nameof(ability));
 
-            abilityIsUnlockable = (ability != Skill.NoBonus && ability != Skill.NoAbility && ability != Skill.UnlockedAtLevel2 && ability != Skill.UnlockedAtLevel3
-                && ability != Skill.UnlockedAtLevel4 && ability != Skill.UnlockedAtLevel5);
+            abilityIsUnlockable = (ability != Skill.NO_BONUS && ability != Skill.NO_ABILITY && ability != Skill.UNLOCKED_AT_LEVEL_2 && ability != Skill.UNLOCKED_AT_LEVEL_3
+                && ability != Skill.UNLOCKED_AT_LEVEL_4 && ability != Skill.UNLOCKED_AT_LEVEL_5);
 
             AssertArgument.check(abilityIsUnlockable, "Must be an unlockable ability", nameof(ability));
 
