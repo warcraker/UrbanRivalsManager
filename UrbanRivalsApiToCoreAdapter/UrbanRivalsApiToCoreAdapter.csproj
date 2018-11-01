@@ -7,8 +7,8 @@
     <ProjectGuid>{69942A29-C91A-433A-B915-D1839264C9B8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UrbanRivalsApiCardBaseAdapter</RootNamespace>
-    <AssemblyName>UrbanRivalsApiCardBaseAdapter</AssemblyName>
+    <RootNamespace>UrbanRivalsApiToCoreAdapter</RootNamespace>
+    <AssemblyName>UrbanRivalsApiToCoreAdapter</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -52,6 +52,10 @@
     <ProjectReference Include="..\UrbanRivalsCore\UrbanRivalsCore.csproj">
       <Project>{eea283d8-1f37-4f9d-8292-bcd541546903}</Project>
       <Name>UrbanRivalsCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\UrbanRivalsUtils.csproj">
+      <Project>{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}</Project>
+      <Name>UrbanRivalsUtils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

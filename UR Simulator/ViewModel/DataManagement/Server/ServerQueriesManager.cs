@@ -9,6 +9,7 @@ using Procurios.Public;
 using UrbanRivalsApiManager;
 using UrbanRivalsCore.Model;
 using UrbanRivalsApiAdapter;
+using UrbanRivalsApiToCoreAdapter;
 
 namespace UrbanRivalsManager.ViewModel.DataManagement
 {
@@ -83,7 +84,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 cardStatsPerLevel.Add(new CardStats(level, power, damage));
             }
 
-            return ApiToCardDefinitionAdapter.ToCardDefinition(id, name, clan_id, rarity, ability, ability_unlock_level, cardStatsPerLevel);
+            return ApiToCardDefinitionAdapter.createCardDefinitionByServerData(id, name, clan_id, rarity, ability, ability_unlock_level, cardStatsPerLevel);
         }
         public string GetUserLocale()
         {

@@ -7,7 +7,7 @@ using System.Net;
 using System.Threading;
 
 using Procurios.Public;
-using UrbanRivalsApiAdapter;
+using UrbanRivalsApiToCoreAdapter;
 using UrbanRivalsApiManager;
 using UrbanRivalsCore.Model;
 
@@ -207,7 +207,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 worker.ReportProgress((int)(100 * progress / idsToAnalyze.Count()), $"[{id}] {name}");
                 progress++;
 
-                var card = ApiToCardDefinitionAdapter.ToCardDefinition(id, name, clanId, rarityText, abilityText, abilityUnlockLevel, cardStatsPerLevel);
+                var card = ApiToCardDefinitionAdapter.createCardDefinitionByServerData(id, name, clanId, rarityText, abilityText, abilityUnlockLevel, cardStatsPerLevel);
 
                 if (card == null) continue; // TODO: Remove this line if day/night is implemented, or after 11/2018, whatever happens first
 

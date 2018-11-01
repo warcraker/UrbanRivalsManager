@@ -576,9 +576,9 @@
     <Folder Include="_Temp\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UrbanRivalsApiCardBaseAdapter\UrbanRivalsApiAdapter.csproj">
-      <Project>{69942a29-c91a-433a-b915-d1839264c9b8}</Project>
-      <Name>UrbanRivalsApiAdapter</Name>
+    <ProjectReference Include="..\UrbanRivalsApiToCoreAdapter\UrbanRivalsApiToCoreAdapter.csproj">
+      <Project>{69942A29-C91A-433A-B915-D1839264C9B8}</Project>
+      <Name>UrbanRivalsApiToCoreAdapter</Name>
     </ProjectReference>
     <ProjectReference Include="..\UrbanRivalsCore\UrbanRivalsCore.csproj">
       <Project>{eea283d8-1f37-4f9d-8292-bcd541546903}</Project>
