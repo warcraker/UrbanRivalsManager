@@ -1,0 +1,45 @@
+General card's description:
+
+Each card has 3 numeric values: level, power and damage.
+Level represents the general strength of the card (from 1 to 5)
+More level means more power and damage, and sometimes having its ability unlocked.
+Power represents how easy is to win a round with the card.
+Damage is applied to the enemy if round is won.
+Cards are known to have power and damage values from 1 to 9, but there is no upper limit.
+
+Combat's flow:
+
+A combat consists on one player versus other.
+It begins with each player drawing 4 cards from their deck.
+Each player begins with 12 lives and 12 pillz.
+On first round, initiative is set randomly to one player. 
+Each round initiative is switched.
+Cards in hand are public and faceup for the whole combat.
+A combat finishes after 4 rounds, or a KO is declared, whatever happens first.
+Each card can only be played once per combat.
+
+Round's flow:
+
+The player with initiative choses one card from its hand to be played.
+The selection is made public, and then the other player does the same.
+
+Now pillz are expended, and this decision is secret until round resolves.
+Each player expends any amount (zero if desired) of pillz to increase the card's attack.
+Is possible to expend exactly 3 additional pillz to apply fury to the card.
+A card with fury has +2 damage.
+
+After both players confirm pillz consumption, round resolves.
+Each players attack is calculated like this:
+CardPower * (1 + UsedPillz)
+Fury's pillz (if apply) are not considered on this formula.
+The card with the greater attack wins the round.
+If attack is equal, the card with the lesser level wins.
+If level is equal, the player with initiative wins.
+The round's loser loses as many lives as the damage of their opponent card.
+
+If a player gets to zero lives, is KO'ed and loses the combat.
+Otherwise, another round is played.
+After 4 founds are played, the player with more lives wins the combat.
+If both players have the same amount of lives, the combat ends in a draw.
+
+TODO: Add ability and bonus explanation
