@@ -1,0 +1,36 @@
+Abilities and Bonus:
+
+Every card has both an ability and a bonus printed on them.
+Each card has its own ability, although some cards share the same one.
+Cards can have "No ability" printed on the card.
+The ability is unlocked at a designed level. Until the card reaches that level, it has no ability.
+Both abilities and bonus apply only for the round the card is played.
+
+Code:
+
+Ability and Bonus have no difference on behaviour, so in the code both are a Skill.
+A Skill is defined by zero/one/two prefixes, one suffix, and can have up to two numerical values.
+The first number (X) represents the amount. The second number (Y) represents the limit (max/min/out of...)
+
+Bonus:
+
+Every card belongs to a clan.
+Cards from the same clan share the same bonus.
+A card has its bonus unlocked if there is another card on the same hand from the same clan but different name.
+
+Suffix:
+A skill can affect the round broadly in two ways: 
+- It can modify the round's conditions before it resolves (increase power, cancel a bonus...)
+- Or can apply an effect after a round is resolved (apply poison, recover some pillz...)
+The skill effect is defined by it's suffix.
+
+Prefix:
+A skill's condition to activate can be modified by its prefix.
+Some prefixes apply a conditional multiplier.
+
+Leaders:
+
+There is a special clan called Leaders. This clan's abilities and bonus behaves differently.
+A leader ability is active for the entire combat, regardless that the card is played or not.
+The Leaders bonus is "Cancel Leader": 
+If a player draws more than one leader, all of their leader's cards lose their ability.
