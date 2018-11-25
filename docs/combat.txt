@@ -41,5 +41,3 @@ If a player gets to zero lives, is KO'ed and loses the combat.
 Otherwise, another round is played.
 After 4 founds are played, the player with more lives wins the combat.
 If both players have the same amount of lives, the combat ends in a draw.
-
-TODO: Add ability and bonus explanation
