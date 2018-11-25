@@ -1,0 +1,48 @@
+Prefixes modify an skill trigger conditions or apply a multiplier to the X.
+If an skill with an after round effect has no prefix, it will trigger if the player wins the round, unless stated otherwise.
+Multiple prefixes can be applied to the same skill.
+
+Backlash: 
+An skill with this prefix has a negative effect, and will apply to the card's owner if the round is won.
+
+Brawl: 
+Multiplies the X skill's value by how many cards belong to the same clan as the opposing card on the enemy hand, including that card.
+
+Confidence: 
+This skill can only be used if the previous round was won. If the previous round was lost, or is the first round, this skill is canceled.
+
+Courage: 
+This skill can only be used if the player has initiative. If the player does not have initiative, this skill is cancelled.
+
+Defeat: 
+This skill will trigger if the player loses the round.
+
+Degrowth: 
+Multiply the X skill's value by how many rounds are left including the current round.
+
+Equalizer: 
+Multiply the X skill's value by the level of the opposing card.
+
+Growth: 
+Multiply the X skill's value by the number of rounds played plus the current round.
+
+Killshot: 
+This skill will trigger if the final attack value of this card is equal or greater to double the opponent's attack final value.
+
+Reprisal: 
+This skill can only be used if the player does not have initiative. If the player have initiative, this skill is cancelled.
+
+Revenge: 
+This skill can only be used if the previous round was lost. If the previous round was won, or is the first round, this skill is canceled.
+
+Stop: 
+This ability will only activate if the opponent uses "Stop Ability". This bonus will only activate if the opponent uses "Stop Bonus"
+
+Support: 
+Multiplies the X skill's value by how many cards belong to the same clan as the current card on your hand, including this card.
+
+VictoryOrDefeat: 
+This effect triggers regardless who wins the round.
+
+Day/Night: 
+This prefix is an exception to normal prefixes. An ability or bonus (Ghostown clan) with this prefix will have a day skill, and a night skill. Any correlation between both versions is pure coincidence. The server's game switch between day and night cycle every 4 hours. The current cycle when the combat begins determines which skill the card has.
