@@ -1,0 +1,61 @@
+Leader is a special clan in the game. Every card of this clan has an ability that applies to the entire combat. A leader ability will not nullify the current's card ability, so multiple similar effects will be cumulative if possible. A leader ability cannot be stopped, but "Cancel XYZ Modifiers" could nullify the effects for a given round. If a player draws more than one leader, all of his/her leaders will have their ability canceled. Effects that modify card values are not considered to alter the card's base value.
+
+Ambre
+Team: Courage: Power +3, Max 10
+On every round the player has initiative, his/her card will increase its power by 3, up to a maximum value of 10.
+
+Ashigaru
+Counter-attack
+Ashigaru's owner will never have initiative, so every round will be second choosing card, and will have "Reprisal" active always. If both players have Ashigaru active, no one will have this effect.
+
+Bridget
++1 Life Per Round
+At the start of each round the player wins one life. It does not apply on the first round.
+
+Eklore
+-1 Opp Pillz Per Round, Min 3
+At the start of each round the enemy loses one pillz, up to a minimum value of 3. This effect activates before the player is able to expend pillz for that round. It does not apply on the first round.
+
+Eyrik
+Team: -1 Opp Power, Min 5
+Decreases by 1 all of the opponent card's power, up to a minimum of 5.
+
+Hugo
+Team: +6 Attack
+Increases attack value by 6.
+
+John Doom
+Team: Reprisal: -2 Power & Damage, Min 3
+On every round the oponent has initiative, his/her card's power and damage values will be reduced by 2, up to a minimum of 3.
+
+Melody
+Team: Defeat: Recover 1 Pillz Out Of 2
+On every round that Melody's owner loses, the player recovers half of the expended pillz that round (including fury), rounded to the nearest integer, with a minimum of 1.
+
+Morphun
++1 Pillz Per Round, Max 10
+At the start of each round the player wins one pillz, up to a maximum value of 10. This effect activates before the player is able to expend pillz for that round. It does not apply on the first round.
+
+Mr Big Duke
+Nuke
+Both your cards and enemy cards are protected by "Protection Damage". Is not possible to reduce the damage of any card on this combat.
+
+Robert Cobb
+Bypass
+Removes the restriction that a card needs another of the same clan to have its bonus active. All your cards will have the bonus active. Opponent effects like "Cancel Bonus" will stop your bonus as usually.
+
+Solomon
+Tie-break
+When resolving the round, if your attack is equal to the opponent's attack, you win the round. If the combat ends with both players with the same life points, you win the combat. If both players have Solomon active, no one will have this effect.
+
+Timber
+Team: +1 Damage 
+Increase by 1 all of your card's damage.
+
+Vansaar
+Team: Xp +90%
+Increase all of your card's earned experience by 90%
+
+Vholt
+Team: -2 Opp Damage, Min 4
+Decreases by 2 all of the opponent card's damage, up to a minimum of 4.
