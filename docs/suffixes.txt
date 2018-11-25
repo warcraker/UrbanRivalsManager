@@ -1,0 +1,141 @@
+List of suffixes:
+
+Copy Power:
+Copy Damage:
+Copy Power & Damage:
+Replaces the base damage/power of the card with the base value on the opponent's card. If both cards have this active, they switch their base values.
+
+Exchange Power:
+Exchange Damage:
+Switches the base power/damage value of both your card and opponent's card.
+
+Decrease Opp Attack X, Min Y:
+Subtract total opponent attack result by X. If the value would fall bellow Y, then set it as Y.
+
+Decrease Opp Attack X Per Remaining Life Min Y:
+Decrease Opp Attack X Per Remaining Pillz Min Y:
+Multiply X per remaining lifes/pillz and subtract the result from opponent's attack. If the value would fall bellow Y, then set it as Y.
+
+Decrease Opp Power X, Min Y:
+Decrease Opp Damage X, Min Y:
+Decrease Opp Power & Damage X, Min Y:
+Subtracts X from opponent's power/damage. If the value would fall bellow Y, then set it as Y.
+
+Decrease Opp Life X, Min Y:
+Decrease Opp Pillz X, Min Y:
+Decrease Opp Pillz & Life X, Min Y:
+If round is won, subtract X from opponent's lifes/pillz. If the value would fall bellow Y, then set it as Y.
+
+Increase Attack X:
+Increases attack by X. 
+
+Increase Attack X Per Remaining Life:
+Increase Attack X Per Remaining Pillz:
+Multiplies X per remaining lifes/pillz and increases attack by the result.  
+
+Increase Power X:
+Increase Damage X:
+Increase Power & Damage X:
+Increases power/damage by X.
+
+Increase Life X:
+Increase Pillz X:
+Increase Pillz & Life X:
+If round is won, increases own lifes/pillz by X.
+
+Increase Life X, Max Y:
+Increase Pillz X, Max Y:
+If round is won, increases own lifes/pillz by X. If value would exceed Y, then set it as Y.
+
+Increase Life X Per Damage:
+Increase Pillz X Per Damage:
+If round is won, increase own lifes/pillz by X for each damage inflicted to the opponent.
+
+Increase Life X Per Damage, Max Y:
+If round is won, increase own lifes by X for each damage inflicted to the opponent. If the value would exceed Y, then set it as Y.
+
+Protect Ability:
+Cancels the effect of opponent's "Stop Ability"
+
+Protect Bonus:
+Cancels the effect of opponent's "Stop Bonus"
+
+Protect Attack:
+Cancels the effect of opponent's "Cancel Attack Modifiers", and any opponent's "Decrease Attack" kind of effect.
+
+Protect Power:
+Cancels the effect of opponent's "Cancel Power Modifiers", and any opponent's "Decrease Power" kind of effect. Opponent's "Exchange Power" does not alter this card's damage.
+
+Protect Damage:
+Cancels the effect of opponent's "Cancel Damage Modifiers", and any opponent's "Decrease Damage" kind of effect. Opponent's "Exchange Damage" does not alter this card's damage.
+
+Protect Power And Damage:
+Combines "Protect Power" and "Protect Damage".
+
+Stop Ability:
+Cancels opponent ability.
+
+Stop Bonus:
+Cancels opponent bonus.
+ 
+Recover X Pillz Out Of Y:
+Multiply the amount of pillz used by the player during this round (including fury) by X and divide by Y. Round the value to the nearest integer. At the end of the round, increase own pillz by that value.
+
+Copy Opp Bonus:
+Replaces this skill with the base bonus of the opponent's card.
+
+Cancel Opp Attack Modifiers:
+Cancel Opp Power Modifiers:
+Cancel Opp Damage Modifiers:
+Cancel Opp Power & Damage Modifiers:
+Cancels those modifiers applied by the opponent, both positive and negative, regardless that they come from an ability, a bonus or a leader. 
+
+Cancel Life Modifiers:
+Cancel Pillz Modifiers:
+Cancel Life & Pillz Modifiers:
+Cancels those modifiers applied by the opponent, both positive and negative, regardless that they come from an ability, a bonus or a leader. It stops effects like poison for one round if they were applied previously. If tried to applied on the current round, they are cancelled entirely.
+
+Consume X, Min Y: tick & dot pillz 
+Corrosion X, Min Y: dot pillz
+Dope X, Min Y: hot pillz
+Heal X, Max Y: hot lifes
+Infection X, Min Y: backlash dot lifes
+Poison X, Min Y: dot lifes
+Regen X, Max Y: tick & hot lifes
+Toxin X, Min Y: tick & dot lifes
+Increases/Decreases lifes/pillz by X, up to a maximum/minimum of Y. These effects will apply at the end of each of the following rounds, regardless who wins the round, until the combat ends. To activate the effect, the player must win the round. Cancel Life/Pillz Modifiers cancels the effect entirely. If the effect was applied on a previous round, it will prevent the effects for that round. If an effect of the same category is applied to the same player on a different round, the new effect will override the previous effect on following rounds.
+Categories:
+- Increase pillz: Dope
+- Decrease pillz: Consume, Corrosion
+- Increase lifes: Heal, Regen, Reanimate, Rebirth
+- Decrease lifes: Poison, Toxin, Infection
+Notes:
+- Consume, regen and toxin apply their effects on the round they are applied too. If they are overriding a previous effect, both effects will apply for the current round.
+- Infection applies poison to the card's owner if that card wins the round.
+- Rebirth will apply regardless who wins the round.
+- Reanimate will apply if the card's owner loses the round. 
+- Reanimate and rebirth will apply even if the owner has zero life points, preventing that way a KO. Keep in mind that a loss is still posible with poison for example.
+- If infection and either poison or toxin is applied to the same player on the same round, it is unknown which one has priority.
+
+
+General Notes:
+
+Base means printed text/value on the card before any modifiers.
+
+Remaining life/pillz means value at the beginning of the round, before using pillz.
+
+Simultaneous operations over the same value work this way: First we apply increases, then decreases. First we apply the more restrictive max/min, then the less restrictive.
+Example: If the player has 10 lifes before calculations, then we apply calculations in this order: 
++3 lifes max 12 -> Total 12 
++1 life -> Total 13
+-5 lifes min 10 -> Total 10
+-2 lifes min 9 -> Total 9
+-2 lifes -> Total 7
+
+Regen and Poison order: When round is resolved, life calculation is done in this order:
+1. Damage Step: Apply normal damage to the losing player
+2. Increase Life Step: Apply increase X lifes effects
+3. Decrease Life Step: Apply decrease X lifes effects
+4. Increase Over Time Life Step: Apply regen like effects
+5. Decrease Over Time Life Step: Apply poison like effects
+A player cannot have a negative amount of lifes. If this value would fall to zero or bellow, it is set to zero and will not increase again, finishing the combat at the end of the round. The game considers a KO only if zero is reached during damage step. If the player by any means remains above zero life points, the combat will continue.
