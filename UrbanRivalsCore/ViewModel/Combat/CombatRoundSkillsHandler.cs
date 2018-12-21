@@ -90,7 +90,7 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Prefix)  // TODO check as flag
+                switch (this[i].prefix)  // TODO check as flag
                 {
                     case SkillPrefix.Courage:
                         if (!((isLeft) ? leftPlayerStatus.Courage : rightPlayerStatus.Courage))
@@ -115,7 +115,7 @@ namespace UrbanRivalsCore.ViewModel
         {
             for (int i = 0; i < 4; i++)
             {
-                if (this[i].Prefix == SkillPrefix.Growth)  // TODO check as flag
+                if (this[i].prefix == SkillPrefix.Growth)  // TODO check as flag
                     skills[i] = skills[i].CopyWithDifferentX(CalculateGrowth(skills[i], roundCounter));
             }
         }
@@ -124,7 +124,7 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Prefix) // TODO check as flag
+                switch (this[i].prefix) // TODO check as flag
                 {
                     case SkillPrefix.Support:
                         if (isLeft)
@@ -139,7 +139,7 @@ namespace UrbanRivalsCore.ViewModel
         {
             for (int i = 0; i < 4; i++)
             {
-                if (skills[i].Prefix == SkillPrefix.Stop) // TODO check as flag
+                if (skills[i].prefix == SkillPrefix.Stop) // TODO check as flag
                 {
                     if (GetStatus(i) == ActivationStatus.Stopped)
                         UnfreezeSkill(i);
@@ -153,7 +153,7 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Prefix) // TODO check as flag
+                switch (this[i].prefix) // TODO check as flag
                 {
                     case SkillPrefix.Killshot:
                         if (isLeft)
@@ -175,7 +175,7 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Prefix) // TODO check as flag
+                switch (this[i].prefix) // TODO check as flag
                 {
                     case SkillPrefix.None:
                     case SkillPrefix.Backlash:
@@ -214,12 +214,12 @@ namespace UrbanRivalsCore.ViewModel
 
         public void ApplyCopyBonusSuffix()
         {
-            if (this[SkillIndex.LA].Suffix == SkillSuffix.CopyBonus &&
-                this[SkillIndex.RB].Suffix != SkillSuffix.CancelLeader)
+            if (this[SkillIndex.LA].suffix == SkillSuffix.CopyBonus &&
+                this[SkillIndex.RB].suffix != SkillSuffix.CancelLeader)
                 skills[(int)SkillIndex.LA] = skills[(int)SkillIndex.RB].Copy();
 
-            if (this[SkillIndex.RA].Suffix == SkillSuffix.CopyBonus &&
-                this[SkillIndex.LB].Suffix != SkillSuffix.CancelLeader)
+            if (this[SkillIndex.RA].suffix == SkillSuffix.CopyBonus &&
+                this[SkillIndex.LB].suffix != SkillSuffix.CancelLeader)
                 skills[(int)SkillIndex.RA] = skills[(int)SkillIndex.LB].Copy();
         }
         public void ApplyStopProtectSuffixes()
@@ -231,14 +231,14 @@ namespace UrbanRivalsCore.ViewModel
             bool leftDoesCopy = false;
             if (!areLeftPowerModifiersCancelled)
             {
-                var suffix = this[SkillIndex.LA].Suffix;
+                var suffix = this[SkillIndex.LA].suffix;
                 leftDoesCopy = (suffix == SkillSuffix.CopyPower || suffix == SkillSuffix.CopyPowerAndDamage);
             }
 
             bool rightDoesCopy = false;
             if (!areRightPowerModifiersCancelled)
             {
-                var suffix = this[SkillIndex.RA].Suffix;
+                var suffix = this[SkillIndex.RA].suffix;
                 rightDoesCopy = (suffix == SkillSuffix.CopyPower || suffix == SkillSuffix.CopyPowerAndDamage);
             }
 
@@ -253,14 +253,14 @@ namespace UrbanRivalsCore.ViewModel
             bool leftDoesCopy = false;
             if (!areLeftDamageModifiersCancelled)
             {
-                var suffix = this[SkillIndex.LA].Suffix;
+                var suffix = this[SkillIndex.LA].suffix;
                 leftDoesCopy = (suffix == SkillSuffix.CopyDamage || suffix == SkillSuffix.CopyPowerAndDamage);
             }
 
             bool rightDoesCopy = false;
             if (!areRightDamageModifiersCancelled)
             {
-                var suffix = this[SkillIndex.RA].Suffix;
+                var suffix = this[SkillIndex.RA].suffix;
                 rightDoesCopy = (suffix == SkillSuffix.CopyDamage || suffix == SkillSuffix.CopyPowerAndDamage);
             }
 
@@ -276,19 +276,19 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Suffix)
+                switch (this[i].suffix)
                 {
                     case SkillSuffix.DecreaseAttackXMinY:
                         if (isLeft)
-                            rightAttackSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                            rightAttackSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                         else
-                            leftAttackSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                            leftAttackSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                         break;
                     case SkillSuffix.DecreaseAttackXPerRemainingLifeMinY:
                         if (isLeft)
-                            rightAttackSubstracter.InsertSubstraction(skills[i].X * initialLeftPlayerStatus.Life, skills[i].Y);
+                            rightAttackSubstracter.InsertSubstraction(skills[i].x * initialLeftPlayerStatus.Life, skills[i].y);
                         else
-                            leftAttackSubstracter.InsertSubstraction(skills[i].X * initialRightPlayerStatus.Life, skills[i].Y);
+                            leftAttackSubstracter.InsertSubstraction(skills[i].x * initialRightPlayerStatus.Life, skills[i].y);
                         break;
                 }
             }
@@ -298,19 +298,19 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Suffix)
+                switch (this[i].suffix)
                 {
                     case SkillSuffix.DecreaseDamageXMinY:
                         if (isLeft)
-                            rightDamageSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                            rightDamageSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                         else
-                            leftDamageSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                            leftDamageSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                         break;
                     case SkillSuffix.DecreasePowerAndDamageXMinY:
                         if (isLeft)
-                            rightDamageSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                            rightDamageSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                         else
-                            leftDamageSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                            leftDamageSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                         break;
                 }
             }
@@ -320,14 +320,14 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Suffix)
+                switch (this[i].suffix)
                 {
                     case SkillSuffix.DecreasePowerAndDamageXMinY:
                     case SkillSuffix.DecreasePowerXMinY:
                         if (isLeft)
-                            rightPowerSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                            rightPowerSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                         else
-                            leftPowerSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                            leftPowerSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                         break;
                 }
             }
@@ -338,25 +338,25 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Suffix)
+                switch (this[i].suffix)
                 {
                     case SkillSuffix.IncreaseAttackX:
                         if (isLeft)
-                            leftAttackAdder.InsertAddition(skills[i].X);
+                            leftAttackAdder.InsertAddition(skills[i].x);
                         else
-                            rightAttackAdder.InsertAddition(skills[i].X);
+                            rightAttackAdder.InsertAddition(skills[i].x);
                         break;
                     case SkillSuffix.IncreaseAttackXPerRemainingLife:
                         if (isLeft)
-                            leftAttackAdder.InsertAddition(skills[i].X * initialLeftPlayerStatus.Life);
+                            leftAttackAdder.InsertAddition(skills[i].x * initialLeftPlayerStatus.Life);
                         else
-                            rightAttackAdder.InsertAddition(skills[i].X * initialRightPlayerStatus.Life);
+                            rightAttackAdder.InsertAddition(skills[i].x * initialRightPlayerStatus.Life);
                         break;
                     case SkillSuffix.IncreaseAttackXPerRemainingPillz:
                         if (isLeft)
-                            leftAttackAdder.InsertAddition(skills[i].X * initialLeftPlayerStatus.Pillz);
+                            leftAttackAdder.InsertAddition(skills[i].x * initialLeftPlayerStatus.Pillz);
                         else
-                            rightAttackAdder.InsertAddition(skills[i].X * initialRightPlayerStatus.Pillz);
+                            rightAttackAdder.InsertAddition(skills[i].x * initialRightPlayerStatus.Pillz);
                         break;
                 }
             }
@@ -366,14 +366,14 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Suffix)
+                switch (this[i].suffix)
                 {
                     case SkillSuffix.IncreaseDamageX:
                     case SkillSuffix.IncreasePowerAndDamageX:
                         if (isLeft)
-                            leftDamageAdder.InsertAddition(skills[i].X);
+                            leftDamageAdder.InsertAddition(skills[i].x);
                         else
-                            rightDamageAdder.InsertAddition(skills[i].X);
+                            rightDamageAdder.InsertAddition(skills[i].x);
                         break;
                 }
             }
@@ -383,14 +383,14 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (this[i].Suffix)
+                switch (this[i].suffix)
                 {
                     case SkillSuffix.IncreasePowerAndDamageX:
                     case SkillSuffix.IncreasePowerX:
                         if (isLeft)
-                            leftPowerAdder.InsertAddition(skills[i].X);
+                            leftPowerAdder.InsertAddition(skills[i].x);
                         else
-                            rightPowerAdder.InsertAddition(skills[i].X);
+                            rightPowerAdder.InsertAddition(skills[i].x);
                         break;
                 }
             }
@@ -404,32 +404,32 @@ namespace UrbanRivalsCore.ViewModel
             {
                 bool isLeft = IsLeft(i);
                 // Backlash has some distinctions so we treat it in an individual loop
-                if (skills[i].Prefix == SkillPrefix.Backlash) // TODO check as flag
+                if (skills[i].prefix == SkillPrefix.Backlash) // TODO check as flag
                 {
-                    switch (skills[i].Suffix)
+                    switch (skills[i].suffix)
                     {
                         case SkillSuffix.DecreaseLifeXMinY:
                             if (isLeft)
                             {
                                 if (!leftCanceledModifiers.Life())
-                                    leftLifeSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                                    leftLifeSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                             }
                             else
                             {
                                 if (!rightCanceledModifiers.Life())
-                                    rightLifeSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                                    rightLifeSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                             }
                             break;
                         case SkillSuffix.DecreasePillzXMinY:
                             if (isLeft)
                             {
                                 if (!leftCanceledModifiers.Pillz())
-                                    leftPillzSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                                    leftPillzSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                             }
                             else
                             {
                                 if (!rightCanceledModifiers.Pillz())
-                                    rightPillzSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                                    rightPillzSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                             }
                             break;
                         case SkillSuffix.PoisonXMinY:
@@ -462,19 +462,19 @@ namespace UrbanRivalsCore.ViewModel
             for (int i = 0; i < 4; i++)
             {
                 bool isLeft = IsLeft(i);
-                switch (skills[i].Suffix)
+                switch (skills[i].suffix)
                 {
                     case SkillSuffix.DecreaseLifeXMinY:
                         if (isLeft)
-                            rightLifeSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                            rightLifeSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                         else
-                            leftLifeSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                            leftLifeSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                         break;
                     case SkillSuffix.DecreasePillzXMinY:
                         if (isLeft)
-                            rightPillzSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                            rightPillzSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                         else
-                            leftPillzSubstracter.InsertSubstraction(skills[i].X, skills[i].Y);
+                            leftPillzSubstracter.InsertSubstraction(skills[i].x, skills[i].y);
                         break;
                     case SkillSuffix.HealXMaxY:
                         if (isLeft)
@@ -490,45 +490,45 @@ namespace UrbanRivalsCore.ViewModel
                         break;
                     case SkillSuffix.IncreaseLifeX:
                         if (isLeft)
-                            leftLifeAdder.InsertAddition(skills[i].X);
+                            leftLifeAdder.InsertAddition(skills[i].x);
                         else
-                            rightLifeAdder.InsertAddition(skills[i].X);
+                            rightLifeAdder.InsertAddition(skills[i].x);
                         break;
                     case SkillSuffix.IncreaseLifeXMaxY:
                         if (isLeft)
-                            leftLifeAdder.InsertAddition(skills[i].Y, skills[i].X);
+                            leftLifeAdder.InsertAddition(skills[i].y, skills[i].x);
                         else
-                            rightLifeAdder.InsertAddition(skills[i].Y, skills[i].X);
+                            rightLifeAdder.InsertAddition(skills[i].y, skills[i].x);
                         break;
                     case SkillSuffix.IncreaseLifeXPerDamage:
                         if (isLeft)
-                            leftLifeAdder.InsertAddition(skills[i].X * leftDamage);
+                            leftLifeAdder.InsertAddition(skills[i].x * leftDamage);
                         else
-                            rightLifeAdder.InsertAddition(skills[i].X * rightDamage);
+                            rightLifeAdder.InsertAddition(skills[i].x * rightDamage);
                         break;
                     case SkillSuffix.IncreaseLifeXPerDamageMaxY:
                         if (isLeft)
-                            leftLifeAdder.InsertAddition(skills[i].Y, skills[i].X * leftDamage);
+                            leftLifeAdder.InsertAddition(skills[i].y, skills[i].x * leftDamage);
                         else
-                            rightLifeAdder.InsertAddition(skills[i].Y, skills[i].X * rightDamage);
+                            rightLifeAdder.InsertAddition(skills[i].y, skills[i].x * rightDamage);
                         break;
                     case SkillSuffix.IncreasePillzX:
                         if (isLeft)
-                            leftPillzAdder.InsertAddition(skills[i].X);
+                            leftPillzAdder.InsertAddition(skills[i].x);
                         else
-                            rightPillzAdder.InsertAddition(skills[i].X);
+                            rightPillzAdder.InsertAddition(skills[i].x);
                         break;
                     case SkillSuffix.IncreasePillzXMaxY:
                         if (isLeft)
-                            leftPillzAdder.InsertAddition(skills[i].Y, skills[i].X);
+                            leftPillzAdder.InsertAddition(skills[i].y, skills[i].x);
                         else
-                            rightPillzAdder.InsertAddition(skills[i].Y, skills[i].X);
+                            rightPillzAdder.InsertAddition(skills[i].y, skills[i].x);
                         break;
                     case SkillSuffix.IncreasePillzXPerDamage:
                         if (isLeft)
-                            leftPillzAdder.InsertAddition(skills[i].X * leftDamage);
+                            leftPillzAdder.InsertAddition(skills[i].x * leftDamage);
                         else
-                            rightPillzAdder.InsertAddition(skills[i].X * rightDamage);
+                            rightPillzAdder.InsertAddition(skills[i].x * rightDamage);
                         break;
                     case SkillSuffix.PoisonXMinY:
                         if (isLeft)
@@ -544,16 +544,16 @@ namespace UrbanRivalsCore.ViewModel
                         break;
                     case SkillSuffix.RecoverXPillzOutOfY:
                         if (isLeft)
-                            leftPillzAdder.InsertAddition(CalculateRecoveredPillz(leftUsedPillz, leftUsedFury, skills[i].X, skills[i].Y));
+                            leftPillzAdder.InsertAddition(CalculateRecoveredPillz(leftUsedPillz, leftUsedFury, skills[i].x, skills[i].y));
                         else
-                            rightPillzAdder.InsertAddition(CalculateRecoveredPillz(rightUsedPillz, rightUsedFury, skills[i].X, skills[i].Y));
+                            rightPillzAdder.InsertAddition(CalculateRecoveredPillz(rightUsedPillz, rightUsedFury, skills[i].x, skills[i].y));
                         break;
                     case SkillSuffix.RegenXMaxY:
                         if (isLeft)
                         {
                             if (!leftCanceledModifiers.Life())
                             {
-                                leftLifeAdder.InsertAddition(skills[i].Y, skills[i].X);
+                                leftLifeAdder.InsertAddition(skills[i].y, skills[i].x);
                                 healToLeft = new Heal(skills[i]);
                             }
                         }
@@ -561,7 +561,7 @@ namespace UrbanRivalsCore.ViewModel
                         {
                             if (!rightCanceledModifiers.Life())
                             {
-                                rightLifeAdder.InsertAddition(skills[i].Y, skills[i].X);
+                                rightLifeAdder.InsertAddition(skills[i].y, skills[i].x);
                                 healToRight = new Heal(skills[i]);
                             }
                         }
@@ -571,7 +571,7 @@ namespace UrbanRivalsCore.ViewModel
                         {
                             if (!leftCanceledModifiers.Life())
                             {
-                                rightLifeSubstracter.InsertSubstraction(skills[i].Y, skills[i].X);
+                                rightLifeSubstracter.InsertSubstraction(skills[i].y, skills[i].x);
                                 poisonToRight = new Poison(skills[i]);
                             }
                         }
@@ -579,7 +579,7 @@ namespace UrbanRivalsCore.ViewModel
                         {
                             if (!rightCanceledModifiers.Life())
                             {
-                                leftLifeSubstracter.InsertSubstraction(skills[i].Y, skills[i].X);
+                                leftLifeSubstracter.InsertSubstraction(skills[i].y, skills[i].x);
                                 poisonToLeft = new Poison(skills[i]);
                             }
                         }
@@ -593,7 +593,7 @@ namespace UrbanRivalsCore.ViewModel
         public void FixDJCorpsDoublePrefix(int roundCounter)
         {
             for (int i = 0; i < 4; i++)
-                if (skills[i].Prefix == (SkillPrefix.GrowthAndDefeat)) // TODO check as flag
+                if (skills[i].prefix == (SkillPrefix.GrowthAndDefeat)) // TODO check as flag
                     skills[i] = new Skill(SkillPrefix.Defeat, SkillSuffix.DecreaseLifeXMinY, CalculateGrowth(skills[i], roundCounter), 1);
         }
 
@@ -605,11 +605,11 @@ namespace UrbanRivalsCore.ViewModel
         }
         private static int CalculateGrowth(Skill skill, int roundCounter)
         {
-            return skill.X * (roundCounter + 1);
+            return skill.x * (roundCounter + 1);
         }
         private static int CalculateSupportValue(PlayerStatus player, CardDrawed card)
         {
-            return card.ability.X * player.Hand.GetSupportMultiplier(card.clan.id);
+            return card.ability.x * player.Hand.GetSupportMultiplier(card.clan.id);
         }
         private static int CalculateRecoveredPillz(int usedPillz, bool usedFury, int x, int y)
         {

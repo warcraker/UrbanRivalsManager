@@ -88,7 +88,7 @@ namespace UrbanRivalsCore.ViewModel
         }
         private static ActivationCases DecodeActivationCases(Skill skill)
         {
-            switch (skill.Suffix)
+            switch (skill.suffix)
             {
                 case SkillSuffix.StopAbility:
                     return ActivationCases.StopAbility | ActivationCases.Stop;

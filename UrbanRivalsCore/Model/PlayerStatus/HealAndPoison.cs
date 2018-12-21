@@ -63,11 +63,11 @@ namespace UrbanRivalsCore.Model
         {
             if (skill == null)
                 throw new ArgumentNullException(nameof(skill));
-            if (skill.Suffix != SkillSuffix.HealXMaxY || skill.Suffix != SkillSuffix.RegenXMaxY)
+            if (skill.suffix != SkillSuffix.HealXMaxY || skill.suffix != SkillSuffix.RegenXMaxY)
                 throw new ArgumentException("Must be a heal or regen type of skill", nameof(skill));
 
-            Value = skill.X;
-            Max = skill.Y;
+            Value = skill.x;
+            Max = skill.y;
         }
 
         // Functions
@@ -142,11 +142,11 @@ namespace UrbanRivalsCore.Model
         {
             if (skill == null)
                 throw new ArgumentNullException(nameof(skill));
-            if (skill.Suffix != SkillSuffix.PoisonXMinY || skill.Suffix != SkillSuffix.ToxinXMinY)
+            if (skill.suffix != SkillSuffix.PoisonXMinY || skill.suffix != SkillSuffix.ToxinXMinY)
                 throw new ArgumentException("Must be a poison or toxin type of skill", nameof(skill));
 
-            Value = skill.X;
-            Min = skill.Y;
+            Value = skill.x;
+            Min = skill.y;
         }
         // Functions
 

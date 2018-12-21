@@ -147,11 +147,11 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             name = card.name;
             unlockLevel = card.abilityUnlockLevel;
             ability = card.ability;
-            leader = (int)ability.Leader;
-            prefix = (int)ability.Prefix;
-            suffix = (int)ability.Suffix;
-            x = ability.X;
-            y = ability.Y;
+            leader = (int)ability.leader;
+            prefix = (int)ability.prefix;
+            suffix = (int)ability.suffix;
+            x = ability.x;
+            y = ability.y;
             rarity = (int)card.rarity;
 
             addCardDefinitionCommand = new SQLiteCommand(

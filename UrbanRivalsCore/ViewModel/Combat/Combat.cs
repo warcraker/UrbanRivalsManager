@@ -192,8 +192,8 @@ namespace UrbanRivalsCore.ViewModel
 
             CardDrawed leftCard = LeftPlayerStatus.Hand[leftUsedCard];
             CardDrawed rightCard = RightPlayerStatus.Hand[rightUsedCard];
-            SkillLeader leftLeader = LeftPlayerStatus.Hand[leftUsedCard].ability.Leader;
-            SkillLeader rightLeader = RightPlayerStatus.Hand[rightUsedCard].ability.Leader;
+            SkillLeader leftLeader = LeftPlayerStatus.Hand[leftUsedCard].ability.leader;
+            SkillLeader rightLeader = RightPlayerStatus.Hand[rightUsedCard].ability.leader;
             int initialLeftLife = LeftPlayerStatus.Life;
             int initialRightLife = RightPlayerStatus.Life;
             int initialLeftPillz = LeftPlayerStatus.Pillz;
@@ -852,7 +852,7 @@ namespace UrbanRivalsCore.ViewModel
         }
         private static ProtectedStats CalculatedProtectedStats(Skill skill)
         {
-            switch (skill.Suffix)
+            switch (skill.suffix)
             {
                 case SkillSuffix.ProtectAttack:
                     return ProtectedStats.Attack;
@@ -872,7 +872,7 @@ namespace UrbanRivalsCore.ViewModel
         }
         private static CanceledModifiers CalculateCancelModifiers(Skill enemySkill)
         {
-            switch (enemySkill.Suffix)
+            switch (enemySkill.suffix)
             {
                 case SkillSuffix.CancelAttackModifier:
                     return CanceledModifiers.Attack;

@@ -126,9 +126,9 @@ namespace UrbanRivalsCore.Model
             SkillLeader result = SkillLeader.None;
             foreach (CardDrawed card in cards)
             {
-                if (card.ability.Leader != SkillLeader.None)
+                if (card.ability.leader != SkillLeader.None)
                 {
-                    result = card.ability.Leader;
+                    result = card.ability.leader;
                     numberOfLeaders++;
                 }
             }
@@ -151,7 +151,7 @@ namespace UrbanRivalsCore.Model
         {
             foreach (CardDrawed card in cards)
             {
-                if (card.ability.Leader != SkillLeader.None)
+                if (card.ability.leader != SkillLeader.None)
                     card.ability = Skill.NO_ABILITY;
             }
         }
