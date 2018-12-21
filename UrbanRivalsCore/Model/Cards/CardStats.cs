@@ -2,7 +2,7 @@
 
 namespace UrbanRivalsCore.Model
 {
-    public class CardStats
+    public struct CardStats
     {
         public readonly int level;
         public readonly int power;
