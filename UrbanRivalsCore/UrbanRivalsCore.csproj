@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="Model\Cards\CardBase.cs" />
+    <Compile Include="Model\Cards\CardDefinition.cs" />
     <Compile Include="Model\Cards\CardDrawed.cs" />
     <Compile Include="Model\Cards\CardInstance.cs" />
     <Compile Include="Model\Cards\CardStats.cs" />
