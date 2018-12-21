@@ -112,7 +112,7 @@ namespace UrbanRivalsCore.Model
 
         public override string ToString()
         {
-            return $"[{cardInstanceId}] {name}";
+            return $"[{this.cardInstanceId}] {this.name}";
         }
     }
 }

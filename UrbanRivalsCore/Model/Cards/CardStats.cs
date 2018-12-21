@@ -21,7 +21,7 @@ namespace UrbanRivalsCore.Model
 
         public override string ToString()
         {
-            return $"{level}* {power}/{damage}";
+            return $"{this.level}* {this.power}/{this.damage}";
         }
     }
 }
