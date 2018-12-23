@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Procurios.Public;
 using UrbanRivalsApiManager;
 using UrbanRivalsCore.Model;
-using UrbanRivalsApiAdapter;
 using UrbanRivalsApiToCoreAdapter;
 
 namespace UrbanRivalsManager.ViewModel.DataManagement
