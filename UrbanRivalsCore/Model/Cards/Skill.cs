@@ -103,7 +103,7 @@ namespace UrbanRivalsCore.Model
                 return new Skill(this.leader);
             return new Skill(this.prefix, this.suffix, newX, this.y);
         }
-        public override string ToString()
+        public override string ToString() // TODO
         {
             string result;
 
@@ -128,127 +128,128 @@ namespace UrbanRivalsCore.Model
                     result = Properties.GameStrings.skill_no_bonus;
                     break;
                 case EmptySkill.None:
-                    switch (this.leader)
-                    {
-                        case SkillLeader.Ambre:
-                            result = Properties.GameStrings.skill_leader_ambre;
-                            break;
-                        case SkillLeader.Ashigaru:
-                            result = Properties.GameStrings.skill_leader_ashigaru;
-                            break;
-                        case SkillLeader.Bridget:
-                            result = Properties.GameStrings.skill_leader_bridget;
-                            break;
-                        case SkillLeader.Eklore:
-                            result = Properties.GameStrings.skill_leader_eklore;
-                            break;
-                        case SkillLeader.Eyrik:
-                            result = Properties.GameStrings.skill_leader_eyrik;
-                            break;
-                        case SkillLeader.Hugo:
-                            result = Properties.GameStrings.skill_leader_hugo;
-                            break;
-                        case SkillLeader.Melody:
-                            result = Properties.GameStrings.skill_leader_melody;
-                            break;
-                        case SkillLeader.Morphun:
-                            result = Properties.GameStrings.skill_leader_morphun;
-                            break;
-                        case SkillLeader.Solomon:
-                            result = Properties.GameStrings.skill_leader_solomon;
-                            break;
-                        case SkillLeader.Timber:
-                            result = Properties.GameStrings.skill_leader_timber;
-                            break;
-                        case SkillLeader.Vansaar:
-                            result = Properties.GameStrings.skill_leader_vansaar;
-                            break;
-                        case SkillLeader.Vholt:
-                            result = Properties.GameStrings.skill_leader_vholt;
-                            break;
-                        case SkillLeader.None:
-                        {
-                            string prefix;
-                            string suffix;
+                    //switch (this.leader)
+                    //{
+                    //    case SkillLeader.Ambre:
+                    //        result = Properties.GameStrings.skill_leader_ambre;
+                    //        break;
+                    //    case SkillLeader.Ashigaru:
+                    //        result = Properties.GameStrings.skill_leader_ashigaru;
+                    //        break;
+                    //    case SkillLeader.Bridget:
+                    //        result = Properties.GameStrings.skill_leader_bridget;
+                    //        break;
+                    //    case SkillLeader.Eklore:
+                    //        result = Properties.GameStrings.skill_leader_eklore;
+                    //        break;
+                    //    case SkillLeader.Eyrik:
+                    //        result = Properties.GameStrings.skill_leader_eyrik;
+                    //        break;
+                    //    case SkillLeader.Hugo:
+                    //        result = Properties.GameStrings.skill_leader_hugo;
+                    //        break;
+                    //    case SkillLeader.Melody:
+                    //        result = Properties.GameStrings.skill_leader_melody;
+                    //        break;
+                    //    case SkillLeader.Morphun:
+                    //        result = Properties.GameStrings.skill_leader_morphun;
+                    //        break;
+                    //    case SkillLeader.Solomon:
+                    //        result = Properties.GameStrings.skill_leader_solomon;
+                    //        break;
+                    //    case SkillLeader.Timber:
+                    //        result = Properties.GameStrings.skill_leader_timber;
+                    //        break;
+                    //    case SkillLeader.Vansaar:
+                    //        result = Properties.GameStrings.skill_leader_vansaar;
+                    //        break;
+                    //    case SkillLeader.Vholt:
+                    //        result = Properties.GameStrings.skill_leader_vholt;
+                    //        break;
+                    //    case SkillLeader.None:
+                    //    {
+                    //        string prefix;
+                    //        string suffix;
 
-                            switch (this.prefix)
-                            {
-                                case SkillPrefix.Backlash:
-                                    prefix = Properties.GameStrings.skill_prefix_backlash;
-                                    switch (this.suffix)
-                                    {
-                                        case SkillSuffix.DecreaseLifeXMinY:
-                                            suffix = String.Format(Properties.GameStrings.skill_suffix_decrease_life_x_min_y_backlash, this.x, this.y);
-                                            break;
-                                        case SkillSuffix.DecreasePillzXMinY:
-                                            suffix = String.Format(Properties.GameStrings.skill_suffix_decrease_pillz_x_min_y_backlash, this.x, this.y);
-                                            break;
-                                        case SkillSuffix.PoisonXMinY:
-                                            suffix = String.Format(Properties.GameStrings.skill_suffix_poison_x_min_y_backlash, this.x, this.y);
-                                            break;
-                                        default:
-                                            suffix = "";
-                                            Asserts.fail($"Invalid {nameof(SkillSuffix)} ({this.suffix.ToString()}) when {nameof(SkillPrefix)} is {nameof(SkillPrefix.Backlash)}");
-                                            break;
-                                    }
-                                    break;
-                                case SkillPrefix.GrowthAndDefeat: // TODO Remove
-                                    prefix = Properties.GameStrings.skill_prefix_defeat + Properties.GameStrings.skill_prefix_growth;
-                                    break;
-                                case SkillPrefix.Brawl:
-                                    prefix = Properties.GameStrings.skill_prefix_brawl;
-                                    break;
-                                case SkillPrefix.Confidence:
-                                    prefix = Properties.GameStrings.skill_prefix_confidence;
-                                    break;
-                                case SkillPrefix.Courage:
-                                    prefix = Properties.GameStrings.skill_prefix_courage;
-                                    break;
-                                case SkillPrefix.Defeat:
-                                    prefix = Properties.GameStrings.skill_prefix_defeat;
-                                    break;
-                                case SkillPrefix.Degrowth:
-                                    prefix = Properties.GameStrings.skill_prefix_degrowth;
-                                    break;
-                                case SkillPrefix.Equalizer:
-                                    prefix = Properties.GameStrings.skill_prefix_equalizer;
-                                    break;
-                                case SkillPrefix.Growth:
-                                    prefix = Properties.GameStrings.skill_prefix_growth;
-                                    break;
-                                case SkillPrefix.Killshot:
-                                    prefix = Properties.GameStrings.skill_prefix_killshot;
-                                    break;
-                                case SkillPrefix.Reprisal:
-                                    prefix = Properties.GameStrings.skill_prefix_reprisal;
-                                    break;
-                                case SkillPrefix.Revenge:
-                                    prefix = Properties.GameStrings.skill_prefix_revenge;
-                                    break;
-                                case SkillPrefix.Stop:
-                                    prefix = Properties.GameStrings.skill_prefix_stop;
-                                    break;
-                                case SkillPrefix.Support:
-                                    prefix = Properties.GameStrings.skill_prefix_support;
-                                    break;
-                                case SkillPrefix.VictoryOrDefeat:
-                                    prefix = Properties.GameStrings.skill_prefix_victory_or_defeat;
-                                    break;
-                                case SkillPrefix.None:
-                                    prefix = "";
-                                    break;
-                                default:
-                                    prefix = "";
-                                    Asserts.fail($"Invalid {nameof(SkillPrefix)}");
-                                    break;
-                            }
-                        }
-                        break;
-                        default:
-                            result = "";
-                            Asserts.fail($"Invalid {nameof(SkillLeader)}");
-                            break;
-                    }
+                    //        switch (this.prefix)
+                    //        {
+                    //            case SkillPrefix.Backlash:
+                    //                prefix = Properties.GameStrings.skill_prefix_backlash;
+                    //                switch (this.suffix)
+                    //                {
+                    //                    case SkillSuffix.DecreaseLifeXMinY:
+                    //                        suffix = String.Format(Properties.GameStrings.skill_suffix_decrease_life_x_min_y_backlash, this.x, this.y);
+                    //                        break;
+                    //                    case SkillSuffix.DecreasePillzXMinY:
+                    //                        suffix = String.Format(Properties.GameStrings.skill_suffix_decrease_pillz_x_min_y_backlash, this.x, this.y);
+                    //                        break;
+                    //                    case SkillSuffix.PoisonXMinY:
+                    //                        suffix = String.Format(Properties.GameStrings.skill_suffix_poison_x_min_y_backlash, this.x, this.y);
+                    //                        break;
+                    //                    default:
+                    //                        suffix = "";
+                    //                        Asserts.fail($"Invalid {nameof(SkillSuffix)} ({this.suffix.ToString()}) when {nameof(SkillPrefix)} is {nameof(SkillPrefix.Backlash)}");
+                    //                        break;
+                    //                }
+                    //                break;
+                    //            case SkillPrefix.GrowthAndDefeat: // TODO Remove
+                    //                prefix = Properties.GameStrings.skill_prefix_defeat + Properties.GameStrings.skill_prefix_growth;
+                    //                break;
+                    //            case SkillPrefix.Brawl:
+                    //                prefix = Properties.GameStrings.skill_prefix_brawl;
+                    //                break;
+                    //            case SkillPrefix.Confidence:
+                    //                prefix = Properties.GameStrings.skill_prefix_confidence;
+                    //                break;
+                    //            case SkillPrefix.Courage:
+                    //                prefix = Properties.GameStrings.skill_prefix_courage;
+                    //                break;
+                    //            case SkillPrefix.Defeat:
+                    //                prefix = Properties.GameStrings.skill_prefix_defeat;
+                    //                break;
+                    //            case SkillPrefix.Degrowth:
+                    //                prefix = Properties.GameStrings.skill_prefix_degrowth;
+                    //                break;
+                    //            case SkillPrefix.Equalizer:
+                    //                prefix = Properties.GameStrings.skill_prefix_equalizer;
+                    //                break;
+                    //            case SkillPrefix.Growth:
+                    //                prefix = Properties.GameStrings.skill_prefix_growth;
+                    //                break;
+                    //            case SkillPrefix.Killshot:
+                    //                prefix = Properties.GameStrings.skill_prefix_killshot;
+                    //                break;
+                    //            case SkillPrefix.Reprisal:
+                    //                prefix = Properties.GameStrings.skill_prefix_reprisal;
+                    //                break;
+                    //            case SkillPrefix.Revenge:
+                    //                prefix = Properties.GameStrings.skill_prefix_revenge;
+                    //                break;
+                    //            case SkillPrefix.Stop:
+                    //                prefix = Properties.GameStrings.skill_prefix_stop;
+                    //                break;
+                    //            case SkillPrefix.Support:
+                    //                prefix = Properties.GameStrings.skill_prefix_support;
+                    //                break;
+                    //            case SkillPrefix.VictoryOrDefeat:
+                    //                prefix = Properties.GameStrings.skill_prefix_victory_or_defeat;
+                    //                break;
+                    //            case SkillPrefix.None:
+                    //                prefix = "";
+                    //                break;
+                    //            default:
+                    //                prefix = "";
+                    //                Asserts.fail($"Invalid {nameof(SkillPrefix)}");
+                    //                break;
+                    //        }
+                    //    }
+                    //    break;
+                    //    default:
+                    //        result = "";
+                    //        Asserts.fail($"Invalid {nameof(SkillLeader)}");
+                    //        break;
+                    //}
+                    result = "";
                     break;
                 default:
                     result = "";
@@ -256,110 +257,109 @@ namespace UrbanRivalsCore.Model
                     break;
             }
 
-
             ///////
-            switch (this.suffix)
-            {
-                case SkillSuffix.ConsumeXMinY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_consume_x_min_y, this.x, this.y);
-                    break;
-                case SkillSuffix.CorrosionXMinY:
-                    result = String.Format(Properties.GameStrings.skill_suffix_corrosion_x_min_y, this.x, this.y);
-                    break;
-                case SkillSuffix.DecreaseAttackXMinY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_min_y, this.x, this.y);
-                    break;
-                case SkillSuffix.DecreaseAttackXPerRemainingLifeMinY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_per_remaining_life_min_y, this.x, this.y);
-                    break;
-                case SkillSuffix.DecreaseAttackXPerRemainingPillzMinY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_per_remaining_pillz_min_y, this.x, this.y);
-                    break;
-                case SkillSuffix.DecreaseDamageXMinY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_decrease_damage_x_min_y, this.x, this.y);
-                    break;
-                case SkillSuffix.DecreaseLifeXMinY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_decrease_life_x_min_y, this.x, this.y);
-                    break;
-                case SkillSuffix.DecreasePillzXMinY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_decrease_pillz_x_min_y, this.x, this.y);
-                    break;
-                case SkillSuffix.DecreasePowerAndDamageXMinY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_decrease_power_and_damage_x_min_y, this.x, this.y);
-                    break;
-                case SkillSuffix.DecreasePowerXMinY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_decrease_power_x_min_y, this.x, this.y);
-                    break;
-                case SkillSuffix.DopeXMaxY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_dope_x_max_y, this.x, this.y);
-                    break;
-                case SkillSuffix.HealXMaxY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_heal_x_max_y, this.x, this.y);
-                    break;
-                case SkillSuffix.IncreaseAttackX:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_attack_x, this.x);
-                    break;
-                case SkillSuffix.IncreaseAttackXPerRemainingLife:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_attack_x_per_remaining_life, this.x);
-                    break;
-                case SkillSuffix.IncreaseAttackXPerRemainingPillz:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_attack_x_per_remaining_pillz, this.x);
-                    break;
-                case SkillSuffix.IncreaseDamageX:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_damage_x, this.x);
-                    break;
-                case SkillSuffix.IncreaseLifeX:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_life_x, this.x);
-                    break;
-                case SkillSuffix.IncreaseLifeXMaxY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_life_x_max_y, this.x, this.y);
-                    break;
-                case SkillSuffix.IncreaseLifeXPerDamage:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_life_x_per_damage, this.x);
-                    break;
-                case SkillSuffix.IncreaseLifeXPerDamageMaxY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_life_x_per_damage_max_y, this.x, this.y);
-                    break;
-                case SkillSuffix.IncreasePillzAndLifeX:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_pillz_and_life_x, this.x);
-                    break;
-                case SkillSuffix.IncreasePillzX:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_pillz_x, this.x);
-                    break;
-                case SkillSuffix.IncreasePillzXMaxY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_pillz_x_max_y, this.x, this.y);
-                    break;
-                case SkillSuffix.IncreasePillzXPerDamage:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_pillz_x_per_damage, this.x);
-                    break;
-                case SkillSuffix.IncreasePowerAndDamageX:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_power_and_damage_x, this.x);
-                    break;
-                case SkillSuffix.IncreasePowerX:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_increase_power_x, this.x);
-                    break;
-                case SkillSuffix.InfectionXMinY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_infection_x_min_y, this.x, this.y);
-                    break;
-                case SkillSuffix.PoisonXMinY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_poison_x_min_y, this.x, this.y);
-                    break;
-                case SkillSuffix.ReanimateX:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_reanimate_x, this.x);
-                    break;
-                case SkillSuffix.RebirthXMaxY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_rebirth_x_max_y, this.x, this.y);
-                    break;
-                case SkillSuffix.RecoverXPillzOutOfY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_recover_x_pillz_out_of_y, this.x, this.y);
-                    break;
-                case SkillSuffix.RegenXMaxY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_regen_x_max_y, this.x, this.y);
-                    break;
-                case SkillSuffix.ToxinXMinY:
-                    text =  String.Format(Properties.GameStrings.skill_suffix_toxin_x_min_y, this.x, this.y);
-                    break;
-            } 
+            //switch (this.suffix)
+            //{
+            //    case SkillSuffix.ConsumeXMinY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_consume_x_min_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.CorrosionXMinY:
+            //        result = String.Format(Properties.GameStrings.skill_suffix_corrosion_x_min_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.DecreaseAttackXMinY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_min_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.DecreaseAttackXPerRemainingLifeMinY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_per_remaining_life_min_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.DecreaseAttackXPerRemainingPillzMinY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_decrease_attack_x_per_remaining_pillz_min_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.DecreaseDamageXMinY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_decrease_damage_x_min_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.DecreaseLifeXMinY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_decrease_life_x_min_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.DecreasePillzXMinY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_decrease_pillz_x_min_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.DecreasePowerAndDamageXMinY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_decrease_power_and_damage_x_min_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.DecreasePowerXMinY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_decrease_power_x_min_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.DopeXMaxY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_dope_x_max_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.HealXMaxY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_heal_x_max_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.IncreaseAttackX:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_attack_x, this.x);
+            //        break;
+            //    case SkillSuffix.IncreaseAttackXPerRemainingLife:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_attack_x_per_remaining_life, this.x);
+            //        break;
+            //    case SkillSuffix.IncreaseAttackXPerRemainingPillz:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_attack_x_per_remaining_pillz, this.x);
+            //        break;
+            //    case SkillSuffix.IncreaseDamageX:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_damage_x, this.x);
+            //        break;
+            //    case SkillSuffix.IncreaseLifeX:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_life_x, this.x);
+            //        break;
+            //    case SkillSuffix.IncreaseLifeXMaxY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_life_x_max_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.IncreaseLifeXPerDamage:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_life_x_per_damage, this.x);
+            //        break;
+            //    case SkillSuffix.IncreaseLifeXPerDamageMaxY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_life_x_per_damage_max_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.IncreasePillzAndLifeX:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_pillz_and_life_x, this.x);
+            //        break;
+            //    case SkillSuffix.IncreasePillzX:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_pillz_x, this.x);
+            //        break;
+            //    case SkillSuffix.IncreasePillzXMaxY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_pillz_x_max_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.IncreasePillzXPerDamage:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_pillz_x_per_damage, this.x);
+            //        break;
+            //    case SkillSuffix.IncreasePowerAndDamageX:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_power_and_damage_x, this.x);
+            //        break;
+            //    case SkillSuffix.IncreasePowerX:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_increase_power_x, this.x);
+            //        break;
+            //    case SkillSuffix.InfectionXMinY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_infection_x_min_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.PoisonXMinY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_poison_x_min_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.ReanimateX:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_reanimate_x, this.x);
+            //        break;
+            //    case SkillSuffix.RebirthXMaxY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_rebirth_x_max_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.RecoverXPillzOutOfY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_recover_x_pillz_out_of_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.RegenXMaxY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_regen_x_max_y, this.x, this.y);
+            //        break;
+            //    case SkillSuffix.ToxinXMinY:
+            //        text =  String.Format(Properties.GameStrings.skill_suffix_toxin_x_min_y, this.x, this.y);
+            //        break;
+            //} 
 
             /////////////
 
@@ -446,14 +446,14 @@ namespace UrbanRivalsCore.Model
 
             return text;
         }
-        private static string prv_getSuffixWithXTextRepresentation(SkillSuffix suffix, int x)
-        {
-            string text;
-            string format;
+        //private static string prv_getSuffixWithXTextRepresentation(SkillSuffix suffix, int x)
+        //{
+        //    string text;
+        //    string format;
 
-            text = String.Format(
+        //    text = String.Format(
 
-            return text;
-        }
+        //    return text;
+        //}
     }
 }
