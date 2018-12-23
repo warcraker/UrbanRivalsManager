@@ -16,7 +16,19 @@ namespace UrbanRivalsCore.Model.Cards
             PRV_ALL_PREFIXES = new List<Prefix>
             {
                 new BacklashPrefix(),
+                new BrawlPrefix(),
+                new ConfidencePrefix(),
                 new CouragePrefix(),
+                new DefeatPrefix(),
+                new DegrowthPrefix(),
+                new EqualizerPrefix(),
+                new GrowthPrefix(),
+                new KillshotPrefix(),
+                new ReprisalPrefix(),
+                new RevengePrefix(),
+                new StopPrefix(),
+                new SupportPrefix(),
+                new VictoryOrDefeatPrefix(),
             };
         }
 
