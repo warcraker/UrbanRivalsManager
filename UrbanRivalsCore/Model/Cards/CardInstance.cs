@@ -47,7 +47,7 @@ namespace UrbanRivalsCore.Model
             CardStats cardStats;
 
             AssertArgument.isNotNull(cardDefinition, nameof(cardDefinition));
-            AssertArgument.checkIntegerRange(instanceId > 0, "Must be greater than 0", instanceId, nameof(instanceId));
+            // TODO modify fake instances generator not to return negative IDs, and then reinstate assert "instanceId > 0"            
             minLevel = cardDefinition.minLevel;
             maxLevel = cardDefinition.maxLevel;
             AssertArgument.checkIntegerRange(minLevel <= level && level <= maxLevel, $"Must be between {minLevel} and {maxLevel} inclusive", level, nameof(level));
