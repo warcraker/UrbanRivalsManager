@@ -106,7 +106,14 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             for (int level = card.minLevel; level <= card.maxLevel; level++)
             {
                 int id = CalculateFakeInstanceId(card.id, level);
-                FakeCardInstances[id] = CardInstance.createCardInstance(card, id, level, 0);
+                if (level == card.maxLevel)
+                {
+                    FakeCardInstances[id] = CardInstance.createCardInstanceAtMaxLevel(card, id);
+                }
+                else
+                {
+                    FakeCardInstances[id] = CardInstance.createCardInstance(card, id, level, 0);
+                }
             }
         }
 
