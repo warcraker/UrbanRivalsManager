@@ -62,7 +62,7 @@ namespace UrbanRivalsCore.Model
             AssertArgument.stringIsFilled(name, nameof(name));
             AssertArgument.isNotNull(clan, nameof(clan));
             AssertArgument.isNotNull(cardStatsPerLevel, nameof(cardStatsPerLevel));
-            AssertArgument.checkIntegerRange(0 >= rarity && (int)rarity <= PRV_MAX_CARD_RARITY_VALUE, "Must be a valid " + nameof(CardRarity), (int)rarity, nameof(rarity));
+            AssertArgument.checkIntegerRange(0 <= rarity && (int)rarity <= PRV_MAX_CARD_RARITY_VALUE, "Must be a valid " + nameof(CardRarity), (int)rarity, nameof(rarity));
 
             minLevel = cardStatsPerLevel.Min(item => item.level);
             maxLevel = cardStatsPerLevel.Max(item => item.level);
