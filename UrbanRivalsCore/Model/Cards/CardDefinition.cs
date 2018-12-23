@@ -77,8 +77,14 @@ namespace UrbanRivalsCore.Model
             {
                 CardStats cardStats;
 
-                cardStats = cardStatsPerLevel.SingleOrDefault(item => item.level == level);
-                AssertArgument.check(cardStats != null, $"There must be a definition for level and it must be unique. Level {level} fails this", nameof(cardStatsPerLevel));
+                try
+                {
+                    cardStats = cardStatsPerLevel.Single(item => item.level == level);
+                }
+                catch (InvalidOperationException)
+                {
+                    Asserts.fail($"There must be a definition for level and it must be unique. Level {level} fails this");
+                }
             }
 
             this.id = id;
