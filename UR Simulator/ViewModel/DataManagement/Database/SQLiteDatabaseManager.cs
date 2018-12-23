@@ -39,7 +39,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             int unlocklevel;
             CardRarity rarity;
 
-            AssertArgument.checkIntegerRange(id <= 0, "Must be greater than 0", id, nameof(id));
+            AssertArgument.checkIntegerRange(id > 0, "Must be greater than 0", id, nameof(id));
 
             using (SQLiteCommand command = new SQLiteCommand(PRV_SELECT_CARDLEVELS_BY_ID))
             {
@@ -100,7 +100,14 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 rarity = prv_getEnum<CardRarity>(row, "rarity");
             }
 
-            cardDefinition = CardDefinition.createCardWithAbility(id, name, clan, cardStatsPerLevel, rarity, ability, unlocklevel);
+            if (ability == Skill.NO_ABILITY)
+            {
+                cardDefinition = CardDefinition.createCardWithoutAbility(id, name, clan, cardStatsPerLevel, rarity);
+            }
+            else
+            {
+                cardDefinition = CardDefinition.createCardWithAbility(id, name, clan, cardStatsPerLevel, rarity, ability, unlocklevel);
+            }
 
             return cardDefinition;
         }
