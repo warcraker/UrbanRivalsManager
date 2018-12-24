@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UrbanRivalsCore.Model.Cards.Prefixes
+namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 {
     public class DefaultPrefix : Prefix
     {

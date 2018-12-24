@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace UrbanRivalsCore.Model.Cards.Prefixes
+namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 {
     public class RevengePrefix : Prefix
     {

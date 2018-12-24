@@ -1,4 +1,4 @@
-﻿namespace UrbanRivalsCore.Model.Cards.Prefixes
+﻿namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 {
     public abstract class Prefix
     {
