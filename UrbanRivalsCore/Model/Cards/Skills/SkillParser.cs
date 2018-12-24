@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UrbanRivalsCore.Model.Cards.Prefixes;
+using UrbanRivalsCore.Model.Cards.Skills.Prefixes;
 
-namespace UrbanRivalsCore.Model.Cards
+namespace UrbanRivalsCore.Model.Cards.Skills
 {
     public static class SkillParser
     {
         private static readonly IEnumerable<Prefix> PRV_ALL_PREFIXES;
+        private static readonly Prefix PRV_DEFAULT_PREFIX;
 
         static SkillParser()
         {
@@ -30,6 +29,7 @@ namespace UrbanRivalsCore.Model.Cards
                 new SupportPrefix(),
                 new VictoryOrDefeatPrefix(),
             };
+            PRV_DEFAULT_PREFIX = new DefaultPrefix();
         }
 
         public static Skill parseSkill(string skillAsText)
@@ -63,6 +63,11 @@ namespace UrbanRivalsCore.Model.Cards
                     textToParse = textWithoutParsedPrefix;
                 }
             } while (parsedPrefix != null);
+
+            if (prefixes.Count == 0)
+            {
+                prefixes.Add(PRV_DEFAULT_PREFIX);
+            }
 
             textWithoutPrefixes = textToParse;
 

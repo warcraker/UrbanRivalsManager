@@ -52,24 +52,37 @@
     <Compile Include="Model\Cards\CardStats.cs" />
     <Compile Include="Model\Cards\Clan.cs" />
     <Compile Include="Model\Cards\Deck.cs" />
-    <Compile Include="Model\Cards\Prefixes\BacklashPrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\BrawlPrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\ConfidencePrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\DefeatPrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\CouragePrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\DegrowthPrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\EmptyPrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\EqualizerPrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\GrowthPrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\KillshotPrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\Prefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\ReprisalPrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\RevengePrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\StopPrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\SupportPrefix.cs" />
-    <Compile Include="Model\Cards\Prefixes\VictoryOrDefeatPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\CoreSkill.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\Ambre.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\Ashigaru.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\Bridget.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\Eklore.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\Eyrik.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\Hugo.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\Leader.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\JohnDoom.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\Melody.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\Morphun.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\MrBigDuke.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\BacklashPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\BrawlPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\ConfidencePrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\DefeatPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\CouragePrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\DegrowthPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\EmptyPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\EqualizerPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\GrowthPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\KillshotPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\Prefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\ReprisalPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\RevengePrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\StopPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\SupportPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\VictoryOrDefeatPrefix.cs" />
     <Compile Include="Model\Cards\Skill.cs" />
-    <Compile Include="Model\Cards\SkillParser.cs" />
+    <Compile Include="Model\Cards\Skills\SkillParser.cs" />
+    <Compile Include="Model\Cards\Skills\Suffixes\Suffix.cs" />
     <Compile Include="Model\Combat\RoundResults.cs" />
     <Compile Include="Model\Combat\RoundStatistics.cs" />
     <Compile Include="Model\Enums.cs" />
@@ -101,6 +114,7 @@
       <Name>UrbanRivalsUtils</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
