@@ -125,13 +125,13 @@ namespace UrbanRivalsApiToCoreAdapter
 
             return rarity;
         }
-        private static Skill prv_parseAbility(string abilityString)
+        private static OldSkill prv_parseAbility(string abilityString)
         {
-            Skill ability;
+            OldSkill ability;
 
             if (abilityString == "No ability")
             {
-                ability = Skill.NO_ABILITY;
+                ability = OldSkill.NO_ABILITY;
             }
             else
             {
@@ -142,12 +142,12 @@ namespace UrbanRivalsApiToCoreAdapter
                 // Exceptional case: Balorg (ID = 1195). Every card with a prefix has a colon (:) after the prefix. This one has a semicolon (;)
                 // Why: The alternative is add an extra case on the regex "PrefixAndSuffix"
                 if (abilityString == "Courage; -2 Opp Pillz. Min 1")
-                    return new Skill(SkillPrefix.Courage, SkillSuffix.DecreasePillzXMinY, 2, 1);
+                    return new OldSkill(SkillPrefix.Courage, SkillSuffix.DecreasePillzXMinY, 2, 1);
 
                 // Exceptional case: DJ Korps (ID = 1260). Every card has a single prefix, or none. This one has a double prefix
                 // Why: The alternative is add a loop that calls (at least) two times the regex "PrefixAndSuffix" for each parse
                 if (abilityString == "Defeat: Growth: -1 Opp. Life, Min 1")
-                    return new Skill(SkillPrefix.GrowthAndDefeat, SkillSuffix.DecreaseLifeXMinY, 1, 1);
+                    return new OldSkill(SkillPrefix.GrowthAndDefeat, SkillSuffix.DecreaseLifeXMinY, 1, 1);
 
                 // Exceptional case: Excess LD (ID = 1678). Every card has a single prefix, or none. This one has a double prefix
                 // Why: The alternative is add a loop that calls (at least) two times the regex "PrefixAndSuffix" for each parse
@@ -182,35 +182,35 @@ namespace UrbanRivalsApiToCoreAdapter
                 switch (abilityString)
                 {
                     case "Team: Courage, Power +3, Max. 10":
-                        return new Skill(SkillLeader.Ambre);
+                        return new OldSkill(SkillLeader.Ambre);
                     case "Counter-attack":
-                        return new Skill(SkillLeader.Ashigaru);
+                        return new OldSkill(SkillLeader.Ashigaru);
                     case "+1 Life Per Round":
-                        return new Skill(SkillLeader.Bridget);
+                        return new OldSkill(SkillLeader.Bridget);
                     case "-1 Opp. Pillz, Per Round, Min 3":
-                        return new Skill(SkillLeader.Eklore);
+                        return new OldSkill(SkillLeader.Eklore);
                     case "Team: -1 Opp. Power, Min 5":
-                        return new Skill(SkillLeader.Eyrik);
+                        return new OldSkill(SkillLeader.Eyrik);
                     case "Team: +6 Attack":
-                        return new Skill(SkillLeader.Hugo);
+                        return new OldSkill(SkillLeader.Hugo);
                     case "Team: Reprisal: -2 Pow. & Dmg, Min 3":
-                        return new Skill(SkillLeader.JonhDoom);
+                        return new OldSkill(SkillLeader.JonhDoom);
                     case "Team: Defeat: Rec. 1 Pillz Out Of 2":
-                        return new Skill(SkillLeader.Melody);
+                        return new OldSkill(SkillLeader.Melody);
                     case "+1 Pillz Per Round, Max. 10":
-                        return new Skill(SkillLeader.Morphun);
+                        return new OldSkill(SkillLeader.Morphun);
                     case "Nuke":
-                        return new Skill(SkillLeader.MrBigDuke);
+                        return new OldSkill(SkillLeader.MrBigDuke);
                     case "Bypass":
-                        return new Skill(SkillLeader.RobbertCobb);
+                        return new OldSkill(SkillLeader.RobbertCobb);
                     case "Tie-break":
-                        return new Skill(SkillLeader.Solomon);
+                        return new OldSkill(SkillLeader.Solomon);
                     case "Team: +1 Damage":
-                        return new Skill(SkillLeader.Timber);
+                        return new OldSkill(SkillLeader.Timber);
                     case "Team: Xp +90%":
-                        return new Skill(SkillLeader.Vansaar);
+                        return new OldSkill(SkillLeader.Vansaar);
                     case "Team: -2 Opp. Damage, Min 4":
-                        return new Skill(SkillLeader.Vholt);
+                        return new OldSkill(SkillLeader.Vholt);
                 }
 
                 string prefixText, suffixText;
@@ -601,7 +601,7 @@ namespace UrbanRivalsApiToCoreAdapter
                 int.TryParse(x, out X);
                 int.TryParse(y, out Y);
 
-                return new Skill(prefix, suffix, X, Y);
+                return new OldSkill(prefix, suffix, X, Y);
             }
 
             return ability;

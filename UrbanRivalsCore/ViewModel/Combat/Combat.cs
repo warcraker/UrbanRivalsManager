@@ -337,8 +337,8 @@ namespace UrbanRivalsCore.ViewModel
                 : DetermineRoundWinnerWithRandom(leftAttack, rightAttack, forceWinnerOnRandom, out finisherMoveTriggers);
 
             /* activationStatusBeforeDuel is used to track skills that we know are stopped before knowing who wins the round.
-             * If the in-game UI would show a red X over the Skill, here the Skill will be shown stopped.
-             * - Will show stopped status if stopped by other Skill.
+             * If the in-game UI would show a red X over the OldSkill, here the OldSkill will be shown stopped.
+             * - Will show stopped status if stopped by other OldSkill.
              * - Will show stopped status if wrong timing for Confidence, Revenge, Courage, Reprisal or Stop prefixes.
              * - Leader skills will be treated as NoAbility. This doesn't change their behavior at all.
              * */
@@ -846,11 +846,11 @@ namespace UrbanRivalsCore.ViewModel
             playerStatus.Confidence = hasWonTheRound;
             playerStatus.Revenge = !hasWonTheRound;
         }
-        private static ProtectedStats CalculatedProtectedStats(Skill ability, Skill bonus)
+        private static ProtectedStats CalculatedProtectedStats(OldSkill ability, OldSkill bonus)
         {
             return CalculatedProtectedStats(ability) | CalculatedProtectedStats(bonus);
         }
-        private static ProtectedStats CalculatedProtectedStats(Skill skill)
+        private static ProtectedStats CalculatedProtectedStats(OldSkill skill)
         {
             switch (skill.suffix)
             {
@@ -866,11 +866,11 @@ namespace UrbanRivalsCore.ViewModel
                     return ProtectedStats.None;
             }
         }
-        private static CanceledModifiers CalculateCanceledModifiers(Skill enemyAbility, Skill enemyBonus)
+        private static CanceledModifiers CalculateCanceledModifiers(OldSkill enemyAbility, OldSkill enemyBonus)
         {
             return CalculateCancelModifiers(enemyAbility) | CalculateCancelModifiers(enemyBonus);
         }
-        private static CanceledModifiers CalculateCancelModifiers(Skill enemySkill)
+        private static CanceledModifiers CalculateCancelModifiers(OldSkill enemySkill)
         {
             switch (enemySkill.suffix)
             {

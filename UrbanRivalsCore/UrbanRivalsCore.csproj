@@ -87,7 +87,7 @@
     <Compile Include="Model\Cards\Skills\Prefixes\StopPrefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\SupportPrefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\VictoryOrDefeatPrefix.cs" />
-    <Compile Include="Model\Cards\Skill.cs" />
+    <Compile Include="Model\Cards\OldSkill.cs" />
     <Compile Include="Model\Cards\Skills\SkillParser.cs" />
     <Compile Include="Model\Cards\Skills\Suffixes\Suffix.cs" />
     <Compile Include="Model\Combat\RoundResults.cs" />

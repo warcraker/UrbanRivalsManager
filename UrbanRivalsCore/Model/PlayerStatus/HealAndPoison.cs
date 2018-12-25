@@ -59,7 +59,7 @@ namespace UrbanRivalsCore.Model
             Value = 0;
         }
 
-        public Heal(Skill skill)
+        public Heal(OldSkill skill)
         {
             if (skill == null)
                 throw new ArgumentNullException(nameof(skill));
@@ -138,7 +138,7 @@ namespace UrbanRivalsCore.Model
             Value = 0;
         }
 
-        public Poison(Skill skill)
+        public Poison(OldSkill skill)
         {
             if (skill == null)
                 throw new ArgumentNullException(nameof(skill));

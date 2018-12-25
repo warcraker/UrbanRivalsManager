@@ -9,7 +9,7 @@ namespace UrbanRivalsCore.Model
         public event PropertyChangedEventHandler PropertyChanged;
 
         // TODO: Revise if set is needed
-        public Skill ability
+        public OldSkill ability
         {
             get
             {
@@ -18,7 +18,7 @@ namespace UrbanRivalsCore.Model
             set
             {
                 if (value == null)
-                    m_ability = Skill.NO_ABILITY;
+                    m_ability = OldSkill.NO_ABILITY;
                 else
                     m_ability = value;
                 if (PropertyChanged != null)
@@ -26,7 +26,7 @@ namespace UrbanRivalsCore.Model
             }
         }
         // TODO: Revise if set is needed    
-        public Skill bonus
+        public OldSkill bonus
         {
             get
             {
@@ -35,7 +35,7 @@ namespace UrbanRivalsCore.Model
             set
             {
                 if (value == null)
-                    m_bonus = Skill.NO_BONUS;
+                    m_bonus = OldSkill.NO_BONUS;
                 else
                     m_bonus = value;
                 if (PropertyChanged != null)
@@ -54,8 +54,8 @@ namespace UrbanRivalsCore.Model
         public readonly int damage;
         public readonly CardRarity rarity;
 
-        private Skill m_bonus;
-        private Skill m_ability;
+        private OldSkill m_bonus;
+        private OldSkill m_ability;
 
         public CardDrawed(CardInstance cardInstance)
         {

@@ -50,7 +50,7 @@ namespace UrbanRivalsCore.ViewModel
                     skillsHandler.FreezeSkill(i);
             }
         }
-        public static ActivationStatus[] CalculateStopProtectChains(ActivationStatus[] initialActivationStatus, Skill leftAbility, Skill rightAbility, Skill leftBonus, Skill rightBonus)
+        public static ActivationStatus[] CalculateStopProtectChains(ActivationStatus[] initialActivationStatus, OldSkill leftAbility, OldSkill rightAbility, OldSkill leftBonus, OldSkill rightBonus)
         {
             PrvStopProtectLink[] Links = GenerateInitialChainLinks(initialActivationStatus, leftAbility, rightAbility, leftBonus, rightBonus);
 
@@ -86,7 +86,7 @@ namespace UrbanRivalsCore.ViewModel
                 result[i] = status;
             return result;
         }
-        private static ActivationCases DecodeActivationCases(Skill skill)
+        private static ActivationCases DecodeActivationCases(OldSkill skill)
         {
             switch (skill.suffix)
             {
@@ -102,7 +102,7 @@ namespace UrbanRivalsCore.ViewModel
                     return ActivationCases.NoChain;
             }
         }
-        private static PrvStopProtectLink[] GenerateInitialChainLinks(ActivationStatus[] initialActivationStatus, Skill leftAbility, Skill rightAbility, Skill leftBonus, Skill rightBonus)
+        private static PrvStopProtectLink[] GenerateInitialChainLinks(ActivationStatus[] initialActivationStatus, OldSkill leftAbility, OldSkill rightAbility, OldSkill leftBonus, OldSkill rightBonus)
         {
             PrvStopProtectLink[] Links = new PrvStopProtectLink[4];
             for (int i = 0; i < 4; i++)
@@ -156,7 +156,7 @@ namespace UrbanRivalsCore.ViewModel
         }
         private static void ApplyStops(PrvStopProtectLink[] links)
         {
-            // Mark as Stopped any Skill that is the target of other Stop
+            // Mark as Stopped any OldSkill that is the target of other Stop
             foreach (PrvStopProtectLink link in links)
             {
                 if (link.inspected)
@@ -199,7 +199,7 @@ namespace UrbanRivalsCore.ViewModel
         }
         private static void ApplyProtects(PrvStopProtectLink[] links)
         {
-            // Any Protect Skill that is not already Stopped cleans the stop from its target
+            // Any Protect OldSkill that is not already Stopped cleans the stop from its target
             foreach (PrvStopProtectLink link in links)
             {
                 if (link.Status == ActivationStatus.Stopped)

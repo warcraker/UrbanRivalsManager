@@ -9,10 +9,10 @@ namespace UrbanRivalsCore.ViewModel
 {
     internal class CombatRoundSkillsHandler
     {
-        Skill[] skills = new Skill[4];
+        OldSkill[] skills = new OldSkill[4];
         ActivationStatus[] status = new ActivationStatus[4];
 
-        public CombatRoundSkillsHandler(Skill leftAbility, Skill rightAbility, Skill leftBonus, Skill rightBonus)
+        public CombatRoundSkillsHandler(OldSkill leftAbility, OldSkill rightAbility, OldSkill leftBonus, OldSkill rightBonus)
         {
             skills[(int)SkillIndex.LA] = leftAbility.Copy();
             skills[(int)SkillIndex.RA] = rightAbility.Copy();
@@ -20,7 +20,7 @@ namespace UrbanRivalsCore.ViewModel
             skills[(int)SkillIndex.RB] = rightBonus.Copy();
         }
 
-        public Skill this[SkillIndex index]
+        public OldSkill this[SkillIndex index]
         {
             get
             {
@@ -31,7 +31,7 @@ namespace UrbanRivalsCore.ViewModel
                 this[(int)index] = value;
             }
         }
-        public Skill this[int index]
+        public OldSkill this[int index]
         {
             get
             {
@@ -39,9 +39,9 @@ namespace UrbanRivalsCore.ViewModel
                     return skills[index];
 
                 if (index == (int)SkillIndex.LA || index == (int)SkillIndex.RA)
-                    return Skill.NO_ABILITY;
+                    return OldSkill.NO_ABILITY;
 
-                return Skill.NO_BONUS;
+                return OldSkill.NO_BONUS;
             }
             private set
             {
@@ -594,7 +594,7 @@ namespace UrbanRivalsCore.ViewModel
         {
             for (int i = 0; i < 4; i++)
                 if (skills[i].prefix == (SkillPrefix.GrowthAndDefeat)) // TODO check as flag
-                    skills[i] = new Skill(SkillPrefix.Defeat, SkillSuffix.DecreaseLifeXMinY, CalculateGrowth(skills[i], roundCounter), 1);
+                    skills[i] = new OldSkill(SkillPrefix.Defeat, SkillSuffix.DecreaseLifeXMinY, CalculateGrowth(skills[i], roundCounter), 1);
         }
 
         /* Utils */
@@ -603,7 +603,7 @@ namespace UrbanRivalsCore.ViewModel
         {
             return (skillIndex == (int)SkillIndex.LA || skillIndex == (int)SkillIndex.LB);
         }
-        private static int CalculateGrowth(Skill skill, int roundCounter)
+        private static int CalculateGrowth(OldSkill skill, int roundCounter)
         {
             return skill.x * (roundCounter + 1);
         }

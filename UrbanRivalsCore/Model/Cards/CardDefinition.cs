@@ -12,7 +12,7 @@ namespace UrbanRivalsCore.Model
         public readonly int id;
         public readonly string name;
         public readonly Clan clan;
-        public readonly Skill ability;
+        public readonly OldSkill ability;
         public readonly int minLevel;
         public readonly int maxLevel;
         public readonly int abilityUnlockLevel;
@@ -24,11 +24,11 @@ namespace UrbanRivalsCore.Model
         {
             CardDefinition cardDefinition;
 
-            cardDefinition = new CardDefinition(id, name, clan, cardStatsPerLevel, rarity, Skill.NO_ABILITY, 0);
+            cardDefinition = new CardDefinition(id, name, clan, cardStatsPerLevel, rarity, OldSkill.NO_ABILITY, 0);
 
             return cardDefinition;
         }
-        public static CardDefinition createCardWithAbility(int id, string name, Clan clan, List<CardStats> cardStatsPerLevel, CardRarity rarity, Skill ability, int abilityUnlockLevel)
+        public static CardDefinition createCardWithAbility(int id, string name, Clan clan, List<CardStats> cardStatsPerLevel, CardRarity rarity, OldSkill ability, int abilityUnlockLevel)
         {
             CardDefinition cardDefinition;
             bool abilityIsUnlockable;
@@ -37,8 +37,8 @@ namespace UrbanRivalsCore.Model
 
             AssertArgument.isNotNull(ability, nameof(ability));
 
-            abilityIsUnlockable = (ability != Skill.NO_BONUS && ability != Skill.NO_ABILITY && ability != Skill.UNLOCKED_AT_LEVEL_2 && ability != Skill.UNLOCKED_AT_LEVEL_3
-                && ability != Skill.UNLOCKED_AT_LEVEL_4 && ability != Skill.UNLOCKED_AT_LEVEL_5);
+            abilityIsUnlockable = (ability != OldSkill.NO_BONUS && ability != OldSkill.NO_ABILITY && ability != OldSkill.UNLOCKED_AT_LEVEL_2 && ability != OldSkill.UNLOCKED_AT_LEVEL_3
+                && ability != OldSkill.UNLOCKED_AT_LEVEL_4 && ability != OldSkill.UNLOCKED_AT_LEVEL_5);
 
             AssertArgument.check(abilityIsUnlockable, "Must be an unlockable ability", nameof(ability));
 
@@ -52,7 +52,7 @@ namespace UrbanRivalsCore.Model
 
             return cardDefinition;
         }
-        private CardDefinition(int id, String name, Clan clan, List<CardStats> cardStatsPerLevel, CardRarity rarity, Skill ability, int abilityUnlockLevel)
+        private CardDefinition(int id, String name, Clan clan, List<CardStats> cardStatsPerLevel, CardRarity rarity, OldSkill ability, int abilityUnlockLevel)
         {
             int minLevel;
             int maxLevel;

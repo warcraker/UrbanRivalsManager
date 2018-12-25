@@ -14,7 +14,7 @@ namespace UrbanRivalsCore.Model
         public readonly int maxLevel;
         public readonly Clan clan;
         public readonly CardRarity rarity;
-        public readonly Skill ability;
+        public readonly OldSkill ability;
         public readonly int power;
         public readonly int damage;
 
@@ -42,8 +42,8 @@ namespace UrbanRivalsCore.Model
         {
             int minLevel;
             int maxLevel;
-            Skill abilityFromBase;
-            Skill ability;
+            OldSkill abilityFromBase;
+            OldSkill ability;
             CardStats cardStats;
 
             AssertArgument.isNotNull(cardDefinition, nameof(cardDefinition));
@@ -58,9 +58,9 @@ namespace UrbanRivalsCore.Model
             }
 
             abilityFromBase = cardDefinition.ability;
-            if (abilityFromBase == Skill.NO_ABILITY)
+            if (abilityFromBase == OldSkill.NO_ABILITY)
             {
-                ability = Skill.NO_ABILITY;
+                ability = OldSkill.NO_ABILITY;
             }
             else
             {
@@ -76,16 +76,16 @@ namespace UrbanRivalsCore.Model
                     switch (abilityUnlockLevel)
                     {
                         case 2:
-                            ability = Skill.UNLOCKED_AT_LEVEL_2;
+                            ability = OldSkill.UNLOCKED_AT_LEVEL_2;
                             break;
                         case 3:
-                            ability = Skill.UNLOCKED_AT_LEVEL_3;
+                            ability = OldSkill.UNLOCKED_AT_LEVEL_3;
                             break;
                         case 4:
-                            ability = Skill.UNLOCKED_AT_LEVEL_4;
+                            ability = OldSkill.UNLOCKED_AT_LEVEL_4;
                             break;
                         case 5:
-                            ability = Skill.UNLOCKED_AT_LEVEL_5;
+                            ability = OldSkill.UNLOCKED_AT_LEVEL_5;
                             break;
                         default:
                             ability = null;

@@ -17,7 +17,7 @@ namespace UrbanRivalsManager.SampleData
             int baseId = 123;
             Clan clan = Clan.getClanById(ClanId.Raptors);
             string cardName = "Tester";
-            Skill ability = new Skill(SkillPrefix.Courage, SkillSuffix.DecreasePillzXMinY, 2, 3);
+            OldSkill ability = new OldSkill(SkillPrefix.Courage, SkillSuffix.DecreasePillzXMinY, 2, 3);
             List<CardStats> cardStatsPerLevel = new List<CardStats>
             {
                 new CardStats(2,2,3),

@@ -3,7 +3,7 @@ using UrbanRivalsUtils;
 
 namespace UrbanRivalsCore.Model
 {
-    public class Skill
+    public class OldSkill
     {
         private enum EmptySkill
         {
@@ -16,12 +16,12 @@ namespace UrbanRivalsCore.Model
             NoBonus,
         }
 
-        public static readonly Skill UNLOCKED_AT_LEVEL_2 = prv_createEmptySkill(EmptySkill.UnlockedAt2);
-        public static readonly Skill UNLOCKED_AT_LEVEL_3 = prv_createEmptySkill(EmptySkill.UnlockedAt3);
-        public static readonly Skill UNLOCKED_AT_LEVEL_4 = prv_createEmptySkill(EmptySkill.UnlockedAt4);
-        public static readonly Skill UNLOCKED_AT_LEVEL_5 = prv_createEmptySkill(EmptySkill.UnlockedAt5);
-        public static readonly Skill NO_ABILITY = prv_createEmptySkill(EmptySkill.NoAbility);
-        public static readonly Skill NO_BONUS = prv_createEmptySkill(EmptySkill.NoBonus);
+        public static readonly OldSkill UNLOCKED_AT_LEVEL_2 = prv_createEmptySkill(EmptySkill.UnlockedAt2);
+        public static readonly OldSkill UNLOCKED_AT_LEVEL_3 = prv_createEmptySkill(EmptySkill.UnlockedAt3);
+        public static readonly OldSkill UNLOCKED_AT_LEVEL_4 = prv_createEmptySkill(EmptySkill.UnlockedAt4);
+        public static readonly OldSkill UNLOCKED_AT_LEVEL_5 = prv_createEmptySkill(EmptySkill.UnlockedAt5);
+        public static readonly OldSkill NO_ABILITY = prv_createEmptySkill(EmptySkill.NoAbility);
+        public static readonly OldSkill NO_BONUS = prv_createEmptySkill(EmptySkill.NoBonus);
 
         private static readonly int PRV_MAX_VALUE_PREFIX = Enum.GetValues(typeof(SkillPrefix)).Length - 1;
 
@@ -33,7 +33,7 @@ namespace UrbanRivalsCore.Model
 
         private EmptySkill EmptySkillFlags;
 
-        public Skill(SkillPrefix prefix, SkillSuffix suffix, int x = 0, int y = 0)
+        public OldSkill(SkillPrefix prefix, SkillSuffix suffix, int x = 0, int y = 0)
         {
             if ((int)prefix < 0 || (int)prefix > Constants.EnumMaxAllowedValues.SkillPrefix)
                 throw new ArgumentOutOfRangeException(nameof(prefix), prefix, "Must be a valid " + nameof(SkillPrefix));
@@ -51,7 +51,7 @@ namespace UrbanRivalsCore.Model
             this.x = x;
             this.y = y;
         }
-        public Skill(SkillLeader leader)
+        public OldSkill(SkillLeader leader)
         {
             if ((int)leader < 0 || (int)leader > Constants.EnumMaxAllowedValues.SkillLeader)
                 throw new ArgumentOutOfRangeException(nameof(leader), leader, "Must be defined in SkillLeader");
@@ -60,18 +60,18 @@ namespace UrbanRivalsCore.Model
 
             this.leader = leader;
         }
-        private Skill() { }
-        private static Skill prv_createEmptySkill(EmptySkill flag)
+        private OldSkill() { }
+        private static OldSkill prv_createEmptySkill(EmptySkill flag)
         {
-            Skill skill;
+            OldSkill skill;
 
-            skill = new Skill();
+            skill = new OldSkill();
             skill.EmptySkillFlags = flag;
 
             return skill;
         }
 
-        public Skill Copy()
+        public OldSkill Copy()
         {
             if (this.EmptySkillFlags != EmptySkill.None)
             {
@@ -94,14 +94,14 @@ namespace UrbanRivalsCore.Model
                 }
             }
             if (this.leader != SkillLeader.None)
-                return new Skill(this.leader);
-            return new Skill(this.prefix, this.suffix, this.x, this.y);
+                return new OldSkill(this.leader);
+            return new OldSkill(this.prefix, this.suffix, this.x, this.y);
         }
-        internal Skill CopyWithDifferentX(int newX)
+        internal OldSkill CopyWithDifferentX(int newX)
         {
             if (this.leader != SkillLeader.None)
-                return new Skill(this.leader);
-            return new Skill(this.prefix, this.suffix, newX, this.y);
+                return new OldSkill(this.leader);
+            return new OldSkill(this.prefix, this.suffix, newX, this.y);
         }
         public override string ToString() // TODO
         {

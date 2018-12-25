@@ -34,7 +34,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             CardDefinition cardDefinition;
             List<CardStats> cardStatsPerLevel;
             Clan clan;
-            Skill ability;
+            OldSkill ability;
             string name;
             int unlocklevel;
             CardRarity rarity;
@@ -78,11 +78,11 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 suffix = prv_getEnum<SkillSuffix>(row, "suffix");
                 if (leader != SkillLeader.None)
                 {
-                    ability = new Skill(leader);
+                    ability = new OldSkill(leader);
                 }
                 else if (suffix == SkillSuffix.None)
                 {
-                    ability = Skill.NO_ABILITY;
+                    ability = OldSkill.NO_ABILITY;
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                     prefix = prv_getEnum<SkillPrefix>(row, "prefix");
                     x = prv_getInteger(row, "x");
                     y = prv_getInteger(row, "y");
-                    ability = new Skill(prefix, suffix, x, y);
+                    ability = new OldSkill(prefix, suffix, x, y);
                 }
 
                 name = prv_getString(row, "name");
@@ -100,7 +100,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 rarity = prv_getEnum<CardRarity>(row, "rarity");
             }
 
-            if (ability == Skill.NO_ABILITY)
+            if (ability == OldSkill.NO_ABILITY)
             {
                 cardDefinition = CardDefinition.createCardWithoutAbility(id, name, clan, cardStatsPerLevel, rarity);
             }
@@ -137,7 +137,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             int clanId;
             string name;
             int unlockLevel;
-            Skill ability;
+            OldSkill ability;
             int leader;
             int prefix;
             int suffix;
