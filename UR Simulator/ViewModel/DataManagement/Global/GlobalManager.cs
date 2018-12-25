@@ -141,10 +141,16 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             // This process will set the locale to English. Here we take the previous value to restore it at the end.
             string userLocale = managers.ServerQueriesManager.GetUserLocale();
 
+            /* TODO get existingIds, sort it, and pick the last item. With each server check, if the retrieved item is greater than the last item, 
+             * we know for sure that the previous obtained data is obsolete. Otherwise, we check the hash.
+             */
             var existingIds = managers.ServerQueriesManager.GetAllCardBaseIds();
             var storedIds = managers.DatabaseManager.getAllCardDefinitionIds();
+            storedIds = new List<int>(); // TODO remove this line
             var idsToAnalyze = existingIds.Except(storedIds).ToList();
             idsToAnalyze.Sort();
+
+            // TODO Hash idToAnalyze. Now we know if a new card has appeared
 
             /* There are 3 API calls to get characters details:
              * - characters.getCharacters (labeled "oldGetCharacters")
@@ -172,6 +178,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             HttpStatusCode statusCode = managers.GlobalManager.ApiManagerInstance.SendRequest(request, out response);
             if (statusCode != HttpStatusCode.OK)
                 throw new Exception("GetCardBase SendRequest returned: " + statusCode.ToString()); // TODO: Manage timeouts gracefully (GatewayTimeout)
+            // TODO hash response. Now we have all abilities by characterId and stats per levels, among other data
             dynamic decoded = JsonDecoder.Decode(response);
 
             int progress = 0;
