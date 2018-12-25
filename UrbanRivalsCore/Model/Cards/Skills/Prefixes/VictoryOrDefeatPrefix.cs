@@ -4,12 +4,12 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 {
     public class VictoryOrDefeatPrefix : Prefix
     {
-        private static readonly Regex PRV_VICTORY_OR_DEFEAT_REGEX = new Regex(@"^Victory Or Defeat|Vict\. Or Def\.: ");
+        private static readonly Regex PRV_VICTORY_OR_DEFEAT_REGEX = new Regex(@"^Victory Or Defeat: |^Vict\. Or Def\.: ");
 
         public override bool isMatch(string text)
         {
-            const string PRV_VICTORY_OR_DEFEAT_LONG_PREFIX = "Victory Or Defeat";
-            const string PRV_VICTORY_OR_DEFEAT_SHORT_PREFIX = "Vict. Or Def.";
+            const string PRV_VICTORY_OR_DEFEAT_LONG_PREFIX = "Victory Or Defeat: ";
+            const string PRV_VICTORY_OR_DEFEAT_SHORT_PREFIX = "Vict. Or Def.: ";
 
             return text.StartsWith(PRV_VICTORY_OR_DEFEAT_LONG_PREFIX) || text.StartsWith(PRV_VICTORY_OR_DEFEAT_SHORT_PREFIX);
         }

@@ -8,7 +8,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 
         public override bool isMatch(string text)
         {
-            const string PRV_KILLSHOT_PREFIX = "Killshot";
+            const string PRV_KILLSHOT_PREFIX = "Killshot: ";
 
             return text.StartsWith(PRV_KILLSHOT_PREFIX);
         }

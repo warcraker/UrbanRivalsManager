@@ -8,7 +8,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 
         public override bool isMatch(string text)
         {
-            const string PRV_EQUALIZER_PREFIX = "Equalizer";
+            const string PRV_EQUALIZER_PREFIX = "Equalizer: ";
 
             return text.StartsWith(PRV_EQUALIZER_PREFIX);
         }

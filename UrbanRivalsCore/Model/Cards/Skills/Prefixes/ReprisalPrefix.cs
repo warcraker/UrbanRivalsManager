@@ -8,7 +8,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 
         public override bool isMatch(string text)
         {
-            const string PRV_REPRISAL_PREFIX = "Reprisal";
+            const string PRV_REPRISAL_PREFIX = "Reprisal: ";
 
             return text.StartsWith(PRV_REPRISAL_PREFIX);
         }
