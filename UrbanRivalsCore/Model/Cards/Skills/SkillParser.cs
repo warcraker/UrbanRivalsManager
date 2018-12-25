@@ -54,9 +54,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills
             };
         }
 
-        public static CoreSkill parseSkill(string skillAsText)
+        public static Skill parseSkill(string skillAsText)
         {
-            CoreSkill skill;
+            Skill skill;
 
             if (skillAsText == PRV_NO_ABILITY_TEXT)
             {
@@ -120,7 +120,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills
             throw new NotImplementedException();
         }
 
-        private static CoreSkill prv_combinePrefixesAndSuffix(IEnumerable<object> prefixes, object suffix)
+        private static Skill prv_combinePrefixesAndSuffix(IEnumerable<object> prefixes, object suffix)
         {
             throw new NotImplementedException();
         }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace UrbanRivalsCore.Model.Cards.Skills
 {
-    public class CoreSkill
+    public class Skill
     {
-        private CoreSkill()
+        private Skill()
         {
         }
     }

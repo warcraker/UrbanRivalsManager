@@ -52,7 +52,7 @@
     <Compile Include="Model\Cards\CardStats.cs" />
     <Compile Include="Model\Cards\Clan.cs" />
     <Compile Include="Model\Cards\Deck.cs" />
-    <Compile Include="Model\Cards\Skills\CoreSkill.cs" />
+    <Compile Include="Model\Cards\Skills\Skill.cs" />
     <Compile Include="Model\Cards\Skills\Leaders\Ambre.cs" />
     <Compile Include="Model\Cards\Skills\Leaders\Ashigaru.cs" />
     <Compile Include="Model\Cards\Skills\Leaders\Bridget.cs" />
