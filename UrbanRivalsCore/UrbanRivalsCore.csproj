@@ -64,6 +64,11 @@
     <Compile Include="Model\Cards\Skills\Leaders\Melody.cs" />
     <Compile Include="Model\Cards\Skills\Leaders\Morphun.cs" />
     <Compile Include="Model\Cards\Skills\Leaders\MrBigDuke.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\RobertCobb.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\Solomon.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\Timber.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\Vansaar.cs" />
+    <Compile Include="Model\Cards\Skills\Leaders\Vholt.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\BacklashPrefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\BrawlPrefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\ConfidencePrefix.cs" />
@@ -74,6 +79,8 @@
     <Compile Include="Model\Cards\Skills\Prefixes\EqualizerPrefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\GrowthPrefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\KillshotPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\DayPrefix.cs" />
+    <Compile Include="Model\Cards\Skills\Prefixes\NightPrefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\Prefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\ReprisalPrefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\RevengePrefix.cs" />
