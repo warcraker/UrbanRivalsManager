@@ -1,4 +1,5 @@
-﻿using UrbanRivalsUtils;
+﻿using System;
+using UrbanRivalsUtils;
 
 namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
 {
@@ -11,6 +12,11 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
             AssertArgument.checkIntegerRange(y >= 0, "Must be positive", y, nameof(y));
 
             this.y = y;
+        }
+
+        protected override string getTextRepresentation(string stringFormat)
+        {
+            return String.Format(stringFormat, this.x, this.y);
         }
     }
 }

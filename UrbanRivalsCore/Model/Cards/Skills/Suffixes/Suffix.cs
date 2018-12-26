@@ -2,5 +2,9 @@
 {
     public abstract class Suffix
     {
+        protected Suffix()
+        {
+            ;
+        }
     }
 }
