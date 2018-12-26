@@ -75,7 +75,6 @@
     <Compile Include="Model\Cards\Skills\Prefixes\DefeatPrefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\CouragePrefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\DegrowthPrefix.cs" />
-    <Compile Include="Model\Cards\Skills\Prefixes\EmptyPrefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\EqualizerPrefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\GrowthPrefix.cs" />
     <Compile Include="Model\Cards\Skills\Prefixes\KillshotPrefix.cs" />

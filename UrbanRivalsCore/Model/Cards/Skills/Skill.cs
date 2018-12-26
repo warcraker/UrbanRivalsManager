@@ -21,12 +21,30 @@ namespace UrbanRivalsCore.Model.Cards.Skills
             AbilityUnlockedAtLevel5,
         }
 
+        private class PrvDefaultPrefix : Prefix
+        {
+            public override bool isMatch(string text)
+            {
+                throw new InvalidOperationException();
+            }
+            public override string removePrefixFromText(string text)
+            {
+                throw new InvalidOperationException();
+            }
+            public override string ToString()
+            {
+                return "";
+            }
+        }
+
         public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_2;
         public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_3;
         public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_4;
         public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_5;
         public static readonly Skill NO_ABILITY;
         public static readonly Skill NO_BONUS;
+
+        private static readonly Prefix PRV_DEFAULT_PREFIX = new PrvDefaultPrefix();
 
         private readonly PrvEEmptySkill emptySkillValue;
         private readonly Leader leader;
@@ -49,13 +67,23 @@ namespace UrbanRivalsCore.Model.Cards.Skills
 
             return new Skill(leader);
         }
-        public static Skill getSkill(IEnumerable<Prefix> prefixes, Suffix suffix)
+        public static Skill getSkillWithPrefixes(IEnumerable<Prefix> prefixes, Suffix suffix)
         {
             AssertArgument.isNotNull(prefixes, nameof(prefixes));
             int prefixesCount = prefixes.Count();
             AssertArgument.checkIntegerRange(prefixesCount > 0, $"must contain at least one item", prefixesCount, nameof(prefixes));
             AssertArgument.isNotNull(suffix, nameof(suffix));
 
+            return new Skill(prefixes, suffix);
+        }
+        public static Skill getSkillWithoutPrefixes(Suffix suffix)
+        {
+            AssertArgument.isNotNull(suffix, nameof(suffix));
+
+            Prefix[] prefixes = new Prefix[]
+            {
+                PRV_DEFAULT_PREFIX,
+            };
             return new Skill(prefixes, suffix);
         }
 

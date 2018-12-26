@@ -12,7 +12,6 @@ namespace UrbanRivalsCore.Model.Cards.Skills
         private const string PRV_NO_ABILITY_TEXT = "No ability";
         private static readonly IEnumerable<Leader> PRV_ALL_LEADERS;
         private static readonly IEnumerable<Prefix> PRV_ALL_PREFIXES;
-        private static readonly Prefix PRV_DEFAULT_PREFIX;
 
         static SkillParser()
         {
@@ -33,7 +32,6 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                 new SupportPrefix(),
                 new VictoryOrDefeatPrefix(),
             };
-            PRV_DEFAULT_PREFIX = new DefaultPrefix();
             PRV_ALL_LEADERS = new List<Leader>
             {
                 new AmbreLeader(),
@@ -60,24 +58,30 @@ namespace UrbanRivalsCore.Model.Cards.Skills
 
             if (skillAsText == PRV_NO_ABILITY_TEXT)
             {
-                skill = null; // TODO
+                skill = Skill.NO_ABILITY;
             }
             else
             {
                 Leader leader = prv_parseLeader(skillAsText);
                 if (leader != null)
                 {
-                    skill = null; // TODO
+                    skill = Skill.getLeaderSkill(leader);
                 }
                 else
                 {
-                    IEnumerable<Prefix> prefixes;
-                    Suffix suffix;
                     string suffixAsText;
 
-                    prefixes = prv_parsePrefixes(skillAsText, out suffixAsText);
-                    suffix = prv_parseSuffix(suffixAsText);
-                    skill = prv_combinePrefixesAndSuffix(prefixes, suffix);
+                    IEnumerable<Prefix> prefixes = prv_parsePrefixes(skillAsText, out suffixAsText);
+                    Suffix suffix = prv_parseSuffix(suffixAsText);
+
+                    if (prefixes.Any())
+                    {
+                        skill = Skill.getSkillWithPrefixes(prefixes, suffix);
+                    }
+                    else
+                    {
+                        skill = Skill.getSkillWithoutPrefixes(suffix);
+                    }
                 }
             }
 
@@ -88,7 +92,6 @@ namespace UrbanRivalsCore.Model.Cards.Skills
         {
             return PRV_ALL_LEADERS.SingleOrDefault(leader => leader.isMatch(abilityText));
         }
-
         private static IEnumerable<Prefix> prv_parsePrefixes(string textToParse, out string textWithoutPrefixes)
         {
             List<Prefix> prefixes;
@@ -107,20 +110,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills
 
             textWithoutPrefixes = textToParse;
 
-            if (prefixes.Count == 0)
-            {
-                prefixes.Add(PRV_DEFAULT_PREFIX);
-            }
-
             return prefixes;
         }
-
         private static Suffix prv_parseSuffix(string suffixAsText)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static Skill prv_combinePrefixesAndSuffix(IEnumerable<object> prefixes, object suffix)
         {
             throw new NotImplementedException();
         }
