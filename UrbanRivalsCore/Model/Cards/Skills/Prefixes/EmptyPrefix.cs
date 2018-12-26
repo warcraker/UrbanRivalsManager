@@ -6,12 +6,15 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
     {
         public override bool isMatch(string text)
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException();
         }
-
         public override string removePrefixFromText(string text)
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException();
+        }
+        public override string ToString()
+        {
+            return "";
         }
     }
 }
