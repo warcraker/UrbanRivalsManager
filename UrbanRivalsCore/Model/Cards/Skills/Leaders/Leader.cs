@@ -13,5 +13,9 @@
         {
             return this.abilityText == abilityText;
         }
+        public override string ToString()
+        {
+            return this.abilityText;
+        }
     }
 }
