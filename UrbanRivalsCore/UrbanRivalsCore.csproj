@@ -88,6 +88,11 @@
     <Compile Include="Model\Cards\Skills\Prefixes\VictoryOrDefeatPrefix.cs" />
     <Compile Include="Model\Cards\OldSkill.cs" />
     <Compile Include="Model\Cards\Skills\SkillParser.cs" />
+    <Compile Include="Model\Cards\Skills\Suffixes\CopyBonusSuffix.cs" />
+    <Compile Include="Model\Cards\Skills\Suffixes\CorrosionXMinYSuffix.cs" />
+    <Compile Include="Model\Cards\Skills\Suffixes\ConsumeXMinYSuffix.cs" />
+    <Compile Include="Model\Cards\Skills\Suffixes\DecreaseAttackXMinYSuffix.cs" />
+    <Compile Include="Model\Cards\Skills\Suffixes\IncreaseAttackXSuffix.cs" />
     <Compile Include="Model\Cards\Skills\Suffixes\SingleValueSuffix.cs" />
     <Compile Include="Model\Cards\Skills\Suffixes\Suffix.cs" />
     <Compile Include="Model\Cards\Skills\Suffixes\DoubleValueSuffix.cs" />
