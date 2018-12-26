@@ -88,7 +88,13 @@
     <Compile Include="Model\Cards\Skills\Prefixes\VictoryOrDefeatPrefix.cs" />
     <Compile Include="Model\Cards\OldSkill.cs" />
     <Compile Include="Model\Cards\Skills\SkillParser.cs" />
+    <Compile Include="Model\Cards\Skills\Suffixes\SingleValueSuffix.cs" />
     <Compile Include="Model\Cards\Skills\Suffixes\Suffix.cs" />
+    <Compile Include="Model\Cards\Skills\Suffixes\DoubleValueSuffix.cs" />
+    <Compile Include="Model\Cards\Skills\SuffixParsers\PlainSuffixParser.cs" />
+    <Compile Include="Model\Cards\Skills\SuffixParsers\SuffixParser.cs" />
+    <Compile Include="Model\Cards\Skills\SuffixParsers\SingleValueSuffixParser.cs" />
+    <Compile Include="Model\Cards\Skills\SuffixParsers\DoubleValueSuffixParser.cs" />
     <Compile Include="Model\Combat\RoundResults.cs" />
     <Compile Include="Model\Combat\RoundStatistics.cs" />
     <Compile Include="Model\Enums.cs" />
