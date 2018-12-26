@@ -1,8 +1,8 @@
 ﻿namespace UrbanRivalsCore.Model.Cards.Skills.Leaders
 {
-    public class Ambre : Leader
+    public class AmbreLeader : Leader
     {
-        public Ambre() 
+        public AmbreLeader() 
             : base("Team: Courage, Power +3, Max. 10")
         {
             ;

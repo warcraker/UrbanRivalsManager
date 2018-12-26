@@ -1,8 +1,8 @@
 ﻿namespace UrbanRivalsCore.Model.Cards.Skills.Leaders
 {
-    public class Morphun : Leader
+    public class MorphunLeader : Leader
     {
-        public Morphun()
+        public MorphunLeader()
             : base("+1 Pillz Per Round, Max. 10")
         {
             ;

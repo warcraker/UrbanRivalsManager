@@ -1,9 +1,9 @@
 ﻿namespace UrbanRivalsCore.Model.Cards.Skills.Leaders
 {
-    public class Hugo : Leader
+    public class MrBigDukeLeader : Leader
     {
-        public Hugo()
-            : base("Team: +6 Attack")
+        public MrBigDukeLeader()
+            : base("Nuke")
         {
             ;
         }

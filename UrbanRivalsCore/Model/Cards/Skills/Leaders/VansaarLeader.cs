@@ -1,8 +1,8 @@
 ﻿namespace UrbanRivalsCore.Model.Cards.Skills.Leaders
 {
-    public class Vansaar : Leader
+    public class VansaarLeader : Leader
     {
-        public Vansaar() 
+        public VansaarLeader() 
             : base("Team: Xp +90%")
         {
             ;

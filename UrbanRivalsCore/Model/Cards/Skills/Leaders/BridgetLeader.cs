@@ -1,8 +1,8 @@
 ﻿namespace UrbanRivalsCore.Model.Cards.Skills.Leaders
 {
-    public class Bridget : Leader
+    public class BridgetLeader : Leader
     {
-        public Bridget()
+        public BridgetLeader()
             : base("+1 Life Per Round")
         {
             ;

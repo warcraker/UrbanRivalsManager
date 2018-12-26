@@ -36,21 +36,21 @@ namespace UrbanRivalsCore.Model.Cards.Skills
             PRV_DEFAULT_PREFIX = new DefaultPrefix();
             PRV_ALL_LEADERS = new List<Leader>
             {
-                new Ambre(),
-                new Ashigaru(),
-                new Bridget(),
-                new Eklore(),
-                new Eyrik(),
-                new Hugo(),
-                new JohnDoom(),
-                new Melody(),
-                new Morphun(),
-                new MrBigDuke(),
-                new RobertCobb(),
-                new Solomon(),
-                new Timber(),
-                new Vansaar(),
-                new Vholt(),
+                new AmbreLeader(),
+                new AshigaruLeader(),
+                new BridgetLeader(),
+                new EkloreLeader(),
+                new EyrikLeader(),
+                new HugoLeader(),
+                new JohnDoomLeader(),
+                new MelodyLeader(),
+                new MorphunLeader(),
+                new MrBigDukeLeader(),
+                new RobertCobbLeader(),
+                new SolomonLeader(),
+                new TimberLeader(),
+                new VansaarLeader(),
+                new VholtLeader(),
             };
         }
 

@@ -1,8 +1,8 @@
 ﻿namespace UrbanRivalsCore.Model.Cards.Skills.Leaders
 {
-    public class Eyrik : Leader
+    public class EyrikLeader : Leader
     {
-        public Eyrik()
+        public EyrikLeader()
             : base("Team: -1 Opp. Power, Min 5")
         {
             ;

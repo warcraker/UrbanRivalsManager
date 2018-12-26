@@ -1,8 +1,8 @@
 ﻿namespace UrbanRivalsCore.Model.Cards.Skills.Leaders
 {
-    public class Melody : Leader
+    public class MelodyLeader : Leader
     {
-        public Melody()
+        public MelodyLeader()
             : base("Team: Defeat: Rec. 1 Pillz Out Of 2")
         {
             ;

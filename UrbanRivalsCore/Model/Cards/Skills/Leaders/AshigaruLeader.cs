@@ -1,8 +1,8 @@
 ﻿namespace UrbanRivalsCore.Model.Cards.Skills.Leaders
 {
-    public class Ashigaru : Leader
+    public class AshigaruLeader : Leader
     {
-        public Ashigaru()
+        public AshigaruLeader()
              : base ("Counter-attack")
         {
             ;

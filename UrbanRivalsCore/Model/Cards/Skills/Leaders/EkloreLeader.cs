@@ -1,8 +1,8 @@
 ﻿namespace UrbanRivalsCore.Model.Cards.Skills.Leaders
 {
-    public class Eklore : Leader
+    public class EkloreLeader : Leader
     {
-        public Eklore()
+        public EkloreLeader()
             : base("-1 Opp. Pillz, Per Round, Min 3")
         {
             ;

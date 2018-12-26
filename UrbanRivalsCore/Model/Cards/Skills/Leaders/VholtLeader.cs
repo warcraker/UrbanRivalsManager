@@ -1,8 +1,8 @@
 ﻿namespace UrbanRivalsCore.Model.Cards.Skills.Leaders
 {
-    public class Vholt : Leader
+    public class VholtLeader : Leader
     {
-        public Vholt() 
+        public VholtLeader() 
             : base("Team: -2 Opp. Damage, Min 4")
         {
             ;
