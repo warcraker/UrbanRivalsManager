@@ -6,8 +6,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
     {
         protected readonly int x;
 
-        protected SingleValueSuffix(int x)
-            : base()
+        protected SingleValueSuffix(int x) : base()
         {
             AssertArgument.checkIntegerRange(x > 0, "Must be greater than 0", x, nameof(x));
 

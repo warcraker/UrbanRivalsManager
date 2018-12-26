@@ -6,8 +6,7 @@ namespace UrbanRivalsUtils
     {
         private class PrvAssertException : Exception
         {
-            public PrvAssertException(string message)
-                : base($"Failed assertion: {message}")
+            public PrvAssertException(string message) : base($"Failed assertion: {message}")
             {
                 ;
             }
@@ -16,7 +15,9 @@ namespace UrbanRivalsUtils
         public static void check(bool condition, string message)
         {
             if (condition == false)
+            {
                 throw new PrvAssertException(message);
+            }
         }
 
         public static void fail(string message)

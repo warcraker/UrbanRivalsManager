@@ -2,8 +2,7 @@
 {
     public class MorphunLeader : Leader
     {
-        public MorphunLeader()
-            : base("+1 Pillz Per Round, Max. 10")
+        public MorphunLeader() : base("+1 Pillz Per Round, Max. 10")
         {
             ;
         }

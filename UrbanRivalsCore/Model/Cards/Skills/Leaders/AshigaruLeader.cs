@@ -2,8 +2,7 @@
 {
     public class AshigaruLeader : Leader
     {
-        public AshigaruLeader()
-             : base ("Counter-attack")
+        public AshigaruLeader() : base ("Counter-attack")
         {
             ;
         }

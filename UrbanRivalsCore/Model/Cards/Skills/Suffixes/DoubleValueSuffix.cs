@@ -6,8 +6,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
     {
         protected readonly int y;
 
-        public DoubleValueSuffix(int x, int y)
-            : base(x)
+        public DoubleValueSuffix(int x, int y) : base(x)
         {
             AssertArgument.checkIntegerRange(y >= 0, "Must be positive", y, nameof(y));
 

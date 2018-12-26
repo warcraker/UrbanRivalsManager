@@ -9,8 +9,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.SuffixParsers
     {
         private readonly Func<int, int, DoubleValueSuffix> funcSuffixFactory;
 
-        public DoubleValueSuffixParser(Regex regex, Func<int, int, DoubleValueSuffix> funcSuffixFactory)
-            : base(regex)
+        public DoubleValueSuffixParser(Regex regex, Func<int, int, DoubleValueSuffix> funcSuffixFactory) : base(regex)
         {
             AssertArgument.isNotNull(funcSuffixFactory, nameof(funcSuffixFactory));
 

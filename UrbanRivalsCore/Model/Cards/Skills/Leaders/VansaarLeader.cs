@@ -2,8 +2,7 @@
 {
     public class VansaarLeader : Leader
     {
-        public VansaarLeader() 
-            : base("Team: Xp +90%")
+        public VansaarLeader() : base("Team: Xp +90%")
         {
             ;
         }

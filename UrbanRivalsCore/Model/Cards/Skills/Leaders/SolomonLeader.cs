@@ -2,8 +2,7 @@
 {
     public class SolomonLeader : Leader
     {
-        public SolomonLeader() 
-            : base("Tie-break")
+        public SolomonLeader() : base("Tie-break")
         {
             ;
         }

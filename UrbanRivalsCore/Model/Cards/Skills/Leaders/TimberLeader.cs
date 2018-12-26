@@ -2,8 +2,7 @@
 {
     public class TimberLeader : Leader
     {
-        public TimberLeader() 
-            : base("Team: +1 Damage")
+        public TimberLeader() : base("Team: +1 Damage")
         {
             ;
         }

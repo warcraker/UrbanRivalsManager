@@ -2,8 +2,7 @@
 {
     public class HugoLeader : Leader
     {
-        public HugoLeader()
-            : base("Team: +6 Attack")
+        public HugoLeader() : base("Team: +6 Attack")
         {
             ;
         }

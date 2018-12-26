@@ -2,8 +2,7 @@
 {
     public class RobertCobbLeader : Leader
     {
-        public RobertCobbLeader()
-            : base("Bypass")
+        public RobertCobbLeader() : base("Bypass")
         {
             ;
         }

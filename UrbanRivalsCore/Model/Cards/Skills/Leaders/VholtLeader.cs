@@ -2,8 +2,7 @@
 {
     public class VholtLeader : Leader
     {
-        public VholtLeader() 
-            : base("Team: -2 Opp. Damage, Min 4")
+        public VholtLeader() : base("Team: -2 Opp. Damage, Min 4")
         {
             ;
         }
