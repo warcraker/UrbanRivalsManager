@@ -10,6 +10,10 @@ using Procurios.Public;
 using UrbanRivalsApiToCoreAdapter;
 using UrbanRivalsApiManager;
 using UrbanRivalsCore.Model;
+using UrbanRivalsCore.Model.Cards.Skills;
+using System.Text;
+using System.Windows;
+using UrbanRivalsUtils;
 
 namespace UrbanRivalsManager.ViewModel.DataManagement
 {
@@ -144,16 +148,10 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             /* TODO get existingIds, sort it, and pick the last item. With each server check, if the retrieved item is greater than the last item, 
              * we know for sure that the previous obtained data is obsolete. Otherwise, we check the hash.
              */
-            var existingIds = managers.ServerQueriesManager.GetAllCardBaseIds();
-            var storedIds = managers.DatabaseManager.getAllCardDefinitionIds();
-            storedIds = new List<int>(); // TODO remove this line
-            var idsToAnalyze = existingIds.Except(storedIds).ToList();
-            idsToAnalyze.Sort();
-
-            // TODO Hash idToAnalyze. Now we know if a new card has appeared
+            IEnumerable<int> characterIds = managers.ServerQueriesManager.GetAllCardBaseIds();
 
             /* There are 3 API calls to get characters details:
-             * - characters.getCharacters (labeled "oldGetCharacters")
+             * - characters.getCharacters (labeled "oldGetCharacters") This call is painfully slow, so we ask only for the info we need 
              * - characters.getCharacterLevels
              * - urc.getCharacters (labeled "newGetCharacters")
              * Some details can be obtained from various of those calls, some only from one of them.
@@ -161,33 +159,72 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
              * "getCharacterLevels" will not be used, all the details that we can obtain from it we can get it from the "new" one too.
              */
 
-            var setLocaleToEnglishCall = new ApiCallList.Players.SetLanguages(new List<string> { ServerQueriesManager.EnglishLocale });
-            var request = new ApiRequest(setLocaleToEnglishCall);
-            var oldGetCharactersCall = new ApiCallList.Characters.GetCharacters
+            ApiCall setLocaleToEnglishCall = new ApiCallList.Players.SetLanguages(new List<string> { ServerQueriesManager.EnglishLocale });
+            ApiCall getClansCall = new ApiCallList.Characters.GetClans();
+            ApiCall getAbilitiesCall = new ApiCallList.Characters.GetCharacters
             {
-                // This call is painfully slow, so we optimize it as much as we can, asking only for the info we need 
-                charactersIDs = new List<int>(idsToAnalyze),
+                charactersIDs = new List<int>(characterIds),
                 maxLevels = true,
                 ItemsFilter = new List<string>() { "id", "ability", "ability_unlock_level" },
             };
-            request.EnqueueApiCall(oldGetCharactersCall);
-            var newGetCharactersCall = new ApiCallList.Urc.GetCharacters();
-            request.EnqueueApiCall(newGetCharactersCall);
+            ApiCall getCharactersCall = new ApiCallList.Urc.GetCharacters();
+
+            ApiRequest request = new ApiRequest(setLocaleToEnglishCall);
+            request.EnqueueApiCall(getClansCall);
+            request.EnqueueApiCall(getAbilitiesCall);
+            request.EnqueueApiCall(getCharactersCall);
 
             string response;
             HttpStatusCode statusCode = managers.GlobalManager.ApiManagerInstance.SendRequest(request, out response);
-            if (statusCode != HttpStatusCode.OK)
-                throw new Exception("GetCardBase SendRequest returned: " + statusCode.ToString()); // TODO: Manage timeouts gracefully (GatewayTimeout)
-            // TODO hash response. Now we have all abilities by characterId and stats per levels, among other data
+            switch (statusCode)
+            {
+                case HttpStatusCode.OK:
+                    break;
+                case HttpStatusCode.GatewayTimeout:
+                    MessageBox.Show("GatewayTimeout");
+                    worker.ReportProgress(0, "Timeout");
+                    return; // TODO manage somewhat
+                default:
+                    throw new Exception("SendRequest returned: " + statusCode.ToString()); // TODO manage somewhat
+            }
+
+            // TODO hash response. 
             dynamic decoded = JsonDecoder.Decode(response);
 
             int progress = 0;
 
             // TODO: Check if new data returns id, ability and ability_unlock_level
-            var oldData = SortServerCharacterDataIntoDictionary(oldGetCharactersCall.Call, decoded);
-            var newData = SortServerCharacterDataIntoDictionary(newGetCharactersCall.Call, decoded);
+            Dictionary<int, dynamic> clansData = SortServerCharacterDataIntoDictionary(getClansCall.Call, decoded);
+            List<int> clanIds = ExtractIds(getClansCall.Call, decoded);
+            int leaderClanId = -1;
+            foreach (int id in clanIds)
+            {
+                dynamic clanData = clansData[id];
 
-            foreach (int id in idsToAnalyze)
+                // id
+                // name
+                // clanPictUrl
+                // clanNewPictUrl
+                // description
+                // bonusDescription
+                // bonusLongDescription
+
+                string bonusText = clanData["bonusDescription"].ToString();
+                if (bonusText == "Cancel Leader")
+                {
+                    Asserts.check(leaderClanId == -1, "More than one clan with 'Cancel Leader'");
+                    leaderClanId = id;
+                }
+                else
+                {
+                    ; // TODO 
+                }
+            }
+
+            Dictionary<int, dynamic> abilitiesData = SortServerCharacterDataIntoDictionary(getAbilitiesCall.Call, decoded);
+            Dictionary<int, dynamic> charactersData = SortServerCharacterDataIntoDictionary(getCharactersCall.Call, decoded);
+            List<Skill> newSkills = new List<Skill>();
+            foreach (int id in characterIds)
             {
                 if (worker.CancellationPending == true)
                 {
@@ -195,15 +232,15 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                     break;
                 }
 
-                string abilityText = oldData[id]["ability"].ToString();
-                int abilityUnlockLevel = int.Parse(oldData[id]["ability_unlock_level"].ToString());
+                string abilityText = abilitiesData[id]["ability"].ToString();
+                int abilityUnlockLevel = int.Parse(abilitiesData[id]["ability_unlock_level"].ToString());
 
-                string name = newData[id]["name"].ToString();
-                int clanId = int.Parse(newData[id]["clanID"].ToString());
-                string rarityText = newData[id]["rarity"].ToString();
+                string name = charactersData[id]["name"].ToString();
+                int clanId = int.Parse(charactersData[id]["clanID"].ToString());
+                string rarityText = charactersData[id]["rarity"].ToString();
 
-                var cardStatsPerLevel = new List<CardStats>();
-                foreach(dynamic levelItem in newData[id]["levels"])
+                List<CardStats> cardStatsPerLevel = new List<CardStats>();
+                foreach(dynamic levelItem in charactersData[id]["levels"])
                 {
                     int level = int.Parse(levelItem["level"].ToString());
                     int power = int.Parse(levelItem["power"].ToString());
@@ -211,12 +248,15 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                     cardStatsPerLevel.Add(new CardStats(level, power, damage));
                 }
 
-                worker.ReportProgress((int)(100 * progress / idsToAnalyze.Count()), $"[{id}] {name}");
+                worker.ReportProgress((int)(100 * progress / characterIds.Count()), $"[{id}] {name}");
                 progress++;
 
-                var card = ApiToCardDefinitionAdapter.createCardDefinitionByServerData(id, name, clanId, rarityText, abilityText, abilityUnlockLevel, cardStatsPerLevel);
+                Skill newAbility = SkillParser.parseSkill(abilityText);
+                newSkills.Add(newAbility);
 
-                if (card == null) continue; // TODO: Remove this line if day/night is implemented, or after 11/2018, whatever happens first
+                continue; // TODO REMOVE
+
+                var card = ApiToCardDefinitionAdapter.createCardDefinitionByServerData(id, name, clanId, rarityText, abilityText, abilityUnlockLevel, cardStatsPerLevel);
 
                 managers.DatabaseManager.storeCardDefinition(card);
                 managers.InMemoryManager.LoadToMemoryCardDefinition(card);
@@ -301,11 +341,26 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             worker.ReportProgress(100);
         }
 
+        private static List<int> ExtractIds(string apiCallString, dynamic decodedData)
+        {
+            List<int> decodedIds = new List<int>();
+            foreach (dynamic item in decodedData[apiCallString]["items"])
+            {
+                int id = int.Parse(item["id"].ToString());
+                decodedIds.Add(id);
+            }
+
+            return decodedIds;
+        }
+
         private static Dictionary<int, dynamic> SortServerCharacterDataIntoDictionary(string apiCallString, dynamic decodedData)
         {
-            var result = new Dictionary<int, dynamic>();
+            Dictionary<int, dynamic> result = new Dictionary<int, dynamic>();
             foreach (dynamic item in decodedData[apiCallString]["items"])
-                result.Add(int.Parse(item["id"].ToString()), item);
+            {
+                int id = int.Parse(item["id"].ToString());
+                result.Add(id, item);
+            }
             return result;
         }
     }
