@@ -4,6 +4,8 @@ using System.Linq;
 using UrbanRivalsCore.Model.Cards.Skills.Leaders;
 using UrbanRivalsCore.Model.Cards.Skills.Prefixes;
 using UrbanRivalsCore.Model.Cards.Skills.Suffixes;
+using UrbanRivalsCore.Model.Cards.Skills.SuffixParsers;
+using UrbanRivalsUtils;
 
 namespace UrbanRivalsCore.Model.Cards.Skills
 {
@@ -12,6 +14,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills
         private const string PRV_NO_ABILITY_TEXT = "No ability";
         private static readonly IEnumerable<Leader> PRV_ALL_LEADERS;
         private static readonly IEnumerable<Prefix> PRV_ALL_PREFIXES;
+        private static readonly IEnumerable<SuffixParser> PRV_ALL_SUFFIX_PARSERS;
 
         static SkillParser()
         {
@@ -49,6 +52,18 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                 new TimberLeader(),
                 new VansaarLeader(),
                 new VholtLeader(),
+            };
+            PRV_ALL_SUFFIX_PARSERS = new List<SuffixParser>
+            {
+                CancelAttackModifierSuffix.getParser(),
+                CancelDamageModifierSuffix.getParser(),
+                CancelLeaderSuffix.getParser(),
+                ConsumeXMinYSuffix.getParser(),
+                CopyBonusSuffix.getParser(),
+                CorrosionXMinYSuffix.getParser(),
+                DecreaseAttackXMinYSuffix.getParser(),
+                DecreaseDamageXMinYSuffix.getParser(),
+                IncreaseAttackXSuffix.getParser(),
             };
         }
 
@@ -100,7 +115,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills
             prefixes = new List<Prefix>();
             do
             {
-                parsedPrefix = PRV_ALL_PREFIXES.SingleOrDefault(prefix => prefix.isMatch(textToParse));
+                parsedPrefix = PRV_ALL_PREFIXES.FirstOrDefault(prefix => prefix.isMatch(textToParse));
                 if (parsedPrefix != null)
                 {
                     textToParse = parsedPrefix.removePrefixFromText(textToParse);
@@ -114,7 +129,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills
         }
         private static Suffix prv_parseSuffix(string suffixAsText)
         {
-            throw new NotImplementedException();
+            SuffixParser parser = PRV_ALL_SUFFIX_PARSERS.SingleOrDefault(p => p.isMatch(suffixAsText));
+            Asserts.check(parser != null, $"No {nameof(SuffixParser)} was found for text [{suffixAsText}]");
+            return parser.getSuffix(suffixAsText);
         }
     }
 }
