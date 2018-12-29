@@ -22,13 +22,14 @@ namespace GuillermoMestreCarrion
         }
 
         public List<string> Habilidades = new List<string>() {
-            "C# .Net Framework 4.5", "C++", "Java", "SQLite" };
+            "C# .Net Framework 4.5", "Java", "SQLite" };
 
         public string Idiomas(string idioma) {
             switch (idioma) {
-                case "Inglés":
-                    return "High level. Stay of 10 months in Ireland as Erasmus student.";
-                case "Valenciano":
+                case "English":
+                    return "High level. B2 EOI Certification. First Certificate Cambridge."
+                        + "Stay of 10 months in Ireland as Erasmus student.";
+                case "Valencià":
                     return "Bilingüe. Llengua materna.";
                 case "Castellano":
                     return "Bilingüe. Lengua materna.";
@@ -37,6 +38,12 @@ namespace GuillermoMestreCarrion
         }   }
 
         public Dictionary<string, List<string>> Experiencia = new Dictionary<string, List<string>>() {
+            { "Everis", new List<string>()
+                { "Desde marzo 2015 hasta la actualidad",
+                  "Centers Developer",
+                  "Robot Process Automation",
+                  "Consultoría software",
+                } },
             { "Computer Aided Education", new List<string>()
                 { "Desde julio 2009 hasta julio 2011", 
                   "Elaboración de cursos e-learning",
