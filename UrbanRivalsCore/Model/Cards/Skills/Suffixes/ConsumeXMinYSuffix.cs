@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
 
         static ConsumeXMinYSuffix()
         {
-            Regex regex = new Regex(@"^Consume (?<x>[0-9]), Min (?<y>[0-9])$");
+            Regex regex = new Regex(@""); // ^Consume (?<x>[0-9]), Min (?<y>[0-9])$
 
             PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new ConsumeXMinYSuffix(x, y));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_consume_x_min_y;

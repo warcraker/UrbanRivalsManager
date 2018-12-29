@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
 
         static IncreaseAttackXSuffix()
         {
-            Regex regex = new Regex(@"^Attack \+(?<x>[0-9]{1,2})$"); //@"^At(tac)?k[.]? [+](?<x>[0-9]+)$"
+            Regex regex = new Regex(@""); // ^Attack \+(?<x>[0-9]{1,2})$ @"^At(tac)?k[.]? [+](?<x>[0-9]+)$"
 
             PRV_PARSER = new SingleValueSuffixParser(regex, (x) => new IncreaseAttackXSuffix(x));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_increase_attack_x;

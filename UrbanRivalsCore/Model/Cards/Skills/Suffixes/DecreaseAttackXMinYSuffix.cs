@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
 
         static DecreaseAttackXMinYSuffix()
         {
-            Regex regex = new Regex(@"^-(?<x>[0-9]{1,2}) Opp\. Attack, Min (?<y>[0-9]{1,2})$"); //@"^- ?(?<x>[0-9]+) (Opp[.]? )?Attack,? Min (?<y>[0-9]+)$"
+            Regex regex = new Regex(@""); // ^-(?<x>[0-9]{1,2}) Opp\. Attack, Min (?<y>[0-9]{1,2})$     @"^- ?(?<x>[0-9]+) (Opp[.]? )?Attack,? Min (?<y>[0-9]+)$"
 
             PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new DecreaseAttackXMinYSuffix(x, y));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_decrease_attack_x_min_y;
