@@ -4,6 +4,9 @@ using System.Linq;
 using UrbanRivalsCore.Model.Cards.Skills.Leaders;
 using UrbanRivalsCore.Model.Cards.Skills.Prefixes;
 using UrbanRivalsCore.Model.Cards.Skills.Suffixes;
+using UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue;
+using UrbanRivalsCore.Model.Cards.Skills.Suffixes.SingleValue;
+using UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain;
 using UrbanRivalsCore.Model.Cards.Skills.SuffixParsers;
 using UrbanRivalsUtils;
 
@@ -18,24 +21,26 @@ namespace UrbanRivalsCore.Model.Cards.Skills
 
         static SkillParser()
         {
-            PRV_ALL_PREFIXES = new List<Prefix>
+            PRV_ALL_PREFIXES = new Prefix[]
             {
                 new BacklashPrefix(),
                 new BrawlPrefix(),
                 new ConfidencePrefix(),
                 new CouragePrefix(),
+                new DayPrefix(),
                 new DefeatPrefix(),
                 new DegrowthPrefix(),
                 new EqualizerPrefix(),
                 new GrowthPrefix(),
                 new KillshotPrefix(),
+                new NightPrefix(),
                 new ReprisalPrefix(),
                 new RevengePrefix(),
                 new StopPrefix(),
                 new SupportPrefix(),
                 new VictoryOrDefeatPrefix(),
             };
-            PRV_ALL_LEADERS = new List<Leader>
+            PRV_ALL_LEADERS = new Leader[]
             {
                 new AmbreLeader(),
                 new AshigaruLeader(),
@@ -53,18 +58,84 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                 new VansaarLeader(),
                 new VholtLeader(),
             };
-            PRV_ALL_SUFFIX_PARSERS = new List<SuffixParser>
+
+            PlainSuffixParser[] allPlainSuffixParsers = new PlainSuffixParser[]
             {
                 CancelAttackModifierSuffix.getParser(),
                 CancelDamageModifierSuffix.getParser(),
                 CancelLeaderSuffix.getParser(),
-                ConsumeXMinYSuffix.getParser(),
+                CancelLifeModifierSuffix.getParser(),
+                CancelPillzAndLifeModifierSuffix.getParser(),
+                CancelPillzModifierSuffix.getParser(),
+                CancelPowerAndDamageModifierSuffix.getParser(),
+                CancelPowerModifierSuffix.getParser(),
                 CopyBonusSuffix.getParser(),
+                CopyDamageSuffix.getParser(),
+                CopyPowerAndDamageSuffix.getParser(),
+                CopyPowerSuffix.getParser(),
+                ExchangeDamageSuffix.getParser(),
+                ExchangePowerAndDamageSuffix.getParser(),
+                ExchangePowerSuffix.getParser(),
+                ProtectAbilitySuffix.getParser(),
+                ProtectAttackSuffix.getParser(),
+                ProtectBonusSuffix.getParser(),
+                ProtectDamageSuffix.getParser(),
+                ProtectPowerAndDamageSuffix.getParser(),
+                ProtectPowerSuffix.getParser(),
+                StopAbilitySuffix.getParser(),
+                StopBonusSuffix.getParser(),
+            };
+            SingleValueSuffixParser[] allSingleValueSuffixParsers = new SingleValueSuffixParser[]
+            {
+                IncreaseAttackXPerRemainingLifeSuffix.getParser(),
+                IncreaseAttackXPerRemainingPillzSuffix.getParser(),
+                IncreaseAttackXPerOppDamageSuffix.getParser(),
+                IncreaseAttackXPerOppPowerSuffix.getParser(),
+                IncreaseAttackXSuffix.getParser(),
+                IncreaseDamageXSuffix.getParser(),
+                IncreaseLifeXPerDamage.getParser(),
+                IncreaseLifeXSuffix.getParser(),
+                IncreasePillzAndLifeXSuffix.getParser(),
+                IncreasePillzXPerDamageSuffix.getParser(),
+                IncreasePillzXSuffix.getParser(),
+                IncreasePowerAndDamageXSuffix.getParser(),
+                IncreasePowerXSuffix.getParser(),
+                ReanimateXSuffix.getParser(),
+            };
+            DoubleValueSuffixParser[] allDoubleValueSuffixParsers = new DoubleValueSuffixParser[]
+            {
+                ConsumeXMinYSuffix.getParser(),
                 CorrosionXMinYSuffix.getParser(),
                 DecreaseAttackXMinYSuffix.getParser(),
+                DecreaseAttackXPerRemainingLifeMinYSuffix.getParser(),
+                DecreaseAttackXPerRemainingPillzMinYSuffix.getParser(),
                 DecreaseDamageXMinYSuffix.getParser(),
-                IncreaseAttackXSuffix.getParser(),
+                DecreaseLifeAndPillzXMinYSuffix.getParser(),
+                DecreaseLifeXMinYSuffix.getParser(),
+                DecreasePillzXMinYSuffix.getParser(),
+                DecreasePowerAndDamageXMinYSuffix.getParser(),
+                DecreasePowerXMinYSuffix.getParser(),
+                DopeAndRegenXMaxYSuffix.getParser(),
+                DopeXMaxYSuffix.getParser(),
+                HealXMaxYSuffix.getParser(),
+                IncreaseLifePerDamageXMaxYSuffix.getParser(),
+                IncreaseLifeXMaxYSuffix.getParser(),
+                IncreasePillzXMaxYSuffix.getParser(),
+                InfectionXMinYSuffix.getParser(),
+                PoisonXMinYSuffix.getParser(),
+                RebirthXMaxYSuffix.getParser(),
+                RecoverXPillzOutOfYSuffix.getParser(),
+                RegenXMaxYSuffix.getParser(),
+                ToxinXMinYSuffix.getParser(),
+                XantiaxXMinYSuffix.getParser(),
             };
+
+            List<SuffixParser> allSuffixParsers = new List<SuffixParser>();
+            allSuffixParsers.AddRange(allPlainSuffixParsers);
+            allSuffixParsers.AddRange(allSingleValueSuffixParsers);
+            allSuffixParsers.AddRange(allDoubleValueSuffixParsers);
+
+            PRV_ALL_SUFFIX_PARSERS = allSuffixParsers.ToArray();
         }
 
         public static Skill parseSkill(string skillAsText)
@@ -87,8 +158,19 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                     string suffixAsText;
 
                     IEnumerable<Prefix> prefixes = prv_parsePrefixes(skillAsText, out suffixAsText);
-                    Suffix suffix = prv_parseSuffix(suffixAsText);
 
+                    // TODO use first or default?
+                    SuffixParser parser = PRV_ALL_SUFFIX_PARSERS.SingleOrDefault(p => p.isMatch(suffixAsText));
+
+
+                    // TODO write alterantive when no parser gets ok
+                    if (parser == null)
+                    {
+                        return null; // TODO remove and leave assert
+                        Asserts.check(parser != null, $"No {nameof(SuffixParser)} was found for text [{suffixAsText}]");
+                    }
+
+                    Suffix suffix = parser.getSuffix(suffixAsText);
                     if (prefixes.Any())
                     {
                         skill = Skill.getSkillWithPrefixes(prefixes, suffix);

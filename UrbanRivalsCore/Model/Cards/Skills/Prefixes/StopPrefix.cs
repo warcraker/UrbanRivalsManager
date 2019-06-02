@@ -5,11 +5,15 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
     public class StopPrefix : Prefix
     {
         private const string PRV_STOP_PREFIX = "Stop: ";
-        private static readonly Regex PRV_STOP_REGEX = new Regex("^Stop: ");
+        private static readonly Regex PRV_STOP_REGEX = new Regex("^Stop ?: ");
 
         public override bool isMatch(string text)
         {
-            return text.StartsWith(PRV_STOP_PREFIX);
+            const string PRV_STOP_WITH_SPACE_PREFIX = "Stop : ";
+
+            return text.StartsWith(PRV_STOP_PREFIX)
+                || text.StartsWith(PRV_STOP_WITH_SPACE_PREFIX)
+                ;
         }
         public override string removePrefixFromText(string text)
         {

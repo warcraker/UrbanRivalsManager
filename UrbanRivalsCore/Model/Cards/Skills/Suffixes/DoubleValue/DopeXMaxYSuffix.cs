@@ -1,22 +1,22 @@
 ﻿using System.Text.RegularExpressions;
 using UrbanRivalsCore.Model.Cards.Skills.SuffixParsers;
 
-namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
+namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 {
-    public class CorrosionXMinYSuffix : DoubleValueSuffix
+    public class DopeXMaxYSuffix : DoubleValueSuffix
     {
         private readonly static DoubleValueSuffixParser PRV_PARSER;
         private readonly static string PRV_TEXT_REPRESENTATION;
 
-        static CorrosionXMinYSuffix()
+        static DopeXMaxYSuffix()
         {
-            Regex regex = new Regex(@""); // ^Corrosion (?<x>[0-9]+), Min (?<y>[0-9]+)$
+            Regex regex = new Regex(@"^Dope (?<x>[1-9]), Max\. (?<y>[1-9][0-9]?)$");
 
-            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new CorrosionXMinYSuffix(x, y));
-            PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_corrosion_x_min_y;
+            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new DopeXMaxYSuffix(x, y));
+            PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_dope_x_max_y;
         }
 
-        public CorrosionXMinYSuffix(int x, int y) : base(x, y)
+        public DopeXMaxYSuffix(int x, int y) : base(x, y)
         {
             ;
         }

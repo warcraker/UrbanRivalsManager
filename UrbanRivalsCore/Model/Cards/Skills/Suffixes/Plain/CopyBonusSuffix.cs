@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using UrbanRivalsCore.Model.Cards.Skills.SuffixParsers;
 
-namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
+namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 {
     public class CopyBonusSuffix : Suffix
     {
@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
 
         static CopyBonusSuffix()
         {
-            Regex regex = new Regex(@""); // ^Copy Opp Bonus$   @"^Copy:? Opp[.] Bonus$"
+            Regex regex = new Regex(@"^Copy:? Opp\. Bonus$"); 
 
             PRV_PARSER = new PlainSuffixParser(regex, new CopyBonusSuffix());
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_copy_bonus;

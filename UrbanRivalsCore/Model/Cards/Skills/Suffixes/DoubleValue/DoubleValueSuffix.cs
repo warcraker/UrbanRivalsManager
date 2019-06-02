@@ -1,7 +1,8 @@
 ﻿using System;
+using UrbanRivalsCore.Model.Cards.Skills.Suffixes.SingleValue;
 using UrbanRivalsUtils;
 
-namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
+namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 {
     public abstract class DoubleValueSuffix : SingleValueSuffix
     {

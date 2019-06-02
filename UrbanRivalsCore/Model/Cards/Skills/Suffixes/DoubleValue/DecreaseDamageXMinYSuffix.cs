@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using UrbanRivalsCore.Model.Cards.Skills.SuffixParsers;
 
-namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
+namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 {
     public class DecreaseDamageXMinYSuffix : DoubleValueSuffix
     {
@@ -10,7 +10,8 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
 
         static DecreaseDamageXMinYSuffix()
         {
-            Regex regex = new Regex(@""); // ^-(?<x>[1-9]) Opp Damage, Min (?<y>[1-9])$     @"^- ?(?<x>[0-9]+) (Opp[.]? )?D(?:amage|mg),? Min (?<y>[0-9]+)$"
+            Regex regex = new Regex(@"^-(?<x>[1-9]) Opp\.? D(?:amage|mg), Min (?<y>[1-9]?)$"); 
+
             PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new DecreaseDamageXMinYSuffix(x, y));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_decrease_damage_x_min_y;
         }

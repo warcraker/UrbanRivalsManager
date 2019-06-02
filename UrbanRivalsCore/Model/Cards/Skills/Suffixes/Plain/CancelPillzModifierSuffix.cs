@@ -1,22 +1,22 @@
 ﻿using System.Text.RegularExpressions;
 using UrbanRivalsCore.Model.Cards.Skills.SuffixParsers;
 
-namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
+namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 {
-    public class CancelDamageModifierSuffix : Suffix
+    public class CancelPillzModifierSuffix : Suffix
     {
         private readonly static PlainSuffixParser PRV_PARSER;
         private readonly static string PRV_TEXT_REPRESENTATION;
 
-        static CancelDamageModifierSuffix()
+        static CancelPillzModifierSuffix()
         {
-            Regex regex = new Regex(@""); // ^Cancel Opp[.] Damage Modif[.]$
+            Regex regex = new Regex(@"^Cancel Opp\. Pillz Modif\.$");
 
-            PRV_PARSER = new PlainSuffixParser(regex, new CancelDamageModifierSuffix());
-            PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_cancel_damage_modifier;
+            PRV_PARSER = new PlainSuffixParser(regex, new CancelPillzModifierSuffix());
+            PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_cancel_pillz_modifier;
         }
 
-        public CancelDamageModifierSuffix() : base()
+        public CancelPillzModifierSuffix() : base()
         {
             ;
         }

@@ -5,7 +5,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
     public class ConfidencePrefix : Prefix
     {
         private const string PRV_CONFIDENCE_STANDARD_PREFIX = "Confidence: ";
-        private static readonly Regex PRV_CONFIDENCE_REGEX = new Regex("^Confidence(? :|:|;) ");
+        private static readonly Regex PRV_CONFIDENCE_REGEX = new Regex("^Confidence(?: :|:|;) ");
 
         public override bool isMatch(string text)
         {

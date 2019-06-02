@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using UrbanRivalsCore.Model.Cards.Skills.Suffixes;
+using UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue;
 using UrbanRivalsUtils;
 
 namespace UrbanRivalsCore.Model.Cards.Skills.SuffixParsers

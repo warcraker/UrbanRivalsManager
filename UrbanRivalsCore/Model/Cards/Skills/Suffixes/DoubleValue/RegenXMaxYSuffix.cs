@@ -1,22 +1,22 @@
 ﻿using System.Text.RegularExpressions;
 using UrbanRivalsCore.Model.Cards.Skills.SuffixParsers;
 
-namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
+namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 {
-    public class ConsumeXMinYSuffix : DoubleValueSuffix
+    public class RegenXMaxYSuffix : DoubleValueSuffix
     {
         private readonly static DoubleValueSuffixParser PRV_PARSER;
         private readonly static string PRV_TEXT_REPRESENTATION;
 
-        static ConsumeXMinYSuffix()
+        static RegenXMaxYSuffix()
         {
-            Regex regex = new Regex(@""); // ^Consume (?<x>[0-9]), Min (?<y>[0-9])$
+            Regex regex = new Regex(@"^Regen (?<x>[1-9]), Max\.? (?<y>[1-9][0-9]?)$");
 
-            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new ConsumeXMinYSuffix(x, y));
-            PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_consume_x_min_y;
+            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new RegenXMaxYSuffix(x, y));
+            PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_regen_x_max_y;
         }
 
-        public ConsumeXMinYSuffix(int x, int y) : base(x, y)
+        public RegenXMaxYSuffix(int x, int y) : base(x, y)
         {
             ;
         }

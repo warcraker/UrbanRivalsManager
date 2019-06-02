@@ -1,7 +1,7 @@
 ﻿using System;
 using UrbanRivalsUtils;
 
-namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes
+namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.SingleValue
 {
     public abstract class SingleValueSuffix : Suffix
     {

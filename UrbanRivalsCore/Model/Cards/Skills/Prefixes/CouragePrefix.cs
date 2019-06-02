@@ -9,7 +9,11 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 
         public override bool isMatch(string text)
         {
-            return text.StartsWith(PRV_COURAGE_PREFIX);
+            const string PRV_COURAGE_PREFIX_WITH_SEMICOLON = "Courage; ";
+
+            return text.StartsWith(PRV_COURAGE_PREFIX)
+                || text.StartsWith(PRV_COURAGE_PREFIX_WITH_SEMICOLON)
+                ;
         }
         public override string removePrefixFromText(string text)
         {
