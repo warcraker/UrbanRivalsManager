@@ -502,6 +502,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Day: .
+        /// </summary>
+        public static string skill_prefix_day {
+            get {
+                return ResourceManager.GetString("skill_prefix_day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Defeat: .
         /// </summary>
         public static string skill_prefix_defeat {
@@ -543,6 +552,15 @@ namespace UrbanRivalsCore.Properties {
         public static string skill_prefix_killshot {
             get {
                 return ResourceManager.GetString("skill_prefix_killshot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Night: .
+        /// </summary>
+        public static string skill_prefix_night {
+            get {
+                return ResourceManager.GetString("skill_prefix_night", resourceCulture);
             }
         }
         
