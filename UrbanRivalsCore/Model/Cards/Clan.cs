@@ -17,7 +17,7 @@ namespace UrbanRivalsCore.Model
                 new Clan(ClanId.Leader,         "Leader",          new OldSkill(SkillPrefix.None, SkillSuffix.CancelLeader)),
                 new Clan(ClanId.AllStars,       "All Stars",       new OldSkill(SkillPrefix.None, SkillSuffix.DecreasePowerXMinY, 2, 1)),
                 new Clan(ClanId.Bangers,        "Bangers",         new OldSkill(SkillPrefix.None, SkillSuffix.IncreasePowerX, 2)),
-                new Clan(ClanId.Berzerk,        "Berzerk",         new OldSkill(SkillPrefix.None, SkillSuffix.DecreaseLifeXMinY, 2, 2)),
+                new Clan(ClanId.Berzerk,        "Berzerk",         new OldSkill(SkillPrefix.None, SkillSuffix.DecreaseLifeXMinY, 2, 2)), // TODO Remove backlash versions of game strings
                 new Clan(ClanId.Dominion,       "Dominion",        new OldSkill(SkillPrefix.Growth, SkillSuffix.DecreasePowerXMinY, 1, 4)),
                 new Clan(ClanId.FangPiClang,    "Fang Pi Clang",   new OldSkill(SkillPrefix.None, SkillSuffix.IncreaseDamageX, 2)),
                 new Clan(ClanId.Freaks,         "Freaks",          new OldSkill(SkillPrefix.None, SkillSuffix.PoisonXMinY, 2, 3)),

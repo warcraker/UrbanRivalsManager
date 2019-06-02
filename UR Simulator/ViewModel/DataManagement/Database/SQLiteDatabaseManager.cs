@@ -281,7 +281,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 
             return value;
         }
-        private static T prv_getEnum<T>(DataRow row, string columnName) where T : Enum
+        private static T prv_getEnum<T>(DataRow row, string columnName) where T : Enum // TODO Remove all enums from app
         {
             T value;
             int valueAsInteger;

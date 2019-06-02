@@ -1,5 +1,6 @@
 ﻿namespace UrbanRivalsCore.Model.Cards.Skills.Leaders
 {
+    // TODO revise leader gamestrings
     public abstract class Leader
     {
         private readonly string abilityText;
