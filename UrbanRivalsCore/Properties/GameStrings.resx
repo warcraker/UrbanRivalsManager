@@ -477,4 +477,16 @@
   <data name="skill_suffix_rebirth_x_max_y" xml:space="preserve">
     <value>Rebirth {0}, Max {1}</value>
   </data>
+  <data name="skill_suffix_exchange_power_and_damage" xml:space="preserve">
+    <value>Exchange Power And Damage</value>
+  </data>
+  <data name="skill_suffix_dope_and_regen_x_max_y" xml:space="preserve">
+    <value>Dope And Regen {0}, Max {1}</value>
+  </data>
+  <data name="skill_suffix_xantiax_x_min_y" xml:space="preserve">
+    <value>Xantiax {0], Min {1}</value>
+  </data>
+  <data name="skill_suffix_increase_atack_x_per_opp_damage" xml:space="preserve">
+    <value>Increase Attack {0} Per Opp Damage</value>
+  </data>
 </root>

@@ -817,6 +817,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dope And Regen {0}, Max {1}.
+        /// </summary>
+        public static string skill_suffix_dope_and_regen_x_max_y {
+            get {
+                return ResourceManager.GetString("skill_suffix_dope_and_regen_x_max_y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dope {0}, Max {1}.
         /// </summary>
         public static string skill_suffix_dope_x_max_y {
@@ -844,11 +853,29 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exchange Power And Damage.
+        /// </summary>
+        public static string skill_suffix_exchange_power_and_damage {
+            get {
+                return ResourceManager.GetString("skill_suffix_exchange_power_and_damage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Heal {0}, Max {1}.
         /// </summary>
         public static string skill_suffix_heal_x_max_y {
             get {
                 return ResourceManager.GetString("skill_suffix_heal_x_max_y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Increase Attack {0} Per Opp Damage.
+        /// </summary>
+        public static string skill_suffix_increase_atack_x_per_opp_damage {
+            get {
+                return ResourceManager.GetString("skill_suffix_increase_atack_x_per_opp_damage", resourceCulture);
             }
         }
         
@@ -1119,6 +1146,15 @@ namespace UrbanRivalsCore.Properties {
         public static string skill_suffix_toxin_x_min_y {
             get {
                 return ResourceManager.GetString("skill_suffix_toxin_x_min_y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xantiax {0], Min {1}.
+        /// </summary>
+        public static string skill_suffix_xantiax_x_min_y {
+            get {
+                return ResourceManager.GetString("skill_suffix_xantiax_x_min_y", resourceCulture);
             }
         }
     }
