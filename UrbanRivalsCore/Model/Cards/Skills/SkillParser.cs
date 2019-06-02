@@ -9,6 +9,7 @@ using UrbanRivalsCore.Model.Cards.Skills.Suffixes.SingleValue;
 using UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain;
 using UrbanRivalsCore.Model.Cards.Skills.SuffixParsers;
 using UrbanRivalsUtils;
+using System.Text.RegularExpressions;
 
 namespace UrbanRivalsCore.Model.Cards.Skills
 {
@@ -18,6 +19,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills
         private static readonly IEnumerable<Leader> PRV_ALL_LEADERS;
         private static readonly IEnumerable<Prefix> PRV_ALL_PREFIXES;
         private static readonly IEnumerable<SuffixParser> PRV_ALL_SUFFIX_PARSERS;
+        private static readonly Regex PRV_REMOVE_FILLER_CHARS = new Regex("[ ,.]");
 
         static SkillParser()
         {
@@ -155,13 +157,12 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                 }
                 else
                 {
+                    string cleanText = prv_parseFillerChars(skillAsText);
                     string suffixAsText;
-
-                    IEnumerable<Prefix> prefixes = prv_parsePrefixes(skillAsText, out suffixAsText);
+                    IEnumerable<Prefix> prefixes = prv_parsePrefixes(cleanText, out suffixAsText);
 
                     // TODO use first or default?
                     SuffixParser parser = PRV_ALL_SUFFIX_PARSERS.SingleOrDefault(p => p.isMatch(suffixAsText));
-
 
                     // TODO write alterantive when no parser gets ok
                     if (parser == null)
@@ -214,6 +215,13 @@ namespace UrbanRivalsCore.Model.Cards.Skills
             SuffixParser parser = PRV_ALL_SUFFIX_PARSERS.SingleOrDefault(p => p.isMatch(suffixAsText));
             Asserts.check(parser != null, $"No {nameof(SuffixParser)} was found for text [{suffixAsText}]");
             return parser.getSuffix(suffixAsText);
+        }
+        private static string prv_parseFillerChars(string text)
+        {
+            string cleantText = PRV_REMOVE_FILLER_CHARS.Replace(text, "");
+            cleantText = cleantText.Replace(';', ':');
+
+            return cleantText;
         }
     }
 }
