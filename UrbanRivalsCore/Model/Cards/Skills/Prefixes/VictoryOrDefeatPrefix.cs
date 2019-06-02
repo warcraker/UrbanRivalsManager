@@ -4,30 +4,20 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 {
     public class VictoryOrDefeatPrefix : Prefix
     {
-        private const string PRV_VICTORY_OR_DEFEAT_LONG_PREFIX = "Victory Or Defeat: ";
-        private static readonly Regex PRV_VICTORY_OR_DEFEAT_REGEX = new Regex(@"^Victory Or Defeat ?: |^Vict\. Or Def\.: ");
+        private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_victory_or_defeat;
+        private static readonly Regex REGEX = new Regex(@"^VictoryOrDefeat|VictOrDef");
 
         public override bool isMatch(string text)
         {
-            const string PRV_VICTORY_OR_DEFEAT_SHORT_PREFIX = "Vict. Or Def.: ";
-            const string PRV_VICTORY_OR_DEFEAT_LONG_WITH_SPACE_PREFIX = "Victory Or Defeat : ";
-
-            return text.StartsWith(PRV_VICTORY_OR_DEFEAT_LONG_PREFIX) 
-                || text.StartsWith(PRV_VICTORY_OR_DEFEAT_SHORT_PREFIX)
-                || text.StartsWith(PRV_VICTORY_OR_DEFEAT_LONG_WITH_SPACE_PREFIX)
-                ;
+            return REGEX.IsMatch(text);
         }
         public override string removePrefixFromText(string text)
         {
-            return PRV_VICTORY_OR_DEFEAT_REGEX.Replace(text, "");
-        }
-        public override bool isSkillActiveAfterWinnerIsDecided(bool isThisPlayerTheRoundWinner, int thisPlayerFinalAttack, int enemyPlayerFinalAttack)
-        {
-            return true;
+            return REGEX.Replace(text, "");
         }
         public override string ToString()
         {
-            return PRV_VICTORY_OR_DEFEAT_LONG_PREFIX;
+            return TEXT_REPRESENTATION;
         }
     }
 }

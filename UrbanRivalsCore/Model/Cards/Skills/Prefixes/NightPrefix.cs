@@ -4,20 +4,20 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 {
     public class NightPrefix : Prefix
     {
-        private const string PRV_NIGHT_PREFIX = "Night: ";
-        private static readonly Regex PRV_NIGHT_REGEX = new Regex("^Night: ");
+        private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_night;
+        private static readonly Regex REGEX = new Regex("^Night:");
 
         public override bool isMatch(string text)
         {
-            return text.StartsWith(PRV_NIGHT_PREFIX);
+            return REGEX.IsMatch(text);
         }
         public override string removePrefixFromText(string text)
         {
-            return PRV_NIGHT_REGEX.Replace(text, "");
+            return REGEX.Replace(text, "");
         }
         public override string ToString()
         {
-            return PRV_NIGHT_PREFIX;
+            return TEXT_REPRESENTATION;
         }
     }
 }

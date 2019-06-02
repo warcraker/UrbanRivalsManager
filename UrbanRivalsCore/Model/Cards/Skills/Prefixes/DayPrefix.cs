@@ -4,20 +4,20 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 {
     public class DayPrefix : Prefix
     {
-        private const string PRV_DAY_PREFIX = "Day: ";
-        private static readonly Regex PRV_DAY_REGEX = new Regex("^Day: ");
+        private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_day;
+        private static readonly Regex REGEX = new Regex("^Day:");
 
         public override bool isMatch(string text)
         {
-            return text.StartsWith(PRV_DAY_PREFIX);
+            return REGEX.IsMatch(text);
         }
         public override string removePrefixFromText(string text)
         {
-            return PRV_DAY_REGEX.Replace(text, "");
+            return REGEX.Replace(text, "");
         }
         public override string ToString()
         {
-            return PRV_DAY_PREFIX;
+            return TEXT_REPRESENTATION;
         }
     }
 }

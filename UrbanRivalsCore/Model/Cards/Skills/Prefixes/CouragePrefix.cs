@@ -4,24 +4,20 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 {
     public class CouragePrefix : Prefix
     {
-        private const string PRV_COURAGE_PREFIX = "Courage: ";
-        private static readonly Regex PRV_COURAGE_REGEX = new Regex("^Courage[:;] ");
+        private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_courage;
+        private static readonly Regex REGEX = new Regex("^Courage:");
 
         public override bool isMatch(string text)
         {
-            const string PRV_COURAGE_PREFIX_WITH_SEMICOLON = "Courage; ";
-
-            return text.StartsWith(PRV_COURAGE_PREFIX)
-                || text.StartsWith(PRV_COURAGE_PREFIX_WITH_SEMICOLON)
-                ;
+            return REGEX.IsMatch(text);
         }
         public override string removePrefixFromText(string text)
         {
-            return PRV_COURAGE_REGEX.Replace(text, "");
+            return REGEX.Replace(text, "");
         }
         public override string ToString()
         {
-            return PRV_COURAGE_PREFIX;
+            return TEXT_REPRESENTATION;
         }
     }
 }

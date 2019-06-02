@@ -4,24 +4,20 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 {
     public class GrowthPrefix : Prefix
     {
-        private const string PRV_GROWTH_PREFIX = "Growth: ";
-        private static readonly Regex PRV_GROWTH_REGEX = new Regex("Growth ?: ");
+        private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_growth;
+        private static readonly Regex REGEX = new Regex("^Growth:");
 
         public override bool isMatch(string text)
         {
-            const string PRV_GROWTH_PREFIX_WITH_SPACE = "Growth :";
-
-            return text.Contains(PRV_GROWTH_PREFIX)
-                || text.Contains(PRV_GROWTH_PREFIX_WITH_SPACE)
-                ;
+            return REGEX.IsMatch(text);
         }
         public override string removePrefixFromText(string text)
         {
-            return PRV_GROWTH_REGEX.Replace(text, "");
+            return REGEX.Replace(text, "");
         }
         public override string ToString()
         {
-            return PRV_GROWTH_PREFIX;
+            return TEXT_REPRESENTATION;
         }
     }
 }

@@ -4,20 +4,20 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 {
     public class SupportPrefix : Prefix
     {
-        private const string PRV_SUPPORT_PREFIX = "Support: ";
-        private static readonly Regex PRV_SUPPORT_REGEX = new Regex("^Support: ");
+        private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_support;
+        private static readonly Regex REGEX = new Regex("^Support:");
 
         public override bool isMatch(string text)
         {
-            return text.StartsWith(PRV_SUPPORT_PREFIX);
+            return REGEX.IsMatch(text);
         }
         public override string removePrefixFromText(string text)
         {
-            return PRV_SUPPORT_REGEX.Replace(text, "");
+            return REGEX.Replace(text, "");
         }
         public override string ToString()
         {
-            return PRV_SUPPORT_PREFIX;
+            return TEXT_REPRESENTATION;
         }
     }
 }

@@ -4,24 +4,20 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 {
     public class ReprisalPrefix : Prefix
     {
-        private const string PRV_REPRISAL_PREFIX = "Reprisal: ";
-        private static readonly Regex PRV_REPRISAL_REGEX = new Regex("^Reprisal ?: ");
+        private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_reprisal;
+        private static readonly Regex REGEX = new Regex("^Reprisal:");
 
         public override bool isMatch(string text)
         {
-            const string PRV_REPRISAL_PREFIX_WITH_SPACE = "Reprisal : ";
-
-            return text.StartsWith(PRV_REPRISAL_PREFIX)
-                || text.StartsWith(PRV_REPRISAL_PREFIX_WITH_SPACE)
-                ;
+            return REGEX.IsMatch(text);
         }
         public override string removePrefixFromText(string text)
         {
-            return PRV_REPRISAL_REGEX.Replace(text, "");
+            return REGEX.Replace(text, "");
         }
         public override string ToString()
         {
-            return PRV_REPRISAL_PREFIX;
+            return TEXT_REPRESENTATION;
         }
     }
 }

@@ -4,24 +4,20 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
 {
     public class RevengePrefix : Prefix
     {
-        private const string PRV_REVENGE_PREFIX = "Revenge: ";
-        private static readonly Regex PRV_REVENGE_REGEX = new Regex("^Revenge ?: ");
+        private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_revenge;
+        private static readonly Regex REGEX = new Regex("^Revenge:");
 
         public override bool isMatch(string text)
         {
-            const string PRV_REVENGE_PREFIX_WITH_SPACE = "Revenge :";
-
-            return text.StartsWith(PRV_REVENGE_PREFIX)
-                || text.StartsWith(PRV_REVENGE_PREFIX_WITH_SPACE)
-                ;
+            return REGEX.IsMatch(text);
         }
         public override string removePrefixFromText(string text)
         {
-            return PRV_REVENGE_REGEX.Replace(text, "");
+            return REGEX.Replace(text, "");
         }
         public override string ToString()
         {
-            return PRV_REVENGE_PREFIX;
+            return TEXT_REPRESENTATION;
         }
     }
 }
