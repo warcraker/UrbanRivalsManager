@@ -2,7 +2,7 @@
 {
     public class BridgetLeader : Leader
     {
-        public BridgetLeader() : base("+1 Life Per Round")
+        public BridgetLeader() : base("Team: Victory Or Defeat: +1 Life")
         {
             ;
         }

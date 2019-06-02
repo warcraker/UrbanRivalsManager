@@ -2,7 +2,7 @@
 {
     public class AmbreLeader : Leader
     {
-        public AmbreLeader() : base("Team: Courage, Power +3, Max. 10")
+        public AmbreLeader() : base("Team: Courage: Power +3")
         {
             ;
         }

@@ -2,7 +2,7 @@
 {
     public class EkloreLeader : Leader
     {
-        public EkloreLeader() : base("-1 Opp. Pillz, Per Round, Min 3")
+        public EkloreLeader() : base("-1 Opp. Pillz, Per Round, Min 5")
         {
             ;
         }

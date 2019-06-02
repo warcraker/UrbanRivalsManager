@@ -2,7 +2,7 @@
 {
     public class MrBigDukeLeader : Leader
     {
-        public MrBigDukeLeader() : base("Nuke")
+        public MrBigDukeLeader() : base("Team: Protection : Damage")
         {
             ;
         }
