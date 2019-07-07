@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 
         static PoisonXMinYSuffix()
         {
-            Regex regex = new Regex(@"^Poison(?<x>[1-9])Min(?<y>[0-9])$"); 
+            Regex regex = new Regex(@"^Poison(?<x>[1-9])Min(?<y>[0-9])$", RegexOptions.Compiled); 
 
-            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new PoisonXMinYSuffix(x, y));
+            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new PoisonXMinYSuffix(x, y), 55);
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_poison_x_min_y;
         }
 

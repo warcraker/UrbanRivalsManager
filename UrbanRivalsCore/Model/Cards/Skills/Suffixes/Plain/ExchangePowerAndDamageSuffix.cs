@@ -11,9 +11,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static ExchangePowerAndDamageSuffix()
         {
-            Regex regex = new Regex(@"^PowerAndDamageExchange$"); 
+            Regex regex = new Regex(@"^PowerAndDamageExchange$", RegexOptions.Compiled); 
 
-            PRV_PARSER = new PlainSuffixParser(regex, new ExchangePowerAndDamageSuffix());
+            PRV_PARSER = new PlainSuffixParser(regex, new ExchangePowerAndDamageSuffix(), 1);
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_exchange_power_and_damage;
         }
 

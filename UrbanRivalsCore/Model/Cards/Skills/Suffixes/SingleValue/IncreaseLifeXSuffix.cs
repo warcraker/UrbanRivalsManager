@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.SingleValue
 
         static IncreaseLifeXSuffix()
         {
-            Regex regex = new Regex(@"^\+(?<x>[1-9])Life$"); 
+            Regex regex = new Regex(@"^\+(?<x>[1-9])Life$", RegexOptions.Compiled); 
 
-            PRV_PARSER = new SingleValueSuffixParser(regex, (x) => new IncreaseLifeXSuffix(x));
+            PRV_PARSER = new SingleValueSuffixParser(regex, (x) => new IncreaseLifeXSuffix(x), 88);
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_increase_life_x;
         }
 

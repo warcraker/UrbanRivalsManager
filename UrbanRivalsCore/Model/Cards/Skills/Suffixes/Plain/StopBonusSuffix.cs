@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static StopBonusSuffix()
         {
-            Regex regex = new Regex(@"^Stop(?:Opp)?Bonus$"); 
+            Regex regex = new Regex(@"^Stop(?:Opp)?Bonus$", RegexOptions.Compiled); 
 
-            PRV_PARSER = new PlainSuffixParser(regex, new StopBonusSuffix());
+            PRV_PARSER = new PlainSuffixParser(regex, new StopBonusSuffix(), 70);
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_stop_bonus;
         }
 

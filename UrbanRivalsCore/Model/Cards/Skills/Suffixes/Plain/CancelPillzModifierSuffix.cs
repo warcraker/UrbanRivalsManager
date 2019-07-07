@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static CancelPillzModifierSuffix()
         {
-            Regex regex = new Regex(@"^CancelOppPillzModif$");
+            Regex regex = new Regex(@"^CancelOppPillzModif$", RegexOptions.Compiled);
 
-            PRV_PARSER = new PlainSuffixParser(regex, new CancelPillzModifierSuffix());
+            PRV_PARSER = new PlainSuffixParser(regex, new CancelPillzModifierSuffix(), 3);
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_cancel_pillz_modifier;
         }
 

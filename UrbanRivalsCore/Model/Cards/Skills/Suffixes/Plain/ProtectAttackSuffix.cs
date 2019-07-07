@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static ProtectAttackSuffix()
         {
-            Regex regex = new Regex(@"^Protection:Attack$"); 
+            Regex regex = new Regex(@"^Protection:Attack$", RegexOptions.Compiled); 
 
-            PRV_PARSER = new PlainSuffixParser(regex, new ProtectAttackSuffix());
+            PRV_PARSER = new PlainSuffixParser(regex, new ProtectAttackSuffix(), 8);
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_protect_attack;
         }
 

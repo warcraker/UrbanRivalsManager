@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 
         static RegenXMaxYSuffix()
         {
-            Regex regex = new Regex(@"^Regen(?<x>[1-9])Max(?<y>[1-9][0-9]?)$");
+            Regex regex = new Regex(@"^Regen(?<x>[1-9])Max(?<y>[1-9][0-9]?)$", RegexOptions.Compiled);
 
-            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new RegenXMaxYSuffix(x, y));
+            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new RegenXMaxYSuffix(x, y), 9);
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_regen_x_max_y;
         }
 

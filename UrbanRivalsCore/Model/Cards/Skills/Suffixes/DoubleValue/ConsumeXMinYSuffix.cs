@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 
         static ConsumeXMinYSuffix()
         {
-            Regex regex = new Regex(@"^Consume(?<x>[0-9])Min(?<y>[0-9])$"); 
+            Regex regex = new Regex(@"^Consume(?<x>[0-9])Min(?<y>[0-9])$", RegexOptions.Compiled); 
 
-            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new ConsumeXMinYSuffix(x, y));
+            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new ConsumeXMinYSuffix(x, y), 5);
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_consume_x_min_y;
         }
 

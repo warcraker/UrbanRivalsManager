@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.SingleValue
 
         static IncreaseAttackXPerOppPowerSuffix()
         {
-            Regex regex = new Regex(@"^\+(?<x>[1-9])AttackPerOppPower$"); 
+            Regex regex = new Regex(@"^\+(?<x>[1-9])AttackPerOppPower$", RegexOptions.Compiled); 
 
-            PRV_PARSER = new SingleValueSuffixParser(regex, (x) => new IncreaseAttackXPerOppPowerSuffix(x));
+            PRV_PARSER = new SingleValueSuffixParser(regex, (x) => new IncreaseAttackXPerOppPowerSuffix(x), 1);
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_increase_attack_x_per_remaining_life;
         }
 

@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 
         static IncreasePillzXMaxYSuffix()
         {
-            Regex regex = new Regex(@"^\+(?<x>[1-9])PillzMax(?<y>[1-9][0-9]?)$");
+            Regex regex = new Regex(@"^\+(?<x>[1-9])PillzMax(?<y>[1-9][0-9]?)$", RegexOptions.Compiled);
 
-            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new IncreasePillzXMaxYSuffix(x, y));
+            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new IncreasePillzXMaxYSuffix(x, y), 5);
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_increase_pillz_x_max_y;
         }
 

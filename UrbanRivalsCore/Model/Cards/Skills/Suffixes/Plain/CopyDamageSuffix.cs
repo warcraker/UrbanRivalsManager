@@ -11,9 +11,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static CopyDamageSuffix()
         {
-            Regex regex = new Regex(@"^Copy:OppDamage|Damage=DamageOpp$"); 
+            Regex regex = new Regex(@"^Copy:OppDamage|Damage=DamageOpp$", RegexOptions.Compiled); 
 
-            PRV_PARSER = new PlainSuffixParser(regex, new CopyDamageSuffix());
+            PRV_PARSER = new PlainSuffixParser(regex, new CopyDamageSuffix(), 26);
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_copy_damage;
         }
 

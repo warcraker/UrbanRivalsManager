@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.SingleValue
 
         static IncreaseAttackXPerRemainingPillzSuffix()
         {
-            Regex regex = new Regex(@"^\+(?<x>[1-9])At(?:tac)?kPerPillzLeft$"); 
+            Regex regex = new Regex(@"^\+(?<x>[1-9])At(?:tac)?kPerPillzLeft$", RegexOptions.Compiled); 
 
-            PRV_PARSER = new SingleValueSuffixParser(regex, (x) => new IncreaseAttackXPerRemainingPillzSuffix(x));
+            PRV_PARSER = new SingleValueSuffixParser(regex, (x) => new IncreaseAttackXPerRemainingPillzSuffix(x), 12);
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_increase_attack_x_per_remaining_pillz;
         }
 
