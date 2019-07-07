@@ -8,11 +8,12 @@ namespace UrbanRivalsCore.Model.Cards.Skills.SuffixParsers
     {
         protected readonly Regex regex;
 
-        public SuffixParser(Regex regex)
+        public SuffixParser(Regex regex, int weight)
         {
             AssertArgument.isNotNull(regex, nameof(regex));
 
             this.regex = regex;
+            this.Weight = weight;
         }
 
         public abstract Suffix getSuffix(string suffixText);
@@ -20,6 +21,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.SuffixParsers
         {
             return this.regex.IsMatch(suffixText);
         }
+
+        public int Weight { get; }
+
 
         protected static int prv_getCapturedGroupAsInteger(Match match, string groupName)
         {

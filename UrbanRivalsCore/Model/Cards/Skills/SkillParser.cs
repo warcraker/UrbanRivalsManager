@@ -17,13 +17,16 @@ namespace UrbanRivalsCore.Model.Cards.Skills
     {
         private const string PRV_NO_ABILITY_TEXT = "No ability";
         private static readonly IEnumerable<Leader> PRV_ALL_LEADERS;
-        private static readonly IEnumerable<Prefix> PRV_ALL_PREFIXES;
-        private static readonly IEnumerable<SuffixParser> PRV_ALL_SUFFIX_PARSERS;
+        public static readonly List<Prefix> PRV_ALL_PREFIXES;
+        public static readonly List<SuffixParser> PRV_ALL_SUFFIX_PARSERS;
         private static readonly Regex PRV_REMOVE_FILLER_CHARS = new Regex("[ ,.]");
+
+        public static int[] PRV_PREFIX_WEIGHTS;// TODO WIP REMOVE IF NOT USED
+        public static int[] PRV_SUFFIX_WEIGHTS;// TODO WIP REMOVE IF NOT USED
 
         static SkillParser()
         {
-            PRV_ALL_PREFIXES = new Prefix[]
+            PRV_ALL_PREFIXES = new List<Prefix>
             {
                 new BacklashPrefix(),
                 new BrawlPrefix(),
@@ -132,12 +135,15 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                 XantiaxXMinYSuffix.getParser(),
             };
 
-            List<SuffixParser> allSuffixParsers = new List<SuffixParser>();
-            allSuffixParsers.AddRange(allPlainSuffixParsers);
-            allSuffixParsers.AddRange(allSingleValueSuffixParsers);
-            allSuffixParsers.AddRange(allDoubleValueSuffixParsers);
+            PRV_ALL_SUFFIX_PARSERS = new List<SuffixParser>();
+            PRV_ALL_SUFFIX_PARSERS.AddRange(allPlainSuffixParsers);
+            PRV_ALL_SUFFIX_PARSERS.AddRange(allSingleValueSuffixParsers);
+            PRV_ALL_SUFFIX_PARSERS.AddRange(allDoubleValueSuffixParsers);
 
-            PRV_ALL_SUFFIX_PARSERS = allSuffixParsers.ToArray();
+            PRV_ALL_SUFFIX_PARSERS = PRV_ALL_SUFFIX_PARSERS.OrderBy(s => s.Weight).ToList();
+
+            PRV_PREFIX_WEIGHTS = new int[PRV_ALL_PREFIXES.Count()];
+            PRV_SUFFIX_WEIGHTS = new int[PRV_ALL_SUFFIX_PARSERS.Count()];
         }
 
         public static Skill parseSkill(string skillAsText)
@@ -162,13 +168,25 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                     IEnumerable<Prefix> prefixes = prv_parsePrefixes(cleanText, out suffixAsText);
 
                     // TODO use first or default?
-                    SuffixParser parser = PRV_ALL_SUFFIX_PARSERS.SingleOrDefault(p => p.isMatch(suffixAsText));
-
+                    SuffixParser parser;
+                    try
+                    {
+                        parser = PRV_ALL_SUFFIX_PARSERS.SingleOrDefault(p => p.isMatch(suffixAsText));
+                    }
+                    catch
+                    {
+                        parser = null;
+                    }
                     // TODO write alterantive when no parser gets ok
                     if (parser == null)
                     {
                         return null; // TODO remove and leave assert
                         Asserts.check(parser != null, $"No {nameof(SuffixParser)} was found for text [{suffixAsText}]");
+                    }
+
+                    {
+                        int suffixIndex = PRV_ALL_SUFFIX_PARSERS.IndexOf(parser);
+                        PRV_SUFFIX_WEIGHTS[suffixIndex]++;
                     }
 
                     Suffix suffix = parser.getSuffix(suffixAsText);
@@ -185,7 +203,6 @@ namespace UrbanRivalsCore.Model.Cards.Skills
 
             return skill;
         }
-
         private static Leader prv_parseLeader(string abilityText)
         {
             return PRV_ALL_LEADERS.SingleOrDefault(leader => leader.isMatch(abilityText));
@@ -203,6 +220,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                 {
                     textToParse = parsedPrefix.removePrefixFromText(textToParse);
                     prefixes.Add(parsedPrefix);
+
+                    int prefixIndex = PRV_ALL_PREFIXES.IndexOf(parsedPrefix);
+                    PRV_PREFIX_WEIGHTS[prefixIndex]++;
                 }
             } while (parsedPrefix != null);
 

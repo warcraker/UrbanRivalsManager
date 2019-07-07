@@ -7,7 +7,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.SuffixParsers
     {
         private readonly Suffix suffixInstance;
 
-        public PlainSuffixParser(Regex regex, Suffix suffixInstance) : base(regex)
+        public PlainSuffixParser(Regex regex, Suffix suffixInstance, int weight) : base(regex, weight)
         {
             this.suffixInstance = suffixInstance;
         }
