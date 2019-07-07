@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static ProtectPowerSuffix()
         {
-            Regex regex = new Regex(@"^Protection: Power$"); 
+            Regex regex = new Regex(@"^Protection:Power$"); 
 
             PRV_PARSER = new PlainSuffixParser(regex, new ProtectPowerSuffix());
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_protect_power;

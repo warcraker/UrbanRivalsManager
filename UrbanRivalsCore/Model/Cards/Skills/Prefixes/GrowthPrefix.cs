@@ -5,7 +5,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
     public class GrowthPrefix : Prefix
     {
         private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_growth;
-        private static readonly Regex REGEX = new Regex("^Growth:");
+        private static readonly Regex REGEX = new Regex("^Growth:", RegexOptions.Compiled);
 
         public override bool isMatch(string text)
         {

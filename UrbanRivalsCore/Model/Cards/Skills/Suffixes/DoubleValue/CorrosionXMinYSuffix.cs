@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 
         static CorrosionXMinYSuffix()
         {
-            Regex regex = new Regex(@"^Corrosion (?<x>[1-9]), Min (?<y>[0-9])$");
+            Regex regex = new Regex(@"^Corrosion(?<x>[1-9])Min(?<y>[0-9])$");
 
             PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new CorrosionXMinYSuffix(x, y));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_corrosion_x_min_y;

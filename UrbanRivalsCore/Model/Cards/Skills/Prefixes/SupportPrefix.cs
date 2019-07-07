@@ -5,7 +5,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
     public class SupportPrefix : Prefix
     {
         private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_support;
-        private static readonly Regex REGEX = new Regex("^Support:");
+        private static readonly Regex REGEX = new Regex("^Support:", RegexOptions.Compiled);
 
         public override bool isMatch(string text)
         {

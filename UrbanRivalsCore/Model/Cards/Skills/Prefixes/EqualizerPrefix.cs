@@ -5,7 +5,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
     public class EqualizerPrefix : Prefix
     {
         private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_equalizer;
-        private static readonly Regex REGEX = new Regex("^Equalizer:");
+        private static readonly Regex REGEX = new Regex("^Equalizer:", RegexOptions.Compiled);
 
         public override bool isMatch(string text)
         {

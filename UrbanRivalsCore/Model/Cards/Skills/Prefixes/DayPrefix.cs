@@ -5,7 +5,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
     public class DayPrefix : Prefix
     {
         private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_day;
-        private static readonly Regex REGEX = new Regex("^Day:");
+        private static readonly Regex REGEX = new Regex("^Day:", RegexOptions.Compiled);
 
         public override bool isMatch(string text)
         {

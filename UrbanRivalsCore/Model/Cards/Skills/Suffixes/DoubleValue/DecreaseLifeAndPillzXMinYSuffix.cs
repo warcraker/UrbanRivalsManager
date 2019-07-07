@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 
         static DecreaseLifeAndPillzXMinYSuffix()
         {
-            Regex regex = new Regex(@"^-(?<x>[1-9]) (?:Life & Pillz,|Opp\.? (?:Life & Pillz|Pillz (?:And|&) Life,)) Min (?<y>[0-9])$"); 
+            Regex regex = new Regex(@"^-(?<x>[1-9])(?:Opp)?(?:Life&Pillz|Pillz(?:&|And)Life)Min(?<y>[0-9])$"); 
 
             PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new DecreaseLifeAndPillzXMinYSuffix(x, y));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_decrease_life_and_pillz_x_min_y;

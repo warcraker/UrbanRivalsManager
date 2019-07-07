@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 
         static DopeXMaxYSuffix()
         {
-            Regex regex = new Regex(@"^Dope (?<x>[1-9]), Max\. (?<y>[1-9][0-9]?)$");
+            Regex regex = new Regex(@"^Dope(?<x>[1-9])Max(?<y>[1-9][0-9]?)$");
 
             PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new DopeXMaxYSuffix(x, y));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_dope_x_max_y;

@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static CancelLeaderSuffix()
         {
-            Regex regex = new Regex(@"^Cancel Leader$");
+            Regex regex = new Regex(@"^CancelLeader$");
 
             PRV_PARSER = new PlainSuffixParser(regex, new CancelLeaderSuffix());
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_cancel_leader;

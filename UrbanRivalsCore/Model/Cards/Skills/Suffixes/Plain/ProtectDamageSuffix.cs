@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static ProtectDamageSuffix()
         {
-            Regex regex = new Regex(@"^Protection : Damage$"); 
+            Regex regex = new Regex(@"^Protection:Damage$"); 
 
             PRV_PARSER = new PlainSuffixParser(regex, new ProtectDamageSuffix());
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_protect_damage;

@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static ProtectPowerAndDamageSuffix()
         {
-            Regex regex = new Regex(@"^Prot(?:ection: Power And Damage|ect\. Power And Damage|ec\. Power And Dmg|\.: Power & Damage)$"); 
+            Regex regex = new Regex(@"^Prot(?:ection:PowerAndDamage|ecPowerAndDmg|ectPowerAndDamage|:Power&Damage)$"); 
 
             PRV_PARSER = new PlainSuffixParser(regex, new ProtectPowerAndDamageSuffix());
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_protect_power_and_damage;

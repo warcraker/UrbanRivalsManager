@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 
         static RebirthXMaxYSuffix()
         {
-            Regex regex = new Regex(@"^Rebirth (?<x>[1-9]), Max\. (?<y>[1-9])$");
+            Regex regex = new Regex(@"^Rebirth(?<x>[1-9])Max(?<y>[1-9])$");
 
             PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new RebirthXMaxYSuffix(x, y));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_rebirth_x_max_y;

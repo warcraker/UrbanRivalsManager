@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.SingleValue
 
         static IncreasePillzAndLifeXSuffix()
         {
-            Regex regex = new Regex(@"^\+(?<x>[1-9]) Pillz And Life$"); 
+            Regex regex = new Regex(@"^\+(?<x>[1-9])PillzAndLife$"); 
 
             PRV_PARSER = new SingleValueSuffixParser(regex, (x) => new IncreasePillzAndLifeXSuffix(x));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_increase_pillz_and_life_x;

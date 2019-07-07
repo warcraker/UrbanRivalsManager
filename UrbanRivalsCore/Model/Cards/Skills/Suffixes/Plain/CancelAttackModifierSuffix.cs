@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static CancelAttackModifierSuffix()
         {
-            Regex regex = new Regex(@"^Cancel Opp\. Attack Modif\.$");
+            Regex regex = new Regex(@"^CancelOppAttackModif$");
 
             PRV_PARSER = new PlainSuffixParser(regex, new CancelAttackModifierSuffix());
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_cancel_attack_modifier;
