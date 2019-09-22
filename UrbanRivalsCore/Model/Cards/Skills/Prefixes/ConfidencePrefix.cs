@@ -5,7 +5,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
     public class ConfidencePrefix : Prefix
     {
         private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_confidence;
-        private static readonly Regex REGEX = new Regex("^Confidence:", RegexOptions.None);
+        private static readonly Regex REGEX = new Regex("^Confid(?:ence)?:", RegexOptions.None);
 
         public override bool isMatch(string text)
         {

@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static CopyBonusSuffix()
         {
-            Regex regex = new Regex(@"^Copy:OppBonus$", RegexOptions.None); 
+            Regex regex = new Regex(@"^Copy:?OppBonus$", RegexOptions.None);
 
             PRV_PARSER = new PlainSuffixParser(regex, new CopyBonusSuffix());
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_copy_bonus;
