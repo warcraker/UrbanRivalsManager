@@ -90,6 +90,9 @@
     <Compile Include="Model\Cards\Skills\Prefixes\VictoryOrDefeatPrefix.cs" />
     <Compile Include="Model\Cards\OldSkill.cs" />
     <Compile Include="Model\Cards\Skills\SkillParser.cs" />
+    <Compile Include="Model\Cards\Skills\Suffixes\DoubleValue\CombustMinYSuffix.cs" />
+    <Compile Include="Model\Cards\Skills\Suffixes\DoubleValue\IncreasePillzPerDamageXMaxYSuffix.cs" />
+    <Compile Include="Model\Cards\Skills\Suffixes\DoubleValue\RepairXMaxYSuffix.cs" />
     <Compile Include="Model\Cards\Skills\Suffixes\DoubleValue\XantiaxXMinYSuffix.cs" />
     <Compile Include="Model\Cards\Skills\Suffixes\DoubleValue\ToxinXMinYSuffix.cs" />
     <Compile Include="Model\Cards\Skills\Suffixes\DoubleValue\RegenXMaxYSuffix.cs" />

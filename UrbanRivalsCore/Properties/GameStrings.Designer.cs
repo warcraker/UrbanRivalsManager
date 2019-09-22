@@ -682,6 +682,15 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Combust {0}, Min {1}.
+        /// </summary>
+        public static string skill_suffix_combust_x_min_y {
+            get {
+                return ResourceManager.GetString("skill_suffix_combust_x_min_y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consume {0}, Min {1}.
         /// </summary>
         public static string skill_suffix_consume_x_min_y {
@@ -1137,6 +1146,15 @@ namespace UrbanRivalsCore.Properties {
         public static string skill_suffix_regen_x_max_y {
             get {
                 return ResourceManager.GetString("skill_suffix_regen_x_max_y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repair {0}, Max {1}.
+        /// </summary>
+        public static string skill_suffix_repair_x_max_y {
+            get {
+                return ResourceManager.GetString("skill_suffix_repair_x_max_y", resourceCulture);
             }
         }
         
