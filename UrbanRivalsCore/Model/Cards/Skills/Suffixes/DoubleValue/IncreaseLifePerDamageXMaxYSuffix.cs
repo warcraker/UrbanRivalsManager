@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 
         static IncreaseLifePerDamageXMaxYSuffix()
         {
-            Regex regex = new Regex(@"^\+(?<x>[1-9])LifePerDamageMax(?<y>[1-9][0-9]?)$", RegexOptions.Compiled);
+            Regex regex = new Regex(@"^\+(?<x>[1-9])LifePerDamageMax(?<y>[1-9][0-9]?)$", RegexOptions.None);
 
-            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new IncreaseLifePerDamageXMaxYSuffix(x, y), 4);
+            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new IncreaseLifePerDamageXMaxYSuffix(x, y));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_increase_life_x_per_damage_max_y;
         }
 

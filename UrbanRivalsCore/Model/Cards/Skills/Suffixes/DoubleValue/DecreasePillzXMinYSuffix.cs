@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 
         static DecreasePillzXMinYSuffix()
         {
-            Regex regex = new Regex(@"^-(?<x>[1-9])(?:OppPillz|PillzOpp)Min(?<y>[0-9])$", RegexOptions.Compiled);
+            Regex regex = new Regex(@"^-(?<x>[1-9])(?:OppPillz|PillzOpp)Min(?<y>[0-9])$", RegexOptions.None);
 
-            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new DecreasePillzXMinYSuffix(x, y), 35);
+            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new DecreasePillzXMinYSuffix(x, y));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_decrease_pillz_x_min_y;
         }
 

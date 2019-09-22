@@ -11,9 +11,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static CopyPowerAndDamageSuffix()
         {
-            Regex regex = new Regex(@"^Copy:PowerAndDamageOpp$", RegexOptions.Compiled); 
+            Regex regex = new Regex(@"^Copy:PowerAndDamageOpp$", RegexOptions.None); 
 
-            PRV_PARSER = new PlainSuffixParser(regex, new CopyPowerAndDamageSuffix(), 7);
+            PRV_PARSER = new PlainSuffixParser(regex, new CopyPowerAndDamageSuffix());
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_copy_power_and_damage;
         }
 

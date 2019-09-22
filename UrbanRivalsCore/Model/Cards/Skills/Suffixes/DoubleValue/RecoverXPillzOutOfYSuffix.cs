@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 
         static RecoverXPillzOutOfYSuffix()
         {
-            Regex regex = new Regex(@"^Recover(?<x>[1-9])PillzOutOf(?<y>[1-9])$", RegexOptions.Compiled);
+            Regex regex = new Regex(@"^Recover(?<x>[1-9])PillzOutOf(?<y>[1-9])$", RegexOptions.None);
 
-            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new RecoverXPillzOutOfYSuffix(x, y), 27);
+            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new RecoverXPillzOutOfYSuffix(x, y));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_recover_x_pillz_out_of_y;
         }
 

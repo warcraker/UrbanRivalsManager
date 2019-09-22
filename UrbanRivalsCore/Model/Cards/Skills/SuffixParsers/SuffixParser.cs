@@ -8,12 +8,11 @@ namespace UrbanRivalsCore.Model.Cards.Skills.SuffixParsers
     {
         protected readonly Regex regex;
 
-        public SuffixParser(Regex regex, int weight)
+        public SuffixParser(Regex regex)
         {
             AssertArgument.isNotNull(regex, nameof(regex));
 
             this.regex = regex;
-            this.Weight = weight;
         }
 
         public abstract Suffix getSuffix(string suffixText);

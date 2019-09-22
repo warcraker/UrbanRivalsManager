@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.SingleValue
 
         static ReanimateXSuffix()
         {
-            Regex regex = new Regex(@"^Reanimate:\+(?<x>[1-9])Life$", RegexOptions.Compiled); 
+            Regex regex = new Regex(@"^Reanimate:\+(?<x>[1-9])Life$", RegexOptions.None); 
 
-            PRV_PARSER = new SingleValueSuffixParser(regex, (x) => new ReanimateXSuffix(x), 1);
+            PRV_PARSER = new SingleValueSuffixParser(regex, (x) => new ReanimateXSuffix(x));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_reanimate_x;
         }
 

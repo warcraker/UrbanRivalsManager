@@ -21,9 +21,6 @@ namespace UrbanRivalsCore.Model.Cards.Skills
         public static readonly List<SuffixParser> PRV_ALL_SUFFIX_PARSERS;
         private static readonly Regex PRV_REMOVE_FILLER_CHARS = new Regex("[ ,.]");
 
-        public static int[] PRV_PREFIX_WEIGHTS;// TODO WIP REMOVE IF NOT USED
-        public static int[] PRV_SUFFIX_WEIGHTS;// TODO WIP REMOVE IF NOT USED
-
         static SkillParser()
         {
             PRV_ALL_PREFIXES = new List<Prefix>
@@ -142,9 +139,6 @@ namespace UrbanRivalsCore.Model.Cards.Skills
             PRV_ALL_SUFFIX_PARSERS.AddRange(allDoubleValueSuffixParsers);
 
             PRV_ALL_SUFFIX_PARSERS = PRV_ALL_SUFFIX_PARSERS.OrderBy(s => s.Weight).ToList();
-
-            PRV_PREFIX_WEIGHTS = new int[PRV_ALL_PREFIXES.Count()];
-            PRV_SUFFIX_WEIGHTS = new int[PRV_ALL_SUFFIX_PARSERS.Count()];
         }
 
         public static Skill parseSkill(string skillAsText)
@@ -221,9 +215,6 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                 {
                     textToParse = parsedPrefix.removePrefixFromText(textToParse);
                     prefixes.Add(parsedPrefix);
-
-                    int prefixIndex = PRV_ALL_PREFIXES.IndexOf(parsedPrefix);
-                    PRV_PREFIX_WEIGHTS[prefixIndex]++;
                 }
             } while (parsedPrefix != null);
 

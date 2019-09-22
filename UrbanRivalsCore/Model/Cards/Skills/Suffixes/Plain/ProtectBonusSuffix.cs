@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static ProtectBonusSuffix()
         {
-            Regex regex = new Regex(@"^BonusProtection|Protection:Bonus$", RegexOptions.Compiled); 
+            Regex regex = new Regex(@"^BonusProtection|Protection:Bonus$", RegexOptions.None); 
 
-            PRV_PARSER = new PlainSuffixParser(regex, new ProtectBonusSuffix(), 19);
+            PRV_PARSER = new PlainSuffixParser(regex, new ProtectBonusSuffix());
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_protect_bonus;
         }
 

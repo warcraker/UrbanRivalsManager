@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 
         static XantiaxXMinYSuffix()
         {
-            Regex regex = new Regex(@"^Xantiax:-(?<x>[1-9])LifeMin(?<y>[0-9])$", RegexOptions.Compiled); 
+            Regex regex = new Regex(@"^Xantiax:-(?<x>[1-9])LifeMin(?<y>[0-9])$", RegexOptions.None); 
 
-            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new XantiaxXMinYSuffix(x, y), 1);
+            PRV_PARSER = new DoubleValueSuffixParser(regex, (x, y) => new XantiaxXMinYSuffix(x, y));
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_xantiax_x_min_y;
         }
 

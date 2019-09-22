@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static StopAbilitySuffix()
         {
-            Regex regex = new Regex(@"^Stop(?:Opp)?Ability$", RegexOptions.Compiled); 
+            Regex regex = new Regex(@"^Stop(?:Opp)?Ability$", RegexOptions.None); 
 
-            PRV_PARSER = new PlainSuffixParser(regex, new StopAbilitySuffix(), 79);
+            PRV_PARSER = new PlainSuffixParser(regex, new StopAbilitySuffix());
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_stop_ability;
         }
 

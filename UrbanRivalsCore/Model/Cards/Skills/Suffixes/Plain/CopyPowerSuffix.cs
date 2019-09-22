@@ -11,9 +11,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static CopyPowerSuffix()
         {
-            Regex regex = new Regex(@"^Copy:OppPower|Power=PowerOpp$", RegexOptions.Compiled); 
+            Regex regex = new Regex(@"^Copy:OppPower|Power=PowerOpp$", RegexOptions.None); 
 
-            PRV_PARSER = new PlainSuffixParser(regex, new CopyPowerSuffix(), 33);
+            PRV_PARSER = new PlainSuffixParser(regex, new CopyPowerSuffix());
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_copy_power;
         }
 

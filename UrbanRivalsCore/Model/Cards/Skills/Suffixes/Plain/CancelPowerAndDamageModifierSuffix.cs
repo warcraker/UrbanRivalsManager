@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain
 
         static CancelPowerAndDamageModifierSuffix()
         {
-            Regex regex = new Regex(@"^Canc(?:PowerDamMod|elOppPower(?:&DamageMod|AndDamageModif))$", RegexOptions.Compiled);
+            Regex regex = new Regex(@"^Canc(?:PowerDamMod|elOppPower(?:&DamageMod|AndDamageModif))$", RegexOptions.None);
 
-            PRV_PARSER = new PlainSuffixParser(regex, new CancelPowerAndDamageModifierSuffix(), 8);
+            PRV_PARSER = new PlainSuffixParser(regex, new CancelPowerAndDamageModifierSuffix());
             PRV_TEXT_REPRESENTATION = Properties.GameStrings.skill_suffix_cancel_power_and_damage_modifier;
         }
 
