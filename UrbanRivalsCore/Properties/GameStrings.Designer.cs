@@ -637,7 +637,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel Opp Life Modifier.
+        ///   Looks up a localized string similar to Cancel Life Modifiers.
         /// </summary>
         public static string skill_suffix_cancel_life_modifier {
             get {
@@ -646,7 +646,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel Opp Pillz And Life Modifier.
+        ///   Looks up a localized string similar to Cancel Pillz And Life Modifiers.
         /// </summary>
         public static string skill_suffix_cancel_pillz_and_life_modifier {
             get {
@@ -655,7 +655,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel Opp Pillz Modifier.
+        ///   Looks up a localized string similar to Cancel Pillz Modifiers.
         /// </summary>
         public static string skill_suffix_cancel_pillz_modifier {
             get {
@@ -664,7 +664,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel Opp Power And Damage Modifier.
+        ///   Looks up a localized string similar to Cancel Power And Damage Modifiers.
         /// </summary>
         public static string skill_suffix_cancel_power_and_damage_modifier {
             get {
@@ -673,7 +673,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel Opp Power Modifier.
+        ///   Looks up a localized string similar to Cancel Power Modifier.
         /// </summary>
         public static string skill_suffix_cancel_power_modifier {
             get {
@@ -709,7 +709,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy Opp Damage.
+        ///   Looks up a localized string similar to Copy Damage.
         /// </summary>
         public static string skill_suffix_copy_damage {
             get {
@@ -718,7 +718,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy Opp Power.
+        ///   Looks up a localized string similar to Copy Power.
         /// </summary>
         public static string skill_suffix_copy_power {
             get {
@@ -727,7 +727,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy Opp Power And Damage.
+        ///   Looks up a localized string similar to Copy Power And Damage.
         /// </summary>
         public static string skill_suffix_copy_power_and_damage {
             get {
@@ -781,7 +781,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -{0} Opp Life And Pillz, Min {1}.
+        ///   Looks up a localized string similar to -{0} Opp Pillz And Life, Min {1}.
         /// </summary>
         public static string skill_suffix_decrease_life_and_pillz_x_min_y {
             get {
@@ -862,7 +862,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Damage Exchange.
+        ///   Looks up a localized string similar to Exchange Damage.
         /// </summary>
         public static string skill_suffix_exchange_damage {
             get {
@@ -871,7 +871,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Power Exchange.
+        ///   Looks up a localized string similar to Exchange Power.
         /// </summary>
         public static string skill_suffix_exchange_power {
             get {
@@ -907,7 +907,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Attack +{0}.
+        ///   Looks up a localized string similar to +{0} Attack.
         /// </summary>
         public static string skill_suffix_increase_attack_x {
             get {
@@ -952,7 +952,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Damage +{0}.
+        ///   Looks up a localized string similar to +{0} Damage.
         /// </summary>
         public static string skill_suffix_increase_damage_x {
             get {
@@ -997,7 +997,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Increase Pillz And Life +{0}.
+        ///   Looks up a localized string similar to +{0} Pillz And Life .
         /// </summary>
         public static string skill_suffix_increase_pillz_and_life_x {
             get {
@@ -1033,7 +1033,16 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Power And Damage +{0}.
+        ///   Looks up a localized string similar to +{0} Pillz Per Damage, Max {1}.
+        /// </summary>
+        public static string skill_suffix_increase_pillz_x_per_damage_max_y {
+            get {
+                return ResourceManager.GetString("skill_suffix_increase_pillz_x_per_damage_max_y", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +{0} Power And Damage.
         /// </summary>
         public static string skill_suffix_increase_power_and_damage_x {
             get {
@@ -1042,7 +1051,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Power +{0}.
+        ///   Looks up a localized string similar to +{0} Power.
         /// </summary>
         public static string skill_suffix_increase_power_x {
             get {
@@ -1132,7 +1141,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reanimate: +{0} Life.
+        ///   Looks up a localized string similar to Reanimate {0}.
         /// </summary>
         public static string skill_suffix_reanimate_x {
             get {
@@ -1204,7 +1213,7 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Xantiax {0], Min {1}.
+        ///   Looks up a localized string similar to Xantiax {0}, Min {1}.
         /// </summary>
         public static string skill_suffix_xantiax_x_min_y {
             get {

@@ -124,7 +124,7 @@
     <value>+{0} Attack Per Pillz Left</value>
   </data>
   <data name="skill_suffix_increase_attack_x" xml:space="preserve">
-    <value>Attack +{0}</value>
+    <value>+{0} Attack</value>
   </data>
   <data name="skill_not_unlocked" xml:space="preserve">
     <value>Ability unlocked at level {0}</value>
@@ -190,13 +190,13 @@
     <value>Copy Opp Bonus</value>
   </data>
   <data name="skill_suffix_copy_damage" xml:space="preserve">
-    <value>Copy Opp Damage</value>
+    <value>Copy Damage</value>
   </data>
   <data name="skill_suffix_copy_power" xml:space="preserve">
-    <value>Copy Opp Power</value>
+    <value>Copy Power</value>
   </data>
   <data name="skill_suffix_copy_power_and_damage" xml:space="preserve">
-    <value>Copy Opp Power And Damage</value>
+    <value>Copy Power And Damage</value>
   </data>
   <data name="skill_suffix_decrease_attack_x_min_y" xml:space="preserve">
     <value>-{0} Opp Attack, Min {1}</value>
@@ -225,7 +225,7 @@
     <value>+{0} Attack Per Life Left</value>
   </data>
   <data name="skill_suffix_increase_damage_x" xml:space="preserve">
-    <value>Damage +{0}</value>
+    <value>+{0} Damage</value>
   </data>
   <data name="skill_suffix_increase_life_x" xml:space="preserve">
     <value>+{0} Life</value>
@@ -240,10 +240,10 @@
     <value>+{0} Pillz Per Damage</value>
   </data>
   <data name="skill_suffix_increase_power_and_damage_x" xml:space="preserve">
-    <value>Power And Damage +{0}</value>
+    <value>+{0} Power And Damage</value>
   </data>
   <data name="skill_suffix_increase_power_x" xml:space="preserve">
-    <value>Power +{0}</value>
+    <value>+{0} Power</value>
   </data>
   <data name="skill_suffix_poison_x_min_y" xml:space="preserve">
     <value>Poison {0}, Min {1}</value>
@@ -403,7 +403,7 @@
     <value>Cancel Opp Attack Modifier</value>
   </data>
   <data name="skill_suffix_cancel_power_modifier" xml:space="preserve">
-    <value>Cancel Opp Power Modifier</value>
+    <value>Cancel Power Modifier</value>
   </data>
   <data name="skill_suffix_toxin_x_min_y" xml:space="preserve">
     <value>Toxin {0}, Min {1}</value>
@@ -412,7 +412,7 @@
     <value>+{0} Life, Max {1}</value>
   </data>
   <data name="skill_suffix_cancel_life_modifier" xml:space="preserve">
-    <value>Cancel Opp Life Modifier</value>
+    <value>Cancel Life Modifiers</value>
   </data>
   <data name="skill_suffix_cancel_damage_modifier" xml:space="preserve">
     <value>Cancel Opp Damage Modifier</value>
@@ -421,7 +421,7 @@
     <value>-{0} Opp Attack Per Life Left, Min {1}</value>
   </data>
   <data name="skill_suffix_cancel_pillz_modifier" xml:space="preserve">
-    <value>Cancel Opp Pillz Modifier</value>
+    <value>Cancel Pillz Modifiers</value>
   </data>
   <data name="skill_suffix_regen_x_max_y" xml:space="preserve">
     <value>Regen {0}, Max {1}</value>
@@ -442,16 +442,16 @@
     <value>Dope {0}, Max {1}</value>
   </data>
   <data name="skill_suffix_cancel_pillz_and_life_modifier" xml:space="preserve">
-    <value>Cancel Opp Pillz And Life Modifier</value>
+    <value>Cancel Pillz And Life Modifiers</value>
   </data>
   <data name="skill_suffix_exchange_damage" xml:space="preserve">
-    <value>Damage Exchange</value>
+    <value>Exchange Damage</value>
   </data>
   <data name="skill_suffix_exchange_power" xml:space="preserve">
-    <value>Power Exchange</value>
+    <value>Exchange Power</value>
   </data>
   <data name="skill_suffix_cancel_power_and_damage_modifier" xml:space="preserve">
-    <value>Cancel Opp Power And Damage Modifier</value>
+    <value>Cancel Power And Damage Modifiers</value>
   </data>
   <data name="skill_suffix_consume_x_min_y" xml:space="preserve">
     <value>Consume {0}, Min {1}</value>
@@ -460,16 +460,16 @@
     <value>-{0} Opp Attack Per Pillz Left, Min {1}</value>
   </data>
   <data name="skill_suffix_increase_pillz_and_life_x" xml:space="preserve">
-    <value>Increase Pillz And Life +{0}</value>
+    <value>+{0} Pillz And Life </value>
   </data>
   <data name="skill_suffix_decrease_life_and_pillz_x_min_y" xml:space="preserve">
-    <value>-{0} Opp Life And Pillz, Min {1}</value>
+    <value>-{0} Opp Pillz And Life, Min {1}</value>
   </data>
   <data name="skill_suffix_infection_x_min_y" xml:space="preserve">
     <value>Infection {0}, Min {1}</value>
   </data>
   <data name="skill_suffix_reanimate_x" xml:space="preserve">
-    <value>Reanimate: +{0} Life</value>
+    <value>Reanimate {0}</value>
   </data>
   <data name="skill_suffix_corrosion_x_min_y" xml:space="preserve">
     <value>Corrosion {0}, Min {1}</value>
@@ -484,7 +484,7 @@
     <value>Dope And Regen {0}, Max {1}</value>
   </data>
   <data name="skill_suffix_xantiax_x_min_y" xml:space="preserve">
-    <value>Xantiax {0], Min {1}</value>
+    <value>Xantiax {0}, Min {1}</value>
   </data>
   <data name="skill_suffix_increase_atack_x_per_opp_damage" xml:space="preserve">
     <value>Increase Attack {0} Per Opp Damage</value>
