@@ -256,6 +256,8 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 
                 continue; // TODO REMOVE
 
+                // TODO Inverse OPP on Backlash and Defeat
+
                 var card = ApiToCardDefinitionAdapter.createCardDefinitionByServerData(id, name, clanId, rarityText, abilityText, abilityUnlockLevel, cardStatsPerLevel);
 
                 managers.DatabaseManager.storeCardDefinition(card);

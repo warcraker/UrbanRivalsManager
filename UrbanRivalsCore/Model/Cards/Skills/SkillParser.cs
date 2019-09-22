@@ -23,6 +23,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills
 
         static SkillParser()
         {
+            // TODO get all parsers by reflection
             PRV_ALL_PREFIXES = new List<Prefix>
             {
                 new BacklashPrefix(),
