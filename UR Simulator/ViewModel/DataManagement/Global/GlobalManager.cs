@@ -54,7 +54,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             return worker;
         }
 
-        private GlobalManager() 
+        private GlobalManager()
         {
             UpdateCardBaseDefinitionsBGW = prv_getNewBackgroundWorker();
             UpdateCardBaseDefinitionsBGW.DoWork += GlobalManager.UpdateCardBaseDefinitions_DoWork;
@@ -240,7 +240,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 string rarityText = charactersData[id]["rarity"].ToString();
 
                 List<CardStats> cardStatsPerLevel = new List<CardStats>();
-                foreach(dynamic levelItem in charactersData[id]["levels"])
+                foreach (dynamic levelItem in charactersData[id]["levels"])
                 {
                     int level = int.Parse(levelItem["level"].ToString());
                     int power = int.Parse(levelItem["power"].ToString());
@@ -336,7 +336,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 }
 
                 page++;
-            } 
+            }
 
             managers.InMemoryManager.ReloadToMemoryCardInstances(instances);
 
@@ -376,7 +376,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
         public ServerQueriesManager ServerQueriesManager;
 
         public UpdateCardBaseDefinitionsArgument
-            (GlobalManager globalManager, IDatabaseManager databaseManager, InMemoryManager inMemoryManager, 
+            (GlobalManager globalManager, IDatabaseManager databaseManager, InMemoryManager inMemoryManager,
             ImageDownloader imageDownloader, ServerQueriesManager serverQueriesManager)
         {
             GlobalManager = globalManager;
