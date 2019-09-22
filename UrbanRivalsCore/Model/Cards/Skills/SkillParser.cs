@@ -55,6 +55,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                 new HugoLeader(),
                 new JohnDoomLeader(),
                 new MelodyLeader(),
+                new MementoLeader(),
                 new MorphunLeader(),
                 new MrBigDukeLeader(),
                 new RobertCobbLeader(),
