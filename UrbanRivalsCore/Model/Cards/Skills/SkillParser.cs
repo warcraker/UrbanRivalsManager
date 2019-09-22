@@ -108,6 +108,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills
             };
             DoubleValueSuffixParser[] allDoubleValueSuffixParsers = new DoubleValueSuffixParser[]
             {
+                CombustXMinYSuffix.getParser(),
                 ConsumeXMinYSuffix.getParser(),
                 CorrosionXMinYSuffix.getParser(),
                 DecreaseAttackXMinYSuffix.getParser(),
@@ -124,12 +125,15 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                 HealXMaxYSuffix.getParser(),
                 IncreaseLifePerDamageXMaxYSuffix.getParser(),
                 IncreaseLifeXMaxYSuffix.getParser(),
+                IncreaseLifePerDamageXMaxYSuffix.getParser(),
+                IncreasePillzPerDamageXMaxYSuffix.getParser(),
                 IncreasePillzXMaxYSuffix.getParser(),
                 InfectionXMinYSuffix.getParser(),
                 PoisonXMinYSuffix.getParser(),
                 RebirthXMaxYSuffix.getParser(),
                 RecoverXPillzOutOfYSuffix.getParser(),
                 RegenXMaxYSuffix.getParser(),
+                RepairXMaxYSuffix.getParser(),
                 ToxinXMinYSuffix.getParser(),
                 XantiaxXMinYSuffix.getParser(),
             };
