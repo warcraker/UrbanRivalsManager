@@ -156,39 +156,14 @@ namespace UrbanRivalsCore.Model.Cards.Skills
             }
             else
             {
-                Leader leader = prv_parseLeader(skillAsText);
-                if (leader != null)
+                string cleanText = prv_parseFillerChars(skillAsText);
+                string suffixAsText;
+                IEnumerable<Prefix> prefixes = prv_parsePrefixes(cleanText, out suffixAsText);
+
+                SuffixParser parser = PRV_ALL_SUFFIX_PARSERS.FirstOrDefault(p => p.isMatch(suffixAsText));
+
+                if (parser != null)
                 {
-                    skill = Skill.getLeaderSkill(leader);
-                }
-                else
-                {
-                    string cleanText = prv_parseFillerChars(skillAsText);
-                    string suffixAsText;
-                    IEnumerable<Prefix> prefixes = prv_parsePrefixes(cleanText, out suffixAsText);
-
-                    // TODO use first or default?
-                    SuffixParser parser;
-                    try
-                    {
-                        parser = PRV_ALL_SUFFIX_PARSERS.SingleOrDefault(p => p.isMatch(suffixAsText));
-                    }
-                    catch
-                    {
-                        parser = null;
-                    }
-                    // TODO write alterantive when no parser gets ok
-                    if (parser == null)
-                    {
-                        return null; // TODO remove and leave assert
-                        Asserts.check(parser != null, $"No {nameof(SuffixParser)} was found for text [{suffixAsText}]");
-                    }
-
-                    {
-                        int suffixIndex = PRV_ALL_SUFFIX_PARSERS.IndexOf(parser);
-                        PRV_SUFFIX_WEIGHTS[suffixIndex]++;
-                    }
-
                     Suffix suffix = parser.getSuffix(suffixAsText);
                     if (prefixes.Any())
                     {
@@ -199,13 +174,22 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                         skill = Skill.getSkillWithoutPrefixes(suffix);
                     }
                 }
+                else
+                {
+                    Leader leader = PRV_ALL_LEADERS.FirstOrDefault(x => x.isMatch(skillAsText));
+
+                    if (leader != null)
+                    {
+                        skill = Skill.getLeaderSkill(leader);
+                    }
+                    else
+                    {
+                        return null; // TODO Write alternative when unknown string
+                    }
+                }
             }
 
             return skill;
-        }
-        private static Leader prv_parseLeader(string abilityText)
-        {
-            return PRV_ALL_LEADERS.SingleOrDefault(leader => leader.isMatch(abilityText));
         }
         private static IEnumerable<Prefix> prv_parsePrefixes(string textToParse, out string textWithoutPrefixes)
         {
