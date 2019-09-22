@@ -223,7 +223,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 
             Dictionary<int, dynamic> abilitiesData = SortServerCharacterDataIntoDictionary(getAbilitiesCall.Call, decoded);
             Dictionary<int, dynamic> charactersData = SortServerCharacterDataIntoDictionary(getCharactersCall.Call, decoded);
-            List<Skill> newSkills = new List<Skill>();
+
             foreach (int id in characterIds)
             {
                 if (worker.CancellationPending == true)
@@ -252,7 +252,6 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 progress++;
 
                 Skill newAbility = SkillParser.parseSkill(abilityText);
-                newSkills.Add(newAbility);
 
                 continue; // TODO REMOVE
 
