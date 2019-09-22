@@ -5,7 +5,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Prefixes
     public class DegrowthPrefix : Prefix
     {
         private static readonly string TEXT_REPRESENTATION = Properties.GameStrings.skill_prefix_degrowth;
-        private static readonly Regex REGEX = new Regex("^Degrowth:", RegexOptions.Compiled);
+        private static readonly Regex REGEX = new Regex("^Degrowth:", RegexOptions.None);
 
         public override bool isMatch(string text)
         {
