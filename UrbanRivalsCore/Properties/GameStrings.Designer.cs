@@ -916,6 +916,24 @@ namespace UrbanRivalsCore.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to +{0} Attack Per Opp Damage.
+        /// </summary>
+        public static string skill_suffix_increase_attack_x_per_opp_damage {
+            get {
+                return ResourceManager.GetString("skill_suffix_increase_attack_x_per_opp_damage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +{0} Attack Per Opp Power.
+        /// </summary>
+        public static string skill_suffix_increase_attack_x_per_opp_power {
+            get {
+                return ResourceManager.GetString("skill_suffix_increase_attack_x_per_opp_power", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to +{0} Attack Per Life Left.
         /// </summary>
         public static string skill_suffix_increase_attack_x_per_remaining_life {

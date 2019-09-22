@@ -504,4 +504,10 @@
   <data name="skill_suffix_combust_x_min_y" xml:space="preserve">
     <value>Combust {0}, Min {1}</value>
   </data>
+  <data name="skill_suffix_increase_attack_x_per_opp_damage" xml:space="preserve">
+    <value>+{0} Attack Per Opp Damage</value>
+  </data>
+  <data name="skill_suffix_increase_attack_x_per_opp_power" xml:space="preserve">
+    <value>+{0} Attack Per Opp Power</value>
+  </data>
 </root>
