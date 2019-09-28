@@ -26,21 +26,6 @@ namespace UrbanRivalsUtils
         }
     }
 
-    public static class GlobalRandom
-    {
-        private static Random r = new Random();
-
-        public static int Next(int max)
-        {
-            return r.Next(max);
-        }
-
-        public static int Next(int min, int max)
-        {
-            return r.Next(min, max);
-        }
-    }
-
     public static class AssertArgument
     {
         public static void fail(string message, string paramName)
@@ -80,5 +65,4 @@ namespace UrbanRivalsUtils
             }
         }
     }
-
 }

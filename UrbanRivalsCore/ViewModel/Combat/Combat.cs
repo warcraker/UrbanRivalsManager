@@ -758,7 +758,6 @@ namespace UrbanRivalsCore.ViewModel
         }
         private static PlayerSide DetermineRoundWinnerWithRandom(int leftAttack, int rightAttack, PlayerSide forceWinnerOnRandom, out bool finishMoveTriggers)
         {
-            // If one has at least double the attack, wins automatically and performs a Finisher Move
             PlayerSide whoTriggersFinishMove = DetermineWhoDoublesAttack(leftAttack, rightAttack);
             if (whoTriggersFinishMove != PlayerSide.None)
             {
@@ -768,12 +767,10 @@ namespace UrbanRivalsCore.ViewModel
 
             finishMoveTriggers = false;
 
-            // If each player has a chance to win, forceWinnerOnRandom can force the winner
             if (forceWinnerOnRandom != PlayerSide.None)
                 return forceWinnerOnRandom;
 
-            // If not, then the probability of winning is proportional to the Attack value
-            int randomCombatResult = GlobalRandom.Next(0, leftAttack + rightAttack);
+            int randomCombatResult = new Random().Next(0, leftAttack + rightAttack); // TODO Replace with a DI of Random
             return (randomCombatResult < leftAttack) ? PlayerSide.Left : PlayerSide.Right;
         }
         private static PlayerSide DetermineRoundWinnerWithoutRandom(int leftAttack, int rightAttack, int leftLevel, int rightLevel, bool leftHasCourage, PlayerSide whoHasSolomon)
