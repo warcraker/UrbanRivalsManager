@@ -139,46 +139,8 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             dynamic decoded = JsonDecoder.Decode(response);
 
             dynamic items = decoded[getExistingCardBaseIdsCall.Call]["items"];
-            foreach(var item in items)
-                yield return int.Parse(item["id"].ToString());
-        }
-        
-        public IEnumerable<Deck> GetDeckList()
-        {
-            ApiCall getPresetsCall;
-            ApiRequest request;
-            string response;
-
-            getPresetsCall = new ApiCallList.Collections.GetPresets();
-            request = new ApiRequest(getPresetsCall);
-
-            HttpStatusCode statusCode = ApiManagerInstance.SendRequest(request, out response);
-            if (statusCode != HttpStatusCode.OK)
-                throw new Exception("GetDeckList SendRequest returned: " + statusCode.ToString());
-            dynamic decoded = JsonDecoder.Decode(response);
-
-            dynamic items = decoded[getPresetsCall.Call]["items"];
             foreach (var item in items)
-            {
-                int deckId = int.Parse(item["id"].ToString());
-                string name = item["name"].ToString();
-                string deckValue = item["deckValue"].ToString();
-                IEnumerable<CardInstance> cards = DecodeDeckValue(deckValue);
-                yield return new Deck(deckId, name, cards);
-            }
-
-            // Server response example:
-            //"id" : 14648770,
-            //"name" : "Duel+LD+Missions",
-            //"deckValue" : "289388796#422299407#424125543#424584307#443996560#444106871#449630678#453161946#",
-            //"nbCards" : 8,
-            //"isCurrentDeck" : true
-        }
-        private IEnumerable<CardInstance> DecodeDeckValue(string deckValue)
-        {
-            string[] ids = deckValue.Split('#');
-            foreach (string idString in ids)
-                yield return InMemoryManagerInstance.GetCardInstance(int.Parse(idString));
+                yield return int.Parse(item["id"].ToString());
         }
     }
 }
