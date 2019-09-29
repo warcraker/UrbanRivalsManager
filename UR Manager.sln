@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2042
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UR Manager", "UR Simulator\UR Manager.csproj", "{2E3366EF-88A5-41D8-BA2C-A591C87D2FC4}"
 EndProject
@@ -16,9 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		PreviewRound() Steps.txt = PreviewRound() Steps.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanRivalsUtils", "Utils\UrbanRivalsUtils.csproj", "{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanRivalsApiToCoreAdapter", "UrbanRivalsApiToCoreAdapter\UrbanRivalsApiToCoreAdapter.csproj", "{69942A29-C91A-433A-B915-D1839264C9B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanRivalsUtils", "UrbanRivalsUtils\UrbanRivalsUtils.csproj", "{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,18 +50,6 @@ Global
 		{EEA283D8-1F37-4F9D-8292-BCD541546903}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EEA283D8-1F37-4F9D-8292-BCD541546903}.Release|x64.ActiveCfg = Release|Any CPU
 		{EEA283D8-1F37-4F9D-8292-BCD541546903}.Release|x86.ActiveCfg = Release|Any CPU
-		{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}.Debug|x64.Build.0 = Debug|Any CPU
-		{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}.Debug|x86.Build.0 = Debug|Any CPU
-		{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}.Release|x64.ActiveCfg = Release|Any CPU
-		{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}.Release|x64.Build.0 = Release|Any CPU
-		{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}.Release|x86.ActiveCfg = Release|Any CPU
-		{1FC53705-4A54-4CAC-9886-B63E90A0A3AD}.Release|x86.Build.0 = Release|Any CPU
 		{69942A29-C91A-433A-B915-D1839264C9B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{69942A29-C91A-433A-B915-D1839264C9B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69942A29-C91A-433A-B915-D1839264C9B8}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -74,6 +62,18 @@ Global
 		{69942A29-C91A-433A-B915-D1839264C9B8}.Release|x64.Build.0 = Release|Any CPU
 		{69942A29-C91A-433A-B915-D1839264C9B8}.Release|x86.ActiveCfg = Release|Any CPU
 		{69942A29-C91A-433A-B915-D1839264C9B8}.Release|x86.Build.0 = Release|Any CPU
+		{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}.Debug|x64.Build.0 = Debug|Any CPU
+		{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}.Debug|x86.Build.0 = Debug|Any CPU
+		{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}.Release|x64.ActiveCfg = Release|Any CPU
+		{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}.Release|x64.Build.0 = Release|Any CPU
+		{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}.Release|x86.ActiveCfg = Release|Any CPU
+		{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
