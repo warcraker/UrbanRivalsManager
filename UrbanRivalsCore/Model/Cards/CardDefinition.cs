@@ -35,19 +35,19 @@ namespace UrbanRivalsCore.Model
             int minLevel;
             int maxLevel;
 
-            AssertArgument.isNotNull(ability, nameof(ability));
+            AssertArgument.CheckIsNotNull(ability, nameof(ability));
 
             abilityIsUnlockable = (ability != OldSkill.NO_BONUS && ability != OldSkill.NO_ABILITY && ability != OldSkill.UNLOCKED_AT_LEVEL_2 && ability != OldSkill.UNLOCKED_AT_LEVEL_3
                 && ability != OldSkill.UNLOCKED_AT_LEVEL_4 && ability != OldSkill.UNLOCKED_AT_LEVEL_5);
 
-            AssertArgument.check(abilityIsUnlockable, "Must be an unlockable ability", nameof(ability));
+            AssertArgument.Check(abilityIsUnlockable, "Must be an unlockable ability", nameof(ability));
 
             cardDefinition = new CardDefinition(id, name, clan, cardStatsPerLevel, rarity, ability, abilityUnlockLevel);
 
             minLevel = cardDefinition.minLevel;
             maxLevel = cardDefinition.maxLevel;
 
-            AssertArgument.checkIntegerRange(minLevel <= abilityUnlockLevel && abilityUnlockLevel <= maxLevel,
+            AssertArgument.CheckIntegerRange(minLevel <= abilityUnlockLevel && abilityUnlockLevel <= maxLevel,
                 $"Must be between {minLevel} and {maxLevel} inclusive", abilityUnlockLevel, nameof(abilityUnlockLevel));
 
             return cardDefinition;
@@ -58,20 +58,20 @@ namespace UrbanRivalsCore.Model
             int maxLevel;
             int amountOfLevels;
 
-            AssertArgument.checkIntegerRange(id > 0, "Must be greater than 0", id, nameof(id));
-            AssertArgument.stringIsFilled(name, nameof(name));
-            AssertArgument.isNotNull(clan, nameof(clan));
-            AssertArgument.isNotNull(cardStatsPerLevel, nameof(cardStatsPerLevel));
-            AssertArgument.checkIntegerRange(0 <= rarity && (int)rarity <= PRV_MAX_CARD_RARITY_VALUE, "Must be a valid " + nameof(CardRarity), (int)rarity, nameof(rarity));
+            AssertArgument.CheckIntegerRange(id > 0, "Must be greater than 0", id, nameof(id));
+            AssertArgument.StringIsFilled(name, nameof(name));
+            AssertArgument.CheckIsNotNull(clan, nameof(clan));
+            AssertArgument.CheckIsNotNull(cardStatsPerLevel, nameof(cardStatsPerLevel));
+            AssertArgument.CheckIntegerRange(0 <= rarity && (int)rarity <= PRV_MAX_CARD_RARITY_VALUE, "Must be a valid " + nameof(CardRarity), (int)rarity, nameof(rarity));
 
             minLevel = cardStatsPerLevel.Min(item => item.level);
             maxLevel = cardStatsPerLevel.Max(item => item.level);
-            AssertArgument.checkIntegerRange(1 <= minLevel && minLevel <= 5, "Minimum level must be between 1 and 5 inclusive", minLevel, nameof(cardStatsPerLevel));
-            AssertArgument.checkIntegerRange(1 <= maxLevel && maxLevel <= 5, "Maximum level must be between 1 and 5 inclusive", maxLevel, nameof(cardStatsPerLevel));
-            AssertArgument.check(minLevel < maxLevel, $"Minimum level ({minLevel}) must be lower than Maximum level ({maxLevel})", nameof(minLevel));
+            AssertArgument.CheckIntegerRange(1 <= minLevel && minLevel <= 5, "Minimum level must be between 1 and 5 inclusive", minLevel, nameof(cardStatsPerLevel));
+            AssertArgument.CheckIntegerRange(1 <= maxLevel && maxLevel <= 5, "Maximum level must be between 1 and 5 inclusive", maxLevel, nameof(cardStatsPerLevel));
+            AssertArgument.Check(minLevel < maxLevel, $"Minimum level ({minLevel}) must be lower than Maximum level ({maxLevel})", nameof(minLevel));
 
             amountOfLevels = maxLevel - minLevel + 1;
-            AssertArgument.checkIntegerRange(cardStatsPerLevel.Count == amountOfLevels, $"There must be {amountOfLevels} level definitions", cardStatsPerLevel.Count, nameof(cardStatsPerLevel));
+            AssertArgument.CheckIntegerRange(cardStatsPerLevel.Count == amountOfLevels, $"There must be {amountOfLevels} level definitions", cardStatsPerLevel.Count, nameof(cardStatsPerLevel));
 
             for (int level = minLevel; level <= maxLevel; level++)
             {
@@ -83,7 +83,7 @@ namespace UrbanRivalsCore.Model
                 }
                 catch (InvalidOperationException)
                 {
-                    Asserts.fail($"There must be a definition for level and it must be unique. Level {level} fails this");
+                    Asserts.Fail($"There must be a definition for level and it must be unique. Level {level} fails this");
                 }
             }
 
@@ -102,7 +102,7 @@ namespace UrbanRivalsCore.Model
         {
             CardStats cardStats;
 
-            AssertArgument.checkIntegerRange(this.minLevel <= level && level <= this.maxLevel, $"Must be between {this.minLevel} and {this.maxLevel} inclusive", level, nameof(level));
+            AssertArgument.CheckIntegerRange(this.minLevel <= level && level <= this.maxLevel, $"Must be between {this.minLevel} and {this.maxLevel} inclusive", level, nameof(level));
 
             cardStats = this.cardStatsPerLevel.Single(item => item.level == level);
             return cardStats;

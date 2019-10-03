@@ -66,9 +66,9 @@ namespace UrbanRivalsCore.Model
         {
             Clan clan;
 
-            AssertArgument.stringIsFilled(name, nameof(name));
+            AssertArgument.StringIsFilled(name, nameof(name));
             clan = s_allClans.FirstOrDefault(c => c.name == name);
-            AssertArgument.check(clan != null, "Clan name doesn't exist", nameof(name));
+            AssertArgument.Check(clan != null, "Clan name doesn't exist", nameof(name));
 
             return clan;
         }
@@ -77,7 +77,7 @@ namespace UrbanRivalsCore.Model
             Clan clan;
 
             clan = s_allClans.FirstOrDefault(c => c.id == id);
-            AssertArgument.check(clan != null, $"Must be a valid {nameof(ClanId)}", nameof(id));
+            AssertArgument.Check(clan != null, $"Must be a valid {nameof(ClanId)}", nameof(id));
 
             return clan;
         }

@@ -212,7 +212,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 string bonusText = clanData["bonusDescription"].ToString();
                 if (bonusText == "Cancel Leader")
                 {
-                    Asserts.check(leaderClanId == -1, "More than one clan with 'Cancel Leader'");
+                    Asserts.Check(leaderClanId == -1, "More than one clan with 'Cancel Leader'");
                     leaderClanId = id;
                 }
                 else

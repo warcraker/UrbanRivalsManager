@@ -119,7 +119,7 @@ namespace UrbanRivalsApiToCoreAdapter
                     break;
                 default:
                     rarity = CardRarity.Common;
-                    AssertArgument.fail($"Rarity has a not defined value = {valueToParse}", nameof(valueToParse));
+                    AssertArgument.Fail($"Rarity has a not defined value = {valueToParse}", nameof(valueToParse));
                     break;
             }
 

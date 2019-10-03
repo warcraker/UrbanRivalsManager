@@ -63,22 +63,22 @@ namespace UrbanRivalsCore.Model.Cards.Skills
 
         public static Skill getLeaderSkill(Leader leader)
         {
-            AssertArgument.isNotNull(leader, nameof(leader));
+            AssertArgument.CheckIsNotNull(leader, nameof(leader));
 
             return new Skill(leader);
         }
         public static Skill getSkillWithPrefixes(IEnumerable<Prefix> prefixes, Suffix suffix)
         {
-            AssertArgument.isNotNull(prefixes, nameof(prefixes));
+            AssertArgument.CheckIsNotNull(prefixes, nameof(prefixes));
             int prefixesCount = prefixes.Count();
-            AssertArgument.checkIntegerRange(prefixesCount > 0, $"must contain at least one item", prefixesCount, nameof(prefixes));
-            AssertArgument.isNotNull(suffix, nameof(suffix));
+            AssertArgument.CheckIntegerRange(prefixesCount > 0, $"must contain at least one item", prefixesCount, nameof(prefixes));
+            AssertArgument.CheckIsNotNull(suffix, nameof(suffix));
 
             return new Skill(prefixes, suffix);
         }
         public static Skill getSkillWithoutPrefixes(Suffix suffix)
         {
-            AssertArgument.isNotNull(suffix, nameof(suffix));
+            AssertArgument.CheckIsNotNull(suffix, nameof(suffix));
 
             Prefix[] prefixes = new Prefix[]
             {
@@ -154,7 +154,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                     break;
                 default:
                     text = "";
-                    Asserts.fail("Invalid skill value state");
+                    Asserts.Fail("Invalid skill value state");
                     break;
             }
 

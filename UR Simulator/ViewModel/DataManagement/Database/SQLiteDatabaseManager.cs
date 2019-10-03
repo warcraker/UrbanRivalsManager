@@ -39,7 +39,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             int unlocklevel;
             CardRarity rarity;
 
-            AssertArgument.checkIntegerRange(id > 0, "Must be greater than 0", id, nameof(id));
+            AssertArgument.CheckIntegerRange(id > 0, "Must be greater than 0", id, nameof(id));
 
             using (SQLiteCommand command = new SQLiteCommand(PRV_SELECT_CARDLEVELS_BY_ID))
             {
@@ -144,7 +144,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             int x, y;
             int rarity;
 
-            AssertArgument.isNotNull(card, nameof(card));
+            AssertArgument.CheckIsNotNull(card, nameof(card));
 
             commands = new List<SQLiteCommand>();
 

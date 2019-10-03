@@ -61,7 +61,7 @@ namespace UrbanRivalsCore.Model
         {
             Clan clan;
 
-            AssertArgument.isNotNull(cardInstance, nameof(cardInstance));
+            AssertArgument.CheckIsNotNull(cardInstance, nameof(cardInstance));
 
             this.cardInstanceId = cardInstance.cardInstanceId;
             this.cardBaseId = cardInstance.cardBaseId;
@@ -103,7 +103,7 @@ namespace UrbanRivalsCore.Model
                 catch
                 {
                     b = null;
-                    AssertArgument.fail("Is not a CardDrawed instance", nameof(obj));
+                    AssertArgument.Fail("Is not a CardDrawed instance", nameof(obj));
                 }
 
                 result = a.clan.name.CompareTo(b.clan.name);

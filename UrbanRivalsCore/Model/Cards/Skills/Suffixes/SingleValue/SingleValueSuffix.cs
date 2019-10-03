@@ -9,7 +9,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.SingleValue
 
         protected SingleValueSuffix(int x) : base()
         {
-            AssertArgument.checkIntegerRange(x > 0, "Must be greater than 0", x, nameof(x));
+            AssertArgument.CheckIntegerRange(x > 0, "Must be greater than 0", x, nameof(x));
 
             this.x = x;
         }

@@ -4,36 +4,36 @@ namespace UrbanRivalsUtils
 {
     public static class Asserts
     {
-        private class PrvAssertException : Exception
+        private class AssertException : Exception
         {
-            public PrvAssertException(string message) : base($"Failed assertion: {message}")
+            public AssertException(string message) : base($"Failed assertion: {message}")
             {
                 ;
             }
         }
 
-        public static void check(bool condition, string message)
+        public static void Check(bool condition, string message)
         {
             if (condition == false)
             {
-                throw new PrvAssertException(message);
+                throw new AssertException(message);
             }
         }
 
-        public static void fail(string message)
+        public static void Fail(string message)
         {
-            throw new PrvAssertException(message);
+            throw new AssertException(message);
         }
     }
 
     public static class AssertArgument
     {
-        public static void fail(string message, string paramName)
+        public static void Fail(string message, string paramName)
         {
             throw new ArgumentException(paramName, message);
         }
 
-        public static void check(bool condition, string message, string paramName)
+        public static void Check(bool condition, string message, string paramName)
         {
             if (condition == false)
             {
@@ -41,7 +41,7 @@ namespace UrbanRivalsUtils
             }
         }
 
-        public static void checkIntegerRange(bool condition, string message, int paramValue, string paramName)
+        public static void CheckIntegerRange(bool condition, string message, int paramValue, string paramName)
         {
             if (condition == false)
             {
@@ -49,7 +49,7 @@ namespace UrbanRivalsUtils
             }
         }
 
-        public static void isNotNull<T>(T paramValue, string paramName)
+        public static void CheckIsNotNull<T>(T paramValue, string paramName)
         {
             if (paramValue == null)
             {
@@ -57,7 +57,7 @@ namespace UrbanRivalsUtils
             }
         }
 
-        public static void stringIsFilled(string paramValue, string paramName)
+        public static void StringIsFilled(string paramValue, string paramName)
         {
             if (String.IsNullOrWhiteSpace(paramValue) == true)
             {

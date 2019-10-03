@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.SuffixParsers
 
         public SuffixParser(Regex regex)
         {
-            AssertArgument.isNotNull(regex, nameof(regex));
+            AssertArgument.CheckIsNotNull(regex, nameof(regex));
 
             this.regex = regex;
         }

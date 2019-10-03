@@ -46,15 +46,15 @@ namespace UrbanRivalsCore.Model
             OldSkill ability;
             CardStats cardStats;
 
-            AssertArgument.isNotNull(cardDefinition, nameof(cardDefinition));
+            AssertArgument.CheckIsNotNull(cardDefinition, nameof(cardDefinition));
             // TODO modify fake instances generator not to return negative IDs, and then reinstate assert "instanceId > 0"            
             minLevel = cardDefinition.minLevel;
             maxLevel = cardDefinition.maxLevel;
-            AssertArgument.checkIntegerRange(minLevel <= level && level <= maxLevel, $"Must be between {minLevel} and {maxLevel} inclusive", level, nameof(level));
-            AssertArgument.checkIntegerRange(experience >= 0, "Must be greater or equal to 0", experience, nameof(experience));
+            AssertArgument.CheckIntegerRange(minLevel <= level && level <= maxLevel, $"Must be between {minLevel} and {maxLevel} inclusive", level, nameof(level));
+            AssertArgument.CheckIntegerRange(experience >= 0, "Must be greater or equal to 0", experience, nameof(experience));
             if (level == maxLevel)
             {
-                AssertArgument.check(experience == 1, $"When {nameof(level)} is max, experience must be 1", nameof(experience));
+                AssertArgument.Check(experience == 1, $"When {nameof(level)} is max, experience must be 1", nameof(experience));
             }
 
             abilityFromBase = cardDefinition.ability;
@@ -89,7 +89,7 @@ namespace UrbanRivalsCore.Model
                             break;
                         default:
                             ability = null;
-                            Asserts.fail("Invalid unlock level");
+                            Asserts.Fail("Invalid unlock level");
                             break;
                     }
                 }

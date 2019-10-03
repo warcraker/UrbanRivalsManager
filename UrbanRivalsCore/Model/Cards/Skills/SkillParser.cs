@@ -214,7 +214,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills
         private static Suffix prv_parseSuffix(string suffixAsText)
         {
             SuffixParser parser = PRV_ALL_SUFFIX_PARSERS.SingleOrDefault(p => p.isMatch(suffixAsText));
-            Asserts.check(parser != null, $"No {nameof(SuffixParser)} was found for text [{suffixAsText}]");
+            Asserts.Check(parser != null, $"No {nameof(SuffixParser)} was found for text [{suffixAsText}]");
             return parser.getSuffix(suffixAsText);
         }
         private static string prv_parseFillerChars(string text)

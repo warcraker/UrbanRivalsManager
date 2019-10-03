@@ -10,9 +10,9 @@ namespace UrbanRivalsCore.Model
 
         public CardStats(int level, int power, int damage)
         {
-            AssertArgument.checkIntegerRange(level >= 1 && level <= 5, "Must be between 1 and 5 inclusive", level, nameof(level));
-            AssertArgument.checkIntegerRange(power > 0, "Must be greater than 0", power, nameof(power));
-            AssertArgument.checkIntegerRange(damage > 0, "Must be greater than 0", damage, nameof(damage));
+            AssertArgument.CheckIntegerRange(level >= 1 && level <= 5, "Must be between 1 and 5 inclusive", level, nameof(level));
+            AssertArgument.CheckIntegerRange(power > 0, "Must be greater than 0", power, nameof(power));
+            AssertArgument.CheckIntegerRange(damage > 0, "Must be greater than 0", damage, nameof(damage));
 
             this.level = level;
             this.power = power;

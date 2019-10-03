@@ -12,7 +12,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.SuffixParsers
 
         public DoubleValueSuffixParser(Regex regex, Func<int, int, DoubleValueSuffix> funcSuffixFactory) : base(regex)
         {
-            AssertArgument.isNotNull(funcSuffixFactory, nameof(funcSuffixFactory));
+            AssertArgument.CheckIsNotNull(funcSuffixFactory, nameof(funcSuffixFactory));
 
             this.funcSuffixFactory = funcSuffixFactory;
         }

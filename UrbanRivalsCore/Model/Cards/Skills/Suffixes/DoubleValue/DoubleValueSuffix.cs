@@ -10,7 +10,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 
         public DoubleValueSuffix(int x, int y) : base(x)
         {
-            AssertArgument.checkIntegerRange(y >= 0, "Must be positive", y, nameof(y));
+            AssertArgument.CheckIntegerRange(y >= 0, "Must be positive", y, nameof(y));
 
             this.y = y;
         }

@@ -253,7 +253,7 @@ namespace UrbanRivalsCore.Model
                     break;
                 default:
                     result = "";
-                    Asserts.fail($"Invalid {nameof(EmptySkill)}");
+                    Asserts.Fail($"Invalid {nameof(EmptySkill)}");
                     break;
             }
 
@@ -440,7 +440,7 @@ namespace UrbanRivalsCore.Model
                     break;
                 default:
                     text = "";
-                    Asserts.fail($"Invalid {nameof(SkillSuffix)} ({suffix.ToString()}) for {nameof(prv_getSuffixWithoutNumberTextRepresentation)}");
+                    Asserts.Fail($"Invalid {nameof(SkillSuffix)} ({suffix.ToString()}) for {nameof(prv_getSuffixWithoutNumberTextRepresentation)}");
                     break;
             }
 
