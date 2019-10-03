@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanRivalsApiToCoreAdapter", "UrbanRivalsApiToCoreAdapter\UrbanRivalsApiToCoreAdapter.csproj", "{69942A29-C91A-433A-B915-D1839264C9B8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "UrbanRivalsUtils\Utils.csproj", "{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Warcraker.Utils", "UrbanRivalsUtils\Warcraker.Utils.csproj", "{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
