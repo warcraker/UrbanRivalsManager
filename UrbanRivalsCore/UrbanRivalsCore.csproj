@@ -187,8 +187,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UrbanRivalsUtils\Warcraker.Utils.csproj">
-      <Project>{e3accc23-ea2e-4db7-810b-d6ad77aa742a}</Project>
+    <ProjectReference Include="..\Warcraker.Utils\Warcraker.Utils.csproj">
+      <Project>{881f9b55-679f-4163-a464-57c62bc3c7a3}</Project>
       <Name>Warcraker.Utils</Name>
     </ProjectReference>
   </ItemGroup>

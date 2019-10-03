@@ -586,8 +586,8 @@
       <Project>{eea283d8-1f37-4f9d-8292-bcd541546903}</Project>
       <Name>UrbanRivalsCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UrbanRivalsUtils\Warcraker.Utils.csproj">
-      <Project>{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}</Project>
+    <ProjectReference Include="..\Warcraker.Utils\Warcraker.Utils.csproj">
+      <Project>{881f9b55-679f-4163-a464-57c62bc3c7a3}</Project>
       <Name>Warcraker.Utils</Name>
     </ProjectReference>
   </ItemGroup>
