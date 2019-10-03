@@ -187,9 +187,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UrbanRivalsUtils\UrbanRivalsUtils.csproj">
+    <ProjectReference Include="..\UrbanRivalsUtils\Utils.csproj">
       <Project>{E3ACCC23-EA2E-4DB7-810B-D6AD77AA742A}</Project>
-      <Name>UrbanRivalsUtils</Name>
+      <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

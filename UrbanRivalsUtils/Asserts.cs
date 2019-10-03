@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UrbanRivalsUtils
+namespace Warcraker.Utils
 {
     public static class Asserts
     {

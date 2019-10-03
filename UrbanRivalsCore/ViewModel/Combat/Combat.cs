@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using UrbanRivalsCore.Model;
-using UrbanRivalsUtils;
+using Warcraker.Utils;
 
 namespace UrbanRivalsCore.ViewModel
 {

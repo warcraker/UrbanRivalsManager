@@ -4,7 +4,7 @@ using System.Linq;
 using UrbanRivalsCore.Model.Cards.Skills.Leaders;
 using UrbanRivalsCore.Model.Cards.Skills.Prefixes;
 using UrbanRivalsCore.Model.Cards.Skills.Suffixes;
-using UrbanRivalsUtils;
+using Warcraker.Utils;
 
 namespace UrbanRivalsCore.Model.Cards.Skills
 {

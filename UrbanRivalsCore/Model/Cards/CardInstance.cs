@@ -1,5 +1,5 @@
 ﻿using System;
-using UrbanRivalsUtils;
+using Warcraker.Utils;
 
 namespace UrbanRivalsCore.Model
 {

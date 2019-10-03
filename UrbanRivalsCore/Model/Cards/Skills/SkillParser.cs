@@ -8,7 +8,7 @@ using UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue;
 using UrbanRivalsCore.Model.Cards.Skills.Suffixes.SingleValue;
 using UrbanRivalsCore.Model.Cards.Skills.Suffixes.Plain;
 using UrbanRivalsCore.Model.Cards.Skills.SuffixParsers;
-using UrbanRivalsUtils;
+using Warcraker.Utils;
 using System.Text.RegularExpressions;
 
 namespace UrbanRivalsCore.Model.Cards.Skills

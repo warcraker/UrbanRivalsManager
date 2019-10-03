@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using UrbanRivalsCore.Model;
-using UrbanRivalsUtils;
+using Warcraker.Utils;
 
 namespace UrbanRivalsApiToCoreAdapter
 {

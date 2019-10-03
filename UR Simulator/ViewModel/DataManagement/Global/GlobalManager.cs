@@ -13,7 +13,7 @@ using UrbanRivalsCore.Model;
 using UrbanRivalsCore.Model.Cards.Skills;
 using System.Text;
 using System.Windows;
-using UrbanRivalsUtils;
+using Warcraker.Utils;
 
 namespace UrbanRivalsManager.ViewModel.DataManagement
 {

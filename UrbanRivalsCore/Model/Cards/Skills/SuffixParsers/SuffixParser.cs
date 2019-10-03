@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using UrbanRivalsCore.Model.Cards.Skills.Suffixes;
-using UrbanRivalsUtils;
+using Warcraker.Utils;
 
 namespace UrbanRivalsCore.Model.Cards.Skills.SuffixParsers
 {

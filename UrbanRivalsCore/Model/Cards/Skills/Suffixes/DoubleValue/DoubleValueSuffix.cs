@@ -1,6 +1,6 @@
 ﻿using System;
 using UrbanRivalsCore.Model.Cards.Skills.Suffixes.SingleValue;
-using UrbanRivalsUtils;
+using Warcraker.Utils;
 
 namespace UrbanRivalsCore.Model.Cards.Skills.Suffixes.DoubleValue
 {

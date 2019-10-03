@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using UrbanRivalsUtils;
+using Warcraker.Utils;
 
 namespace UrbanRivalsCore.Model
 {

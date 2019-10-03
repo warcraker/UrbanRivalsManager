@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using UrbanRivalsCore.Model;
-using UrbanRivalsUtils;
+using Warcraker.Utils;
 
 namespace UrbanRivalsManager.ViewModel.DataManagement
 {
