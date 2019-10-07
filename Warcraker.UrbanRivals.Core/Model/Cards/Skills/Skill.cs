@@ -6,11 +6,11 @@ using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Prefixes;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes;
 using Warcraker.Utils;
 
-namespace Warcraker.UrbanRivals.Core
+namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills
 {
     public class Skill
     {
-        private enum PrvEEmptySkill
+        private enum EmptySkill
         {
             NormalSkill = 0,
             NotActiveBonus,
@@ -21,22 +21,6 @@ namespace Warcraker.UrbanRivals.Core
             AbilityUnlockedAtLevel5,
         }
 
-        private class PrvDefaultPrefix : Prefix
-        {
-            public override bool isMatch(string text)
-            {
-                throw new InvalidOperationException();
-            }
-            public override string removePrefixFromText(string text)
-            {
-                throw new InvalidOperationException();
-            }
-            public override string ToString()
-            {
-                return "";
-            }
-        }
-
         public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_2;
         public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_3;
         public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_4;
@@ -44,116 +28,67 @@ namespace Warcraker.UrbanRivals.Core
         public static readonly Skill NO_ABILITY;
         public static readonly Skill NO_BONUS;
 
-        private static readonly Prefix PRV_DEFAULT_PREFIX = new PrvDefaultPrefix();
-
-        private readonly PrvEEmptySkill emptySkillValue;
-        private readonly Leader leader;
-        private readonly Prefix[] prefixes;
+        public IEnumerable<Prefix> Prefixes { get; set; }
+        public Suffix Suffix { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        private readonly IEnumerable<Prefix> prefixes;
         private readonly Suffix suffix;
+        private readonly int x;
+        private readonly int y;
+
+        private readonly EmptySkill emptySkillValue;
 
         static Skill()
         {
-            ABILITY_UNLOCKED_AT_LEVEL_2 = new Skill(PrvEEmptySkill.AbilityUnlockedAtLevel2);
-            ABILITY_UNLOCKED_AT_LEVEL_3 = new Skill(PrvEEmptySkill.AbilityUnlockedAtLevel3);
-            ABILITY_UNLOCKED_AT_LEVEL_4 = new Skill(PrvEEmptySkill.AbilityUnlockedAtLevel4);
-            ABILITY_UNLOCKED_AT_LEVEL_5 = new Skill(PrvEEmptySkill.AbilityUnlockedAtLevel5);
-            NO_ABILITY = new Skill(PrvEEmptySkill.NoAbility);
-            NO_BONUS = new Skill(PrvEEmptySkill.NotActiveBonus);
+            ABILITY_UNLOCKED_AT_LEVEL_2 = new Skill(EmptySkill.AbilityUnlockedAtLevel2);
+            ABILITY_UNLOCKED_AT_LEVEL_3 = new Skill(EmptySkill.AbilityUnlockedAtLevel3);
+            ABILITY_UNLOCKED_AT_LEVEL_4 = new Skill(EmptySkill.AbilityUnlockedAtLevel4);
+            ABILITY_UNLOCKED_AT_LEVEL_5 = new Skill(EmptySkill.AbilityUnlockedAtLevel5);
+            NO_ABILITY = new Skill(EmptySkill.NoAbility);
+            NO_BONUS = new Skill(EmptySkill.NotActiveBonus);
         }
 
-        public static Skill getLeaderSkill(Leader leader)
-        {
-            AssertArgument.CheckIsNotNull(leader, nameof(leader));
-
-            return new Skill(leader);
-        }
-        public static Skill getSkillWithPrefixes(IEnumerable<Prefix> prefixes, Suffix suffix)
+        public static Skill GetStandardSkill(IEnumerable<Prefix> prefixes, Suffix suffix, int x, int y)
         {
             AssertArgument.CheckIsNotNull(prefixes, nameof(prefixes));
-            int prefixesCount = prefixes.Count();
-            AssertArgument.CheckIntegerRange(prefixesCount > 0, $"must contain at least one item", prefixesCount, nameof(prefixes));
             AssertArgument.CheckIsNotNull(suffix, nameof(suffix));
+            AssertArgument.CheckIntegerRange(x >= 0, "Cannot be negative", x, nameof(x));
+            AssertArgument.CheckIntegerRange(y >= 0, "Cannot be negative", y, nameof(y));
 
-            return new Skill(prefixes, suffix);
+            return new Skill(prefixes, suffix, x, y);
         }
-        public static Skill getSkillWithoutPrefixes(Suffix suffix)
-        {
-            AssertArgument.CheckIsNotNull(suffix, nameof(suffix));
-
-            Prefix[] prefixes = new Prefix[]
-            {
-                PRV_DEFAULT_PREFIX,
-            };
-            return new Skill(prefixes, suffix);
-        }
-
-        private Skill()
-        {
-            this.emptySkillValue = PrvEEmptySkill.NormalSkill;
-        }
-        private Skill(PrvEEmptySkill emptySkillValue)
-        {
-            this.emptySkillValue = emptySkillValue;
-            this.leader = null;
-            this.prefixes = new Prefix[0];
-            this.suffix = null;
-        }
-        private Skill(Leader leader)
-            : this()
-        {
-            this.leader = leader;
-            this.prefixes = new Prefix[0];
-            this.suffix = null;
-        }
-        private Skill(IEnumerable<Prefix> prefixes, Suffix suffix)
-            : this()
-        {
-            this.leader = null;
-            this.prefixes = prefixes.ToArray();
-            this.suffix = suffix;
-        }
-
+        
         public override string ToString()
         {
             string text;
 
             switch (this.emptySkillValue)
             {
-                case PrvEEmptySkill.NotActiveBonus:
+                case EmptySkill.NotActiveBonus:
                     text = ""; // TODO // Properties.GameStrings.skill_no_bonus;
                     break;
-                case PrvEEmptySkill.NoAbility:
+                case EmptySkill.NoAbility:
                     text = ""; // TODO // Properties.GameStrings.skill_no_ability;
                     break;
-                case PrvEEmptySkill.AbilityUnlockedAtLevel2:
-                    text = prv_getUnlockedAtLevelStringRepresentation(2);
+                case EmptySkill.AbilityUnlockedAtLevel2:
+                    text = GetUnlockedAtLevelStringRepresentation(2);
                     break;
-                case PrvEEmptySkill.AbilityUnlockedAtLevel3:
-                    text = prv_getUnlockedAtLevelStringRepresentation(3);
+                case EmptySkill.AbilityUnlockedAtLevel3:
+                    text = GetUnlockedAtLevelStringRepresentation(3);
                     break;
-                case PrvEEmptySkill.AbilityUnlockedAtLevel4:
-                    text = prv_getUnlockedAtLevelStringRepresentation(4);
+                case EmptySkill.AbilityUnlockedAtLevel4:
+                    text = GetUnlockedAtLevelStringRepresentation(4);
                     break;
-                case PrvEEmptySkill.AbilityUnlockedAtLevel5:
-                    text = prv_getUnlockedAtLevelStringRepresentation(5);
+                case EmptySkill.AbilityUnlockedAtLevel5:
+                    text = GetUnlockedAtLevelStringRepresentation(5);
                     break;
-                case PrvEEmptySkill.NormalSkill:
-                    if (this.leader != null)
-                    {
-                        text = this.leader.ToString();
-                    }
-                    else
-                    {
-                        text = "";
-                        for (int i = 0; i < this.prefixes.Length; i++)
-                        {
-                            text += this.prefixes[i].ToString();
-                        }
-                        text += this.suffix.ToString();
-                    }
+                case EmptySkill.NormalSkill:
+                    text = this.prefixes.Aggregate("", (acc, prefix) => acc + prefix.ToString());
+                    text += this.suffix.ToString();
                     break;
                 default:
-                    text = "";
+                    text = "Invalid";
                     Asserts.Fail("Invalid skill value state");
                     break;
             }
@@ -161,9 +96,30 @@ namespace Warcraker.UrbanRivals.Core
             return text;
         }
 
-        private static string prv_getUnlockedAtLevelStringRepresentation(int level)
+        private Skill()
         {
-            return ""; // TODO // String.Format(Properties.GameStrings.skill_not_unlocked, level);
+            this.emptySkillValue = EmptySkill.NormalSkill;
+            this.prefixes = new Prefix[0];
+            this.suffix = null;
+            this.x = 0;
+            this.y = 0;
+        }
+        private Skill(EmptySkill emptySkillValue)
+        {
+            this.emptySkillValue = emptySkillValue;
+        }
+        private Skill(IEnumerable<Prefix> prefixes, Suffix suffix, int x, int y)
+            : this()
+        {
+            this.prefixes = prefixes.ToArray();
+            this.suffix = suffix;
+            this.x = x;
+            this.y = y;
+        }
+
+        private static string GetUnlockedAtLevelStringRepresentation(int level)
+        {
+            return "" + level; // TODO // String.Format(Properties.GameStrings.skill_not_unlocked, level);
         }
     }
 }

@@ -1,22 +1,8 @@
-﻿namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Leaders
+﻿using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes;
+
+namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Leaders
 {
-    // TODO revise leader gamestrings
-    public abstract class Leader
+    public abstract class Leader : Suffix
     {
-        private readonly string abilityText;
-
-        protected Leader(string abilityText)
-        {
-            this.abilityText = abilityText;
-        }
-
-        public bool isMatch(string abilityText)
-        {
-            return this.abilityText == abilityText;
-        }
-        public override string ToString()
-        {
-            return this.abilityText;
-        }
     }
 }
