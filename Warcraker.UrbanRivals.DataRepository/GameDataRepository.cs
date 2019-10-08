@@ -6,11 +6,11 @@ using Warcraker.Utils;
 
 namespace Warcraker.UrbanRivals.DataRepository
 {
-    public class StaticGameDataRepository
+    public class GameDataRepository : DataRepository
     {
         public string Path { get; private set; }
 
-        public StaticGameDataRepository(string path)
+        public GameDataRepository(string path)
         {
             AssertArgument.StringIsFilled(path, nameof(path));
             
@@ -22,19 +22,19 @@ namespace Warcraker.UrbanRivals.DataRepository
             this.Path = path;
         }
 
-        public BlobCycleData GetBlobCycleData(int blobHash)
-        {
-            throw new NotImplementedException();
-        }
-        public SkillData GetSkillData(int skillHash)
-        {
-            throw new NotImplementedException();
-        }
         public ClanData GetClanData(int clanHash)
         {
             throw new NotImplementedException();
         }
-        public CardDefinitionData GetCardDefinitionData(int cardDefinitionHash)
+        public CardData GetCardData(int cardHash)
+        {
+            throw new NotImplementedException();
+        }
+        public CycleData GetCycleData(int cycleHash)
+        {
+            throw new NotImplementedException();
+        }
+        public SkillData GetSkillData(int skillHash)
         {
             throw new NotImplementedException();
         }
@@ -43,8 +43,30 @@ namespace Warcraker.UrbanRivals.DataRepository
             throw new NotImplementedException();
         }
 
+        public void SaveClanData(ClanData clanData)
+        {
+            throw new NotImplementedException();
+        }
+        public void SaveCardData(CardData cardData)
+        {
+            throw new NotImplementedException();
+        }
+        public void SaveCycleBlobData(CycleData blobData)
+        {
+            throw new NotImplementedException();
+        }
+        public void SaveSkillData(SkillData skillData)
+        {
+            throw new NotImplementedException();
+        }
         public void SaveSkillTextHash(int textHash, int skillHash)
         {
+            TextToSkillData data = new TextToSkillData
+            {
+                TextHash = textHash,
+                SkillHash = skillHash,
+            };
+
             throw new NotImplementedException();
         }
 
@@ -52,12 +74,13 @@ namespace Warcraker.UrbanRivals.DataRepository
         {
             using (var connection = new SQLiteConnection(path))
             {
-                connection.CreateTable<BlobCycleData>();
-                connection.CreateTable<CardDefinitionData>();
+                connection.CreateTable<CycleData>();
                 connection.CreateTable<ClanData>();
+                connection.CreateTable<CardData>();
                 connection.CreateTable<SkillData>();
                 connection.CreateTable<TextToSkillData>();
             }
         }
+
     }
 }

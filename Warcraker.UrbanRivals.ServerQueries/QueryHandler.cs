@@ -17,7 +17,7 @@ namespace Warcraker.UrbanRivals.ServerQueries
             apiManager = ApiManager.CreateApiManagerReadyForRequests(consumerKey, consumerSecret, accessKey, accessSecret);
         }
         
-        public string GetCardDefinitionsBlob()
+        public string GetCycleBlob()
         {
             string blob;
             string previousUserLocale = GetUserLocale();
