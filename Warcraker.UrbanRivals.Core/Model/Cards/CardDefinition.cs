@@ -11,7 +11,6 @@ namespace Warcraker.UrbanRivals.Core.Model.Cards
             Rare,
             Collector,
             Legendary,
-            Rebirth,
             Mythic,
         }
 
