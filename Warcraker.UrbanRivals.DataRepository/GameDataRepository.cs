@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.IO;
+using System.Linq.Expressions;
 using Warcraker.UrbanRivals.DataRepository.DataModels;
 using Warcraker.Utils;
 
@@ -24,50 +25,69 @@ namespace Warcraker.UrbanRivals.DataRepository
 
         public ClanData GetClanData(int clanHash)
         {
-            throw new NotImplementedException();
+            return GetSingleItem<ClanData>(row => row.Hash == clanHash);
         }
         public CardData GetCardData(int cardHash)
         {
-            throw new NotImplementedException();
+            return GetSingleItem<CardData>(row => row.Hash == cardHash);
         }
         public CycleData GetCycleData(int cycleHash)
         {
-            throw new NotImplementedException();
+            return GetSingleItem<CycleData>(row => row.Hash == cycleHash);
         }
         public SkillData GetSkillData(int skillHash)
         {
-            throw new NotImplementedException();
+            return GetSingleItem<SkillData>(row => row.Hash == skillHash);
         }
         public int GetSkillHashFromTextHash(int textHash)
         {
-            throw new NotImplementedException();
+            TextToSkillData item = GetSingleItem<TextToSkillData>(row => row.TextHash == textHash);
+
+            if (item == null)
+                return SCALAR_VALUE_NOT_FOUND;
+
+            return item.SkillHash;
         }
 
-        public void SaveClanData(ClanData clanData)
+        public bool SaveClanData(ClanData clanData)
         {
-            throw new NotImplementedException();
+            return InsertSingleItem(clanData);
         }
-        public void SaveCardData(CardData cardData)
+        public bool SaveCardData(CardData cardData)
         {
-            throw new NotImplementedException();
+            return InsertSingleItem(cardData);
         }
-        public void SaveCycleBlobData(CycleData blobData)
+        public bool SaveCycleBlobData(CycleData blobData)
         {
-            throw new NotImplementedException();
+            return InsertSingleItem(blobData);
         }
-        public void SaveSkillData(SkillData skillData)
+        public bool SaveSkillData(SkillData skillData, int skillTextHash)
         {
-            throw new NotImplementedException();
-        }
-        public void SaveSkillTextHash(int textHash, int skillHash)
-        {
-            TextToSkillData data = new TextToSkillData
+            AssertArgument.CheckIsNotNull(skillData, $"Cannot insert null item [{typeof(SkillData).Name}]");
+            AssertArgument.CheckIntegerRange(skillTextHash > 0, "Must be greater than zero", skillTextHash, nameof(skillTextHash));
+
+            using (var connection = GetConnection())
             {
-                TextHash = textHash,
-                SkillHash = skillHash,
-            };
+                TextToSkillData textToSkillData = new TextToSkillData
+                {
+                    TextHash = skillTextHash,
+                    SkillHash = skillData.Hash,
+                };
 
-            throw new NotImplementedException();
+                connection.BeginTransaction();
+                connection.Insert(skillData);
+                int rowsInserted = connection.Insert(textToSkillData);
+                if (rowsInserted > 0)
+                {
+                    connection.Commit();
+                    return true;
+                }
+                else
+                {
+                    connection.Rollback();
+                    return false;
+                }
+            }
         }
 
         private static void Initialize(string path)
@@ -81,6 +101,31 @@ namespace Warcraker.UrbanRivals.DataRepository
                 connection.CreateTable<TextToSkillData>();
             }
         }
+        
+        private SQLiteConnection GetConnection()
+        {
+            return new SQLiteConnection(Path);
+        }
+        private T GetSingleItem<T>(Expression<Func<T, bool>> where) where T : new()
+        {
+            using (var connection = GetConnection())
+            {
+                T item = connection
+                    .Table<T>()
+                    .FirstOrDefault(where);
 
+                return item;
+            }
+        }
+        private bool InsertSingleItem<T>(T item)
+        {
+            AssertArgument.CheckIsNotNull(item, $"Cannot insert null item [{typeof(T).Name}]");
+            using (var connection = GetConnection())
+            {
+                int rowsInserted = connection.Insert(item);
+
+                return rowsInserted > 0;
+            }
+        }
     }
 }
