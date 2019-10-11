@@ -6,8 +6,8 @@ namespace Warcraker.UrbanRivals.DataRepository.DataModels
     public class CycleData
     {
         [PrimaryKey]
-        [Column(nameof(BlobHash))]
-        public int BlobHash { get; set; }
+        [Column(nameof(Hash))]
+        public int Hash { get; set; }
 
         [Column(nameof(AbilityHashes))]
         public int[] AbilityHashes { get; set; }
