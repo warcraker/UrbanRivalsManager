@@ -179,7 +179,7 @@ namespace Warcraker.UrbanRivals.TextProcess
                             ClanGameId = clanId,
                             InitialLevel = initialLevel,
                             AbilityUnlockLevel = abilityUnlockLevel,
-                            Rarity = RarityTextToInt(rarityText),
+                            Rarity = (int)rarity,
                             PowerPerLevel = powers.ToArray(),
                             DamagePerLevel = damages.ToArray(),
                         };
@@ -247,14 +247,26 @@ namespace Warcraker.UrbanRivals.TextProcess
 
             return skill;
         }
-        private static int RarityTextToInt(string text)
+        private static CardDefinition.ECardRarity GetRarity(string text)
         {
-            throw new NotImplementedException();
-        }
-
-        private static void SaveNewSkill()
-        {
-
+            switch (text)
+            {
+                case "cr":
+                    return CardDefinition.ECardRarity.Collector;
+                case "c":
+                    return CardDefinition.ECardRarity.Common;
+                case "l":
+                    return CardDefinition.ECardRarity.Legendary;
+                case "m":
+                    return CardDefinition.ECardRarity.Mythic;
+                case "r":
+                    return CardDefinition.ECardRarity.Rare;
+                case "u":
+                    return CardDefinition.ECardRarity.Uncommon;
+                default:
+                    Asserts.Fail($"Invalid rarity {text}");
+                    return CardDefinition.ECardRarity.Common;
+            }
         }
 
         private static object BuildInstance(string name)
