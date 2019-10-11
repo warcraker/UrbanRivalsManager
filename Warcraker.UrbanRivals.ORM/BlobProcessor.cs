@@ -17,7 +17,7 @@ namespace Warcraker.UrbanRivals.TextProcess
 {
     public class BlobProcessor
     {
-        private GameDataRepository repository;
+        private readonly GameDataRepository repository;
 
         public BlobProcessor(GameDataRepository repository)
         {
