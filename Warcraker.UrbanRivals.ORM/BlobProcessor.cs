@@ -14,11 +14,11 @@ using Warcraker.UrbanRivals.DataRepository;
 using Warcraker.UrbanRivals.DataRepository.DataModels;
 using Warcraker.Utils;
 
-namespace Warcraker.UrbanRivals.TextProcess
+namespace Warcraker.UrbanRivals.ORM
 {
     public class BlobProcessor
     {
-        private const char COMMA_SEPARATOR = ';';
+        private static readonly char COMMA_SEPARATOR = ';';
 
         private readonly GameDataRepository repository;
 
@@ -100,7 +100,7 @@ namespace Warcraker.UrbanRivals.TextProcess
                         string cardName = decodedCard["name"].ToString();
                         int clanId = int.Parse(decodedCard["clanID"].ToString());
                         string rarityText = decodedCard["rarity"].ToString();
-                        CardDefinition.ECardRarity rarity = GetRarity(rarityText);
+                        CardDefinition.ECardRarity rarity = TextToRarity(rarityText);
 
                         IEnumerable<dynamic> levels = decodedCard["levels"].ToList();
                         int initialLevel = int.Parse(levels.First()["level"].ToString());
@@ -177,30 +177,30 @@ namespace Warcraker.UrbanRivals.TextProcess
             return cycle;
         }
 
-        private static SkillData SkillToSkillData(Skill skill)
+        private static IList<string> BlobToList<TCall>(string blob) where TCall : ApiCall, new()
         {
-            string[] prefixNames = skill.Prefixes
-                .Select(prefix => GetTypeName(prefix))
-                .ToArray();
+            IList<string> result = new List<string>();
 
-            int skillHash = HashCode
-                .OfEach(prefixNames)
-                .And(GetTypeName(skill.Suffix))
-                .And(skill.X)
-                .And(skill.Y);
-
-            string prefixCsv = prefixNames
-                .Aggregate(new StringBuilder(), (acc, item) => acc.Append(COMMA_SEPARATOR).Append(item))
-                .ToString();
-
-            return new SkillData
+            TCall call = new TCall();
+            dynamic decoded = JsonConvert.DeserializeObject(blob);
+            foreach (dynamic item in decoded[call.Call]["items"])
             {
-                Hash = skillHash,
-                PrefixesClassNames = prefixCsv,
-                SuffixClassName = GetTypeName(skill.Suffix),
-                X = skill.X,
-                Y = skill.Y,
-            };
+                result.Add(item.ToString());
+            }
+            return result;
+        }
+        private static IEnumerable<int> CsvToInt(string input)
+        {
+            return input
+                .Split(COMMA_SEPARATOR)
+                .Select(item => int.Parse(item));
+        }
+        private static string IntsToCsv(IEnumerable<int> input)
+        {
+            return input
+                .Aggregate(new StringBuilder()
+                    , (acc, item) => acc.Append(COMMA_SEPARATOR).Append(item))
+                .ToString();
         }
         private static Skill SkillDataToSkill(SkillData data)
         {
@@ -214,7 +214,7 @@ namespace Warcraker.UrbanRivals.TextProcess
 
             return skill;
         }
-        private static CardDefinition.ECardRarity GetRarity(string text)
+        private static CardDefinition.ECardRarity TextToRarity(string text)
         {
             switch (text)
             {
@@ -236,39 +236,9 @@ namespace Warcraker.UrbanRivals.TextProcess
             }
         }
 
-        private static IList<string> BlobToList<TCall>(string blob) where TCall : ApiCall, new()
-        {
-            IList<string> result = new List<string>();
-
-            TCall call = new TCall();
-            dynamic decoded = JsonConvert.DeserializeObject(blob);
-            foreach (dynamic item in decoded[call.Call]["items"])
-            {
-                result.Add(item.ToString());
-            }
-            return result;
-        }
-        private static string IntsToCsv(IEnumerable<int> input)
-        {
-            return input
-                .Aggregate(new StringBuilder()
-                    , (acc, item) => acc.Append(COMMA_SEPARATOR).Append(item))
-                .ToString();
-        }
-        private static IEnumerable<int> CsvToInt(string input)
-        {
-            return input
-                .Split(COMMA_SEPARATOR)
-                .Select(item => int.Parse(item));
-        }
-
         private static TParent BuildInstance<TParent>(string name)
         {
             return (TParent)Activator.CreateInstance(Type.GetType(name));
-        }
-        private static string GetTypeName(object o)
-        {
-            return o.GetType().Name;
         }
         private static int HashText(string text)
         {
