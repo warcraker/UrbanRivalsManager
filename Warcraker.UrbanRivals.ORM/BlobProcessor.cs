@@ -33,16 +33,12 @@ namespace Warcraker.UrbanRivals.TextProcess
             CycleData cycleData = repository.GetCycleData(blobHash);
             if (cycleData == null)
             {
-                IList<string> clanItems = BlobToList<ApiCallList.Characters.GetClans>(blob);
                 IList<string> abilityItems = BlobToList<ApiCallList.Characters.GetCharacters>(blob);
                 IList<string> cardItems = BlobToList<ApiCallList.Urc.GetCharacters>(blob);
-
                 Asserts.Check(abilityItems.Count == cardItems.Count, $"Characters.GetCharacters and Urc.GetCharacters call counts must be equal");
+                IList<string> clanItems = BlobToList<ApiCallList.Characters.GetClans>(blob);
 
                 IList<int> clanHashes = new List<int>();
-                IList<int> abilityHashes = new List<int>();
-                IList<int> cardHashes = new List<int>();
-
                 foreach (string clanItem in clanItems)
                 {
                     int clanHash = HashText(clanItem);
@@ -56,10 +52,8 @@ namespace Warcraker.UrbanRivals.TextProcess
                         int bonusHash = repository.GetSkillHashFromTextHash(bonusTextHash);
                         if (bonusHash == repository.SCALAR_VALUE_NOT_FOUND)
                         {
-                            Skill bonus = SkillProcessor.ParseSkill(bonusText);
-                            SkillData bonusData = SkillToSkillData(bonus);
+                            SkillData bonusData = null; // SkillProcessor.ParseSkill(bonusText); // TODO
                             repository.SaveSkillData(bonusData, bonusTextHash);
-
                             bonusHash = bonusData.Hash;
                         }
 
@@ -78,6 +72,8 @@ namespace Warcraker.UrbanRivals.TextProcess
                     clanHashes.Add(clanHash);
                 }
 
+                IList<int> abilityHashes = new List<int>();
+                IList<int> cardHashes = new List<int>();
                 for (int i = 0, n = cardItems.Count; i < n; i++)
                 {
                     string abilityItem = abilityItems[i];
@@ -88,14 +84,10 @@ namespace Warcraker.UrbanRivals.TextProcess
                     int abilityHash = repository.GetSkillHashFromTextHash(abilityTextHash);
                     if (abilityHash == repository.SCALAR_VALUE_NOT_FOUND)
                     {
-                        Skill ability = SkillProcessor.ParseSkill(abilityText);
-                        SkillData abilityData = SkillToSkillData(ability);
+                        SkillData abilityData = null; // SkillProcessor.ParseSkill(abilityText); // TODO
                         repository.SaveSkillData(abilityData, abilityTextHash);
-
                         abilityHash = abilityData.Hash;
                     }
-
-                    int cardGameIdFromAbility = int.Parse(decodedAbility["id"].ToString());
 
                     string cardItem = cardItems[i];
                     int cardHash = HashText(cardItem);
@@ -130,13 +122,15 @@ namespace Warcraker.UrbanRivals.TextProcess
                             InitialLevel = initialLevel,
                             AbilityUnlockLevel = abilityUnlockLevel,
                             Rarity = (int)rarity,
-                            PowerPerLevel = FromIntsToCsv(powers),
-                            DamagePerLevel = FromIntsToCsv(damages),
+                            PowerPerLevel = IntsToCsv(powers),
+                            DamagePerLevel = IntsToCsv(damages),
                         };
                         repository.SaveCardData(cardData);
                     }
 
-                    Asserts.Check(cardGameIdFromAbility == cardData.GameId, "Characters.GetCharacters and Urc.GetCharacters items must be in the same order");
+                    int cardGameIdFromAbility = int.Parse(decodedAbility["id"].ToString());
+                    Asserts.Check(cardGameIdFromAbility == cardData.GameId, 
+                        "Characters.GetCharacters and Urc.GetCharacters items must be in the same order");
 
                     cardHashes.Add(cardHash);
                     abilityHashes.Add(abilityHash);
@@ -145,15 +139,13 @@ namespace Warcraker.UrbanRivals.TextProcess
                 cycleData = new CycleData
                 {
                     Hash = blobHash,
-                    AbilityHashes = FromIntsToCsv(abilityHashes),
-                    CardHashes = FromIntsToCsv(cardHashes),
-                    ClanHashes = FromIntsToCsv(clanHashes),
+                    AbilityHashes = IntsToCsv(abilityHashes),
+                    CardHashes = IntsToCsv(cardHashes),
+                    ClanHashes = IntsToCsv(clanHashes),
                 };
-
                 repository.SaveCycleBlobData(cycleData);
             }
 
-            IList<CardDefinition> cards = new List<CardDefinition>();
             IDictionary<int, Clan> clans = new Dictionary<int, Clan>();
             foreach (int clanHash in cycleData.ClanHashes)
             {
@@ -164,6 +156,7 @@ namespace Warcraker.UrbanRivals.TextProcess
                 clans[clan.GameId] = clan;
             }
 
+            IList<CardDefinition> cards = new List<CardDefinition>();
             for (int i = 0, n = cycleData.CardHashes.Length; i < n; i++)
             {
                 CardData cardData = repository.GetCardData(cycleData.CardHashes[i]);
@@ -171,7 +164,7 @@ namespace Warcraker.UrbanRivals.TextProcess
                 Skill ability = SkillDataToSkill(abilityData);
                 Clan clan = clans[cardData.ClanGameId];
                 CardStats stats = new CardStats(cardData.InitialLevel, 
-                    FromCsvToInt(cardData.PowerPerLevel), FromCsvToInt(cardData.DamagePerLevel));
+                    CsvToInt(cardData.PowerPerLevel), CsvToInt(cardData.DamagePerLevel));
                 CardDefinition card = new CardDefinition(cardData.GameId, cardData.Name, clan, ability, 
                     cardData.AbilityUnlockLevel, stats, (CardDefinition.ECardRarity)cardData.Rarity);
 
@@ -182,32 +175,6 @@ namespace Warcraker.UrbanRivals.TextProcess
             Cycle cycle = new Cycle(cycleType, cards);
 
             return cycle;
-        }
-
-        private static IList<string> BlobToList<TCall>(string blob) where TCall : ApiCall, new()
-        {
-            IList<string> result = new List<string>();
-
-            TCall call = new TCall();
-            dynamic decoded = JsonConvert.DeserializeObject(blob);
-            foreach (dynamic item in decoded[call.Call]["items"])
-            {
-                result.Add(item.ToString());
-            }
-            return result;
-        }
-        private static string FromIntsToCsv(IEnumerable<int> input)
-        {
-            return input
-                .Aggregate(new StringBuilder()
-                    , (acc, item) => acc.Append(COMMA_SEPARATOR).Append(item))
-                .ToString();
-        }
-        private static IEnumerable<int> FromCsvToInt(string input)
-        {
-            return input
-                .Split(COMMA_SEPARATOR)
-                .Select(item => int.Parse(item));
         }
 
         private static SkillData SkillToSkillData(Skill skill)
@@ -267,6 +234,32 @@ namespace Warcraker.UrbanRivals.TextProcess
                     Asserts.Fail($"Invalid rarity {text}");
                     return CardDefinition.ECardRarity.Common;
             }
+        }
+
+        private static IList<string> BlobToList<TCall>(string blob) where TCall : ApiCall, new()
+        {
+            IList<string> result = new List<string>();
+
+            TCall call = new TCall();
+            dynamic decoded = JsonConvert.DeserializeObject(blob);
+            foreach (dynamic item in decoded[call.Call]["items"])
+            {
+                result.Add(item.ToString());
+            }
+            return result;
+        }
+        private static string IntsToCsv(IEnumerable<int> input)
+        {
+            return input
+                .Aggregate(new StringBuilder()
+                    , (acc, item) => acc.Append(COMMA_SEPARATOR).Append(item))
+                .ToString();
+        }
+        private static IEnumerable<int> CsvToInt(string input)
+        {
+            return input
+                .Split(COMMA_SEPARATOR)
+                .Select(item => int.Parse(item));
         }
 
         private static TParent BuildInstance<TParent>(string name)
