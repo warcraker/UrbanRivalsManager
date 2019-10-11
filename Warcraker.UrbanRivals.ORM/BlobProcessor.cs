@@ -26,40 +26,9 @@ namespace Warcraker.UrbanRivals.TextProcess
 
         public Cycle GetCycleData(string blob)
         {
-            Cycle cycle;
-            Cycle.ECycleType cycleType;
-            IList<CardDefinition> cards = new List<CardDefinition>();
-
             int blobHash = HashText(blob);
             CycleData cycleData = repository.GetCycleData(blobHash);
-            if (cycleData != null)
-            {
-                IDictionary<int, Clan> clans = new Dictionary<int, Clan>();
-                foreach (int clanHash in cycleData.ClanHashes)
-                {
-                    ClanData clanData = repository.GetClanData(clanHash);
-                    SkillData bonusData = repository.GetSkillData(clanData.BonusHash);
-                    Skill bonus = SkillDataToSkill(bonusData);
-                    Clan clan = new Clan(clanData.GameId, clanData.Name, bonus);
-                    clans[clan.GameId] = clan;
-                }
-
-                for (int i = 0, n = cycleData.CardHashes.Length; i < n; i++)
-                {
-                    CardData cardData = repository.GetCardData(cycleData.CardHashes[i]);
-                    SkillData abilityData = repository.GetSkillData(cycleData.AbilityHashes[i]);
-                    Skill ability = SkillDataToSkill(abilityData);
-                    Clan clan = clans[cardData.ClanGameId];
-                    CardStats stats = new CardStats(cardData.InitialLevel, cardData.PowerPerLevel, cardData.DamagePerLevel);
-
-                    CardDefinition card = new CardDefinition(cardData.GameId, cardData.Name, clan, ability, cardData.AbilityUnlockLevel,
-                        stats, (CardDefinition.ECardRarity)cardData.Rarity);
-                    cards.Add(card);
-                }
-
-                cycleType = Cycle.ECycleType.Day; // TODO detect day/night
-            }
-            else
+            if (cycleData == null)
             {
                 IList<string> clanItems = BlobToList<ApiCallList.Characters.GetClans>(blob);
                 IList<string> abilityItems = BlobToList<ApiCallList.Characters.GetCharacters>(blob);
@@ -71,19 +40,11 @@ namespace Warcraker.UrbanRivals.TextProcess
                 IList<int> abilityHashes = new List<int>();
                 IList<int> cardHashes = new List<int>();
 
-                IDictionary<int, Clan> clans = new Dictionary<int, Clan>();
                 foreach (string clanItem in clanItems)
                 {
-                    Clan clan;
-                    Skill bonus;
                     int clanHash = HashText(clanItem);
                     ClanData clanData = repository.GetClanData(clanHash);
-                    if (clanData != null)
-                    {
-                        SkillData bonusData = repository.GetSkillData(clanData.BonusHash);
-                        bonus = SkillDataToSkill(bonusData);
-                    }
-                    else
+                    if (clanData == null)
                     {
                         dynamic decodedClan = JsonConvert.DeserializeObject(clanItem);
                         string bonusText = decodedClan["bonusDescription"].ToString();
@@ -92,17 +53,11 @@ namespace Warcraker.UrbanRivals.TextProcess
                         int bonusHash = repository.GetSkillHashFromTextHash(bonusTextHash);
                         if (bonusHash == repository.SCALAR_VALUE_NOT_FOUND)
                         {
-                            bonus = SkillProcessor.ParseSkill(bonusText);
+                            Skill bonus = SkillProcessor.ParseSkill(bonusText);
                             SkillData bonusData = SkillToSkillData(bonus);
-                            bonusHash = bonusData.Hash;
+                            repository.SaveSkillData(bonusData, bonusTextHash);
 
-                            repository.SaveSkillData(bonusData);
-                            repository.SaveSkillTextHash(bonusTextHash, bonusHash);
-                        }
-                        else
-                        {
-                            SkillData bonusData = repository.GetSkillData(bonusHash);
-                            bonus = SkillDataToSkill(bonusData);
+                            bonusHash = bonusData.Hash;
                         }
 
                         int clanId = int.Parse(decodedClan["id"].ToString());
@@ -117,37 +72,27 @@ namespace Warcraker.UrbanRivals.TextProcess
                         repository.SaveClanData(clanData);
                     }
 
-                    clan = new Clan(clanData.GameId, clanData.Name, bonus);
-                    clans.Add(clan.GameId, clan);
                     clanHashes.Add(clanHash);
                 }
 
                 for (int i = 0, n = cardItems.Count; i < n; i++)
                 {
-                    Skill ability;
-
                     string abilityItem = abilityItems[i];
                     dynamic decodedAbility = JsonConvert.DeserializeObject(abilityItem);
-
-                    int cardGameIdFromAbility = int.Parse(decodedAbility["id"].ToString());
                     string abilityText = decodedAbility["ability"].ToString();
 
                     int abilityTextHash = HashText(abilityText);
                     int abilityHash = repository.GetSkillHashFromTextHash(abilityTextHash);
                     if (abilityHash == repository.SCALAR_VALUE_NOT_FOUND)
                     {
-                        ability = SkillProcessor.ParseSkill(abilityText);
+                        Skill ability = SkillProcessor.ParseSkill(abilityText);
                         SkillData abilityData = SkillToSkillData(ability);
-                        abilityHash = abilityData.Hash;
+                        repository.SaveSkillData(abilityData, abilityTextHash);
 
-                        repository.SaveSkillData(abilityData);
-                        repository.SaveSkillTextHash(abilityTextHash, abilityHash);
+                        abilityHash = abilityData.Hash;
                     }
-                    else
-                    {
-                        SkillData abilityData = repository.GetSkillData(abilityHash);
-                        ability = SkillDataToSkill(abilityData);
-                    }
+
+                    int cardGameIdFromAbility = int.Parse(decodedAbility["id"].ToString());
 
                     string cardItem = cardItems[i];
                     int cardHash = HashText(cardItem);
@@ -160,9 +105,11 @@ namespace Warcraker.UrbanRivals.TextProcess
                         string cardName = decodedCard["name"].ToString();
                         int clanId = int.Parse(decodedCard["clanID"].ToString());
                         string rarityText = decodedCard["rarity"].ToString();
+                        CardDefinition.ECardRarity rarity = GetRarity(rarityText);
 
-                        dynamic levels = decodedCard["levels"];
-                        int initialLevel = int.Parse(levels[0]["level"].ToString());
+                        IEnumerable<dynamic> levels = decodedCard["levels"].ToList();
+                        int initialLevel = int.Parse(levels.First()["level"].ToString());
+
                         IList<int> powers = new List<int>();
                         IList<int> damages = new List<int>();
                         foreach (dynamic levelItem in levels)
@@ -186,21 +133,15 @@ namespace Warcraker.UrbanRivals.TextProcess
                         repository.SaveCardData(cardData);
                     }
 
-                    Clan clan = clans[cardData.ClanGameId];
-                    CardStats stats = new CardStats(cardData.InitialLevel, cardData.PowerPerLevel, cardData.DamagePerLevel);
-                    CardDefinition card = new CardDefinition(cardData.GameId, cardData.Name, clan, ability, cardData.AbilityUnlockLevel, stats, 0);
+                    Asserts.Check(cardGameIdFromAbility == cardData.GameId, "Characters.GetCharacters and Urc.GetCharacters items must be in the same order");
 
-                    Asserts.Check(cardGameIdFromAbility == cardData.GameId, "Characters.GetCharacters and Urc.GetCharacters must be in the same order");
-
-                    cards.Add(card);
                     cardHashes.Add(cardHash);
                     abilityHashes.Add(abilityHash);
                 }
 
-                cycleType = Cycle.ECycleType.Day; // TODO detect day/night
                 cycleData = new CycleData
                 {
-                    BlobHash = blobHash,
+                    Hash = blobHash,
                     AbilityHashes = abilityHashes.ToArray(),
                     CardHashes = cardHashes.ToArray(),
                     ClanHashes = clanHashes.ToArray(),
@@ -209,7 +150,34 @@ namespace Warcraker.UrbanRivals.TextProcess
                 repository.SaveCycleBlobData(cycleData);
             }
 
-            cycle = new Cycle(cycleType, cards);
+            IList<CardDefinition> cards = new List<CardDefinition>();
+            IDictionary<int, Clan> clans = new Dictionary<int, Clan>();
+            foreach (int clanHash in cycleData.ClanHashes)
+            {
+                ClanData clanData = repository.GetClanData(clanHash);
+                SkillData bonusData = repository.GetSkillData(clanData.BonusHash);
+                Skill bonus = SkillDataToSkill(bonusData);
+                Clan clan = new Clan(clanData.GameId, clanData.Name, bonus);
+                clans[clan.GameId] = clan;
+            }
+
+            for (int i = 0, n = cycleData.CardHashes.Length; i < n; i++)
+            {
+                CardData cardData = repository.GetCardData(cycleData.CardHashes[i]);
+                SkillData abilityData = repository.GetSkillData(cycleData.AbilityHashes[i]);
+                Skill ability = SkillDataToSkill(abilityData);
+                Clan clan = clans[cardData.ClanGameId];
+                CardStats stats = new CardStats(cardData.InitialLevel, cardData.PowerPerLevel, cardData.DamagePerLevel);
+                CardDefinition card = new CardDefinition(cardData.GameId, cardData.Name, clan, ability, 
+                    cardData.AbilityUnlockLevel, stats, (CardDefinition.ECardRarity)cardData.Rarity);
+
+                cards.Add(card);
+            }
+
+
+
+            Cycle.ECycleType cycleType = Cycle.ECycleType.Day; // TODO detect day/night
+            Cycle cycle = new Cycle(cycleType, cards);
 
             return cycle;
         }
@@ -228,9 +196,15 @@ namespace Warcraker.UrbanRivals.TextProcess
         }
         private static SkillData SkillToSkillData(Skill skill)
         {
+            int skillHash = HashCode
+                .OfEach(skill.Prefixes.Select(prefix => GetTypeName(prefix)))
+                .And(GetTypeName(skill.Suffix))
+                .And(skill.X)
+                .And(skill.Y);
+
             return new SkillData
             {
-                Hash = HashSkill(skill),
+                Hash = skillHash,
                 PrefixesClassNames = skill.Prefixes.Select(prefix => GetTypeName(prefix)).ToArray(),
                 SuffixClassName = GetTypeName(skill.Suffix),
                 X = skill.X,
@@ -279,19 +253,7 @@ namespace Warcraker.UrbanRivals.TextProcess
         }
         private static int HashText(string text)
         {
-            int hashValue = HashCode.Of(text);
-
-            return hashValue;
-        }
-        private static int HashSkill(Skill skill)
-        {
-            int hashValue = HashCode
-                .OfEach(skill.Prefixes.Select(prefix => GetTypeName(prefix)))
-                .And(GetTypeName(skill.Suffix))
-                .And(skill.X)
-                .And(skill.Y);
-
-            return hashValue;
+            return HashCode.Of(text);
         }
     }
 }
