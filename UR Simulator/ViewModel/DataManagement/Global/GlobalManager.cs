@@ -145,11 +145,6 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             // This process will set the locale to English. Here we take the previous value to restore it at the end.
             string userLocale = managers.ServerQueriesManager.GetUserLocale();
 
-            /* TODO get existingIds, sort it, and pick the last item. With each server check, if the retrieved item is greater than the last item, 
-             * we know for sure that the previous obtained data is obsolete. Otherwise, we check the hash.
-             */
-            IEnumerable<int> characterIds = managers.ServerQueriesManager.GetAllCardBaseIds();
-
             /* There are 3 API calls to get characters details:
              * - characters.getCharacters (labeled "oldGetCharacters") This call is painfully slow, so we ask only for the info we need 
              * - characters.getCharacterLevels
@@ -159,20 +154,27 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
              * "getCharacterLevels" will not be used, all the details that we can obtain from it we can get it from the "new" one too.
              */
 
-            ApiCall setLocaleToEnglishCall = new ApiCallList.Players.SetLanguages(new List<string> { ServerQueriesManager.EnglishLocale });
-            ApiCall getClansCall = new ApiCallList.Characters.GetClans();
+            ApiCall setLocaleToEnglishCall = new ApiCallList.Players.SetLanguages(
+                new List<string> { "en" }
+            );
+            ApiCall getClansCall = new ApiCallList.Characters.GetClans
+            {
+                ItemsFilter = new List<string> { "id", "name", "bonusDescription" },
+            };
             ApiCall getAbilitiesCall = new ApiCallList.Characters.GetCharacters
             {
-                charactersIDs = new List<int>(characterIds),
                 maxLevels = true,
-                ItemsFilter = new List<string>() { "id", "ability", "ability_unlock_level" },
+                ItemsFilter = new List<string> { "id", "ability", "ability_unlock_level" },
             };
-            ApiCall getCharactersCall = new ApiCallList.Urc.GetCharacters();
+            ApiCall getCharactersCall = new ApiCallList.Urc.GetCharacters
+            {
+                ItemsFilter = new List<string> { "id", "name", "clanID", "rarity", "levels.level", "levels.power", "levels.damage" },
+            };
 
             ApiRequest request = new ApiRequest(setLocaleToEnglishCall);
-            request.EnqueueApiCall(getClansCall);
             request.EnqueueApiCall(getAbilitiesCall);
             request.EnqueueApiCall(getCharactersCall);
+            request.EnqueueApiCall(getClansCall);
 
             string response;
             HttpStatusCode statusCode = managers.GlobalManager.ApiManagerInstance.SendRequest(request, out response);
@@ -224,7 +226,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             Dictionary<int, dynamic> abilitiesData = SortServerCharacterDataIntoDictionary(getAbilitiesCall.Call, decoded);
             Dictionary<int, dynamic> charactersData = SortServerCharacterDataIntoDictionary(getCharactersCall.Call, decoded);
 
-            foreach (int id in characterIds)
+            foreach (int id in charactersData.Keys)
             {
                 if (worker.CancellationPending == true)
                 {
@@ -248,7 +250,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                     cardStatsPerLevel.Add(new CardStats(level, power, damage));
                 }
 
-                worker.ReportProgress((int)(100 * progress / characterIds.Count()), $"[{id}] {name}");
+                worker.ReportProgress((int)(100 * progress / charactersData.Count()), $"[{id}] {name}");
                 progress++;
 
                 Skill newAbility = SkillParser.parseSkill(abilityText);
