@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UrbanRivalsApiManager;
 using Warcraker.UrbanRivals.Core.Model.Cards;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills;
@@ -17,6 +18,8 @@ namespace Warcraker.UrbanRivals.TextProcess
 {
     public class BlobProcessor
     {
+        private const char COMMA_SEPARATOR = ';';
+
         private readonly GameDataRepository repository;
 
         public BlobProcessor(GameDataRepository repository)
@@ -127,8 +130,8 @@ namespace Warcraker.UrbanRivals.TextProcess
                             InitialLevel = initialLevel,
                             AbilityUnlockLevel = abilityUnlockLevel,
                             Rarity = (int)rarity,
-                            PowerPerLevel = powers.ToArray(),
-                            DamagePerLevel = damages.ToArray(),
+                            PowerPerLevel = FromIntsToCsv(powers),
+                            DamagePerLevel = FromIntsToCsv(damages),
                         };
                         repository.SaveCardData(cardData);
                     }
@@ -142,9 +145,9 @@ namespace Warcraker.UrbanRivals.TextProcess
                 cycleData = new CycleData
                 {
                     Hash = blobHash,
-                    AbilityHashes = abilityHashes.ToArray(),
-                    CardHashes = cardHashes.ToArray(),
-                    ClanHashes = clanHashes.ToArray(),
+                    AbilityHashes = FromIntsToCsv(abilityHashes),
+                    CardHashes = FromIntsToCsv(cardHashes),
+                    ClanHashes = FromIntsToCsv(clanHashes),
                 };
 
                 repository.SaveCycleBlobData(cycleData);
@@ -167,14 +170,13 @@ namespace Warcraker.UrbanRivals.TextProcess
                 SkillData abilityData = repository.GetSkillData(cycleData.AbilityHashes[i]);
                 Skill ability = SkillDataToSkill(abilityData);
                 Clan clan = clans[cardData.ClanGameId];
-                CardStats stats = new CardStats(cardData.InitialLevel, cardData.PowerPerLevel, cardData.DamagePerLevel);
+                CardStats stats = new CardStats(cardData.InitialLevel, 
+                    FromCsvToInt(cardData.PowerPerLevel), FromCsvToInt(cardData.DamagePerLevel));
                 CardDefinition card = new CardDefinition(cardData.GameId, cardData.Name, clan, ability, 
                     cardData.AbilityUnlockLevel, stats, (CardDefinition.ECardRarity)cardData.Rarity);
 
                 cards.Add(card);
             }
-
-
 
             Cycle.ECycleType cycleType = Cycle.ECycleType.Day; // TODO detect day/night
             Cycle cycle = new Cycle(cycleType, cards);
@@ -194,18 +196,40 @@ namespace Warcraker.UrbanRivals.TextProcess
             }
             return result;
         }
+        private static string FromIntsToCsv(IEnumerable<int> input)
+        {
+            return input
+                .Aggregate(new StringBuilder()
+                    , (acc, item) => acc.Append(COMMA_SEPARATOR).Append(item))
+                .ToString();
+        }
+        private static IEnumerable<int> FromCsvToInt(string input)
+        {
+            return input
+                .Split(COMMA_SEPARATOR)
+                .Select(item => int.Parse(item));
+        }
+
         private static SkillData SkillToSkillData(Skill skill)
         {
+            string[] prefixNames = skill.Prefixes
+                .Select(prefix => GetTypeName(prefix))
+                .ToArray();
+
             int skillHash = HashCode
-                .OfEach(skill.Prefixes.Select(prefix => GetTypeName(prefix)))
+                .OfEach(prefixNames)
                 .And(GetTypeName(skill.Suffix))
                 .And(skill.X)
                 .And(skill.Y);
 
+            string prefixCsv = prefixNames
+                .Aggregate(new StringBuilder(), (acc, item) => acc.Append(COMMA_SEPARATOR).Append(item))
+                .ToString();
+
             return new SkillData
             {
                 Hash = skillHash,
-                PrefixesClassNames = skill.Prefixes.Select(prefix => GetTypeName(prefix)).ToArray(),
+                PrefixesClassNames = prefixCsv,
                 SuffixClassName = GetTypeName(skill.Suffix),
                 X = skill.X,
                 Y = skill.Y,
@@ -215,8 +239,10 @@ namespace Warcraker.UrbanRivals.TextProcess
         {
             Skill skill;
 
-            Suffix suffix = (Suffix)BuildInstance(data.SuffixClassName);
-            IEnumerable<Prefix> prefixes = data.PrefixesClassNames.Select(prefix => (Prefix)BuildInstance(prefix));
+            Suffix suffix = BuildInstance<Suffix>(data.SuffixClassName);
+            IEnumerable<Prefix> prefixes = data.PrefixesClassNames
+                .Split(COMMA_SEPARATOR)
+                .Select(prefix => BuildInstance<Prefix>(prefix));
             skill = Skill.GetStandardSkill(prefixes, suffix, data.X, data.Y);
 
             return skill;
@@ -243,9 +269,9 @@ namespace Warcraker.UrbanRivals.TextProcess
             }
         }
 
-        private static object BuildInstance(string name)
+        private static TParent BuildInstance<TParent>(string name)
         {
-            return Activator.CreateInstance(Type.GetType(name));
+            return (TParent)Activator.CreateInstance(Type.GetType(name));
         }
         private static string GetTypeName(object o)
         {

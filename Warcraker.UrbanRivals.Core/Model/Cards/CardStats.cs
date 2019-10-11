@@ -1,4 +1,7 @@
-﻿namespace Warcraker.UrbanRivals.Core.Model.Cards
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Warcraker.UrbanRivals.Core.Model.Cards
 {
     public class CardStats
     {
@@ -17,16 +20,19 @@
 
         private LevelStats[] stats;
 
-        public CardStats(int initialLevel, int[] powers, int[] damages)
+        public CardStats(int initialLevel, IEnumerable<int> powers, IEnumerable<int> damages)
         {
-            int statsLength = powers.Length;
+            int[] powersArray = powers.ToArray();
+            int[] damagesArray = damages.ToArray();
+
+            int statsLength = powersArray.Length;
             this.InitialLevel = initialLevel;
             this.MaxLevel = initialLevel + statsLength - 1;
 
             this.stats = new LevelStats[statsLength];
             for (int i = 0; i < statsLength; i++)
             {
-                stats[i] = new LevelStats(powers[i], damages[i]);
+                stats[i] = new LevelStats(powersArray[i], damagesArray[i]);
             }
         }
     }

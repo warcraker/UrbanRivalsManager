@@ -20,9 +20,9 @@ namespace Warcraker.UrbanRivals.DataRepository.DataModels
         [Column(nameof(AbilityUnlockLevel))]
         public int AbilityUnlockLevel { get; set; }
         [Column(nameof(PowerPerLevel))]
-        public int[] PowerPerLevel { get; set; }
+        public string PowerPerLevel { get; set; }
         [Column(nameof(DamagePerLevel))]
-        public int[] DamagePerLevel { get; set; }
+        public string DamagePerLevel { get; set; }
         [Column(nameof(Rarity))]
         public int Rarity { get; set; }
     }

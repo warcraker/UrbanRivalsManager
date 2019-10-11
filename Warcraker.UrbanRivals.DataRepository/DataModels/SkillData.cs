@@ -12,7 +12,7 @@ namespace Warcraker.UrbanRivals.DataRepository.DataModels
         [Column(nameof(SuffixClassName))]
         public string SuffixClassName { get; set; }
         [Column(nameof(PrefixesClassNames))]
-        public string[] PrefixesClassNames { get; set; }
+        public string PrefixesClassNames { get; set; }
         [Column(nameof(X))]
         public int X { get; set; }
         [Column(nameof(Y))]

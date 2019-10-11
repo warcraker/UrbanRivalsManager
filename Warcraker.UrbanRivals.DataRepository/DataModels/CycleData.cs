@@ -10,10 +10,10 @@ namespace Warcraker.UrbanRivals.DataRepository.DataModels
         public int Hash { get; set; }
 
         [Column(nameof(AbilityHashes))]
-        public int[] AbilityHashes { get; set; }
+        public string AbilityHashes { get; set; }
         [Column(nameof(CardHashes))]
-        public int[] CardHashes { get; set; }
+        public string CardHashes { get; set; }
         [Column(nameof(ClanHashes))]
-        public int[] ClanHashes { get; set; }
+        public string ClanHashes { get; set; }
     }
 }
