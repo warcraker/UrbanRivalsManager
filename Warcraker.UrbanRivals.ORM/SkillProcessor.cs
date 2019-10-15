@@ -10,7 +10,6 @@ using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Double;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Plain;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Single;
 using Warcraker.UrbanRivals.DataRepository.DataModels;
-using Warcraker.UrbanRivals.SkillParser;
 
 namespace Warcraker.UrbanRivals.ORM
 {
@@ -127,38 +126,9 @@ namespace Warcraker.UrbanRivals.ORM
             return prefixes;
         }
 
-        private static SkillData SkillToSkillData(Skill skill)
-        {
-            string[] prefixNames = skill.Prefixes
-                .Select(prefix => GetTypeName(prefix))
-                .ToArray();
-
-            int skillHash = HashCode
-                .OfEach(prefixNames)
-                .And(GetTypeName(skill.Suffix))
-                .And(skill.Suffix.X)
-                .And(skill.Suffix.Y);
-
-            string prefixCsv = prefixNames
-                .Aggregate(new StringBuilder(), (acc, item) => acc.Append(COMMA_SEPARATOR).Append(item))
-                .ToString();
-
-            return new SkillData
-            {
-                Hash = skillHash,
-                PrefixesClassNames = prefixCsv,
-                SuffixClassName = GetTypeName(skill.Suffix),
-                X = skill.Suffix.X,
-                Y = skill.Suffix.Y,
-            };
-        }
         private static Regex GetRegex(string pattern)
         {
             return new Regex(pattern, RegexOptions.None);
-        }
-        private static string GetTypeName(object o)
-        {
-            return o.GetType().Name;
         }
     }
 }

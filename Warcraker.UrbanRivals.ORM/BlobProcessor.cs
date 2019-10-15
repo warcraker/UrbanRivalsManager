@@ -163,7 +163,7 @@ namespace Warcraker.UrbanRivals.ORM
                 Skill ability = SkillDataToSkill(abilityData);
                 Clan clan = clans[cardData.ClanGameId];
                 CardStats stats = new CardStats(cardData.InitialLevel, 
-                    CsvToInt(cardData.PowerPerLevel), CsvToInt(cardData.DamagePerLevel));
+                    CsvToInts(cardData.PowerPerLevel), CsvToInts(cardData.DamagePerLevel));
                 CardDefinition card = new CardDefinition(cardData.GameId, cardData.Name, clan, ability, 
                     cardData.AbilityUnlockLevel, stats, (CardDefinition.ECardRarity)cardData.Rarity);
 
@@ -188,9 +188,9 @@ namespace Warcraker.UrbanRivals.ORM
             }
             return result;
         }
-        private static IEnumerable<int> CsvToInt(string input)
+        private static IEnumerable<int> CsvToInts(string csv)
         {
-            return input
+            return csv
                 .Split(COMMA_SEPARATOR)
                 .Select(item => int.Parse(item));
         }
@@ -201,6 +201,18 @@ namespace Warcraker.UrbanRivals.ORM
                     , (acc, item) => acc.Append(COMMA_SEPARATOR).Append(item))
                 .ToString();
         }
+        private static string StringsToCsv(IEnumerable<string> input)
+        {
+            return input
+                .Aggregate(new StringBuilder(),
+                    (acc, item) => acc.Append(COMMA_SEPARATOR).Append(item))
+                .ToString();
+        }
+        private static IEnumerable<string> CsvToStrings(string csv)
+        {
+            return csv.Split(COMMA_SEPARATOR);
+        }
+
         private static Skill SkillDataToSkill(SkillData data)
         {
             Skill skill;
@@ -220,13 +232,30 @@ namespace Warcraker.UrbanRivals.ORM
         {
             SkillData data;
 
+            string[] prefixNames = skill.Prefixes
+                .Select(prefix => GetTypeName(prefix))
+                .ToArray();
+
+            string suffixName = GetTypeName(skill.Suffix);
+            int x = skill.Suffix.X;
+            int y = skill.Suffix.Y;
+
+
+            int skillHash = HashCode
+                .OfEach(prefixNames)
+                .And(suffixName)
+                .And(x)
+                .And(y);
+
+            string prefixesCsv = StringsToCsv(prefixNames);
+
             data = new SkillData
             {
-                Hash = 0,
-                PrefixesClassNames = "",
-                SuffixClassName = "",
-                X = skill.Suffix.X,
-                Y = skill.Suffix.Y,
+                Hash = skillHash,
+                PrefixesClassNames = prefixesCsv,
+                SuffixClassName = suffixName,
+                X = x,
+                Y = y,
             };
 
             return data;
@@ -258,16 +287,13 @@ namespace Warcraker.UrbanRivals.ORM
         {
             return HashCode.Of(text);
         }
-        private static int HashSkilk(Skill skill)
-        {
-            return HashCode.OfEach(skill.Prefixes.Select(p => p.GetType().Name))
-                .And(skill.Suffix.GetType().Name)
-                .And(skill.Suffix.X)
-                .And(skill.Suffix.Y);
-        }
         private static Type GetType(string typeName)
         {
             return Type.GetType(typeName);
+        }
+        private static string GetTypeName(object o)
+        {
+            return o.GetType().Name;
         }
     }
 }
