@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Double
+﻿namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Double
 {
     public class CombustXMinYSuffix : Suffix
     {

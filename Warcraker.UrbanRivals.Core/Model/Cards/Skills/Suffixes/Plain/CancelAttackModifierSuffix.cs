@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Plain
+﻿namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Plain
 {
     public class CancelAttackModifierSuffix : Suffix
     {

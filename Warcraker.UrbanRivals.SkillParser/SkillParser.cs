@@ -11,6 +11,7 @@ using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes;
 using Warcraker.UrbanRivals.DataRepository.DataModels;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Double;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Plain;
+using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Single;
 
 namespace Warcraker.UrbanRivals.SkillParser
 {

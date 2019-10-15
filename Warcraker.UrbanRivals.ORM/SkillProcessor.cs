@@ -1,5 +1,4 @@
 ﻿using HashUtils;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +6,10 @@ using System.Text.RegularExpressions;
 using static Warcraker.UrbanRivals.Common.Constants;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Prefixes;
-using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes;
-using Warcraker.UrbanRivals.DataRepository.DataModels;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Double;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Plain;
+using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Single;
+using Warcraker.UrbanRivals.DataRepository.DataModels;
 using Warcraker.UrbanRivals.SkillParser;
 
 namespace Warcraker.UrbanRivals.ORM
