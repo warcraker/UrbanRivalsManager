@@ -1,5 +1,4 @@
-﻿using HashUtils;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills;
@@ -43,6 +42,7 @@ namespace Warcraker.UrbanRivals.ORM
                 new PrefixParser(new SupportPrefix(), new Regex("^Support:", OPTIONS)),
                 new PrefixParser(new VictoryOrDefeatPrefix(), new Regex(@"^Vict(?:ory)?OrDef(?:eat)?:", OPTIONS)),
             };
+
             SuffixParser[] doubleValueSuffixParsers = new SuffixParser[]
             {
                 new SuffixParser((x, y) => new CombustXMinYSuffix(x, y), new Regex(@"^Combust(?<x>[0-9])Min(?<y>[0-9])$", OPTIONS)),
@@ -75,11 +75,46 @@ namespace Warcraker.UrbanRivals.ORM
             };
             SuffixParser[] singleValueSuffixParsers = new SuffixParser[]
             {
-                new SuffixParser((x, y) => new IncreaseAttackXPerOppDamageSuffix(x), GetRegex(@"^\+(?<x>[1-9])AttackPerOppDamage$")),
+                new SuffixParser((x, y) => new IncreaseAttackXPerOppDamageSuffix(x), new Regex(@"^\+(?<x>[1-9])AttackPerOppDamage$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreaseAttackXPerOppPowerSuffix(x), new Regex(@"^\+(?<x>[1-9])AttackPerOppPower$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreaseAttackXPerRemainingLifeSuffix(x), new Regex(@"^\+(?<x>[1-9])At(?:tac)?kPerLifeLeft$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreaseAttackXPerRemainingPillzSuffix(x), new Regex(@"^\+(?<x>[1-9])At(?:tac)?kPerPillzLeft$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreaseAttackXSuffix(x), new Regex(@"^At(?:tac)?k\+(?<x>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreaseDamageXSuffix(x), new Regex(@"^Damage\+(?<x>[1-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreaseLifeXPerDamage(x), new Regex(@"^\+(?<x>[1-9])LifePerD(?:amage|mg)$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreaseLifeXSuffix(x), new Regex(@"^\+(?<x>[1-9])(?:Opp)?Life$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreasePillzAndLifeXSuffix(x), new Regex(@"^\+(?<x>[1-9])PillzAndLife$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreasePillzXPerDamageSuffix(x), new Regex(@"^\+(?<x>[1-9])PillzPerDamage$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreasePillzXSuffix(x), new Regex(@"^\+(?<x>[1-9])Pillz$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreasePowerAndDamageXSuffix(x), new Regex(@"^Power(?:And|&)Damage\+(?<x>[1-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreasePowerXSuffix(x), new Regex(@"^Power\+(?<x>[1-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new ReanimateXSuffix(x), new Regex(@"^Reanimate:\+(?<x>[1-9])Life$", OPTIONS)),
             };
             SuffixParser[] plainSuffixParsers = new SuffixParser[]
             {
-                new SuffixParser((x, y) => new CancelAttackModifierSuffix(), GetRegex(@"^CancelOppAttackModif$")),
+                new SuffixParser((x, y) => new CancelAttackModifierSuffix(), new Regex(@"^CancelOppAttackModif$", OPTIONS)),
+                new SuffixParser((x, y) => new CancelDamageModifierSuffix(), new Regex(@"^CancelOppDamageModif$", OPTIONS)),
+                new SuffixParser((x, y) => new CancelLeaderSuffix(), new Regex(@"^CancelLeader$", OPTIONS)),
+                new SuffixParser((x, y) => new CancelLifeModifierSuffix(), new Regex(@"^CancelOppLifeModif$", OPTIONS)),
+                new SuffixParser((x, y) => new CancelPillzAndLifeModifierSuffix(), new Regex(@"^CancelOppPillz&LifeModif$", OPTIONS)),
+                new SuffixParser((x, y) => new CancelPillzModifierSuffix(), new Regex(@"^CancelOppPillzModif$", OPTIONS)),
+                new SuffixParser((x, y) => new CancelPowerAndDamageModifierSuffix(), new Regex(@"^Canc(?:Power&?DamMod|elOppPower(?:&DamageMod|AndDamageModif))$", OPTIONS)),
+                new SuffixParser((x, y) => new CancelPowerModifierSuffix(), new Regex(@"^CancelOppPowerModif$", OPTIONS)),
+                new SuffixParser((x, y) => new CopyBonusSuffix(), new Regex(@"^Copy:?OppBonus$", OPTIONS)),
+                new SuffixParser((x, y) => new CopyDamageSuffix(), new Regex(@"^Copy:OppDamage|Damage=DamageOpp$", OPTIONS)),
+                new SuffixParser((x, y) => new CopyPowerAndDamageSuffix(), new Regex(@"^Copy:PowerAndDamageOpp$", OPTIONS)),
+                new SuffixParser((x, y) => new CopyPowerSuffix(), new Regex(@"^Copy:OppPower|Power=PowerOpp$", OPTIONS)),
+                new SuffixParser((x, y) => new ExchangeDamageSuffix(), new Regex(@"^DamageExchange$", OPTIONS)),
+                new SuffixParser((x, y) => new ExchangePowerAndDamageSuffix(), new Regex(@"^PowerAndDamageExchange$", OPTIONS)),
+                new SuffixParser((x, y) => new ExchangePowerSuffix(), new Regex(@"^PowerExchange$", OPTIONS)),
+                new SuffixParser((x, y) => new ProtectAbilitySuffix(), new Regex(@"^Protection:Ability$", OPTIONS)),
+                new SuffixParser((x, y) => new ProtectAttackSuffix(), new Regex(@"^Protection:Attack$", OPTIONS)),
+                new SuffixParser((x, y) => new ProtectBonusSuffix(), new Regex(@"^BonusProtection|Protection:Bonus$", OPTIONS)),
+                new SuffixParser((x, y) => new ProtectDamageSuffix(), new Regex(@"^Protection:Damage$", OPTIONS)),
+                new SuffixParser((x, y) => new ProtectPowerAndDamageSuffix(), new Regex(@"^Prot(?:ection:PowerAndDamage|ecPowerAndDmg|ectPowerAndDamage|:Power&Damage)$", OPTIONS)),
+                new SuffixParser((x, y) => new ProtectPowerSuffix(), new Regex(@"^Protection:Power$", OPTIONS)),
+                new SuffixParser((x, y) => new StopAbilitySuffix(), new Regex(@"^Stop(?:Opp)?Ability$", OPTIONS)),
+                new SuffixParser((x, y) => new StopBonusSuffix(), new Regex(@"^Stop(?:Opp)?Bonus$", OPTIONS)),
             };
 
             SUFFIX_PARSERS = doubleValueSuffixParsers
