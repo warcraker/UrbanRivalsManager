@@ -5,10 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UrbanRivalsApiManager;
+using static Warcraker.UrbanRivals.Common.Constants;
 using Warcraker.UrbanRivals.Core.Model.Cards;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills;
-using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Prefixes;
-using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes;
 using Warcraker.UrbanRivals.Core.Model.Cycles;
 using Warcraker.UrbanRivals.DataRepository;
 using Warcraker.UrbanRivals.DataRepository.DataModels;
@@ -18,8 +17,6 @@ namespace Warcraker.UrbanRivals.ORM
 {
     public class BlobProcessor
     {
-        private static readonly char COMMA_SEPARATOR = ';';
-
         private readonly GameDataRepository repository;
 
         public BlobProcessor(GameDataRepository repository)
@@ -52,7 +49,8 @@ namespace Warcraker.UrbanRivals.ORM
                         int bonusHash = repository.GetSkillHashFromTextHash(bonusTextHash);
                         if (bonusHash == repository.SCALAR_VALUE_NOT_FOUND)
                         {
-                            SkillData bonusData = null; // SkillProcessor.ParseSkill(bonusText); // TODO
+                            Skill bonus = SkillProcessor.ParseSkill(bonusText);
+                            SkillData bonusData = SkillToSkillData(bonus);
                             repository.SaveSkillData(bonusData, bonusTextHash);
                             bonusHash = bonusData.Hash;
                         }
@@ -84,7 +82,8 @@ namespace Warcraker.UrbanRivals.ORM
                     int abilityHash = repository.GetSkillHashFromTextHash(abilityTextHash);
                     if (abilityHash == repository.SCALAR_VALUE_NOT_FOUND)
                     {
-                        SkillData abilityData = null; // SkillProcessor.ParseSkill(abilityText); // TODO
+                        Skill ability = SkillProcessor.ParseSkill(abilityText);
+                        SkillData abilityData = SkillToSkillData(ability);
                         repository.SaveSkillData(abilityData, abilityTextHash);
                         abilityHash = abilityData.Hash;
                     }
@@ -206,14 +205,33 @@ namespace Warcraker.UrbanRivals.ORM
         {
             Skill skill;
 
-            Suffix suffix = BuildInstance<Suffix>(data.SuffixClassName);
+            Suffix suffix = (Suffix)Activator
+                .CreateInstance(GetType(data.SuffixClassName), new int[] { data.X, data.Y });
+
             IEnumerable<Prefix> prefixes = data.PrefixesClassNames
                 .Split(COMMA_SEPARATOR)
-                .Select(prefix => BuildInstance<Prefix>(prefix));
-            skill = Skill.GetStandardSkill(prefixes, suffix, data.X, data.Y);
+                .Select(prefix => (Prefix)Activator.CreateInstance(GetType(prefix)));
+
+            skill = new Skill(prefixes, suffix);
 
             return skill;
         }
+        private static SkillData SkillToSkillData(Skill skill)
+        {
+            SkillData data;
+
+            data = new SkillData
+            {
+                Hash = 0,
+                PrefixesClassNames = "",
+                SuffixClassName = "",
+                X = skill.Suffix.X,
+                Y = skill.Suffix.Y,
+            };
+
+            return data;
+        }
+
         private static CardDefinition.ECardRarity TextToRarity(string text)
         {
             switch (text)
@@ -236,13 +254,20 @@ namespace Warcraker.UrbanRivals.ORM
             }
         }
 
-        private static TParent BuildInstance<TParent>(string name)
-        {
-            return (TParent)Activator.CreateInstance(Type.GetType(name));
-        }
         private static int HashText(string text)
         {
             return HashCode.Of(text);
+        }
+        private static int HashSkilk(Skill skill)
+        {
+            return HashCode.OfEach(skill.Prefixes.Select(p => p.GetType().Name))
+                .And(skill.Suffix.GetType().Name)
+                .And(skill.Suffix.X)
+                .And(skill.Suffix.Y);
+        }
+        private static Type GetType(string typeName)
+        {
+            return Type.GetType(typeName);
         }
     }
 }
