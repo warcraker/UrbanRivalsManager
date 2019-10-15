@@ -1,15 +1,12 @@
 ﻿using HashUtils;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using static Warcraker.UrbanRivals.Common.Constants;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Prefixes;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Double;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Plain;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Single;
-using Warcraker.UrbanRivals.DataRepository.DataModels;
 
 namespace Warcraker.UrbanRivals.ORM
 {
@@ -19,6 +16,7 @@ namespace Warcraker.UrbanRivals.ORM
         private static readonly Regex FILLER_CHARS_REGEX = new Regex("[ ,.]+");
         private static readonly PrefixParser[] PREFIX_PARSERS;
         private static readonly SuffixParser[] SUFFIX_PARSERS;
+        private static readonly RegexOptions OPTIONS = RegexOptions.None;
 
         static SkillProcessor()
         {
@@ -28,22 +26,22 @@ namespace Warcraker.UrbanRivals.ORM
 
             PREFIX_PARSERS = new PrefixParser[]
             {
-                new PrefixParser(new BacklashPrefix(), GetRegex("^Backlash:")),
-                new PrefixParser(new BrawlPrefix(), GetRegex("^Brawl:")),
-                new PrefixParser(new ConfidencePrefix(), GetRegex("^Confid(?:ence)?:")),
-                new PrefixParser(new CouragePrefix(), GetRegex("^Courage:")),
-                new PrefixParser(new DayPrefix(), GetRegex("^Day:")),
-                new PrefixParser(new DefeatPrefix(), GetRegex("^Defeat:")),
-                new PrefixParser(new DegrowthPrefix(), GetRegex("^Degrowth:")),
-                new PrefixParser(new EqualizerPrefix(), GetRegex("^Equalizer:")),
-                new PrefixParser(new GrowthPrefix(), GetRegex("^Growth:")),
-                new PrefixParser(new KillshotPrefix(), GetRegex("^Killshot:")),
-                new PrefixParser(new NightPrefix(), GetRegex("^Night:")),
-                new PrefixParser(new ReprisalPrefix(), GetRegex("^Reprisal:")),
-                new PrefixParser(new RevengePrefix(), GetRegex("^Revenge:")),
-                new PrefixParser(new StopPrefix(), GetRegex("^Stop:")),
-                new PrefixParser(new SupportPrefix(), GetRegex("^Support:")),
-                new PrefixParser(new VictoryOrDefeatPrefix(), GetRegex(@"^Vict(?:ory)?OrDef(?:eat)?:")),
+                new PrefixParser(new BacklashPrefix(), new Regex("^Backlash:", OPTIONS)),
+                new PrefixParser(new BrawlPrefix(), new Regex("^Brawl:", OPTIONS)),
+                new PrefixParser(new ConfidencePrefix(), new Regex("^Confid(?:ence)?:", OPTIONS)),
+                new PrefixParser(new CouragePrefix(), new Regex("^Courage:", OPTIONS)),
+                new PrefixParser(new DayPrefix(), new Regex("^Day:", OPTIONS)),
+                new PrefixParser(new DefeatPrefix(), new Regex("^Defeat:", OPTIONS)),
+                new PrefixParser(new DegrowthPrefix(), new Regex("^Degrowth:", OPTIONS)),
+                new PrefixParser(new EqualizerPrefix(), new Regex("^Equalizer:", OPTIONS)),
+                new PrefixParser(new GrowthPrefix(), new Regex("^Growth:", OPTIONS)),
+                new PrefixParser(new KillshotPrefix(), new Regex("^Killshot:", OPTIONS)),
+                new PrefixParser(new NightPrefix(), new Regex("^Night:", OPTIONS)),
+                new PrefixParser(new ReprisalPrefix(), new Regex("^Reprisal:", OPTIONS)),
+                new PrefixParser(new RevengePrefix(), new Regex("^Revenge:", OPTIONS)),
+                new PrefixParser(new StopPrefix(), new Regex("^Stop:", OPTIONS)),
+                new PrefixParser(new SupportPrefix(), new Regex("^Support:", OPTIONS)),
+                new PrefixParser(new VictoryOrDefeatPrefix(), new Regex(@"^Vict(?:ory)?OrDef(?:eat)?:", OPTIONS)),
             };
             SuffixParser[] doubleValueSuffixParsers = new SuffixParser[]
             {
@@ -124,11 +122,6 @@ namespace Warcraker.UrbanRivals.ORM
             } while (parser != null);
 
             return prefixes;
-        }
-
-        private static Regex GetRegex(string pattern)
-        {
-            return new Regex(pattern, RegexOptions.None);
         }
     }
 }
