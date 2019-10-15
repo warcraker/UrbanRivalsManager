@@ -4,7 +4,7 @@ using UrbanRivalsCore.Model;
 
 namespace UrbanRivalsCore
 {
-    public static class Constants
+    public static class OldConstants
     {
         internal static class EnumMaxAllowedValues
         {

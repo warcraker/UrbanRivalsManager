@@ -84,9 +84,9 @@ namespace UrbanRivalsCore.ViewModel
         /// <returns></returns>
         public static Combat GetSurvivorCombat(SurvivorStage leftStage, SurvivorStage rightStage, Hand leftHand, Hand rightHand, bool isLeftFirstPlayer)
         {
-            if ((int)leftStage > Constants.EnumMaxAllowedValues.SurvivorStage)
+            if ((int)leftStage > OldConstants.EnumMaxAllowedValues.SurvivorStage)
                 throw new ArgumentOutOfRangeException(nameof(leftStage), leftStage, "Must be a valid " + nameof(SurvivorStage));
-            if ((int)rightStage > Constants.EnumMaxAllowedValues.SurvivorStage)
+            if ((int)rightStage > OldConstants.EnumMaxAllowedValues.SurvivorStage)
                 throw new ArgumentOutOfRangeException(nameof(rightStage), rightStage, "Must be a valid " + nameof(SurvivorStage));
 
             int leftPillz, rightPillz, leftLifes, rightLifes;

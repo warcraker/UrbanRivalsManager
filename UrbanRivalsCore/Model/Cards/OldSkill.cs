@@ -35,9 +35,9 @@ namespace UrbanRivalsCore.Model
 
         public OldSkill(SkillPrefix prefix, SkillSuffix suffix, int x = 0, int y = 0)
         {
-            if ((int)prefix < 0 || (int)prefix > Constants.EnumMaxAllowedValues.SkillPrefix)
+            if ((int)prefix < 0 || (int)prefix > OldConstants.EnumMaxAllowedValues.SkillPrefix)
                 throw new ArgumentOutOfRangeException(nameof(prefix), prefix, "Must be a valid " + nameof(SkillPrefix));
-            if ((int)suffix < 0 || (int)suffix > Constants.EnumMaxAllowedValues.SkillSuffix)
+            if ((int)suffix < 0 || (int)suffix > OldConstants.EnumMaxAllowedValues.SkillSuffix)
                 throw new ArgumentOutOfRangeException(nameof(suffix), suffix, "Must be a valid " + nameof(SkillSuffix));
             if (suffix == SkillSuffix.None)
                 throw new ArgumentException("Can't be None (0)", nameof(suffix));
@@ -53,7 +53,7 @@ namespace UrbanRivalsCore.Model
         }
         public OldSkill(SkillLeader leader)
         {
-            if ((int)leader < 0 || (int)leader > Constants.EnumMaxAllowedValues.SkillLeader)
+            if ((int)leader < 0 || (int)leader > OldConstants.EnumMaxAllowedValues.SkillLeader)
                 throw new ArgumentOutOfRangeException(nameof(leader), leader, "Must be defined in SkillLeader");
             if (leader == SkillLeader.None)
                 throw new ArgumentException("Can't be None (0)", nameof(leader));

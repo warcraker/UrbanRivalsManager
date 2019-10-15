@@ -722,7 +722,7 @@ namespace UrbanRivalsCore.ViewModel
             if (auxPillz > RightPlayerStatus.Pillz)
                 throw new ArgumentException($"Can't use more pillz that the available. Fury uses 3 extra pillz. Available = {RightPlayerStatus.Pillz}. Used = {auxPillz}", nameof(rightUsedPillz));
 
-            if (forceWinnerOnRandom < 0 || (int)forceWinnerOnRandom > Constants.EnumMaxAllowedValues.PlayerSide)
+            if (forceWinnerOnRandom < 0 || (int)forceWinnerOnRandom > OldConstants.EnumMaxAllowedValues.PlayerSide)
                 throw new ArgumentException("It must be a valid " + nameof(PlayerSide), nameof(forceWinnerOnRandom));
         }
 
