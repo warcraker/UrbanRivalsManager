@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Plain
+﻿namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Single
 {
     public class IncreaseAttackXPerOppDamageSuffix : Suffix
     {
         public IncreaseAttackXPerOppDamageSuffix(int x)
-            : base(0, 0)
+            : base(x, 0)
         {
             ;
         }
