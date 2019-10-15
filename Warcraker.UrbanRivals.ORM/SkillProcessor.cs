@@ -45,7 +45,33 @@ namespace Warcraker.UrbanRivals.ORM
             };
             SuffixParser[] doubleValueSuffixParsers = new SuffixParser[]
             {
-                new SuffixParser((x, y) => new CombustXMinYSuffix(x, y), GetRegex(@"^Combust(?<x>[0-9])Min(?<y>[0-9])$")),
+                new SuffixParser((x, y) => new CombustXMinYSuffix(x, y), new Regex(@"^Combust(?<x>[0-9])Min(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new ConsumeXMinYSuffix(x, y), new Regex(@"^Consume(?<x>[0-9])Min(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new CorrosionXMinYSuffix(x, y), new Regex(@"^Corrosion(?<x>[1-9])Min(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreaseAttackXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9][0-9]?)OppAttackMin(?<y>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreaseAttackXPerRemainingLifeMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppAttPerLifeLeftMin(?<y>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreaseAttackXPerRemainingPillzMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppAttPerPillzLeftMin(?<y>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreaseDamageXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppD(?:amage|mg)Min(?<y>[1-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreaseLifeAndPillzXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])(?:Opp)?(?:Life&Pillz|Pillz(?:&|And)Life)Min(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreaseLifeXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])(?:Opp)?LifeMin(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreasePillzXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])(?:OppPillz|Pillz(?:Opp)?)Min(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreasePowerAndDamageXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])(?:Opp)?Pow(?:er)?(?:&|And)D(?:amageM|amM|mgm)in(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreasePowerXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppPowerMin(?<y>[1-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new DopeAndRegenXMaxYSuffix(x, y), new Regex(@"^Dope\+Regen(?<x>[1-9])Max(?<y>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new DopeXMaxYSuffix(x, y), new Regex(@"^Dope(?<x>[1-9])Max(?<y>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new HealXMaxYSuffix(x, y), new Regex(@"^Heal(?<x>[1-9])Max(?<y>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreaseLifePerDamageXMaxYSuffix(x, y), new Regex(@"^\+(?<x>[1-9])LifePerDamageMax(?<y>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreaseLifeXMaxYSuffix(x, y), new Regex(@"^\+(?<x>[1-9])LifeMax(?<y>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreasePillzPerDamageXMaxYSuffix(x, y), new Regex(@"^\+(?<x>[1-9])PillzPerDamageMax(?<y>[1-9]?[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreasePillzXMaxYSuffix(x, y), new Regex(@"^\+(?<x>[1-9])PillzMax(?<y>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new InfectionXMinYSuffix(x, y), new Regex(@"^Infection(?<x>[1-9])Min(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new PoisonXMinYSuffix(x, y), new Regex(@"^Poison(?<x>[1-9])Min(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new RebirthXMaxYSuffix(x, y), new Regex(@"^Rebirth(?<x>[1-9])Max(?<y>[1-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new RecoverXPillzOutOfYSuffix(x, y), new Regex(@"^Recover(?<x>[1-9])PillzOutOf(?<y>[1-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new RegenXMaxYSuffix(x, y), new Regex(@"^Regen(?<x>[1-9])Max(?<y>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new RepairXMaxYSuffix(x, y), new Regex(@"^Repair(?<x>[0-9])Max(?<y>[1-9]?[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new ToxinXMinYSuffix(x, y), new Regex(@"^Toxin(?<x>[1-9])Min(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new XantiaxXMinYSuffix(x, y), new Regex(@"^Xantiax:-(?<x>[1-9])LifeMin(?<y>[0-9])$", OPTIONS)),
             };
             SuffixParser[] singleValueSuffixParsers = new SuffixParser[]
             {
