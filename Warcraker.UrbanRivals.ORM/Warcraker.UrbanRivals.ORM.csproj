@@ -6,12 +6,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HashUtils\HashUtils.csproj" />
+    <ProjectReference Include="..\Warcraker.UrbanRivals.CommonConstants\Warcraker.UrbanRivals.Common.csproj" />
     <ProjectReference Include="..\Warcraker.UrbanRivals.Core\Warcraker.UrbanRivals.Core.csproj" />
     <ProjectReference Include="..\Warcraker.UrbanRivals.DataRepository\Warcraker.UrbanRivals.DataRepository.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Prefixes\" />
+    <ProjectReference Include="..\Warcraker.UrbanRivals.SkillParser\Warcraker.UrbanRivals.SkillParser.csproj" />
   </ItemGroup>
 
   <ItemGroup>
