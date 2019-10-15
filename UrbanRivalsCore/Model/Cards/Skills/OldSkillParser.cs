@@ -13,7 +13,7 @@ using System.Text.RegularExpressions;
 
 namespace UrbanRivalsCore.Model.Cards.Skills
 {
-    public static class SkillParser
+    public static class OldSkillParser
     {
         private const string PRV_NO_ABILITY_TEXT = "No ability";
         private static readonly IEnumerable<Leader> PRV_ALL_LEADERS;
@@ -21,7 +21,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills
         public static readonly List<SuffixParser> PRV_ALL_SUFFIX_PARSERS;
         private static readonly Regex PRV_REMOVE_FILLER_CHARS = new Regex("[ ,.]");
 
-        static SkillParser()
+        static OldSkillParser()
         {
             // TODO get all parsers by reflection
             PRV_ALL_PREFIXES = new List<Prefix>
@@ -146,13 +146,13 @@ namespace UrbanRivalsCore.Model.Cards.Skills
             PRV_ALL_SUFFIX_PARSERS = PRV_ALL_SUFFIX_PARSERS.OrderBy(s => s.Weight).ToList();
         }
 
-        public static Skill parseSkill(string skillAsText)
+        public static OldSkill parseSkill(string skillAsText)
         {
-            Skill skill;
+            OldSkill skill;
 
             if (skillAsText == PRV_NO_ABILITY_TEXT)
             {
-                skill = Skill.NO_ABILITY;
+                skill = OldSkill.NO_ABILITY;
             }
             else
             {
@@ -167,11 +167,11 @@ namespace UrbanRivalsCore.Model.Cards.Skills
                     Suffix suffix = parser.getSuffix(suffixAsText);
                     if (prefixes.Any())
                     {
-                        skill = Skill.getSkillWithPrefixes(prefixes, suffix);
+                        skill = OldSkill.getSkillWithPrefixes(prefixes, suffix);
                     }
                     else
                     {
-                        skill = Skill.getSkillWithoutPrefixes(suffix);
+                        skill = OldSkill.getSkillWithoutPrefixes(suffix);
                     }
                 }
                 else
@@ -180,7 +180,7 @@ namespace UrbanRivalsCore.Model.Cards.Skills
 
                     if (leader != null)
                     {
-                        skill = Skill.getLeaderSkill(leader);
+                        skill = OldSkill.getLeaderSkill(leader);
                     }
                     else
                     {

@@ -253,7 +253,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 worker.ReportProgress((int)(100 * progress / charactersData.Count()), $"[{id}] {name}");
                 progress++;
 
-                Skill newAbility = SkillParser.parseSkill(abilityText);
+                UrbanRivalsCore.Model.Cards.Skills.OldSkill newAbility = OldSkillParser.parseSkill(abilityText);
 
                 continue; // TODO REMOVE
 

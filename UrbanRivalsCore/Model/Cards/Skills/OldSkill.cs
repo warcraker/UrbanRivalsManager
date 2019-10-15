@@ -8,7 +8,7 @@ using Warcraker.Utils;
 
 namespace UrbanRivalsCore.Model.Cards.Skills
 {
-    public class Skill
+    public class OldSkill
     {
         private enum PrvEEmptySkill
         {
@@ -37,12 +37,12 @@ namespace UrbanRivalsCore.Model.Cards.Skills
             }
         }
 
-        public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_2;
-        public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_3;
-        public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_4;
-        public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_5;
-        public static readonly Skill NO_ABILITY;
-        public static readonly Skill NO_BONUS;
+        public static readonly OldSkill ABILITY_UNLOCKED_AT_LEVEL_2;
+        public static readonly OldSkill ABILITY_UNLOCKED_AT_LEVEL_3;
+        public static readonly OldSkill ABILITY_UNLOCKED_AT_LEVEL_4;
+        public static readonly OldSkill ABILITY_UNLOCKED_AT_LEVEL_5;
+        public static readonly OldSkill NO_ABILITY;
+        public static readonly OldSkill NO_BONUS;
 
         private static readonly Prefix PRV_DEFAULT_PREFIX = new PrvDefaultPrefix();
 
@@ -51,32 +51,32 @@ namespace UrbanRivalsCore.Model.Cards.Skills
         private readonly Prefix[] prefixes;
         private readonly Suffix suffix;
 
-        static Skill()
+        static OldSkill()
         {
-            ABILITY_UNLOCKED_AT_LEVEL_2 = new Skill(PrvEEmptySkill.AbilityUnlockedAtLevel2);
-            ABILITY_UNLOCKED_AT_LEVEL_3 = new Skill(PrvEEmptySkill.AbilityUnlockedAtLevel3);
-            ABILITY_UNLOCKED_AT_LEVEL_4 = new Skill(PrvEEmptySkill.AbilityUnlockedAtLevel4);
-            ABILITY_UNLOCKED_AT_LEVEL_5 = new Skill(PrvEEmptySkill.AbilityUnlockedAtLevel5);
-            NO_ABILITY = new Skill(PrvEEmptySkill.NoAbility);
-            NO_BONUS = new Skill(PrvEEmptySkill.NotActiveBonus);
+            ABILITY_UNLOCKED_AT_LEVEL_2 = new OldSkill(PrvEEmptySkill.AbilityUnlockedAtLevel2);
+            ABILITY_UNLOCKED_AT_LEVEL_3 = new OldSkill(PrvEEmptySkill.AbilityUnlockedAtLevel3);
+            ABILITY_UNLOCKED_AT_LEVEL_4 = new OldSkill(PrvEEmptySkill.AbilityUnlockedAtLevel4);
+            ABILITY_UNLOCKED_AT_LEVEL_5 = new OldSkill(PrvEEmptySkill.AbilityUnlockedAtLevel5);
+            NO_ABILITY = new OldSkill(PrvEEmptySkill.NoAbility);
+            NO_BONUS = new OldSkill(PrvEEmptySkill.NotActiveBonus);
         }
 
-        public static Skill getLeaderSkill(Leader leader)
+        public static OldSkill getLeaderSkill(Leader leader)
         {
             AssertArgument.CheckIsNotNull(leader, nameof(leader));
 
-            return new Skill(leader);
+            return new OldSkill(leader);
         }
-        public static Skill getSkillWithPrefixes(IEnumerable<Prefix> prefixes, Suffix suffix)
+        public static OldSkill getSkillWithPrefixes(IEnumerable<Prefix> prefixes, Suffix suffix)
         {
             AssertArgument.CheckIsNotNull(prefixes, nameof(prefixes));
             int prefixesCount = prefixes.Count();
             AssertArgument.CheckIntegerRange(prefixesCount > 0, $"must contain at least one item", prefixesCount, nameof(prefixes));
             AssertArgument.CheckIsNotNull(suffix, nameof(suffix));
 
-            return new Skill(prefixes, suffix);
+            return new OldSkill(prefixes, suffix);
         }
-        public static Skill getSkillWithoutPrefixes(Suffix suffix)
+        public static OldSkill getSkillWithoutPrefixes(Suffix suffix)
         {
             AssertArgument.CheckIsNotNull(suffix, nameof(suffix));
 
@@ -84,28 +84,28 @@ namespace UrbanRivalsCore.Model.Cards.Skills
             {
                 PRV_DEFAULT_PREFIX,
             };
-            return new Skill(prefixes, suffix);
+            return new OldSkill(prefixes, suffix);
         }
 
-        private Skill()
+        private OldSkill()
         {
             this.emptySkillValue = PrvEEmptySkill.NormalSkill;
         }
-        private Skill(PrvEEmptySkill emptySkillValue)
+        private OldSkill(PrvEEmptySkill emptySkillValue)
         {
             this.emptySkillValue = emptySkillValue;
             this.leader = null;
             this.prefixes = new Prefix[0];
             this.suffix = null;
         }
-        private Skill(Leader leader)
+        private OldSkill(Leader leader)
             : this()
         {
             this.leader = leader;
             this.prefixes = new Prefix[0];
             this.suffix = null;
         }
-        private Skill(IEnumerable<Prefix> prefixes, Suffix suffix)
+        private OldSkill(IEnumerable<Prefix> prefixes, Suffix suffix)
             : this()
         {
             this.leader = null;
