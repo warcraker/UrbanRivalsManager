@@ -168,20 +168,21 @@ namespace Warcraker.UrbanRivals.ORM
 
         private static IEnumerable<Prefix> ParsePrefixes(string textToParse, out string textWithoutPrefixes)
         {
+            string text = textToParse;
             List<Prefix> prefixes = new List<Prefix>();
             PrefixParser parser;
 
-            textWithoutPrefixes = textToParse;
             do
             {
-                parser = PREFIX_PARSERS.FirstOrDefault(prefix => prefix.IsMatch(textToParse));
+                parser = PREFIX_PARSERS.FirstOrDefault(prefix => prefix.IsMatch(text));
                 if (parser != null)
                 {
-                    textWithoutPrefixes = parser.RemovePrefixFromText(textWithoutPrefixes);
+                    text = parser.RemovePrefixFromText(text);
                     prefixes.Add(parser.Prefix);
                 }
             } while (parser != null);
 
+            textWithoutPrefixes = text;
             return prefixes;
         }
     }
