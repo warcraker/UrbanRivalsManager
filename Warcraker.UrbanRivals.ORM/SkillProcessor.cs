@@ -2,10 +2,12 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills;
+using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Leaders;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Prefixes;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Double;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Plain;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Single;
+using Warcraker.Utils;
 
 namespace Warcraker.UrbanRivals.ORM
 {
@@ -15,6 +17,7 @@ namespace Warcraker.UrbanRivals.ORM
         private static readonly Regex FILLER_CHARS_REGEX = new Regex("[ ,.]+");
         private static readonly PrefixParser[] PREFIX_PARSERS;
         private static readonly SuffixParser[] SUFFIX_PARSERS;
+        private static readonly LeaderParser[] LEADER_PARSERS;
         private static readonly RegexOptions OPTIONS = RegexOptions.None;
 
         static SkillProcessor()
@@ -121,6 +124,26 @@ namespace Warcraker.UrbanRivals.ORM
                 .Concat(singleValueSuffixParsers)
                 .Concat(plainSuffixParsers)
                 .ToArray();
+
+            LEADER_PARSERS = new LeaderParser[]
+            {
+                new LeaderParser((x, y) => new AmbreLeader(x), new Regex(@"^Team:Courage:Power\+(?<x>[0-9])$", OPTIONS)),
+                new LeaderParser((x, y) => new AshigaruLeader(), new Regex(@"^Counter-attack$", OPTIONS)),
+                new LeaderParser((x, y) => new BridgetLeader(x), new Regex(@"^Team:VictoryOrDefeat:\+(?<x>[0-9])Life$", OPTIONS)),
+                new LeaderParser((x, y) => new EkloreLeader(x, y), new Regex(@"^-(?<x>[0-9])OppPillzPerRoundMin(?<y>[0-9])$", OPTIONS)),
+                new LeaderParser((x, y) => new EyrikLeader(x, y), new Regex(@"^Team:-(?<x>[0-9])OppPowerMin(?<y>[0-9])$", OPTIONS)),
+                new LeaderParser((x, y) => new HugoLeader(x), new Regex(@"^Team:\+(?<x>[0-9])Attack$", OPTIONS)),
+                new LeaderParser((x, y) => new JonhDoomLeader(x, y), new Regex(@"^Team:Reprisal:-(?<x>[0-9])Pow&DmgMin(?<y>[0-9])$", OPTIONS)),
+                new LeaderParser((x, y) => new MelodyLeader(x, y), new Regex(@"^Team:Defeat:Rec(?<x>[0-9])PillzOutOf(?<y>[0-9])$", OPTIONS)),
+                new LeaderParser((x, y) => new MementoLeader(), new Regex(@"^RemoveAbilityConditions$", OPTIONS)),
+                new LeaderParser((x, y) => new MorphunLeader(x, y), new Regex(@"^\+(?<x>[0-9])PillzPerRoundMax(?<y>[1-9]?[0-9])$", OPTIONS)),
+                new LeaderParser((x, y) => new MrBigDukeLeader(), new Regex(@"^Team:Protection:Damage$", OPTIONS)),
+                new LeaderParser((x, y) => new RobertCobbLeader(), new Regex(@"^Bypass$", OPTIONS)),
+                new LeaderParser((x, y) => new SolomonLeader(), new Regex(@"^Tie-break$", OPTIONS)),
+                new LeaderParser((x, y) => new TimberLeader(x), new Regex(@"^Team:\+(?<x>[0-9])Damage$", OPTIONS)),
+                new LeaderParser((x, y) => new VansarLeader(x), new Regex(@"^Team:Xp\+(?<x>[0-9]{2,3})%$", OPTIONS)),
+                new LeaderParser((x, y) => new VholtLeader(x, y), new Regex(@"^Team:-(?<x>[0-9])OppDamageMin(?<y>[0-9])$", OPTIONS)),
+            };
         }
 
         public static Skill ParseSkill(string text)
@@ -148,18 +171,19 @@ namespace Warcraker.UrbanRivals.ORM
                 }
                 else
                 {
-                    // TODO
-                    //Leader leader = LEADERS.FirstOrDefault(x => x.isMatch(skillAsText));
-                    //if (leader != null)
-                    //{
-                    //    skill = Skill.getLeaderSkill(leader);
-                    //}
-                    //else
-                    //{
-                    // TODO Write alternative when unknown string
-                    //}
+                    LeaderParser leaderParser = LEADER_PARSERS.FirstOrDefault(p => p.IsMatch(suffixAsText));
 
-                    return null;
+                    if (leaderParser != null)
+                    {
+                        Prefix[] leaderPrefixes = new Prefix[0];
+                        Leader leader = leaderParser.ParseLeader(suffixAsText);
+                        skill = new Skill(leaderPrefixes, leader);
+                    }
+                    else
+                    {
+                        Asserts.Fail($"Unable to parse skill: {text}");
+                        skill = null;
+                    }
                 }
             }
 
