@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Leaders;
-using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Prefixes;
-using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes;
 using Warcraker.Utils;
 
 namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills

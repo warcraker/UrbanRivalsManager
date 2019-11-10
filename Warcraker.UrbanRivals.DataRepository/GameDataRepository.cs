@@ -14,7 +14,7 @@ namespace Warcraker.UrbanRivals.DataRepository
         public GameDataRepository(string path)
         {
             AssertArgument.StringIsFilled(path, nameof(path));
-            
+
             if (!File.Exists(path))
             {
                 Initialize(path);
@@ -44,7 +44,9 @@ namespace Warcraker.UrbanRivals.DataRepository
             TextToSkillData item = GetSingleItem<TextToSkillData>(row => row.TextHash == textHash);
 
             if (item == null)
-                return SCALAR_VALUE_NOT_FOUND;
+            {
+                return this.SCALAR_VALUE_NOT_FOUND;
+            }
 
             return item.SkillHash;
         }
@@ -64,9 +66,8 @@ namespace Warcraker.UrbanRivals.DataRepository
         public bool SaveSkillData(SkillData skillData, int skillTextHash)
         {
             AssertArgument.CheckIsNotNull(skillData, $"Cannot insert null item [{typeof(SkillData).Name}]");
-            AssertArgument.CheckIntegerRange(skillTextHash > 0, "Must be greater than zero", skillTextHash, nameof(skillTextHash));
 
-            using (var connection = GetConnection())
+            using (SQLiteConnection connection = GetConnection())
             {
                 TextToSkillData textToSkillData = new TextToSkillData
                 {
@@ -75,7 +76,7 @@ namespace Warcraker.UrbanRivals.DataRepository
                 };
 
                 connection.BeginTransaction();
-                connection.Insert(skillData);
+                connection.InsertOrReplace(skillData);
                 int rowsInserted = connection.Insert(textToSkillData);
                 if (rowsInserted > 0)
                 {
@@ -92,7 +93,7 @@ namespace Warcraker.UrbanRivals.DataRepository
 
         private static void Initialize(string path)
         {
-            using (var connection = new SQLiteConnection(path))
+            using (SQLiteConnection connection = new SQLiteConnection(path))
             {
                 connection.CreateTable<CycleData>();
                 connection.CreateTable<ClanData>();
@@ -101,14 +102,14 @@ namespace Warcraker.UrbanRivals.DataRepository
                 connection.CreateTable<TextToSkillData>();
             }
         }
-        
+
         private SQLiteConnection GetConnection()
         {
-            return new SQLiteConnection(Path);
+            return new SQLiteConnection(this.Path);
         }
         private T GetSingleItem<T>(Expression<Func<T, bool>> where) where T : new()
         {
-            using (var connection = GetConnection())
+            using (SQLiteConnection connection = GetConnection())
             {
                 T item = connection
                     .Table<T>()
@@ -120,7 +121,7 @@ namespace Warcraker.UrbanRivals.DataRepository
         private bool InsertSingleItem<T>(T item)
         {
             AssertArgument.CheckIsNotNull(item, $"Cannot insert null item [{typeof(T).Name}]");
-            using (var connection = GetConnection())
+            using (SQLiteConnection connection = GetConnection())
             {
                 int rowsInserted = connection.Insert(item);
 
