@@ -211,19 +211,32 @@ namespace Warcraker.UrbanRivals.ORM
                 .Split(COMMA_SEPARATOR)
                 .Select(item => int.Parse(item));
         }
+        // TODO avoid duplicate code in CSV methods
         private static string IntsToCsv(IEnumerable<int> input)
         {
-            return input
-                .Aggregate(new StringBuilder()
-                    , (acc, item) => acc.Append(COMMA_SEPARATOR).Append(item))
-                .ToString();
+            if (!input.Any())
+            {
+                return "";
+            }
+
+            StringBuilder result = input
+                .Aggregate(new StringBuilder(), (acc, item) => acc.Append(item).Append(COMMA_SEPARATOR));
+            result.Length--;
+
+            return result.ToString();
         }
         private static string StringsToCsv(IEnumerable<string> input)
         {
-            return input
-                .Aggregate(new StringBuilder(),
-                    (acc, item) => acc.Append(COMMA_SEPARATOR).Append(item))
-                .ToString();
+            if (!input.Any())
+            {
+                return "";
+            }
+
+            StringBuilder result = input
+                .Aggregate(new StringBuilder(), (acc, item) => acc.Append(item).Append(COMMA_SEPARATOR));
+            result.Length--;
+
+            return result.ToString();
         }
         private static IEnumerable<string> CsvToStrings(string csv)
         {
