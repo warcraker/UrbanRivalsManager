@@ -54,8 +54,8 @@ namespace Warcraker.UrbanRivals.ORM
             int[] clanHashes = CsvToInts(cycleData.ClanHashes).ToArray();
             foreach (int clanHash in clanHashes)
             {
-                ClanData clanData = repository.GetClanData(clanHash);
-                SkillData bonusData = repository.GetSkillData(clanData.BonusHash);
+                ClanData clanData = this.repository.GetClanData(clanHash);
+                SkillData bonusData = this.repository.GetSkillData(clanData.BonusHash);
                 Skill bonus = SkillDataToSkill(bonusData);
                 Clan clan = new Clan(clanData.GameId, clanData.Name, bonus);
                 clans[clan.GameId] = clan;
@@ -97,7 +97,7 @@ namespace Warcraker.UrbanRivals.ORM
             foreach (string clanItem in clanItems)
             {
                 int clanHash = HashText(clanItem);
-                ClanData clanData = repository.GetClanData(clanHash);
+                ClanData clanData = this.repository.GetClanData(clanHash);
                 if (clanData == null)
                 {
                     dynamic decodedClan = JsonConvert.DeserializeObject(clanItem);
@@ -109,7 +109,7 @@ namespace Warcraker.UrbanRivals.ORM
                     {
                         Skill bonus = SkillProcessor.ParseSkill(bonusText);
                         SkillData bonusData = SkillToSkillData(bonus);
-                        repository.SaveSkillData(bonusData, bonusTextHash);
+                        this.repository.SaveSkillData(bonusData, bonusTextHash);
                         bonusHash = bonusData.Hash;
                     }
 
@@ -122,7 +122,7 @@ namespace Warcraker.UrbanRivals.ORM
                         Name = clanName,
                         GameId = clanId,
                     };
-                    repository.SaveClanData(clanData);
+                    this.repository.SaveClanData(clanData);
                 }
 
                 clanHashes.Add(clanHash);
@@ -142,13 +142,13 @@ namespace Warcraker.UrbanRivals.ORM
                 {
                     Skill ability = SkillProcessor.ParseSkill(abilityText);
                     SkillData abilityData = SkillToSkillData(ability);
-                    repository.SaveSkillData(abilityData, abilityTextHash);
+                    this.repository.SaveSkillData(abilityData, abilityTextHash);
                     abilityHash = abilityData.Hash;
                 }
 
                 string cardItem = cardItems[i];
                 int cardHash = HashText(cardItem);
-                CardData cardData = repository.GetCardData(cardHash);
+                CardData cardData = this.repository.GetCardData(cardHash);
                 if (cardData == null)
                 {
                     int abilityUnlockLevel = int.Parse(decodedAbility["ability_unlock_level"].ToString());
@@ -182,7 +182,7 @@ namespace Warcraker.UrbanRivals.ORM
                         PowerPerLevel = IntsToCsv(powers),
                         DamagePerLevel = IntsToCsv(damages),
                     };
-                    repository.SaveCardData(cardData);
+                    this.repository.SaveCardData(cardData);
                 }
 
                 int cardGameIdFromAbility = int.Parse(decodedAbility["id"].ToString());
@@ -200,7 +200,7 @@ namespace Warcraker.UrbanRivals.ORM
                 CardHashes = IntsToCsv(cardHashes),
                 ClanHashes = IntsToCsv(clanHashes),
             };
-            repository.SaveCycleBlobData(cycleData);
+            this.repository.SaveCycleBlobData(cycleData);
 
             return cycleData;
         }
