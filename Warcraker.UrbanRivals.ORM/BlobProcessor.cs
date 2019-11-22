@@ -246,12 +246,12 @@ namespace Warcraker.UrbanRivals.ORM
             return csv.Split(COMMA_SEPARATOR);
         }
 
-        private static Skill SkillDataToSkill(SkillData data)
+        private Skill SkillDataToSkill(SkillData data)
         {
             Skill skill;
 
-            Suffix suffix = (Suffix)Activator
-                .CreateInstance(GetType(data.SuffixClassName), new int[] { data.X, data.Y });
+            Type suffixType = GetType(data.SuffixClassName);
+            Suffix suffix = (Suffix)Activator.CreateInstance(suffixType, new { data.X, data.Y });
 
             IEnumerable<Prefix> prefixes = data.PrefixesClassNames
                 .Split(COMMA_SEPARATOR)
