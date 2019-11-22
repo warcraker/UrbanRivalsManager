@@ -12,15 +12,32 @@ using Warcraker.UrbanRivals.Core.Model.Cycles;
 using Warcraker.UrbanRivals.DataRepository;
 using Warcraker.UrbanRivals.DataRepository.DataModels;
 using Warcraker.Utils;
+using System.Reflection;
 
 namespace Warcraker.UrbanRivals.ORM
 {
     public class BlobProcessor
     {
         private readonly GameDataRepository repository;
+        private readonly IDictionary<string, string> fullAssembliesByClassName;
 
         public BlobProcessor(GameDataRepository repository)
         {
+            string leaderEnding = typeof(Leader).Name;
+            string prefixEnding = typeof(Prefix).Name;
+            string suffixEnding = typeof(Suffix).Name;
+
+            Assembly assembly = typeof(Skill).Assembly;
+            IEnumerable<Type> validTypes = assembly
+                .GetTypes()
+                .Where(t => t.Name.EndsWith(leaderEnding) || t.Name.EndsWith(prefixEnding) || t.Name.EndsWith(suffixEnding));
+
+            this.fullAssembliesByClassName = new Dictionary<string, string>();
+            foreach (Type type in validTypes)
+            {
+                this.fullAssembliesByClassName.Add(type.Name, type.AssemblyQualifiedName);
+            }
+
             this.repository = repository;
         }
 
