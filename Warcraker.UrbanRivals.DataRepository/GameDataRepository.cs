@@ -7,7 +7,7 @@ using Warcraker.Utils;
 
 namespace Warcraker.UrbanRivals.DataRepository
 {
-    public class GameDataRepository : DataRepository
+    public class GameDataRepository
     {
         public string Path { get; private set; }
 
@@ -39,16 +39,14 @@ namespace Warcraker.UrbanRivals.DataRepository
         {
             return GetSingleItem<SkillData>(row => row.Hash == skillHash);
         }
-        public int GetSkillHashFromTextHash(int textHash)
+        public bool TryGetSkillHashFromTextHash(int textHash, out int skillHash)
         {
             TextToSkillData item = GetSingleItem<TextToSkillData>(row => row.TextHash == textHash);
+            bool itemFound = item != null;
 
-            if (item == null)
-            {
-                return this.SCALAR_VALUE_NOT_FOUND;
-            }
+            skillHash = itemFound ? item.SkillHash : 0;
 
-            return item.SkillHash;
+            return itemFound;
         }
 
         public bool SaveClanData(ClanData clanData)

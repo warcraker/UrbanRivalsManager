@@ -104,8 +104,8 @@ namespace Warcraker.UrbanRivals.ORM
                     string bonusText = decodedClan["bonusDescription"].ToString();
 
                     int bonusTextHash = HashText(bonusText);
-                    int bonusHash = repository.GetSkillHashFromTextHash(bonusTextHash);
-                    if (bonusHash == repository.SCALAR_VALUE_NOT_FOUND)
+                    int bonusHash;
+                    if (this.repository.TryGetSkillHashFromTextHash(bonusTextHash, out bonusHash))
                     {
                         Skill bonus = SkillProcessor.ParseSkill(bonusText);
                         SkillData bonusData = SkillToSkillData(bonus);
@@ -137,8 +137,8 @@ namespace Warcraker.UrbanRivals.ORM
                 string abilityText = decodedAbility["ability"].ToString();
 
                 int abilityTextHash = HashText(abilityText);
-                int abilityHash = repository.GetSkillHashFromTextHash(abilityTextHash);
-                if (abilityHash == repository.SCALAR_VALUE_NOT_FOUND)
+                int abilityHash;
+                if (this.repository.TryGetSkillHashFromTextHash(abilityTextHash, out abilityHash))
                 {
                     Skill ability = SkillProcessor.ParseSkill(abilityText);
                     SkillData abilityData = SkillToSkillData(ability);
