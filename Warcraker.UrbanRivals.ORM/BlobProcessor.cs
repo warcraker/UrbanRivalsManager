@@ -44,126 +44,15 @@ namespace Warcraker.UrbanRivals.ORM
         public Cycle GetCycleData(string blob)
         {
             int blobHash = HashText(blob);
-            CycleData cycleData = repository.GetCycleData(blobHash);
+            CycleData cycleData = this.repository.GetCycleData(blobHash);
             if (cycleData == null)
             {
-                IList<string> abilityItems = BlobToList<ApiCallList.Characters.GetCharacters>(blob);
-                IList<string> cardItems = BlobToList<ApiCallList.Urc.GetCharacters>(blob);
-                Asserts.Check(abilityItems.Count == cardItems.Count, $"Characters.GetCharacters and Urc.GetCharacters call counts must be equal");
-                IList<string> clanItems = BlobToList<ApiCallList.Characters.GetClans>(blob);
-
-                IList<int> clanHashes = new List<int>();
-                foreach (string clanItem in clanItems)
-                {
-                    int clanHash = HashText(clanItem);
-                    ClanData clanData = repository.GetClanData(clanHash);
-                    if (clanData == null)
-                    {
-                        dynamic decodedClan = JsonConvert.DeserializeObject(clanItem);
-                        string bonusText = decodedClan["bonusDescription"].ToString();
-
-                        int bonusTextHash = HashText(bonusText);
-                        int bonusHash = repository.GetSkillHashFromTextHash(bonusTextHash);
-                        if (bonusHash == repository.SCALAR_VALUE_NOT_FOUND)
-                        {
-                            Skill bonus = SkillProcessor.ParseSkill(bonusText);
-                            SkillData bonusData = SkillToSkillData(bonus);
-                            repository.SaveSkillData(bonusData, bonusTextHash);
-                            bonusHash = bonusData.Hash;
-                        }
-
-                        int clanId = int.Parse(decodedClan["id"].ToString());
-                        string clanName = decodedClan["name"].ToString();
-                        clanData = new ClanData
-                        {
-                            Hash = clanHash,
-                            BonusHash = bonusHash,
-                            Name = clanName,
-                            GameId = clanId,
-                        };
-                        repository.SaveClanData(clanData);
-                    }
-
-                    clanHashes.Add(clanHash);
-                }
-
-                IList<int> abilityHashes = new List<int>();
-                IList<int> cardHashes = new List<int>();
-                for (int i = 0, n = cardItems.Count; i < n; i++)
-                {
-                    string abilityItem = abilityItems[i];
-                    dynamic decodedAbility = JsonConvert.DeserializeObject(abilityItem);
-                    string abilityText = decodedAbility["ability"].ToString();
-
-                    int abilityTextHash = HashText(abilityText);
-                    int abilityHash = repository.GetSkillHashFromTextHash(abilityTextHash);
-                    if (abilityHash == repository.SCALAR_VALUE_NOT_FOUND)
-                    {
-                        Skill ability = SkillProcessor.ParseSkill(abilityText);
-                        SkillData abilityData = SkillToSkillData(ability);
-                        repository.SaveSkillData(abilityData, abilityTextHash);
-                        abilityHash = abilityData.Hash;
-                    }
-
-                    string cardItem = cardItems[i];
-                    int cardHash = HashText(cardItem);
-                    CardData cardData = repository.GetCardData(cardHash);
-                    if (cardData == null)
-                    {
-                        int abilityUnlockLevel = int.Parse(decodedAbility["ability_unlock_level"].ToString());
-                        dynamic decodedCard = JsonConvert.DeserializeObject(cardItem);
-                        int cardGameId = int.Parse(decodedCard["id"].ToString());
-                        string cardName = decodedCard["name"].ToString();
-                        int clanId = int.Parse(decodedCard["clanID"].ToString());
-                        string rarityText = decodedCard["rarity"].ToString();
-                        CardDefinition.ECardRarity rarity = TextToRarity(rarityText);
-
-                        IEnumerable<dynamic> levels = decodedCard["levels"].ToList();
-                        int initialLevel = int.Parse(levels.First()["level"].ToString());
-
-                        IList<int> powers = new List<int>();
-                        IList<int> damages = new List<int>();
-                        foreach (dynamic levelItem in levels)
-                        {
-                            powers.Add(int.Parse(levelItem["power"].ToString()));
-                            damages.Add(int.Parse(levelItem["damage"].ToString()));
-                        }
-
-                        cardData = new CardData
-                        {
-                            Hash = cardHash,
-                            GameId = cardGameId,
-                            Name = cardName,
-                            ClanGameId = clanId,
-                            InitialLevel = initialLevel,
-                            AbilityUnlockLevel = abilityUnlockLevel,
-                            Rarity = (int)rarity,
-                            PowerPerLevel = IntsToCsv(powers),
-                            DamagePerLevel = IntsToCsv(damages),
-                        };
-                        repository.SaveCardData(cardData);
-                    }
-
-                    int cardGameIdFromAbility = int.Parse(decodedAbility["id"].ToString());
-                    Asserts.Check(cardGameIdFromAbility == cardData.GameId, 
-                        "Characters.GetCharacters and Urc.GetCharacters items must be in the same order");
-
-                    cardHashes.Add(cardHash);
-                    abilityHashes.Add(abilityHash);
-                }
-
-                cycleData = new CycleData
-                {
-                    Hash = blobHash,
-                    AbilityHashes = IntsToCsv(abilityHashes),
-                    CardHashes = IntsToCsv(cardHashes),
-                    ClanHashes = IntsToCsv(clanHashes),
-                };
-                repository.SaveCycleBlobData(cycleData);
+                cycleData = ParseAndStoreCycle(blob);
             }
 
             IDictionary<int, Clan> clans = new Dictionary<int, Clan>();
-            foreach (int clanHash in cycleData.ClanHashes)
+            int[] clanHashes = CsvToInts(cycleData.ClanHashes).ToArray();
+            foreach (int clanHash in clanHashes)
             {
                 ClanData clanData = repository.GetClanData(clanHash);
                 SkillData bonusData = repository.GetSkillData(clanData.BonusHash);
@@ -173,15 +62,18 @@ namespace Warcraker.UrbanRivals.ORM
             }
 
             IList<CardDefinition> cards = new List<CardDefinition>();
-            for (int i = 0, n = cycleData.CardHashes.Length; i < n; i++)
+            int[] cardHashes = CsvToInts(cycleData.CardHashes).ToArray();
+            int[] abilityHashes = CsvToInts(cycleData.AbilityHashes).ToArray();
+
+            for (int i = 0, n = cardHashes.Length; i < n; i++)
             {
-                CardData cardData = repository.GetCardData(cycleData.CardHashes[i]);
-                SkillData abilityData = repository.GetSkillData(cycleData.AbilityHashes[i]);
+                CardData cardData = this.repository.GetCardData(cardHashes[i]);
+                SkillData abilityData = this.repository.GetSkillData(abilityHashes[i]);
                 Skill ability = SkillDataToSkill(abilityData);
                 Clan clan = clans[cardData.ClanGameId];
-                CardStats stats = new CardStats(cardData.InitialLevel, 
+                CardStats stats = new CardStats(cardData.InitialLevel,
                     CsvToInts(cardData.PowerPerLevel), CsvToInts(cardData.DamagePerLevel));
-                CardDefinition card = new CardDefinition(cardData.GameId, cardData.Name, clan, ability, 
+                CardDefinition card = new CardDefinition(cardData.GameId, cardData.Name, clan, ability,
                     cardData.AbilityUnlockLevel, stats, (CardDefinition.ECardRarity)cardData.Rarity);
 
                 cards.Add(card);
@@ -193,9 +85,129 @@ namespace Warcraker.UrbanRivals.ORM
             return cycle;
         }
 
-        private static IList<string> BlobToList<TCall>(string blob) where TCall : ApiCall, new()
+        private CycleData ParseAndStoreCycle(string blob)
         {
-            IList<string> result = new List<string>();
+            CycleData cycleData;
+            List<string> abilityItems = BlobToList<ApiCallList.Characters.GetCharacters>(blob);
+            List<string> cardItems = BlobToList<ApiCallList.Urc.GetCharacters>(blob);
+            Asserts.Check(abilityItems.Count == cardItems.Count, $"Characters.GetCharacters and Urc.GetCharacters call counts must be equal");
+            List<string> clanItems = BlobToList<ApiCallList.Characters.GetClans>(blob);
+
+            IList<int> clanHashes = new List<int>();
+            foreach (string clanItem in clanItems)
+            {
+                int clanHash = HashText(clanItem);
+                ClanData clanData = repository.GetClanData(clanHash);
+                if (clanData == null)
+                {
+                    dynamic decodedClan = JsonConvert.DeserializeObject(clanItem);
+                    string bonusText = decodedClan["bonusDescription"].ToString();
+
+                    int bonusTextHash = HashText(bonusText);
+                    int bonusHash = repository.GetSkillHashFromTextHash(bonusTextHash);
+                    if (bonusHash == repository.SCALAR_VALUE_NOT_FOUND)
+                    {
+                        Skill bonus = SkillProcessor.ParseSkill(bonusText);
+                        SkillData bonusData = SkillToSkillData(bonus);
+                        repository.SaveSkillData(bonusData, bonusTextHash);
+                        bonusHash = bonusData.Hash;
+                    }
+
+                    int clanId = int.Parse(decodedClan["id"].ToString());
+                    string clanName = decodedClan["name"].ToString();
+                    clanData = new ClanData
+                    {
+                        Hash = clanHash,
+                        BonusHash = bonusHash,
+                        Name = clanName,
+                        GameId = clanId,
+                    };
+                    repository.SaveClanData(clanData);
+                }
+
+                clanHashes.Add(clanHash);
+            }
+
+            IList<int> abilityHashes = new List<int>();
+            IList<int> cardHashes = new List<int>();
+            for (int i = 0, n = cardItems.Count; i < n; i++)
+            {
+                string abilityItem = abilityItems[i];
+                dynamic decodedAbility = JsonConvert.DeserializeObject(abilityItem);
+                string abilityText = decodedAbility["ability"].ToString();
+
+                int abilityTextHash = HashText(abilityText);
+                int abilityHash = repository.GetSkillHashFromTextHash(abilityTextHash);
+                if (abilityHash == repository.SCALAR_VALUE_NOT_FOUND)
+                {
+                    Skill ability = SkillProcessor.ParseSkill(abilityText);
+                    SkillData abilityData = SkillToSkillData(ability);
+                    repository.SaveSkillData(abilityData, abilityTextHash);
+                    abilityHash = abilityData.Hash;
+                }
+
+                string cardItem = cardItems[i];
+                int cardHash = HashText(cardItem);
+                CardData cardData = repository.GetCardData(cardHash);
+                if (cardData == null)
+                {
+                    int abilityUnlockLevel = int.Parse(decodedAbility["ability_unlock_level"].ToString());
+                    dynamic decodedCard = JsonConvert.DeserializeObject(cardItem);
+                    int cardGameId = int.Parse(decodedCard["id"].ToString());
+                    string cardName = decodedCard["name"].ToString();
+                    int clanId = int.Parse(decodedCard["clanID"].ToString());
+                    string rarityText = decodedCard["rarity"].ToString();
+                    CardDefinition.ECardRarity rarity = TextToRarity(rarityText);
+
+                    IEnumerable<dynamic> levels = decodedCard["levels"];
+                    int initialLevel = int.Parse(levels.First()["level"].ToString());
+
+                    List<int> powers = new List<int>();
+                    List<int> damages = new List<int>();
+                    foreach (dynamic levelItem in levels)
+                    {
+                        powers.Add(int.Parse(levelItem["power"].ToString()));
+                        damages.Add(int.Parse(levelItem["damage"].ToString()));
+                    }
+
+                    cardData = new CardData
+                    {
+                        Hash = cardHash,
+                        GameId = cardGameId,
+                        Name = cardName,
+                        ClanGameId = clanId,
+                        InitialLevel = initialLevel,
+                        AbilityUnlockLevel = abilityUnlockLevel,
+                        Rarity = (int)rarity,
+                        PowerPerLevel = IntsToCsv(powers),
+                        DamagePerLevel = IntsToCsv(damages),
+                    };
+                    repository.SaveCardData(cardData);
+                }
+
+                int cardGameIdFromAbility = int.Parse(decodedAbility["id"].ToString());
+                Asserts.Check(cardGameIdFromAbility == cardData.GameId,
+                    "Characters.GetCharacters and Urc.GetCharacters items must be in the same order");
+
+                cardHashes.Add(cardHash);
+                abilityHashes.Add(abilityHash);
+            }
+
+            cycleData = new CycleData
+            {
+                Hash = HashText(blob),
+                AbilityHashes = IntsToCsv(abilityHashes),
+                CardHashes = IntsToCsv(cardHashes),
+                ClanHashes = IntsToCsv(clanHashes),
+            };
+            repository.SaveCycleBlobData(cycleData);
+
+            return cycleData;
+        }
+
+        private static List<string> BlobToList<TCall>(string blob) where TCall : ApiCall, new()
+        {
+            List<string> result = new List<string>();
 
             TCall call = new TCall();
             dynamic decoded = JsonConvert.DeserializeObject(blob);
