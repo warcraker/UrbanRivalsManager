@@ -199,9 +199,12 @@ namespace Warcraker.UrbanRivals.ORM
 
             TCall call = new TCall();
             dynamic decoded = JsonConvert.DeserializeObject(blob);
-            foreach (dynamic item in decoded[call.Call]["items"])
+            IEnumerable<dynamic> items = decoded[call.Call]["items"];
+            IEnumerable<dynamic> orderedItems = items.OrderBy(x => x["id"].Value);
+            foreach (dynamic item in orderedItems)
             {
-                result.Add(item.ToString());
+                string text = item.ToString();
+                result.Add(text);
             }
             return result;
         }
