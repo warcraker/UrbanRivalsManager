@@ -320,9 +320,10 @@ namespace Warcraker.UrbanRivals.ORM
         {
             return HashCode.Of(text);
         }
-        private static Type GetType(string typeName)
+        private Type GetType(string typeName)
         {
-            return Type.GetType(typeName);
+            string fullAssemblyName = this.fullAssembliesByClassName[typeName];
+            return Type.GetType(fullAssemblyName);
         }
         private static string GetTypeName(object o)
         {
