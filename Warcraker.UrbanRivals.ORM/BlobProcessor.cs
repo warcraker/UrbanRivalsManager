@@ -105,7 +105,7 @@ namespace Warcraker.UrbanRivals.ORM
 
                     int bonusTextHash = HashText(bonusText);
                     int bonusHash;
-                    if (this.repository.TryGetSkillHashFromTextHash(bonusTextHash, out bonusHash))
+                    if (!this.repository.TryGetSkillHashFromTextHash(bonusTextHash, out bonusHash))
                     {
                         Skill bonus = SkillProcessor.ParseSkill(bonusText);
                         SkillData bonusData = SkillToSkillData(bonus);
@@ -138,7 +138,7 @@ namespace Warcraker.UrbanRivals.ORM
 
                 int abilityTextHash = HashText(abilityText);
                 int abilityHash;
-                if (this.repository.TryGetSkillHashFromTextHash(abilityTextHash, out abilityHash))
+                if (!this.repository.TryGetSkillHashFromTextHash(abilityTextHash, out abilityHash))
                 {
                     Skill ability = SkillProcessor.ParseSkill(abilityText);
                     SkillData abilityData = SkillToSkillData(ability);
