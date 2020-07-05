@@ -28,9 +28,10 @@ namespace Warcraker.UrbanRivals.ORM
 
             PREFIX_PARSERS = new PrefixParser[]
             {
+                new PrefixParser(new AsymmetryPrefix(), new Regex("^Asymmetry:", OPTIONS)),
                 new PrefixParser(new BacklashPrefix(), new Regex("^Backlash:", OPTIONS)),
                 new PrefixParser(new BrawlPrefix(), new Regex("^Brawl:", OPTIONS)),
-                new PrefixParser(new ConfidencePrefix(), new Regex("^Confid(?:ence)?:", OPTIONS)),
+                new PrefixParser(new ConfidencePrefix(), new Regex("^Conf(?:id(?:ence))?:", OPTIONS)),
                 new PrefixParser(new CouragePrefix(), new Regex("^Courage:", OPTIONS)),
                 new PrefixParser(new DayPrefix(), new Regex("^Day:", OPTIONS)),
                 new PrefixParser(new DefeatPrefix(), new Regex("^Defeat:", OPTIONS)),
@@ -43,6 +44,7 @@ namespace Warcraker.UrbanRivals.ORM
                 new PrefixParser(new RevengePrefix(), new Regex("^Revenge:", OPTIONS)),
                 new PrefixParser(new StopPrefix(), new Regex("^Stop:", OPTIONS)),
                 new PrefixParser(new SupportPrefix(), new Regex("^Support:", OPTIONS)),
+                new PrefixParser(new SymmetryPrefix(), new Regex("^Symmetry:", OPTIONS)),
                 new PrefixParser(new VictoryOrDefeatPrefix(), new Regex(@"^Vict(?:ory)?OrDef(?:eat)?:", OPTIONS)),
             };
 
@@ -51,27 +53,32 @@ namespace Warcraker.UrbanRivals.ORM
                 new SuffixParser((x, y) => new CombustXMinYSuffix(x, y), new Regex(@"^Combust(?<x>[0-9])Min(?<y>[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new ConsumeXMinYSuffix(x, y), new Regex(@"^Consume(?<x>[0-9])Min(?<y>[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new CorrosionXMinYSuffix(x, y), new Regex(@"^Corrosion(?<x>[1-9])Min(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new CorruptXMinYSuffix(x, y), new Regex(@"^Corrupt(?<x>[0-9])Min(?<y>[0-9])", OPTIONS)),
                 new SuffixParser((x, y) => new DecreaseAttackXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9][0-9]?)OppAttackMin(?<y>[1-9][0-9]?)$", OPTIONS)),
-                new SuffixParser((x, y) => new DecreaseAttackXPerRemainingLifeMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppAttPerLifeLeftMin(?<y>[1-9][0-9]?)$", OPTIONS)),
-                new SuffixParser((x, y) => new DecreaseAttackXPerRemainingPillzMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppAttPerPillzLeftMin(?<y>[1-9][0-9]?)$", OPTIONS)),
-                new SuffixParser((x, y) => new DecreaseDamageXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppD(?:amage|mg)Min(?<y>[1-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreaseAttackXPerRemainingLifeMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppAttPerLifeLeftMin(?<y>[1-9]?[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreaseAttackXPerRemainingPillzMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppAttPerPillzLeftMin(?<y>[1-9]?[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreaseCardsDamageXMinYSuffix(x, y), new Regex(@"^-(?<x>[0-9])CardsDamageMin(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreaseCardsPowerXMinYSuffix(x, y), new Regex(@"^-(?<x>[0-9])CardsPowerMin(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreaseDamageXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppD(?:amage|mg)Min(?<y>[0-9]?)$", OPTIONS)),
                 new SuffixParser((x, y) => new DecreaseLifeAndPillzXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])(?:Opp)?(?:Life&Pillz|Pillz(?:&|And)Life)Min(?<y>[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new DecreaseLifeXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])(?:Opp)?LifeMin(?<y>[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new DecreasePillzXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])(?:OppPillz|Pillz(?:Opp)?)Min(?<y>[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new DecreasePowerAndDamageXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])(?:Opp)?Pow(?:er)?(?:&|And)D(?:amageM|amM|mgm)in(?<y>[0-9])$", OPTIONS)),
-                new SuffixParser((x, y) => new DecreasePowerXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppPowerMin(?<y>[1-9])$", OPTIONS)),
-                new SuffixParser((x, y) => new DopeAndRegenXMaxYSuffix(x, y), new Regex(@"^Dope\+Regen(?<x>[1-9])Max(?<y>[1-9][0-9]?)$", OPTIONS)),
-                new SuffixParser((x, y) => new DopeXMaxYSuffix(x, y), new Regex(@"^Dope(?<x>[1-9])Max(?<y>[1-9][0-9]?)$", OPTIONS)),
-                new SuffixParser((x, y) => new HealXMaxYSuffix(x, y), new Regex(@"^Heal(?<x>[1-9])Max(?<y>[1-9][0-9]?)$", OPTIONS)),
-                new SuffixParser((x, y) => new IncreaseLifePerDamageXMaxYSuffix(x, y), new Regex(@"^\+(?<x>[1-9])LifePerDamageMax(?<y>[1-9][0-9]?)$", OPTIONS)),
-                new SuffixParser((x, y) => new IncreaseLifeXMaxYSuffix(x, y), new Regex(@"^\+(?<x>[1-9])LifeMax(?<y>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new DecreasePowerXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppPowerMin(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new DopeAndRegenXMaxYSuffix(x, y), new Regex(@"^Dope\+Regen(?<x>[1-9])Max(?<y>[1-9]?[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new DopeXMaxYSuffix(x, y), new Regex(@"^Dope(?<x>[1-9])Max(?<y>[1-9]?[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new HealXMaxYSuffix(x, y), new Regex(@"^Heal(?<x>[1-9])Max(?<y>[1-9]?[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreaseLifePerDamageXMaxYSuffix(x, y), new Regex(@"^\+(?<x>[1-9])LifePerDamageMax(?<y>[1-9]?[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreaseLifeXMaxYSuffix(x, y), new Regex(@"^\+(?<x>[1-9])LifeMax(?<y>[1-9]?[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new IncreasePillzPerDamageXMaxYSuffix(x, y), new Regex(@"^\+(?<x>[1-9])PillzPerDamageMax(?<y>[1-9]?[0-9])$", OPTIONS)),
-                new SuffixParser((x, y) => new IncreasePillzXMaxYSuffix(x, y), new Regex(@"^\+(?<x>[1-9])PillzMax(?<y>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreasePillzXMaxYSuffix(x, y), new Regex(@"^\+(?<x>[1-9])PillzMax(?<y>[1-9]?[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new IncreasePowerPerLifeLeftXMaxYSuffix(x, y), new Regex(@"^\+(?<x>[0-9])PowerPerLifeLeftMax(?<y>[1-9]?[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new InfectionXMinYSuffix(x, y), new Regex(@"^Infection(?<x>[1-9])Min(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new MindwipeXMinYSuffix(x, y), new Regex(@"^Mindwipe(?<x>[0-9])Min(?<y>[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new PoisonXMinYSuffix(x, y), new Regex(@"^Poison(?<x>[1-9])Min(?<y>[0-9])$", OPTIONS)),
-                new SuffixParser((x, y) => new RebirthXMaxYSuffix(x, y), new Regex(@"^Rebirth(?<x>[1-9])Max(?<y>[1-9])$", OPTIONS)),
-                new SuffixParser((x, y) => new RecoverXPillzOutOfYSuffix(x, y), new Regex(@"^Recover(?<x>[1-9])PillzOutOf(?<y>[1-9])$", OPTIONS)),
-                new SuffixParser((x, y) => new RegenXMaxYSuffix(x, y), new Regex(@"^Regen(?<x>[1-9])Max(?<y>[1-9][0-9]?)$", OPTIONS)),
+                new SuffixParser((x, y) => new RebirthXMaxYSuffix(x, y), new Regex(@"^Rebirth(?<x>[1-9])Max(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new RecoverXPillzOutOfYSuffix(x, y), new Regex(@"^Recover(?<x>[1-9])PillzOutOf(?<y>[0-9])$", OPTIONS)),
+                new SuffixParser((x, y) => new RegenXMaxYSuffix(x, y), new Regex(@"^Regen(?<x>[1-9])Max(?<y>[1-9]?[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new RepairXMaxYSuffix(x, y), new Regex(@"^Repair(?<x>[0-9])Max(?<y>[1-9]?[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new ToxinXMinYSuffix(x, y), new Regex(@"^Toxin(?<x>[1-9])Min(?<y>[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new XantiaxXMinYSuffix(x, y), new Regex(@"^Xantiax:-(?<x>[1-9])LifeMin(?<y>[0-9])$", OPTIONS)),
@@ -132,6 +139,7 @@ namespace Warcraker.UrbanRivals.ORM
                 new LeaderParser((x, y) => new BridgetLeader(x), new Regex(@"^Team:VictoryOrDefeat:\+(?<x>[0-9])Life$", OPTIONS)),
                 new LeaderParser((x, y) => new EkloreLeader(x, y), new Regex(@"^-(?<x>[0-9])OppPillzPerRoundMin(?<y>[0-9])$", OPTIONS)),
                 new LeaderParser((x, y) => new EyrikLeader(x, y), new Regex(@"^Team:-(?<x>[0-9])OppPowerMin(?<y>[0-9])$", OPTIONS)),
+                new LeaderParser((x, y) => new KateLeader(), new Regex(@"^Illusion$", OPTIONS)),
                 new LeaderParser((x, y) => new HugoLeader(x), new Regex(@"^Team:\+(?<x>[0-9])Attack$", OPTIONS)),
                 new LeaderParser((x, y) => new JonhDoomLeader(x, y), new Regex(@"^Team:Reprisal:-(?<x>[0-9])Pow&DmgMin(?<y>[0-9])$", OPTIONS)),
                 new LeaderParser((x, y) => new MelodyLeader(x, y), new Regex(@"^Team:Defeat:Rec(?<x>[0-9])PillzOutOf(?<y>[0-9])$", OPTIONS)),
@@ -182,7 +190,7 @@ namespace Warcraker.UrbanRivals.ORM
                     else
                     {
                         Asserts.Fail($"Unable to parse skill: {text}");
-                        skill = null;
+                        skill = PlaceholderSkill.NOT_PARSED_TEXT;
                     }
                 }
             }
