@@ -26,7 +26,7 @@ namespace Warcraker.UrbanRivals.ORM
             int x = GetRegexValue(match, "x");
             int y = GetRegexValue(match, "y");
 
-            return builder.Invoke(x, y);
+            return this.builder.Invoke(x, y);
         }
 
         private static int GetRegexValue(Match match, string groupName)

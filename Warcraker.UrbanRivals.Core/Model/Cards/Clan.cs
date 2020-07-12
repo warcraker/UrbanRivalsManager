@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Warcraker.UrbanRivals.Core.Model.Cards.Skills;
+﻿using Warcraker.UrbanRivals.Core.Model.Cards.Skills;
 
 namespace Warcraker.UrbanRivals.Core.Model.Cards
 {
@@ -18,12 +15,12 @@ namespace Warcraker.UrbanRivals.Core.Model.Cards
             this.Bonus = bonus;
         }
 
-        public bool Equals(Clan other)
+        public bool Equals(Clan clan)
         {
-            if (other == null)
+            if (clan == null)
                 return false;
 
-            return this.GameId == other.GameId;
+            return this.GameId == clan.GameId;
         }
     }
 }

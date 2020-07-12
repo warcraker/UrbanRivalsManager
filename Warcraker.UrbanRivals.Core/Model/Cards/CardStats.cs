@@ -13,12 +13,12 @@ namespace Warcraker.UrbanRivals.Core.Model.Cards
         {
             get
             {
-                int pos = level - InitialLevel;
-                return stats[pos];
+                int pos = level - this.InitialLevel;
+                return this.stats[pos];
             }
         }
 
-        private LevelStats[] stats;
+        private readonly LevelStats[] stats;
 
         public CardStats(int initialLevel, IEnumerable<int> powers, IEnumerable<int> damages)
         {
@@ -32,7 +32,7 @@ namespace Warcraker.UrbanRivals.Core.Model.Cards
             this.stats = new LevelStats[statsLength];
             for (int i = 0; i < statsLength; i++)
             {
-                stats[i] = new LevelStats(powersArray[i], damagesArray[i]);
+                this.stats[i] = new LevelStats(powersArray[i], damagesArray[i]);
             }
         }
     }
