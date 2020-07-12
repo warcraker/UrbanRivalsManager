@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UrbanRivalsApiManager;
-using static Warcraker.UrbanRivals.Common.Constants;
 using Warcraker.UrbanRivals.Core.Model.Cards;
 using Warcraker.UrbanRivals.Core.Model.Cards.Skills;
 using Warcraker.UrbanRivals.Core.Model.Cycles;
@@ -18,6 +17,8 @@ namespace Warcraker.UrbanRivals.ORM
 {
     public class BlobProcessor
     {
+        private static readonly char COMMA_SEPARATOR = ';';
+
         private readonly GameDataRepository repository;
         private readonly IDictionary<string, string> fullAssembliesByClassName;
 
