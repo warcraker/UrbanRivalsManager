@@ -335,8 +335,16 @@ namespace Warcraker.UrbanRivals.ORM
         }
         private Type GetType(string typeName)
         {
-            string fullAssemblyName = this.fullAssembliesByClassName[typeName];
-            return Type.GetType(fullAssemblyName);
+            string fullAssemblyName;
+            try
+            {
+                fullAssemblyName = this.fullAssembliesByClassName[typeName];
+                return Type.GetType(fullAssemblyName);
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException($"Unable to parse type {typeName}. Reason: {ex.Message}");
+            }
         }
         private static string GetTypeName(object o)
         {
