@@ -14,6 +14,8 @@ using UrbanRivalsCore.Model.Cards.Skills;
 using System.Text;
 using System.Windows;
 using Warcraker.Utils;
+using Warcraker.UrbanRivals.DataRepository;
+using Warcraker.UrbanRivals.ORM;
 
 namespace UrbanRivalsManager.ViewModel.DataManagement
 {
@@ -33,7 +35,6 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
     public class GlobalManager
     {
         private ApiManager ApiManagerInstance;
-        private IDatabaseManager DatabaseManagerInstance;
         private InMemoryManager InMemoryManagerInstance;
         private ImageDownloader ImageDownloaderInstance;
         private ServerQueriesManager ServerQueriesManagerInstance;
@@ -69,13 +70,11 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             UpdateCardInstanceDefinitionsBGW.ProgressChanged += delegate { };
             UpdateCardInstanceDefinitionsBGW.RunWorkerCompleted += delegate { };
         }
-        public GlobalManager(ApiManager apiManager, IDatabaseManager databaseManager, ImageDownloader imageManager, InMemoryManager inMemoryManager, ServerQueriesManager serverQueriesManager)
+        public GlobalManager(ApiManager apiManager, ImageDownloader imageManager, InMemoryManager inMemoryManager, ServerQueriesManager serverQueriesManager)
             : this()
         {
             if (apiManager == null)
                 throw new ArgumentNullException(nameof(apiManager));
-            if (databaseManager == null)
-                throw new ArgumentNullException(nameof(databaseManager));
             if (imageManager == null)
                 throw new ArgumentNullException(nameof(imageManager));
             if (inMemoryManager == null)
@@ -84,7 +83,6 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 throw new ArgumentNullException(nameof(serverQueriesManager));
 
             ApiManagerInstance = apiManager;
-            DatabaseManagerInstance = databaseManager;
             ImageDownloaderInstance = imageManager;
             InMemoryManagerInstance = inMemoryManager;
             ServerQueriesManagerInstance = serverQueriesManager;
@@ -116,7 +114,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             if (UpdateCardBaseDefinitionsBGW.IsBusy)
                 throw new Exception("Can't call to UpdateCardBaseDefinitions until the previous execution finishes");
             var argument = new UpdateCardBaseDefinitionsArgument
-                (this, DatabaseManagerInstance, InMemoryManagerInstance, ImageDownloaderInstance, ServerQueriesManagerInstance);
+                (this, InMemoryManagerInstance, ImageDownloaderInstance, ServerQueriesManagerInstance);
             UpdateCardBaseDefinitionsBGW.RunWorkerAsync(argument);
         }
         public void UdpateCardInstanceDefinitionsAsync()
@@ -130,8 +128,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
         public IEnumerable<int> GetAllCardBaseIdsNotInDatabase()
         {
             var existingIds = ServerQueriesManagerInstance.GetAllCardBaseIds();
-            var storedIds = DatabaseManagerInstance.getAllCardDefinitionIds();
-            return existingIds.Except(storedIds);
+            return existingIds;
         }
 
         private static void UpdateCardBaseDefinitions_DoWork(object sender, DoWorkEventArgs e)
@@ -139,6 +136,11 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             BackgroundWorker worker = (BackgroundWorker)sender;
             Debug.Assert(e.Argument != null);
             UpdateCardBaseDefinitionsArgument managers = (UpdateCardBaseDefinitionsArgument)e.Argument;
+
+            worker.ReportProgress(0, "Initialize database...");
+
+            GameDataRepository repo = new GameDataRepository(@"C:\repo.db");
+            BlobProcessor processor = new BlobProcessor(repo);
 
             worker.ReportProgress(0, "Connecting to server...");
 
@@ -371,17 +373,15 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
     internal class UpdateCardBaseDefinitionsArgument
     {
         public GlobalManager GlobalManager;
-        public IDatabaseManager DatabaseManager;
         public InMemoryManager InMemoryManager;
         public ImageDownloader ImageDownloader;
         public ServerQueriesManager ServerQueriesManager;
 
         public UpdateCardBaseDefinitionsArgument
-            (GlobalManager globalManager, IDatabaseManager databaseManager, InMemoryManager inMemoryManager,
+            (GlobalManager globalManager, InMemoryManager inMemoryManager,
             ImageDownloader imageDownloader, ServerQueriesManager serverQueriesManager)
         {
             GlobalManager = globalManager;
-            DatabaseManager = databaseManager;
             InMemoryManager = inMemoryManager;
             ImageDownloader = imageDownloader;
             ServerQueriesManager = serverQueriesManager;

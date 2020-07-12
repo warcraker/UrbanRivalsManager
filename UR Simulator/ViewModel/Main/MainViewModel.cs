@@ -21,13 +21,6 @@ namespace UrbanRivalsManager.ViewModel
         }
         public static readonly DependencyProperty ApiManagerProperty =
             DependencyProperty.Register("ApiManager", typeof(ApiManager), typeof(MainViewModel), new PropertyMetadata(null));
-        public IDatabaseManager DatabaseManager
-        {
-            get { return (IDatabaseManager)GetValue(DatabaseManagerProperty); }
-            set { SetValue(DatabaseManagerProperty, value); }
-        }
-        public static readonly DependencyProperty DatabaseManagerProperty =
-            DependencyProperty.Register("DatabaseManager", typeof(IDatabaseManager), typeof(MainViewModel), new PropertyMetadata(null));
         public FilepathManager FilepathManager
         {
             get { return (FilepathManager)GetValue(FilepathManagerProperty); }

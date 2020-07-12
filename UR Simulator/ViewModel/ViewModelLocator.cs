@@ -46,7 +46,6 @@ namespace UrbanRivalsManager.ViewModel
         private Dictionary<string, object> ViewModels;
 
         private ApiManager ApiManagerInstance;
-        private IDatabaseManager DatabaseManagerInstance;
         private FilepathManager FilepathManagerInstance;
         private GlobalManager GlobalManagerInstance;
         private ImageCache ImageCacheInstance;
@@ -65,9 +64,7 @@ namespace UrbanRivalsManager.ViewModel
 
             FilepathManagerInstance = new FilepathManager(GetFileManagerPath());
 
-            DatabaseManagerInstance = new SQLiteDatabaseManager(FilepathManagerInstance.PersistentDatabase);
-
-            InMemoryManagerInstance = new InMemoryManager(DatabaseManagerInstance);
+            InMemoryManagerInstance = new InMemoryManager();
 
             consumerKey = Properties.Settings.Default.ConsumerKey;
             consumerSecret = Properties.Settings.Default.ConsumerSecret;
@@ -94,7 +91,7 @@ namespace UrbanRivalsManager.ViewModel
             ImageDownloaderInstance = new ImageDownloader(FilepathManagerInstance, InMemoryManagerInstance);
 
             GlobalManagerInstance = new GlobalManager
-                (ApiManagerInstance, DatabaseManagerInstance, ImageDownloaderInstance, InMemoryManagerInstance, ServerQueriesManagerInstance);
+                (ApiManagerInstance, ImageDownloaderInstance, InMemoryManagerInstance, ServerQueriesManagerInstance);
 
             PortraitConverter portraitConv = (PortraitConverter)Application.Current.FindResource("PortraitConv");
             portraitConv.ImageRetriever = ImageRetrieverInstance;
@@ -103,7 +100,6 @@ namespace UrbanRivalsManager.ViewModel
         {
             var vm = new MainViewModel();
             vm.ApiManager = ApiManagerInstance;
-            vm.DatabaseManager = DatabaseManagerInstance;
             vm.FilepathManager = FilepathManagerInstance;
             vm.GlobalManager = GlobalManagerInstance;
             vm.ImageDownloader = ImageDownloaderInstance;

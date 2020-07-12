@@ -16,21 +16,13 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
         /// </summary>
         private Dictionary<int, CardInstance> FakeCardInstances;
 
-        private InMemoryManager() 
+        public InMemoryManager() 
         { 
             CardDefinitions = new Dictionary<int, CardDefinition>();
             CardInstances = new Dictionary<int, CardInstance>();
             FakeCardInstances = new Dictionary<int, CardInstance>();
             CardNames = new List<string>();
             CardDefinitionIdsByName = new Dictionary<string, int>();
-        }
-        public InMemoryManager(IDatabaseManager databaseManager)
-            : this()
-        {
-            if (databaseManager == null)
-                throw new ArgumentNullException(nameof(databaseManager));
-
-            LoadToMemoryFromDatabase(databaseManager);
         }
 
         public bool LoadToMemoryCardDefinition(CardDefinition card)
@@ -95,11 +87,8 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
                 yield return card;
         }
 
-        private void LoadToMemoryFromDatabase(IDatabaseManager databaseManager)
+        private void LoadToMemoryFromDatabase()
         {
-            var ids = databaseManager.getAllCardDefinitionIds();
-            foreach (int id in ids)
-                LoadToMemoryCardDefinition(databaseManager.getCardDefinitionById(id));
         }
         private void LoadToMemoryFakeCardInstances(CardDefinition card)
         {
