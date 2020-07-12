@@ -1,10 +1,7 @@
-﻿using SQLite;
-
-namespace Warcraker.UrbanRivals.DataRepository.DataModels
+﻿namespace Warcraker.UrbanRivals.DataRepository.DataModels
 {
     public class SkillData
     {
-        [PrimaryKey]
         public int Hash { get; set; }
         public string SuffixClassName { get; set; }
         public string PrefixesClassNames { get; set; }

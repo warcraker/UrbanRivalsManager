@@ -1,10 +1,7 @@
-﻿using SQLite;
-
-namespace Warcraker.UrbanRivals.DataRepository.DataModels
+﻿namespace Warcraker.UrbanRivals.DataRepository.DataModels
 {
     public class CardData
     {
-        [PrimaryKey]
         public int Hash { get; set; }
         public int GameId { get; set; }
         public int ClanGameId { get; set; }
