@@ -183,14 +183,13 @@ namespace Warcraker.UrbanRivals.ORM
 
                     if (leaderParser != null)
                     {
-                        Prefix[] leaderPrefixes = new Prefix[0];
                         Leader leader = leaderParser.ParseLeader(suffixAsText);
-                        skill = new Skill(leaderPrefixes, leader);
+                        skill = new Skill(new Prefix[0], leader);
                     }
                     else
                     {
+                        skill = UnknownSkill.INSTANCE;
                         Asserts.Fail($"Unable to parse skill: {text}");
-                        skill = PlaceholderSkill.NOT_PARSED_TEXT;
                     }
                 }
             }

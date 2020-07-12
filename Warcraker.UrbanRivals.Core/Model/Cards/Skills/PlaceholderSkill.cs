@@ -1,14 +1,10 @@
-﻿using Warcraker.Utils;
+﻿using Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes;
+using Warcraker.Utils;
 
 namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills
 {
     public sealed class PlaceholderSkill : Skill
     {
-        private class PlaceholderSuffix : Suffix
-        {
-            public PlaceholderSuffix() : base(0, 0) { }
-        }
-
         private enum EPlaceholder
         {
             NoAbility,
@@ -17,16 +13,14 @@ namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills
             AbilityUnlockedAtLevel3,
             AbilityUnlockedAtLevel4,
             AbilityUnlockedAtLevel5,
-            NotParsed,
         }
 
-        public static readonly Skill NO_ABILITY = new PlaceholderSkill(EPlaceholder.NoAbility);
+        public static readonly Skill NO_ABILITY = new NoAbility();
         public static readonly Skill NO_BONUS = new PlaceholderSkill(EPlaceholder.NotActiveBonus);
         public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_2 = new PlaceholderSkill(EPlaceholder.AbilityUnlockedAtLevel2);
         public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_3 = new PlaceholderSkill(EPlaceholder.AbilityUnlockedAtLevel3);
         public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_4 = new PlaceholderSkill(EPlaceholder.AbilityUnlockedAtLevel4);
         public static readonly Skill ABILITY_UNLOCKED_AT_LEVEL_5 = new PlaceholderSkill(EPlaceholder.AbilityUnlockedAtLevel5);
-        public static readonly Skill NOT_PARSED_TEXT = new PlaceholderSkill(EPlaceholder.NotParsed);
 
         private readonly EPlaceholder placeholder;
 
@@ -59,9 +53,6 @@ namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills
                     break;
                 case EPlaceholder.AbilityUnlockedAtLevel5:
                     text = GetUnlockedAtLevelStringRepresentation(5);
-                    break;
-                case EPlaceholder.NotParsed:
-                    text = "Skill Not Parsed";
                     break;
                 default:
                     text = "Invalid";
