@@ -3,7 +3,7 @@
     public class CancelDamageModifierSuffix : Suffix
     {
         public CancelDamageModifierSuffix()
-            : base(0, 0)
+            : base(-1, -1)
         {
             ;
         }

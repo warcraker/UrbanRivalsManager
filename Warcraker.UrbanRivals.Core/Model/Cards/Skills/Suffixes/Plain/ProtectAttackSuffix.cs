@@ -3,7 +3,7 @@
     public class ProtectAttackSuffix : Suffix
     {
         public ProtectAttackSuffix()
-            : base(0, 0)
+            : base(-1, -1)
         {
             ;
         }

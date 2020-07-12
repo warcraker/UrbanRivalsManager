@@ -3,7 +3,7 @@
     public class CopyPowerAndDamageSuffix : Suffix
     {
         public CopyPowerAndDamageSuffix()
-            : base(0, 0)
+            : base(-1, -1)
         {
             ;
         }

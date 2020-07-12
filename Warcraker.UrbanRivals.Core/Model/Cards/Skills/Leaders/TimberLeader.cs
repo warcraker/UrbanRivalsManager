@@ -7,7 +7,7 @@ namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Leaders
     public class TimberLeader : Leader
     {
         public TimberLeader(int damageIncrease)
-            : base(damageIncrease, 0)
+            : base(damageIncrease, -1)
         {
             ;
         }

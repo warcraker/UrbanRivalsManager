@@ -3,7 +3,7 @@
     public class CancelLeaderSuffix : Suffix
     {
         public CancelLeaderSuffix()
-            : base(0, 0)
+            : base(-1, -1)
         {
             ;
         }

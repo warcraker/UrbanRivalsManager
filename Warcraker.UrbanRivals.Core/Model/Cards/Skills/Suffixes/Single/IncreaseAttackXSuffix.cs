@@ -3,7 +3,7 @@
     public class IncreaseAttackXSuffix : Suffix
     {
         public IncreaseAttackXSuffix(int x)
-            : base(x, 0)
+            : base(x, -1)
         {
             ;
         }

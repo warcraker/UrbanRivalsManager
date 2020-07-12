@@ -7,7 +7,7 @@ namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Leaders
     public class VansarLeader : Leader
     {
         public VansarLeader(int experienceBonus)
-            : base(experienceBonus, 0)
+            : base(experienceBonus, -1)
         {
             ;
         }

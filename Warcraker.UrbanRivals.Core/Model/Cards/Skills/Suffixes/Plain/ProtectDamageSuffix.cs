@@ -3,7 +3,7 @@
     public class ProtectDamageSuffix : Suffix
     {
         public ProtectDamageSuffix()
-            : base(0, 0)
+            : base(-1, -1)
         {
             ;
         }

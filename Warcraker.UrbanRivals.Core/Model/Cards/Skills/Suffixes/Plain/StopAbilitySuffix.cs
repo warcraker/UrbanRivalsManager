@@ -3,7 +3,7 @@
     public class StopAbilitySuffix : Suffix
     {
         public StopAbilitySuffix()
-            : base(0, 0)
+            : base(-1, -1)
         {
             ;
         }

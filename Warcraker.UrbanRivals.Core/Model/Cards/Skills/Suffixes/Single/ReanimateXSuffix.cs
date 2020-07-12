@@ -3,7 +3,7 @@
     public class ReanimateXSuffix : Suffix
     {
         public ReanimateXSuffix(int x)
-            : base(x, 0)
+            : base(x, -1)
         {
             ;
         }

@@ -3,7 +3,7 @@
     public class ExchangePowerAndDamageSuffix : Suffix
     {
         public ExchangePowerAndDamageSuffix()
-            : base(0, 0)
+            : base(-1, -1)
         {
             ;
         }

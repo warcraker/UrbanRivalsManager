@@ -3,7 +3,7 @@
     public class IncreaseDamageXSuffix : Suffix
     {
         public IncreaseDamageXSuffix(int x)
-            : base(x, 0)
+            : base(x, -1)
         {
             ;
         }

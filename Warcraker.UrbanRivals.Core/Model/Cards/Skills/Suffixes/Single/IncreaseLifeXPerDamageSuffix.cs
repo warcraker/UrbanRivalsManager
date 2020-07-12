@@ -1,8 +1,8 @@
 ﻿namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Suffixes.Single
 {
-    public class IncreaseAttackXPerRemainingLifeSuffix : Suffix
+    public class IncreaseLifeXPerDamageSuffix : Suffix
     {
-        public IncreaseAttackXPerRemainingLifeSuffix(int x)
+        public IncreaseLifeXPerDamageSuffix(int x)
             : base(x, -1)
         {
             ;

@@ -3,7 +3,7 @@
     public class CancelPillzAndLifeModifierSuffix : Suffix
     {
         public CancelPillzAndLifeModifierSuffix()
-            : base(0, 0)
+            : base(-1, -1)
         {
             ;
         }

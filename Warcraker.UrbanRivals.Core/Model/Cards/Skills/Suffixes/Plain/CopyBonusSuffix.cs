@@ -3,7 +3,7 @@
     public class CopyBonusSuffix : Suffix
     {
         public CopyBonusSuffix()
-            : base(0, 0)
+            : base(-1, -1)
         {
             ;
         }

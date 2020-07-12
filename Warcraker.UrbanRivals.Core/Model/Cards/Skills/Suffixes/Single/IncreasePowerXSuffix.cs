@@ -3,7 +3,7 @@
     public class IncreasePowerXSuffix : Suffix
     {
         public IncreasePowerXSuffix(int x)
-            : base(x, 0)
+            : base(x, -1)
         {
             ;
         }

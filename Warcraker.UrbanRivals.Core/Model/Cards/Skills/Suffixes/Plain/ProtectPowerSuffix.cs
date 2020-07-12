@@ -3,7 +3,7 @@
     public class ProtectPowerSuffix : Suffix
     {
         public ProtectPowerSuffix()
-            : base(0, 0)
+            : base(-1, -1)
         {
             ;
         }
