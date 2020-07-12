@@ -1,7 +1,7 @@
-﻿using SQLite;
-using System;
+﻿using System;
 using System.IO;
-using System.Linq.Expressions;
+using Tortuga.Chain;
+using Tortuga.Chain.SQLite;
 using Warcraker.UrbanRivals.DataRepository.DataModels;
 using Warcraker.Utils;
 
@@ -9,41 +9,46 @@ namespace Warcraker.UrbanRivals.DataRepository
 {
     public class GameDataRepository
     {
-        public string Path { get; private set; }
+        private readonly SQLiteDataSource Connection;
 
         public GameDataRepository(string path)
         {
-            AssertArgument.StringIsFilled(path, nameof(path));
+            // TODO ensure connection is safe: File exists + Test connection
 
-            if (!File.Exists(path))
+            bool fileExists = File.Exists(path);
+
+            this.Connection = new SQLiteDataSource($"Data Source={path};Database=UR;");
+
+            this.Connection.TestConnection();
+
+            if (!fileExists)
             {
-                Initialize(path);
+                Initialize();
             }
-
-            this.Path = path;
         }
 
         public ClanData GetClanData(int clanHash)
         {
-            return GetSingleItem<ClanData>(row => row.Hash == clanHash);
+            return GetSingleItemByKey<ClanData>(clanHash);
         }
         public CardData GetCardData(int cardHash)
         {
-            return GetSingleItem<CardData>(row => row.Hash == cardHash);
+            return GetSingleItemByKey<CardData>(cardHash);
         }
         public CycleData GetCycleData(int cycleHash)
         {
-            return GetSingleItem<CycleData>(row => row.Hash == cycleHash);
+            return GetSingleItemByKey<CycleData>(cycleHash);
         }
         public SkillData GetSkillData(int skillHash)
         {
-            return GetSingleItem<SkillData>(row => row.Hash == skillHash);
+            return GetSingleItemByKey<SkillData>(skillHash);
         }
         public bool TryGetSkillHashFromTextHash(int textHash, out int skillHash)
         {
-            TextToSkillData item = GetSingleItem<TextToSkillData>(row => row.TextHash == textHash);
-            bool itemFound = item != null;
+            TextToSkillData item;
+            item = GetSingleItemByKey<TextToSkillData>(textHash);
 
+            bool itemFound = item != null;
             skillHash = itemFound ? item.SkillHash : 0;
 
             return itemFound;
@@ -61,11 +66,11 @@ namespace Warcraker.UrbanRivals.DataRepository
         {
             return InsertSingleItem(blobData);
         }
-        public bool SaveSkillData(SkillData skillData, int skillTextHash)
+        public void SaveSkillData(SkillData skillData, int skillTextHash)
         {
             AssertArgument.CheckIsNotNull(skillData, $"Cannot insert null item [{typeof(SkillData).Name}]");
 
-            using (SQLiteConnection connection = GetConnection())
+            using (SQLiteTransactionalDataSource transaction = this.Connection.BeginTransaction())
             {
                 TextToSkillData textToSkillData = new TextToSkillData
                 {
@@ -73,58 +78,68 @@ namespace Warcraker.UrbanRivals.DataRepository
                     SkillHash = skillData.Hash,
                 };
 
-                connection.BeginTransaction();
-                connection.InsertOrReplace(skillData);
-                int rowsInserted = connection.Insert(textToSkillData);
-                if (rowsInserted > 0)
-                {
-                    connection.Commit();
-                    return true;
-                }
-                else
-                {
-                    connection.Rollback();
-                    return false;
-                }
+                transaction.Upsert(skillData).Execute();
+                transaction.Upsert(textToSkillData).Execute();
+                transaction.Commit();
             }
         }
 
-        private static void Initialize(string path)
+        private void Initialize()
         {
-            using (SQLiteConnection connection = new SQLiteConnection(path))
+            string[] createTableScripts = new string[] {
+@"CREATE TABLE ""CardData"" (
+    ""Hash"" integer primary key not null ,
+    ""GameId"" integer ,
+    ""ClanGameId"" integer ,
+    ""Name"" varchar ,
+    ""InitialLevel"" integer ,
+    ""AbilityUnlockLevel"" integer ,
+    ""PowerPerLevel"" varchar ,
+    ""DamagePerLevel"" varchar ,
+    ""Rarity"" integer )"
+, @"CREATE TABLE ""ClanData"" (
+    ""Hash"" integer primary key not null ,
+    ""BonusHash"" integer ,
+    ""GameId"" integer ,
+    ""Name"" varchar )"
+, @"CREATE TABLE ""CycleData"" (
+    ""Hash"" integer primary key not null ,
+    ""AbilityHashes"" varchar ,
+    ""CardHashes"" varchar ,
+    ""ClanHashes"" varchar )"
+, @"CREATE TABLE ""SkillData"" (
+    ""Hash"" integer primary key not null,
+    ""SuffixClassName"" varchar,
+    ""PrefixesClassNames"" varchar,
+    ""X"" integer,
+    ""Y"" integer )"
+, @"CREATE TABLE ""TextToSkillData"" (
+    ""TextHash"" integer primary key not null,
+    ""SkillHash"" integer)"
+};
+            foreach (string script in createTableScripts)
             {
-                connection.CreateTable<CycleData>();
-                connection.CreateTable<ClanData>();
-                connection.CreateTable<CardData>();
-                connection.CreateTable<SkillData>();
-                connection.CreateTable<TextToSkillData>();
+                this.Connection.Sql(script).Execute();
             }
         }
 
-        private SQLiteConnection GetConnection()
-        {
-            return new SQLiteConnection(this.Path);
-        }
-        private T GetSingleItem<T>(Expression<Func<T, bool>> where) where T : new()
-        {
-            using (SQLiteConnection connection = GetConnection())
-            {
-                T item = connection
-                    .Table<T>()
-                    .FirstOrDefault(where);
-
-                return item;
-            }
-        }
-        private bool InsertSingleItem<T>(T item)
+        private bool InsertSingleItem<T>(T item) where T : class
         {
             AssertArgument.CheckIsNotNull(item, $"Cannot insert null item [{typeof(T).Name}]");
-            using (SQLiteConnection connection = GetConnection())
-            {
-                int rowsInserted = connection.Insert(item);
 
-                return rowsInserted > 0;
-            }
+            int insertedRows = this.Connection
+                .Insert<T>(item)
+                .Execute() ?? -1;
+
+            return insertedRows == 1;
+        }
+
+        private T GetSingleItemByKey<T>(int key) where T : class
+        {
+            return this.Connection
+                .GetByKey<T>(key)
+                .ToObjectOrNull()
+                .Execute();
         }
     }
 }
