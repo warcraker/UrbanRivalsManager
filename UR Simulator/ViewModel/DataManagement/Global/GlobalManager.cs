@@ -170,7 +170,7 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
             };
             ApiCall getCharactersCall = new ApiCallList.Urc.GetCharacters
             {
-                ItemsFilter = new List<string> { "id", "name", "clanID", "rarity", "levels.level", "levels.power", "levels.damage" },
+                ItemsFilter = new List<string> { "id", "name", "clanID", "rarity", "levels" },
             };
 
             ApiRequest request = new ApiRequest(setLocaleToEnglishCall);
