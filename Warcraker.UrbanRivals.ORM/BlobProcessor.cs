@@ -330,7 +330,21 @@ namespace Warcraker.UrbanRivals.ORM
             else
             {
                 Type suffixType = GetType(data.SuffixClassName);
-                var arguments = new object[] { data.X, data.Y };
+                object[] arguments;
+
+                if (data.X == -1)
+                {
+                    arguments = new object[] { };
+                }
+                else if (data.Y == -1)
+                {
+                    arguments = new object[] { data.X };
+                }
+                else
+                {
+                    arguments = new object[] { data.X, data.Y };
+                }
+                
                 Suffix suffix = (Suffix)Activator.CreateInstance(suffixType, arguments);
 
                 IEnumerable<Prefix> prefixes;
