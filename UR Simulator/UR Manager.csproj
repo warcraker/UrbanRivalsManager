@@ -584,6 +584,14 @@
       <Project>{eea283d8-1f37-4f9d-8292-bcd541546903}</Project>
       <Name>UrbanRivalsCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warcraker.UrbanRivals.DataRepository\Warcraker.UrbanRivals.DataRepository.csproj">
+      <Project>{20c91878-e5c0-46db-a328-44b0306f473c}</Project>
+      <Name>Warcraker.UrbanRivals.DataRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warcraker.UrbanRivals.ORM\Warcraker.UrbanRivals.ORM.csproj">
+      <Project>{7a49bc2f-e155-4947-b159-746b416cf8bf}</Project>
+      <Name>Warcraker.UrbanRivals.ORM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warcraker.Utils\Warcraker.Utils.csproj">
       <Project>{881f9b55-679f-4163-a464-57c62bc3c7a3}</Project>
       <Name>Warcraker.Utils</Name>
