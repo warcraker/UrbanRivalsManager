@@ -21,6 +21,7 @@ namespace Warcraker.UrbanRivals.ORM
 
         private readonly GameDataRepository repository;
         private readonly IDictionary<string, string> fullAssembliesByClassName;
+        private readonly IDictionary<string, Prefix> prefixesByName;
 
         public BlobProcessor(GameDataRepository repository)
         {
@@ -37,6 +38,14 @@ namespace Warcraker.UrbanRivals.ORM
             foreach (Type type in validTypes)
             {
                 this.fullAssembliesByClassName.Add(type.Name, type.AssemblyQualifiedName);
+            }
+
+            this.prefixesByName = new Dictionary<string, Prefix>();
+            IEnumerable<KeyValuePair<string, string>> prefixesToCreate = this.fullAssembliesByClassName.Where(a => a.Key.EndsWith(prefixEnding) && a.Key != prefixEnding);
+            foreach (KeyValuePair<string, string> prefixAssemblyName in prefixesToCreate)
+            {
+                Prefix prefix = (Prefix)Type.GetType(prefixAssemblyName.Value).GetConstructor(Type.EmptyTypes).Invoke(null);
+                this.prefixesByName.Add(prefixAssemblyName.Key, prefix);
             }
 
             this.repository = repository;
@@ -95,15 +104,16 @@ namespace Warcraker.UrbanRivals.ORM
         private CycleData ParseAndStoreCycle(string blob, IProgress<string> progress)
         {
             CycleData cycleData;
-            List<string> abilityItems = BlobToList<ApiCallList.Characters.GetCharacters>(blob);
-            List<string> cardItems = BlobToList<ApiCallList.Urc.GetCharacters>(blob);
+            Dictionary<int, string> abilityItems = BlobToDictionary<ApiCallList.Characters.GetCharacters>(blob);
+            Dictionary<int, string> cardItems = BlobToDictionary<ApiCallList.Urc.GetCharacters>(blob);
             Asserts.Check(abilityItems.Count == cardItems.Count, $"Characters.GetCharacters and Urc.GetCharacters call counts must be equal");
-            List<string> clanItems = BlobToList<ApiCallList.Characters.GetClans>(blob);
+            Dictionary<int, string> clanItems = BlobToDictionary<ApiCallList.Characters.GetClans>(blob);
             progress.Report($"Cards: {cardItems.Count}. Clans: {clanItems.Count}");
 
             IList<int> clanHashes = new List<int>();
-            foreach (string clanItem in clanItems)
+            foreach (int clanId in clanItems.Keys)
             {
+                string clanItem = clanItems[clanId];
                 int clanHash = HashText(clanItem);
                 ClanData clanData = this.repository.GetClanData(clanHash);
                 if (clanData == null)
@@ -193,7 +203,6 @@ namespace Warcraker.UrbanRivals.ORM
                     progress.Report("Card NOT found");
                     int abilityUnlockLevel = int.Parse(decodedAbility["ability_unlock_level"].ToString());
                     dynamic decodedCard = JsonConvert.DeserializeObject(cardItem);
-                    int cardGameId = int.Parse(decodedCard["id"].ToString());
                     string cardName = decodedCard["name"].ToString();
                     int clanId = int.Parse(decodedCard["clanID"].ToString());
                     string rarityText = decodedCard["rarity"].ToString();
@@ -213,7 +222,7 @@ namespace Warcraker.UrbanRivals.ORM
                     cardData = new CardData
                     {
                         Hash = cardHash,
-                        GameId = cardGameId,
+                        GameId = cardId,
                         Name = cardName,
                         ClanGameId = clanId,
                         InitialLevel = initialLevel,
@@ -256,18 +265,19 @@ namespace Warcraker.UrbanRivals.ORM
             return cycleData;
         }
 
-        private static List<string> BlobToList<TCall>(string blob) where TCall : ApiCall, new()
+        private static Dictionary<int, string> BlobToDictionary<TCall>(string blob) where TCall : ApiCall, new()
         {
-            List<string> result = new List<string>();
+            var result = new Dictionary<int, string>();
 
             TCall call = new TCall();
             dynamic decoded = JsonConvert.DeserializeObject(blob);
             IEnumerable<dynamic> items = decoded[call.Call]["items"];
             IEnumerable<dynamic> orderedItems = items.OrderBy(x => x["id"].Value);
-            foreach (dynamic item in orderedItems)
+            foreach (dynamic item in items)
             {
+                int id = int.Parse(item["id"].ToString());
                 string text = item.ToString();
-                result.Add(text);
+                result.Add(id, text);
             }
             return result;
         }
@@ -313,14 +323,30 @@ namespace Warcraker.UrbanRivals.ORM
         {
             Skill skill;
 
-            Type suffixType = GetType(data.SuffixClassName);
-            Suffix suffix = (Suffix)Activator.CreateInstance(suffixType, new { data.X, data.Y });
+            if (data.SuffixClassName == nameof(NoAbility))
+            {
+                skill = PlaceholderSkill.NO_ABILITY;
+            }
+            else
+            {
+                Type suffixType = GetType(data.SuffixClassName);
+                var arguments = new object[] { data.X, data.Y };
+                Suffix suffix = (Suffix)Activator.CreateInstance(suffixType, arguments);
 
-            IEnumerable<Prefix> prefixes = data.PrefixesClassNames
-                .Split(COMMA_SEPARATOR)
-                .Select(prefix => (Prefix)Activator.CreateInstance(GetType(prefix)));
+                IEnumerable<Prefix> prefixes;
+                if (String.IsNullOrEmpty(data.PrefixesClassNames))
+                {
+                    prefixes = new Prefix[] { };
+                }
+                else
+                {
+                    prefixes = data.PrefixesClassNames
+                        .Split(COMMA_SEPARATOR)
+                        .Select(prefixName => this.prefixesByName[prefixName]);
+                }
 
-            skill = new Skill(prefixes, suffix);
+                skill = new Skill(prefixes, suffix);
+            }
 
             return skill;
         }
