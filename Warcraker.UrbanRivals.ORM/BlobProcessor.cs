@@ -178,7 +178,7 @@ namespace Warcraker.UrbanRivals.ORM
 
                 int abilityTextHash = HashText(abilityText);
                 int abilityHash;
-                if (!this.repository.TryGetSkillHashFromTextHash(abilityTextHash, out abilityHash))
+                if (this.repository.TryGetSkillHashFromTextHash(abilityTextHash, out abilityHash))
                 {
                     progress.Report($"Ability found [#{abilityHash}]");
                 }
