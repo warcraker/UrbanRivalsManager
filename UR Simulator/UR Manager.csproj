@@ -286,9 +286,7 @@
     <Compile Include="ViewModel\DataManagement\Images\ImageRetriever.cs" />
     <Compile Include="ViewModel\DataManagement\Images\ImageUtils.cs" />
     <Compile Include="ViewModel\DataManagement\Server\ServerQueriesManager.cs" />
-    <Compile Include="ViewModel\DataManagement\Database\SQLiteDatabaseManager.cs" />
     <Compile Include="ViewModel\DataManagement\Global\GlobalManager.cs" />
-    <Compile Include="ViewModel\DataManagement\Database\IDatabaseManager.cs" />
     <Compile Include="ViewModel\DataManagement\InMemory\InMemoryManager.cs" />
     <Compile Include="Others\Utils.cs" />
     <Compile Include="ViewModel\DataManagement\Images\ImageCache.cs" />
