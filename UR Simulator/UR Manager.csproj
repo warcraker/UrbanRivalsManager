@@ -627,6 +627,10 @@
       <Project>{eea283d8-1f37-4f9d-8292-bcd541546903}</Project>
       <Name>UrbanRivalsCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Warcraker.UrbanRivals.Core\Warcraker.UrbanRivals.Core.csproj">
+      <Project>{66235846-A50F-4940-820E-40FB25B945B2}</Project>
+      <Name>Warcraker.UrbanRivals.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warcraker.UrbanRivals.DataRepository\Warcraker.UrbanRivals.DataRepository.csproj">
       <Project>{20c91878-e5c0-46db-a328-44b0306f473c}</Project>
       <Name>Warcraker.UrbanRivals.DataRepository</Name>
