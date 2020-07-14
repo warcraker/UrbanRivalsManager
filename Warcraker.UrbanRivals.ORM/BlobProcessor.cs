@@ -42,13 +42,19 @@ namespace Warcraker.UrbanRivals.ORM
             this.repository = repository;
         }
 
-        public Cycle GetCycleData(string blob)
+        // TODO use localizable values for IProgress calls
+        public Cycle GetCycleData(string blob, IProgress<string> progress)
         {
             int blobHash = HashText(blob);
             CycleData cycleData = this.repository.GetCycleData(blobHash);
             if (cycleData == null)
             {
-                cycleData = ParseAndStoreCycle(blob);
+                progress.Report("Blob NOT found on database");
+                cycleData = ParseAndStoreCycle(blob, progress);
+            }
+            else
+            {
+                progress.Report("Blob found on database");
             }
 
             IDictionary<int, Clan> clans = new Dictionary<int, Clan>();
@@ -86,13 +92,14 @@ namespace Warcraker.UrbanRivals.ORM
             return cycle;
         }
 
-        private CycleData ParseAndStoreCycle(string blob)
+        private CycleData ParseAndStoreCycle(string blob, IProgress<string> progress)
         {
             CycleData cycleData;
             List<string> abilityItems = BlobToList<ApiCallList.Characters.GetCharacters>(blob);
             List<string> cardItems = BlobToList<ApiCallList.Urc.GetCharacters>(blob);
             Asserts.Check(abilityItems.Count == cardItems.Count, $"Characters.GetCharacters and Urc.GetCharacters call counts must be equal");
             List<string> clanItems = BlobToList<ApiCallList.Characters.GetClans>(blob);
+            progress.Report($"Cards: {cardItems.Count}. Clans: {clanItems.Count}");
 
             IList<int> clanHashes = new List<int>();
             foreach (string clanItem in clanItems)
@@ -101,6 +108,8 @@ namespace Warcraker.UrbanRivals.ORM
                 ClanData clanData = this.repository.GetClanData(clanHash);
                 if (clanData == null)
                 {
+                    progress.Report("Clan NOT found");
+
                     dynamic decodedClan = JsonConvert.DeserializeObject(clanItem);
                     string bonusText = decodedClan["bonusDescription"].ToString();
 
@@ -108,13 +117,21 @@ namespace Warcraker.UrbanRivals.ORM
                     int bonusHash;
                     if (!this.repository.TryGetSkillHashFromTextHash(bonusTextHash, out bonusHash))
                     {
+                        progress.Report("Bonus NOT found");
                         Skill bonus = SkillProcessor.ParseSkill(bonusText);
                         SkillData bonusData = SkillToSkillData(bonus);
                         this.repository.SaveSkillData(bonusData, bonusTextHash);
                         bonusHash = bonusData.Hash;
+
+                        progress.Report($"SkillText: {bonusText}");
+                        progress.Report($"Prefixes: {bonusData.PrefixesClassNames}");
+                        progress.Report($"Suffix: {bonusData.SuffixClassName} ({bonusData.X}.{bonusData.Y})");
+                    }
+                    else
+                    {
+                        progress.Report($"Bonus found [#{bonusHash}]");
                     }
 
-                    int clanId = int.Parse(decodedClan["id"].ToString());
                     string clanName = decodedClan["name"].ToString();
                     clanData = new ClanData
                     {
@@ -125,15 +142,27 @@ namespace Warcraker.UrbanRivals.ORM
                     };
                     this.repository.SaveClanData(clanData);
                 }
+                else
+                {
+                    progress.Report($"Clan found [#{clanHash}]");
+                }
 
+                progress.Report($"Clan: [{clanData.GameId}] {clanData.Name}");
                 clanHashes.Add(clanHash);
             }
 
             IList<int> abilityHashes = new List<int>();
             IList<int> cardHashes = new List<int>();
-            for (int i = 0, n = cardItems.Count; i < n; i++)
+
+            int numberOfCardsRecovered = cardItems.Count;
+            int currentCardIndex = 0;
+
+            foreach (int cardId in cardItems.Keys)
             {
-                string abilityItem = abilityItems[i];
+                currentCardIndex++;
+                progress.Report($"Processing card {currentCardIndex}/{numberOfCardsRecovered}. Id {cardId}.");
+
+                string abilityItem = abilityItems[cardId];
                 dynamic decodedAbility = JsonConvert.DeserializeObject(abilityItem);
                 string abilityText = decodedAbility["ability"].ToString();
 
@@ -141,17 +170,27 @@ namespace Warcraker.UrbanRivals.ORM
                 int abilityHash;
                 if (!this.repository.TryGetSkillHashFromTextHash(abilityTextHash, out abilityHash))
                 {
+                    progress.Report($"Ability found [#{abilityHash}]");
+                }
+                else
+                {
+                    progress.Report("Ability NOT found");
                     Skill ability = SkillProcessor.ParseSkill(abilityText);
                     SkillData abilityData = SkillToSkillData(ability);
                     this.repository.SaveSkillData(abilityData, abilityTextHash);
                     abilityHash = abilityData.Hash;
+
+                    progress.Report($"SkillText: {abilityText}");
+                    progress.Report($"Prefixes: {abilityData.PrefixesClassNames}");
+                    progress.Report($"Suffix: {abilityData.SuffixClassName} ({abilityData.X}.{abilityData.Y})");
                 }
 
-                string cardItem = cardItems[i];
+                string cardItem = cardItems[cardId];
                 int cardHash = HashText(cardItem);
                 CardData cardData = this.repository.GetCardData(cardHash);
                 if (cardData == null)
                 {
+                    progress.Report("Card NOT found");
                     int abilityUnlockLevel = int.Parse(decodedAbility["ability_unlock_level"].ToString());
                     dynamic decodedCard = JsonConvert.DeserializeObject(cardItem);
                     int cardGameId = int.Parse(decodedCard["id"].ToString());
@@ -185,6 +224,17 @@ namespace Warcraker.UrbanRivals.ORM
                     };
                     this.repository.SaveCardData(cardData);
                 }
+                else
+                {
+                    progress.Report($"Card found [#{cardHash}]");
+                }
+
+                progress.Report($"Card: [{cardData.GameId}]{cardData.Name}");
+                int levelVariations = cardData.PowerPerLevel.Split(COMMA_SEPARATOR).Count();
+                progress.Report($"Levels: {cardData.InitialLevel}-{cardData.InitialLevel + levelVariations}");
+                progress.Report($"Powers: {cardData.PowerPerLevel}");
+                progress.Report($"Damages: {cardData.DamagePerLevel}");
+                progress.Report($"Ability unlock level: {cardData.AbilityUnlockLevel}");
 
                 int cardGameIdFromAbility = int.Parse(decodedAbility["id"].ToString());
                 Asserts.Check(cardGameIdFromAbility == cardData.GameId,
