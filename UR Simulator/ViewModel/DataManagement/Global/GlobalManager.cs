@@ -263,7 +263,6 @@ namespace UrbanRivalsManager.ViewModel.DataManagement
 
                 var card = ApiToCardDefinitionAdapter.createCardDefinitionByServerData(id, name, clanId, rarityText, abilityText, abilityUnlockLevel, cardStatsPerLevel);
 
-                managers.DatabaseManager.storeCardDefinition(card);
                 managers.InMemoryManager.LoadToMemoryCardDefinition(card);
                 managers.ImageDownloader.AddCardDefinitionToDownloadQueue(card, CharacterImageFormat.Color800x640);
             }
