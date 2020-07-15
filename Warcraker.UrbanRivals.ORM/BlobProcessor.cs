@@ -327,11 +327,13 @@ namespace Warcraker.UrbanRivals.ORM
             {
                 skill = PlaceholderSkill.NO_ABILITY;
             }
+            else if (data.SuffixClassName == nameof(UnknownSkill))
+            {
+                skill = UnknownSkill.INSTANCE;
+            }
             else
             {
-                Type suffixType = GetType(data.SuffixClassName);
                 object[] arguments;
-
                 if (data.X == -1)
                 {
                     arguments = new object[] { };
@@ -434,7 +436,8 @@ namespace Warcraker.UrbanRivals.ORM
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException($"Unable to parse type {typeName}. Reason: {ex.Message}");
+                Asserts.Fail($"Unable to parse type {typeName}. Reason: {ex.Message}");
+                return typeof(UnknownSkill);
             }
         }
         private static string GetTypeName(object o)
