@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable IDE0008, IDE0021, IDE0022, IDE0023, IDE0024
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
