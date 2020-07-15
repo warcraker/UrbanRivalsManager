@@ -6,7 +6,7 @@ namespace UrbanRivalsCore.ViewModel
 {
     internal class BatchSubtracter
     {
-        private SortedList<int, int> Operations;
+        private SortedList<int, int> Operations; // TODO: Does not work when 2 items have the same key
 
         public BatchSubtracter()
         {
@@ -15,6 +15,8 @@ namespace UrbanRivalsCore.ViewModel
 
         public void InsertSubstraction(int value, int min)
         {
+            throw new NotImplementedException(); // TODO: Does not work when 2 items have the same key
+
             if (value <= 0)
                 throw new ArgumentOutOfRangeException(nameof(value), value, "Must be greater than 0");
             if (min < 0)
@@ -24,6 +26,8 @@ namespace UrbanRivalsCore.ViewModel
         }
         public int CalculateSubstractionsAndReset(int initialValue)
         {
+            throw new NotImplementedException(); // TODO: Does not work when 2 items have the same key
+
             int result = initialValue;
             while (Operations.Count > 0)
             {
@@ -37,7 +41,7 @@ namespace UrbanRivalsCore.ViewModel
     }
     internal class BatchAdder
     {
-        private SortedList<int, int> Operations;
+        private SortedList<int, int> Operations; // TODO: Does not work when 2 items have the same key
 
         public BatchAdder()
         {
@@ -46,6 +50,8 @@ namespace UrbanRivalsCore.ViewModel
 
         public void InsertAddition(int value)
         {
+            throw new NotImplementedException(); // TODO: Does not work when 2 items have the same key
+
             if (value <= 0)
                 throw new ArgumentOutOfRangeException(nameof(value), value, "Must be greater than 0");
 
@@ -53,6 +59,8 @@ namespace UrbanRivalsCore.ViewModel
         }
         public void InsertAddition(int value, int max)
         {
+            throw new NotImplementedException(); // TODO: Does not work when 2 items have the same key
+
             if (value <= 0)
                 throw new ArgumentOutOfRangeException(nameof(value), value, "Must be greater than 0");
             if (max <= 0)
@@ -62,6 +70,8 @@ namespace UrbanRivalsCore.ViewModel
         }
         public int CalculateAdditionsAndReset(int initialValue)
         {
+            throw new NotImplementedException(); // TODO: Does not work when 2 items have the same key
+
             List<int> OperationsWithoutMax = new List<int>();
             while (Operations.Count > 0)
             {
