@@ -269,7 +269,7 @@ namespace Warcraker.UrbanRivals.ORM
         {
             var result = new Dictionary<int, string>();
 
-            TCall call = new TCall();
+            var call = new TCall();
             dynamic decoded = JsonConvert.DeserializeObject(blob);
             IEnumerable<dynamic> items = decoded[call.Call]["items"];
             IEnumerable<dynamic> orderedItems = items.OrderBy(x => x["id"].Value);
@@ -344,8 +344,9 @@ namespace Warcraker.UrbanRivals.ORM
                 {
                     arguments = new object[] { data.X, data.Y };
                 }
-                
-                Suffix suffix = (Suffix)Activator.CreateInstance(suffixType, arguments);
+
+                Type suffixType = GetType(data.SuffixClassName);
+                var suffix = (Suffix)Activator.CreateInstance(suffixType, arguments);
 
                 IEnumerable<Prefix> prefixes;
                 if (String.IsNullOrEmpty(data.PrefixesClassNames))
