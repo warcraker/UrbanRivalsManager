@@ -416,7 +416,7 @@ namespace Warcraker.UrbanRivals.ORM
                     return CardDefinition.ECardRarity.Uncommon;
                 default:
                     Asserts.Fail($"Invalid rarity {text}");
-                    return CardDefinition.ECardRarity.Common;
+                    return CardDefinition.ECardRarity.Unknown;
             }
         }
 

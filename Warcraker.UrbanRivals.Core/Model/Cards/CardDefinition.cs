@@ -6,7 +6,8 @@ namespace Warcraker.UrbanRivals.Core.Model.Cards
     {
         public enum ECardRarity
         {
-            Common = 0,
+            Unknown = 0,
+            Common,
             Uncommon,
             Rare,
             Collector,
