@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Warcraker.Utils;
 
 namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills
 {
-    public class Skill : ILocalizable
+    public class Skill
     {
         public IReadOnlyCollection<Prefix> Prefixes { get; protected set; }
         public Suffix Suffix { get; protected set; }
-        public abstract string LocalizationKey { get; }
 
         public Skill(IEnumerable<Prefix> prefixes, Suffix suffix)
         {

@@ -160,7 +160,7 @@ namespace Warcraker.UrbanRivals.ORM
 
             if (text == NO_ABILITY_TEXT)
             {
-                skill = PlaceholderSkill.NO_ABILITY;
+                skill = NoAbility.INSTANCE;
             }
             else
             {
