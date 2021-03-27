@@ -30,6 +30,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Warcraker.UrbanRivals.Serve
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Warcraker.UrbanRivals.ORM", "Warcraker.UrbanRivals.ORM\Warcraker.UrbanRivals.ORM.csproj", "{7A49BC2F-E155-4947-B159-746B416CF8BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warcraker.UrbanRivals.Localization", "Warcraker.UrbanRivals.Localization\Warcraker.UrbanRivals.Localization.csproj", "{94BFE3C6-C96F-48A3-9EA0-E145DEC94485}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -144,6 +146,18 @@ Global
 		{7A49BC2F-E155-4947-B159-746B416CF8BF}.Release|x64.Build.0 = Release|Any CPU
 		{7A49BC2F-E155-4947-B159-746B416CF8BF}.Release|x86.ActiveCfg = Release|Any CPU
 		{7A49BC2F-E155-4947-B159-746B416CF8BF}.Release|x86.Build.0 = Release|Any CPU
+		{94BFE3C6-C96F-48A3-9EA0-E145DEC94485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94BFE3C6-C96F-48A3-9EA0-E145DEC94485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94BFE3C6-C96F-48A3-9EA0-E145DEC94485}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{94BFE3C6-C96F-48A3-9EA0-E145DEC94485}.Debug|x64.Build.0 = Debug|Any CPU
+		{94BFE3C6-C96F-48A3-9EA0-E145DEC94485}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{94BFE3C6-C96F-48A3-9EA0-E145DEC94485}.Debug|x86.Build.0 = Debug|Any CPU
+		{94BFE3C6-C96F-48A3-9EA0-E145DEC94485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94BFE3C6-C96F-48A3-9EA0-E145DEC94485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94BFE3C6-C96F-48A3-9EA0-E145DEC94485}.Release|x64.ActiveCfg = Release|Any CPU
+		{94BFE3C6-C96F-48A3-9EA0-E145DEC94485}.Release|x64.Build.0 = Release|Any CPU
+		{94BFE3C6-C96F-48A3-9EA0-E145DEC94485}.Release|x86.ActiveCfg = Release|Any CPU
+		{94BFE3C6-C96F-48A3-9EA0-E145DEC94485}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
