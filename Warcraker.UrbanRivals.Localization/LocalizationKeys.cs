@@ -120,7 +120,7 @@
                     public const string INCREASE_PILLZ_X_PER_DAMAGE_MAX_Y = "increase_pillz_x_per_damage_max_y";
                     public const string INCREASE_PILLZ_X_MAX_Y = "increase_pillz_x_max_y";
                     public const string INCREASE_POWER_PER_LIFE_LEFT_X_MAX_Y = "increase_power_per_life_left_x_max_y";
-                    public const string INFECTION_X_MAX_Y = "infection_x_max_y";
+                    public const string INFECTION_X_MIN_Y = "infection_x_max_y";
                     public const string MINDWIPE_X_MAX_Y = "mindwipe_x_max_y";
                     public const string POISON_X_MAX_Y = "poison_x_max_y";
                     public const string REBIRTH_X_MAX_Y = "rebirth_x_max_y";

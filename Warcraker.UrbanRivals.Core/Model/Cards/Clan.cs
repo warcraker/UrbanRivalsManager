@@ -18,9 +18,13 @@ namespace Warcraker.UrbanRivals.Core.Model.Cards
         public bool Equals(Clan clan)
         {
             if (clan == null)
+            {
                 return false;
-
-            return this.GameId == clan.GameId;
+            }
+            else
+            {
+                return this.GameId == clan.GameId;
+            }
         }
     }
 }

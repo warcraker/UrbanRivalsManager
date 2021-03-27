@@ -57,8 +57,6 @@ namespace Warcraker.UrbanRivals.ORM
                 new SuffixParser((x, y) => new DecreaseAttackXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9][0-9]?)OppAttackMin(?<y>[1-9][0-9]?)$", OPTIONS)),
                 new SuffixParser((x, y) => new DecreaseAttackXPerRemainingLifeMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppAttPerLifeLeftMin(?<y>[1-9]?[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new DecreaseAttackXPerRemainingPillzMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppAttPerPillzLeftMin(?<y>[1-9]?[0-9])$", OPTIONS)),
-                new SuffixParser((x, y) => new DecreaseCardsDamageXMinYSuffix(x, y), new Regex(@"^-(?<x>[0-9])CardsDamageMin(?<y>[0-9])$", OPTIONS)),
-                new SuffixParser((x, y) => new DecreaseCardsPowerXMinYSuffix(x, y), new Regex(@"^-(?<x>[0-9])CardsPowerMin(?<y>[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new DecreaseDamageXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])OppD(?:amage|mg)Min(?<y>[0-9]?)$", OPTIONS)),
                 new SuffixParser((x, y) => new DecreaseLifeAndPillzXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])(?:Opp)?(?:Life&Pillz|Pillz(?:&|And)Life)Min(?<y>[0-9])$", OPTIONS)),
                 new SuffixParser((x, y) => new DecreaseLifeXMinYSuffix(x, y), new Regex(@"^-(?<x>[1-9])(?:Opp)?LifeMin(?<y>[0-9])$", OPTIONS)),
@@ -200,7 +198,7 @@ namespace Warcraker.UrbanRivals.ORM
         private static IEnumerable<Prefix> ParsePrefixes(string textToParse, out string textWithoutPrefixes)
         {
             string text = textToParse;
-            List<Prefix> prefixes = new List<Prefix>();
+            var prefixes = new List<Prefix>();
             PrefixParser parser;
 
             do

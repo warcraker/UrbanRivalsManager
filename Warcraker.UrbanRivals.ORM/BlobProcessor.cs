@@ -73,7 +73,7 @@ namespace Warcraker.UrbanRivals.ORM
                 ClanData clanData = this.repository.GetClanData(clanHash);
                 SkillData bonusData = this.repository.GetSkillData(clanData.BonusHash);
                 Skill bonus = SkillDataToSkill(bonusData);
-                Clan clan = new Clan(clanData.GameId, clanData.Name, bonus);
+                var clan = new Clan(clanData.GameId, clanData.Name, bonus);
                 clans[clan.GameId] = clan;
             }
 
@@ -87,16 +87,16 @@ namespace Warcraker.UrbanRivals.ORM
                 SkillData abilityData = this.repository.GetSkillData(abilityHashes[i]);
                 Skill ability = SkillDataToSkill(abilityData);
                 Clan clan = clans[cardData.ClanGameId];
-                CardStats stats = new CardStats(cardData.InitialLevel,
+                var stats = new CardStats(cardData.InitialLevel,
                     CsvToInts(cardData.PowerPerLevel), CsvToInts(cardData.DamagePerLevel));
-                CardDefinition card = new CardDefinition(cardData.GameId, cardData.Name, clan, ability,
+                var card = new CardDefinition(cardData.GameId, cardData.Name, clan, ability,
                     cardData.AbilityUnlockLevel, stats, (CardDefinition.ECardRarity)cardData.Rarity);
 
                 cards.Add(card);
             }
 
             Cycle.ECycleType cycleType = Cycle.ECycleType.Day; // TODO detect day/night
-            Cycle cycle = new Cycle(cycleType, cards);
+            var cycle = new Cycle(cycleType, cards);
 
             return cycle;
         }
@@ -211,8 +211,8 @@ namespace Warcraker.UrbanRivals.ORM
                     IEnumerable<dynamic> levels = decodedCard["levels"];
                     int initialLevel = int.Parse(levels.First()["level"].ToString());
 
-                    List<int> powers = new List<int>();
-                    List<int> damages = new List<int>();
+                    var powers = new List<int>();
+                    var damages = new List<int>();
                     foreach (dynamic levelItem in levels)
                     {
                         powers.Add(int.Parse(levelItem["power"].ToString()));
@@ -287,7 +287,6 @@ namespace Warcraker.UrbanRivals.ORM
                 .Split(COMMA_SEPARATOR)
                 .Select(item => int.Parse(item));
         }
-        // TODO avoid duplicate code in CSV methods
         private static string IntsToCsv(IEnumerable<int> input)
         {
             if (!input.Any())
@@ -325,7 +324,7 @@ namespace Warcraker.UrbanRivals.ORM
 
             if (data.SuffixClassName == nameof(NoAbility))
             {
-                skill = PlaceholderSkill.NO_ABILITY;
+                skill = NoAbility.INSTANCE;
             }
             else if (data.SuffixClassName == nameof(UnknownSkill))
             {

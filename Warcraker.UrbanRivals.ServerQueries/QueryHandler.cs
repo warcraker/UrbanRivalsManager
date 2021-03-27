@@ -10,7 +10,7 @@ namespace Warcraker.UrbanRivals.ServerQueries
 {
     public class QueryHandler
     {
-        private ApiManager apiManager;
+        private readonly ApiManager apiManager;
 
         public QueryHandler(string consumerKey, string consumerSecret, string accessKey, string accessSecret) 
         {
@@ -23,22 +23,23 @@ namespace Warcraker.UrbanRivals.ServerQueries
             string previousUserLocale = GetUserLocale();
                        
             ApiCall setLocaleToEnglishCall = new ApiCallList.Players.SetLanguages(new List<string> { "en" });
-            ApiCall getClansCall = new ApiCallList.Characters.GetClans
-            {
-                ItemsFilter = new List<string> { "id", "name", "bonusDescription" },
-            };
+            var request = new ApiRequest(setLocaleToEnglishCall);
+
             ApiCall getAbilitiesCall = new ApiCallList.Characters.GetCharacters
             {
                 maxLevels = true,
                 ItemsFilter = new List<string> { "id", "ability", "ability_unlock_level" },
             };
+            request.EnqueueApiCall(getAbilitiesCall);
             ApiCall getCharactersCall = new ApiCallList.Urc.GetCharacters
             {
                 ItemsFilter = new List<string> { "id", "name", "clanID", "rarity", "levels.level", "levels.power", "levels.damage" },
             };
-            ApiRequest request = new ApiRequest(setLocaleToEnglishCall);
-            request.EnqueueApiCall(getAbilitiesCall);
             request.EnqueueApiCall(getCharactersCall);
+            ApiCall getClansCall = new ApiCallList.Characters.GetClans
+            {
+                ItemsFilter = new List<string> { "id", "name", "bonusDescription" },
+            };
             request.EnqueueApiCall(getClansCall);
 
             blob = ExecuteCall(request);
@@ -65,7 +66,7 @@ namespace Warcraker.UrbanRivals.ServerQueries
             {
                 ContextFilter = new List<string>() { "player.locale" }
             };
-            ApiRequest request = new ApiRequest(getLocaleCall);
+            var request = new ApiRequest(getLocaleCall);
 
             string response = ExecuteCall(request);
             dynamic decoded = JsonConvert.DeserializeObject(response);
@@ -76,7 +77,7 @@ namespace Warcraker.UrbanRivals.ServerQueries
         private void SetUserLocale(string locale)
         {
             ApiCall setLocaleCall = new ApiCallList.Players.SetLanguages(new List<string> { locale });
-            ApiRequest request = new ApiRequest(setLocaleCall);
+            var request = new ApiRequest(setLocaleCall);
 
             ExecuteCall(request);
         }
