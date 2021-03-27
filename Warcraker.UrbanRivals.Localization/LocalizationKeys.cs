@@ -6,10 +6,10 @@
         public static class Skills
         {
             public const string NO_ABILITY = "skill_no_ability";
-            public const string ABILITY_UNLOCKED_AT_LEVEL_2 = "skill_unlock_at_level_2";
-            public const string ABILITY_UNLOCKED_AT_LEVEL_3 = "skill_unlock_at_level_3";
-            public const string ABILITY_UNLOCKED_AT_LEVEL_4 = "skill_unlock_at_level_4";
-            public const string ABILITY_UNLOCKED_AT_LEVEL_5 = "skill_unlock_at_level_5";
+            public const string ABILITY_UNLOCKED_AT_LEVEL_2 = "skill_unlocked_at_level_2";
+            public const string ABILITY_UNLOCKED_AT_LEVEL_3 = "skill_unlocked_at_level_3";
+            public const string ABILITY_UNLOCKED_AT_LEVEL_4 = "skill_unlocked_at_level_4";
+            public const string ABILITY_UNLOCKED_AT_LEVEL_5 = "skill_unlocked_at_level_5";
             public const string INACTIVE_BONUS = "skill_inactive_bonus";
             public static class Leaders
             {
