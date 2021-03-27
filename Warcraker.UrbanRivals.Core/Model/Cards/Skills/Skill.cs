@@ -5,10 +5,11 @@ using Warcraker.Utils;
 
 namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills
 {
-    public class Skill
+    public class Skill : ILocalizable
     {
         public IReadOnlyCollection<Prefix> Prefixes { get; protected set; }
         public Suffix Suffix { get; protected set; }
+        public abstract string LocalizationKey { get; }
 
         public Skill(IEnumerable<Prefix> prefixes, Suffix suffix)
         {

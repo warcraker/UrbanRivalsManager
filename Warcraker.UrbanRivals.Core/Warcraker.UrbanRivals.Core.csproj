@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Warcraker.UrbanRivals.Localization\Warcraker.UrbanRivals.Localization.csproj" />
     <ProjectReference Include="..\Warcraker.Utils\Warcraker.Utils.csproj" />
   </ItemGroup>
 
