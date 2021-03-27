@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="skill_suffix_cancel_leader" xml:space="preserve">
+    <value>Cancel Leader</value>
+  </data>
+  <data name="skill_suffix_increase_attack_x_per_remaining_pillz" xml:space="preserve">
+    <value>+{0} Attack Per Pillz Left</value>
+  </data>
+  <data name="skill_suffix_increase_attack_x" xml:space="preserve">
+    <value>+{0} Attack</value>
+  </data>
+  <data name="skill_unlocked_at_level_2" xml:space="preserve">
+    <value>Ability unlocked at level 2</value>
+  </data>
+  <data name="skill_no_ability" xml:space="preserve">
+    <value>No ability</value>
+  </data>
+  <data name="skill_no_bonus" xml:space="preserve">
+    <value>No bonus</value>
+  </data>
+  <data name="skill_prefix_confidence" xml:space="preserve">
+    <value>Confidence: </value>
+  </data>
+  <data name="skill_prefix_courage" xml:space="preserve">
+    <value>Courage: </value>
+  </data>
+  <data name="skill_prefix_defeat" xml:space="preserve">
+    <value>Defeat: </value>
+  </data>
+  <data name="skill_prefix_reprisal" xml:space="preserve">
+    <value>Reprisal: </value>
+  </data>
+  <data name="skill_prefix_revenge" xml:space="preserve">
+    <value>Regenge: </value>
+  </data>
+  <data name="skill_prefix_stop" xml:space="preserve">
+    <value>Stop: </value>
+  </data>
+  <data name="skill_prefix_support" xml:space="preserve">
+    <value>Support: </value>
+  </data>
+  <data name="skill_leader_ambre" xml:space="preserve">
+    <value>Team: Courage: Power +3, Max 10</value>
+  </data>
+  <data name="skill_leader_ashigaru" xml:space="preserve">
+    <value>Team: Strike Back</value>
+  </data>
+  <data name="skill_leader_bridget" xml:space="preserve">
+    <value>Team: +1 Life Per Round</value>
+  </data>
+  <data name="skill_leader_eklore" xml:space="preserve">
+    <value>Team: -1 Opp Pillz Per Round, Min 3</value>
+  </data>
+  <data name="skill_leader_eyrik" xml:space="preserve">
+    <value>Team: -1 Opp Power, Min 5</value>
+  </data>
+  <data name="skill_leader_hugo" xml:space="preserve">
+    <value>Team: +6 Attack</value>
+  </data>
+  <data name="skill_leader_morphun" xml:space="preserve">
+    <value>Team: +1 Pillz Per Round, Max 10</value>
+  </data>
+  <data name="skill_leader_timber" xml:space="preserve">
+    <value>Team: Damage +1</value>
+  </data>
+  <data name="skill_leader_vansaar" xml:space="preserve">
+    <value>Team: Xp +90%</value>
+  </data>
+  <data name="skill_leader_vholt" xml:space="preserve">
+    <value>Team: -2 Opp Damage, Min 4</value>
+  </data>
+  <data name="skill_suffix_copy_bonus" xml:space="preserve">
+    <value>Copy Opp Bonus</value>
+  </data>
+  <data name="skill_suffix_copy_damage" xml:space="preserve">
+    <value>Copy Damage</value>
+  </data>
+  <data name="skill_suffix_copy_power" xml:space="preserve">
+    <value>Copy Power</value>
+  </data>
+  <data name="skill_suffix_copy_power_and_damage" xml:space="preserve">
+    <value>Copy Power And Damage</value>
+  </data>
+  <data name="skill_suffix_decrease_attack_x_min_y" xml:space="preserve">
+    <value>-{0} Opp Attack, Min {1}</value>
+  </data>
+  <data name="skill_suffix_decrease_damage_x_min_y" xml:space="preserve">
+    <value>-{0} Opp Damage, Min {1}</value>
+  </data>
+  <data name="skill_suffix_decrease_life_x_min_y" xml:space="preserve">
+    <value>-{0} Life, Min {1}</value>
+  </data>
+  <data name="skill_suffix_decrease_pillz_x_min_y" xml:space="preserve">
+    <value>-{0} Pillz, Min {1}</value>
+  </data>
+  <data name="skill_suffix_decrease_power_and_damage_x_min_y" xml:space="preserve">
+    <value>-{0} Opp Power And Damage, Min {1}</value>
+  </data>
+  <data name="skill_suffix_decrease_power_x_min_y" xml:space="preserve">
+    <value>-{0} Opp Power, Min {1}</value>
+  </data>
+  <data name="skill_suffix_heal_x_max_y" xml:space="preserve">
+    <value>Heal {0}, Max {1}</value>
+  </data>
+  <data name="skill_suffix_increase_attack_x_per_remaining_life" xml:space="preserve">
+    <value>+{0} Attack Per Life Left</value>
+  </data>
+  <data name="skill_suffix_increase_damage_x" xml:space="preserve">
+    <value>+{0} Damage</value>
+  </data>
+  <data name="skill_suffix_increase_life_x" xml:space="preserve">
+    <value>+{0} Life</value>
+  </data>
+  <data name="skill_suffix_increase_life_x_per_damage" xml:space="preserve">
+    <value>+{0} Life Per Damage</value>
+  </data>
+  <data name="skill_suffix_increase_pillz_x" xml:space="preserve">
+    <value>+{0} Pillz</value>
+  </data>
+  <data name="skill_suffix_increase_pillz_x_per_damage" xml:space="preserve">
+    <value>+{0} Pillz Per Damage</value>
+  </data>
+  <data name="skill_suffix_increase_power_and_damage_x" xml:space="preserve">
+    <value>+{0} Power And Damage</value>
+  </data>
+  <data name="skill_suffix_increase_power_x" xml:space="preserve">
+    <value>+{0} Power</value>
+  </data>
+  <data name="skill_suffix_poison_x_min_y" xml:space="preserve">
+    <value>Poison {0}, Min {1}</value>
+  </data>
+  <data name="skill_suffix_protect_ability" xml:space="preserve">
+    <value>Protect Ability</value>
+  </data>
+  <data name="skill_suffix_protect_bonus" xml:space="preserve">
+    <value>Protect Bonus</value>
+  </data>
+  <data name="skill_suffix_protect_damage" xml:space="preserve">
+    <value>Protect Damage</value>
+  </data>
+  <data name="skill_suffix_protect_power" xml:space="preserve">
+    <value>Protect Power</value>
+  </data>
+  <data name="skill_suffix_protect_power_and_damage" xml:space="preserve">
+    <value>Protect Power And Damage</value>
+  </data>
+  <data name="skill_suffix_recover_x_pillz_out_of_y" xml:space="preserve">
+    <value>Recover {0} Pillz Out Of {1}</value>
+  </data>
+  <data name="skill_suffix_stop_ability" xml:space="preserve">
+    <value>Stop Opp Ability</value>
+  </data>
+  <data name="skill_suffix_stop_bonus" xml:space="preserve">
+    <value>Stop Opp Bonus</value>
+  </data>
+  <data name="clan_name_allstars" xml:space="preserve">
+    <value>All Stars</value>
+  </data>
+  <data name="clan_name_bangers" xml:space="preserve">
+    <value>Bangers</value>
+  </data>
+  <data name="clan_name_berzerk" xml:space="preserve">
+    <value>Berzerk</value>
+  </data>
+  <data name="clan_name_fangpiclang" xml:space="preserve">
+    <value>Fang Pi Clang</value>
+  </data>
+  <data name="clan_name_freaks" xml:space="preserve">
+    <value>Freaks</value>
+  </data>
+  <data name="clan_name_frozn" xml:space="preserve">
+    <value>Frozn</value>
+  </data>
+  <data name="clan_name_gheist" xml:space="preserve">
+    <value>GHEIST</value>
+  </data>
+  <data name="clan_name_huracan" xml:space="preserve">
+    <value>Huracan</value>
+  </data>
+  <data name="clan_name_jungo" xml:space="preserve">
+    <value>Jungo</value>
+  </data>
+  <data name="clan_name_junkz" xml:space="preserve">
+    <value>Junkz</value>
+  </data>
+  <data name="clan_name_lajunta" xml:space="preserve">
+    <value>La Junta</value>
+  </data>
+  <data name="clan_name_leader" xml:space="preserve">
+    <value>Leader</value>
+  </data>
+  <data name="clan_name_montana" xml:space="preserve">
+    <value>Montana</value>
+  </data>
+  <data name="clan_name_nightmare" xml:space="preserve">
+    <value>Nightmare</value>
+  </data>
+  <data name="clan_name_piranas" xml:space="preserve">
+    <value>Piranas</value>
+  </data>
+  <data name="clan_name_pussycats" xml:space="preserve">
+    <value>Pussycats</value>
+  </data>
+  <data name="clan_name_rescue" xml:space="preserve">
+    <value>Rescue</value>
+  </data>
+  <data name="clan_name_roots" xml:space="preserve">
+    <value>Roots</value>
+  </data>
+  <data name="clan_name_sakrohm" xml:space="preserve">
+    <value>Sakrohm</value>
+  </data>
+  <data name="clan_name_sentinel" xml:space="preserve">
+    <value>Sentinel</value>
+  </data>
+  <data name="clan_name_skeelz" xml:space="preserve">
+    <value>Skeelz</value>
+  </data>
+  <data name="clan_name_uluwatu" xml:space="preserve">
+    <value>Ulu Watu</value>
+  </data>
+  <data name="clan_name_uppers" xml:space="preserve">
+    <value>Uppers</value>
+  </data>
+  <data name="clan_name_vortex" xml:space="preserve">
+    <value>Vortex</value>
+  </data>
+  <data name="skill_prefix_backlash" xml:space="preserve">
+    <value>Backlash: </value>
+  </data>
+  <data name="skill_prefix_victory_or_defeat" xml:space="preserve">
+    <value>Victory or Defeat: </value>
+  </data>
+  <data name="skill_prefix_growth" xml:space="preserve">
+    <value>Growth: </value>
+  </data>
+  <data name="card_rarity_collector" xml:space="preserve">
+    <value>Collector</value>
+  </data>
+  <data name="card_rarity_common" xml:space="preserve">
+    <value>Common</value>
+  </data>
+  <data name="card_rarity_legendary" xml:space="preserve">
+    <value>Legendary</value>
+  </data>
+  <data name="card_rarity_rare" xml:space="preserve">
+    <value>Rare</value>
+  </data>
+  <data name="card_rarity_rebirth" xml:space="preserve">
+    <value>Rebirth</value>
+  </data>
+  <data name="card_rarity_uncommon" xml:space="preserve">
+    <value>Uncommon</value>
+  </data>
+  <data name="skill_leader_solomon" xml:space="preserve">
+    <value>Tie-break</value>
+  </data>
+  <data name="skill_suffix_increase_pillz_x_max_y" xml:space="preserve">
+    <value>+{0} Pillz, Max {1}</value>
+  </data>
+  <data name="skill_suffix_protect_attack" xml:space="preserve">
+    <value>Protect Attack</value>
+  </data>
+  <data name="skill_suffix_increase_life_x_per_damage_max_y" xml:space="preserve">
+    <value>+{0} Life Per Damage, Max {1}</value>
+  </data>
+  <data name="skill_prefix_killshot" xml:space="preserve">
+    <value>Killshot: </value>
+  </data>
+  <data name="skill_suffix_cancel_attack_modifier" xml:space="preserve">
+    <value>Cancel Opp Attack Modifier</value>
+  </data>
+  <data name="skill_suffix_cancel_power_modifier" xml:space="preserve">
+    <value>Cancel Power Modifier</value>
+  </data>
+  <data name="skill_suffix_toxin_x_min_y" xml:space="preserve">
+    <value>Toxin {0}, Min {1}</value>
+  </data>
+  <data name="skill_suffix_increase_life_x_max_y" xml:space="preserve">
+    <value>+{0} Life, Max {1}</value>
+  </data>
+  <data name="skill_suffix_cancel_life_modifier" xml:space="preserve">
+    <value>Cancel Life Modifiers</value>
+  </data>
+  <data name="skill_suffix_cancel_damage_modifier" xml:space="preserve">
+    <value>Cancel Opp Damage Modifier</value>
+  </data>
+  <data name="skill_suffix_decrease_attack_x_per_remaining_life_min_y" xml:space="preserve">
+    <value>-{0} Opp Attack Per Life Left, Min {1}</value>
+  </data>
+  <data name="skill_suffix_cancel_pillz_modifier" xml:space="preserve">
+    <value>Cancel Pillz Modifiers</value>
+  </data>
+  <data name="skill_suffix_regen_x_max_y" xml:space="preserve">
+    <value>Regen {0}, Max {1}</value>
+  </data>
+  <data name="skill_leader_melody" xml:space="preserve">
+    <value>Team: Defeat: Recover 1 Pillz Out Of 3</value>
+  </data>
+  <data name="skill_prefix_equalizer" xml:space="preserve">
+    <value>Equalizer: </value>
+  </data>
+  <data name="skill_prefix_brawl" xml:space="preserve">
+    <value>Brawl: </value>
+  </data>
+  <data name="skill_prefix_degrowth" xml:space="preserve">
+    <value>Degrowth: </value>
+  </data>
+  <data name="skill_suffix_dope_x_max_y" xml:space="preserve">
+    <value>Dope {0}, Max {1}</value>
+  </data>
+  <data name="skill_suffix_cancel_pillz_and_life_modifier" xml:space="preserve">
+    <value>Cancel Pillz And Life Modifiers</value>
+  </data>
+  <data name="skill_suffix_exchange_damage" xml:space="preserve">
+    <value>Exchange Damage</value>
+  </data>
+  <data name="skill_suffix_exchange_power" xml:space="preserve">
+    <value>Exchange Power</value>
+  </data>
+  <data name="skill_suffix_cancel_power_and_damage_modifier" xml:space="preserve">
+    <value>Cancel Power And Damage Modifiers</value>
+  </data>
+  <data name="skill_suffix_consume_x_min_y" xml:space="preserve">
+    <value>Consume {0}, Min {1}</value>
+  </data>
+  <data name="skill_suffix_decrease_attack_x_per_remaining_pillz_min_y" xml:space="preserve">
+    <value>-{0} Opp Attack Per Pillz Left, Min {1}</value>
+  </data>
+  <data name="skill_suffix_increase_pillz_and_life_x" xml:space="preserve">
+    <value>+{0} Pillz And Life </value>
+  </data>
+  <data name="skill_suffix_decrease_life_and_pillz_x_min_y" xml:space="preserve">
+    <value>-{0} Opp Pillz And Life, Min {1}</value>
+  </data>
+  <data name="skill_suffix_infection_x_min_y" xml:space="preserve">
+    <value>Infection {0}, Min {1}</value>
+  </data>
+  <data name="skill_suffix_reanimate_x" xml:space="preserve">
+    <value>Reanimate {0}</value>
+  </data>
+  <data name="skill_suffix_corrosion_x_min_y" xml:space="preserve">
+    <value>Corrosion {0}, Min {1}</value>
+  </data>
+  <data name="skill_suffix_rebirth_x_max_y" xml:space="preserve">
+    <value>Rebirth {0}, Max {1}</value>
+  </data>
+  <data name="skill_suffix_exchange_power_and_damage" xml:space="preserve">
+    <value>Exchange Power And Damage</value>
+  </data>
+  <data name="skill_suffix_dope_and_regen_x_max_y" xml:space="preserve">
+    <value>Dope And Regen {0}, Max {1}</value>
+  </data>
+  <data name="skill_suffix_xantiax_x_min_y" xml:space="preserve">
+    <value>Xantiax {0}, Min {1}</value>
+  </data>
+  <data name="skill_suffix_increase_atack_x_per_opp_damage" xml:space="preserve">
+    <value>Increase Attack {0} Per Opp Damage</value>
+  </data>
+  <data name="skill_prefix_day" xml:space="preserve">
+    <value>Day: </value>
+  </data>
+  <data name="skill_prefix_night" xml:space="preserve">
+    <value>Night: </value>
+  </data>
+  <data name="skill_suffix_increase_pillz_x_per_damage_max_y" xml:space="preserve">
+    <value>+{0} Pillz Per Damage, Max {1}</value>
+  </data>
+  <data name="skill_suffix_repair_x_max_y" xml:space="preserve">
+    <value>Repair {0}, Max {1}</value>
+  </data>
+  <data name="skill_suffix_combust_x_min_y" xml:space="preserve">
+    <value>Combust {0}, Min {1}</value>
+  </data>
+  <data name="skill_suffix_increase_attack_x_per_opp_damage" xml:space="preserve">
+    <value>+{0} Attack Per Opp Damage</value>
+  </data>
+  <data name="skill_suffix_increase_attack_x_per_opp_power" xml:space="preserve">
+    <value>+{0} Attack Per Opp Power</value>
+  </data>
+  <data name="skill_unlocked_at_level_3" xml:space="preserve">
+    <value>Ability unlocked at level 3</value>
+  </data>
+  <data name="skill_unlocked_at_level_4" xml:space="preserve">
+    <value>Ability unlocked at level 4</value>
+  </data>
+  <data name="skill_unlocked_at_level_5" xml:space="preserve">
+    <value>Ability unlocked at level 5</value>
+  </data>
+</root>
