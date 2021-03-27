@@ -1,4 +1,6 @@
-﻿namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills
+﻿using Warcraker.UrbanRivals.Localization;
+
+namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills
 {
     public abstract class Prefix : ILocalizable
     {

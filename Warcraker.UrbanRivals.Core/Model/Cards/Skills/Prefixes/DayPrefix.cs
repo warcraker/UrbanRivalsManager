@@ -1,10 +1,15 @@
-﻿namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Prefixes
+﻿using Warcraker.UrbanRivals.Localization;
+
+namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Prefixes
 {
     public class DayPrefix : Prefix
     {
-        public override string ToString()
+        public override string LocalizationKey
         {
-            return ""; // TODO
+            get
+            {
+                return LocalizationKeys.Skills.Prefixes.DAY;
+            }
         }
     }
 }

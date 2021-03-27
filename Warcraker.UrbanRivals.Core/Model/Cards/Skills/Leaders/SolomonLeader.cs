@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Warcraker.UrbanRivals.Localization;
 
 namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Leaders
 {
@@ -10,6 +8,14 @@ namespace Warcraker.UrbanRivals.Core.Model.Cards.Skills.Leaders
             : base(-1, -1)
         {
             ;
+        }
+
+        public override string LocalizationKey
+        {
+            get
+            {
+                return LocalizationKeys.Skills.Leaders.SOLOMON;
+            }
         }
     }
 }
