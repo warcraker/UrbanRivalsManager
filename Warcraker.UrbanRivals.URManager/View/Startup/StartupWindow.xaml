@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warcraker.UrbanRivals.URManager.View.Startup"
         mc:Ignorable="d"
-        Title="StartupWindow" Height="450" Width="800">
+        Title="StartupWindow" Height="450" Width="800"
+        Visibility="Hidden">
     <Grid>
         
     </Grid>
