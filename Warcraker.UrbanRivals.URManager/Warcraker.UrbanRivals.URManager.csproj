@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Warcraker.UrbanRivals.URManager.Bootstrap\Warcraker.UrbanRivals.URManager.Bootstrap.csproj" />
+    <ProjectReference Include="..\Warcraker.UrbanRivals.URManager.ViewModels\Warcraker.UrbanRivals.URManager.ViewModels.csproj" />
+    <ProjectReference Include="..\Warcraker.Utils\Warcraker.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Resources\Text\Text.en.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
