@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Warcraker.UrbanRivals.URManager.Configuration\Warcraker.UrbanRivals.URManager.Configuration.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Warcraker.UrbanRivals.URManager.Settings\Warcraker.UrbanRivals.URManager.Settings.csproj" />
     <Reference Include="Warcraker.UrbanRivals.ApiManager">
       <HintPath>..\..\Api\UrbanRivalsApiManager\UrbanRivalsApiManager\bin\Release\Warcraker.UrbanRivals.ApiManager.dll</HintPath>
     </Reference>

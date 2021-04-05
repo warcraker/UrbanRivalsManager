@@ -1,42 +1,21 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using Microsoft.Extensions.Logging;
 using Warcraker.Utils;
 
 namespace Warcraker.UrbanRivals.URManager.Configuration
 {
-    public class URConfigurationManager
+    public class SettingsManager
     {
         private readonly ILogger log;
 
-        public URConfigurationManager(ILogger<URConfigurationManager> log) 
+        public SettingsManager(ILogger<SettingsManager> log)
         {
             AssertArgument.CheckIsNotNull(log, nameof(log));
 
             this.log = log;
         }
 
-        public bool IsFirstRun
-        {
-            get
-            {
-                string storedValue = GetValue(nameof(IsFirstRun));
-                return String.IsNullOrEmpty(storedValue);
-            }
-            set
-            {
-                if (value)
-                {
-                    log.LogInformation($"Setting {nameof(IsFirstRun)} as true");
-                    SetValue(nameof(IsFirstRun), null);
-                }
-                else
-                {
-                    SetValue(nameof(IsFirstRun), value.ToString());
-                }
-            }
-        }
-        public string Language 
+        public string Language
         {
             get
             {
@@ -48,15 +27,58 @@ namespace Warcraker.UrbanRivals.URManager.Configuration
                 {
                     case SupportedLanguages.ENGLISH:
                     case SupportedLanguages.SPANISH:
-                        log.LogInformation("Setting language: {language}", value);
                         SetValue(nameof(Language), value);
                         break;
                     default:
-                        log.LogError("Provided unsupported language: {language}. Setting language to default (English)", value);
+                        log.LogWarning("Provided unsupported language: {language}. Setting language to default (English)", value);
                         Asserts.Fail($"Unsupported language {value}");
                         SetValue(nameof(Language), SupportedLanguages.ENGLISH);
                         break;
                 }
+            }
+        }
+        public string ConsumerKey
+        {
+            get
+            {
+                return GetValue(nameof(ConsumerKey));
+            }
+            set
+            {
+                SetValue(nameof(ConsumerKey), value);
+            }
+        }
+        public string ConsumerSecret
+        {
+            get
+            {
+                return GetValue(nameof(ConsumerSecret));
+            }
+            set
+            {
+                SetValue(nameof(ConsumerSecret), value);
+            }
+        }
+        public string AccessKey
+        {
+            get
+            {
+                return GetValue(nameof(AccessKey));
+            }
+            set
+            {
+                SetValue(nameof(AccessKey), value);
+            }
+        }
+        public string AccessSecret
+        {
+            get
+            {
+                return GetValue(nameof(AccessSecret));
+            }
+            set
+            {
+                SetValue(nameof(AccessSecret), value);
             }
         }
 
