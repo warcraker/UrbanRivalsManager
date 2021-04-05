@@ -6,20 +6,17 @@ using Microsoft.Extensions.Logging;
 using Warcraker.UrbanRivals.URManager.Configuration;
 using Warcraker.Utils;
 
-namespace Warcraker.UrbanRivals.URManager.ViewModels.Language
+namespace Warcraker.UrbanRivals.URManager.ViewModels
 {
-    public class LanguageConfigurationVM
+    public class LanguageVM
     {
-        private readonly ILogger<LanguageConfigurationVM> log;
-        private readonly URConfigurationManager config;
+        private readonly ILogger<LanguageVM> log;
 
-        public LanguageConfigurationVM(ILogger<LanguageConfigurationVM> log, URConfigurationManager config)
+        public LanguageVM(ILogger<LanguageVM> log)
         {
             AssertArgument.CheckIsNotNull(log, nameof(log));
-            AssertArgument.CheckIsNotNull(config, nameof(config));
 
             this.log = log;
-            this.config = config;
         }
 
         public void SetLanguage(string language)
@@ -28,12 +25,12 @@ namespace Warcraker.UrbanRivals.URManager.ViewModels.Language
             {
                 case SupportedLanguages.ENGLISH:
                 case SupportedLanguages.SPANISH:
-                    log.LogDebug("Start application with language {language}", language);
+                    log.LogDebug("Applying language {language}", language);
                     SetApplicationLanguage(language);
                     break;
                 default:
-                    log.LogWarning("Invalid language on startup [{language}]. Using English per default", language);
-                    Asserts.Fail($"Invalid language on startup [{language}]");
+                    log.LogWarning("Not supported language [{language}]. Using English per default", language);
+                    Asserts.Fail($"Not supported language [{language}]");
                     SetApplicationLanguage(SupportedLanguages.ENGLISH);
                     break;
             }
