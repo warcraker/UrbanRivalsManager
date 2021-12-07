@@ -7,7 +7,7 @@ namespace Warcraker.UrbanRivals.URManager.Bootstrap
 {
     public static class SerilogLoggerBootstrap
     {
-        public static ContainerBuilder BuildTextFileLogger(this ContainerBuilder builder)
+        public static ContainerBuilder BuildSerilogTextFileLogger(this ContainerBuilder builder)
         {
             DateTime today = DateTime.Today;
 

@@ -5,17 +5,18 @@ namespace Warcraker.UrbanRivals.URManager
 {
     public static class AutofacContainer
     {
-        public static readonly IContainer INSTANCE;
+        public static readonly IContainer INSTANCE = GetInstance();
 
-        static AutofacContainer()
+        private static IContainer GetInstance()
         {
+            IContainer container;
             var builder = new ContainerBuilder();
-
-            builder.BuildTextFileLogger();
+            builder.BuildSerilogTextFileLogger();
             builder.BuildViewModels();
-            builder.BuildConfigurationManager();
+            builder.BuildWindowsSettingsManager();
+            container = builder.Build();
 
-            INSTANCE = builder.Build();
+            return container;
         }
     }
 }

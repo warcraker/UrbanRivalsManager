@@ -1,0 +1,16 @@
+﻿<Window x:Class="Warcraker.UrbanRivals.URManager.View.LanguageSelection.LanguageSelectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Warcraker.UrbanRivals.URManager.View.LanguageSelection"
+        mc:Ignorable="d"
+        Title="LanguageSelectionWindow" Height="100" Width="300">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding }"/>
+            <Button>Spanish - Español (España)</Button>
+            <Button>English - English (UK)</Button>
+        </StackPanel>
+    </Grid>
+</Window>

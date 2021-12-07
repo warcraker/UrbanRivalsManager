@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using Autofac;
 using Warcraker.UrbanRivals.URManager.View.LanguageSelection;
 using Warcraker.UrbanRivals.URManager.ViewModels;
@@ -11,18 +12,20 @@ namespace Warcraker.UrbanRivals.URManager.View.Startup
         {
             InitializeComponent();
 
-            StartupVM vm;
+            WindowsStartupVM vm;
             using (ILifetimeScope scope = AutofacContainer.INSTANCE.BeginLifetimeScope())
             {
-                vm = scope.Resolve<StartupVM>();
+                vm = scope.Resolve<WindowsStartupVM>();
             }
 
             vm.OnApplicationStart();
 
-            if(vm.IsLanguageDefined)
+            if(!vm.IsLanguageDefined())
             {
                 var languageSelectionWindow = new LanguageSelectionWindow();
                 languageSelectionWindow.ShowDialog();
+                //Process.Start(Application.ResourceAssembly.Location);
+                //Application.Current.Shutdown();
             }
         }
     }

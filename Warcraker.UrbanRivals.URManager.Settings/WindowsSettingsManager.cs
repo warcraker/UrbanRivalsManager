@@ -1,18 +1,19 @@
 ﻿using System.Configuration;
 using Microsoft.Extensions.Logging;
+using Warcraker.UrbanRivals.Interfaces;
 using Warcraker.Utils;
 
 namespace Warcraker.UrbanRivals.URManager.Configuration
 {
-    public class SettingsManager
+    public class WindowsSettingsManager : ISettingsManager
     {
-        private readonly ILogger log;
+        private readonly ILogger _log;
 
-        public SettingsManager(ILogger<SettingsManager> log)
+        public WindowsSettingsManager(ILogger<WindowsSettingsManager> log)
         {
             AssertArgument.CheckIsNotNull(log, nameof(log));
 
-            this.log = log;
+            _log = log;
         }
 
         public string Language
@@ -30,7 +31,7 @@ namespace Warcraker.UrbanRivals.URManager.Configuration
                         SetValue(nameof(Language), value);
                         break;
                     default:
-                        log.LogWarning("Provided unsupported language: {language}. Setting language to default (English)", value);
+                        _log.LogWarning("Provided unsupported language: {language}. Setting language to default (English)", value);
                         Asserts.Fail($"Unsupported language {value}");
                         SetValue(nameof(Language), SupportedLanguages.ENGLISH);
                         break;
@@ -85,13 +86,13 @@ namespace Warcraker.UrbanRivals.URManager.Configuration
         private string GetValue(string key)
         {
             string value = ConfigurationManager.AppSettings.Get(key);
-            log.LogTrace("Obtained setting [{key}]: {value}", key, value);
+            _log.LogTrace("Obtained setting [{key}]: {value}", key, value);
 
             return value;
         }
         private void SetValue(string key, string value)
         {
-            log.LogTrace("Stored setting [{key}]: {value}", key, value);
+            _log.LogTrace("Stored setting [{key}]: {value}", key, value);
             ConfigurationManager.AppSettings.Set(key, value);
         }
     }

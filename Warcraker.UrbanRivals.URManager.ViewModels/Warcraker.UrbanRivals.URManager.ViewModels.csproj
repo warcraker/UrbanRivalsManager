@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <ProjectReference Include="..\Warcraker.UrbanRivals.Interfaces\Warcraker.UrbanRivals.Interfaces.csproj" />
     <ProjectReference Include="..\Warcraker.UrbanRivals.URManager.Settings\Warcraker.UrbanRivals.URManager.Settings.csproj" />
     <ProjectReference Include="..\Warcraker.Utils\Warcraker.Utils.csproj" />
     <Reference Include="Warcraker.UrbanRivals.ApiManager">
