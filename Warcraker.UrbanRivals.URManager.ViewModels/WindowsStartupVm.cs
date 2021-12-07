@@ -6,12 +6,12 @@ using Warcraker.Utils;
 
 namespace Warcraker.UrbanRivals.URManager.ViewModels
 {
-    public class WindowsStartupVM
+    public class WindowsStartupVm
     {
         private readonly ILogger _log;
         private readonly ILanguageVM _languageVm;
 
-        public WindowsStartupVM(ILogger<WindowsStartupVM> log, ILanguageVM languageVm)
+        public WindowsStartupVm(ILogger<WindowsStartupVm> log, ILanguageVM languageVm)
         {
             AssertArgument.CheckIsNotNull(log, nameof(log));
             AssertArgument.CheckIsNotNull(languageVm, nameof(languageVm));

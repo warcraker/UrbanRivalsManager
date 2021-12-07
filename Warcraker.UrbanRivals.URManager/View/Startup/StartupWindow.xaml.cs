@@ -12,10 +12,10 @@ namespace Warcraker.UrbanRivals.URManager.View.Startup
         {
             InitializeComponent();
 
-            WindowsStartupVM vm;
+            WindowsStartupVm vm;
             using (ILifetimeScope scope = AutofacContainer.INSTANCE.BeginLifetimeScope())
             {
-                vm = scope.Resolve<WindowsStartupVM>();
+                vm = scope.Resolve<WindowsStartupVm>();
             }
 
             vm.OnApplicationStart();

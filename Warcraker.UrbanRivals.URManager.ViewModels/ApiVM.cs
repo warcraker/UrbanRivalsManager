@@ -9,15 +9,15 @@ using Manager = Warcraker.UrbanRivals.ApiManager.ApiManager;
 
 namespace Warcraker.UrbanRivals.URManager.ViewModels
 {
-    public class ApiVM
+    public class ApiVm
     {
         private static readonly Regex CONSUMER_TOKEN_REGEX = new Regex(@"^(?<key>[a-f0-9]{39}),(?<secret>[a-f0-9]{32})$");
 
-        private readonly ILogger<ApiVM> _log;
+        private readonly ILogger<ApiVm> _log;
         private readonly ISettingsManager _settings;
         private Manager _apiManager; // TODO refactor ApiManager project to bootstrap it
 
-        public ApiVM(ILogger<ApiVM> log, ISettingsManager settings)
+        public ApiVm(ILogger<ApiVm> log, ISettingsManager settings)
         {
             AssertArgument.CheckIsNotNull(log, nameof(log));
             AssertArgument.CheckIsNotNull(settings, nameof(settings));

@@ -8,9 +8,9 @@ namespace Warcraker.UrbanRivals.URManager.Bootstrap
     {
         public static ContainerBuilder BuildViewModels(this ContainerBuilder builder)
         {
-            builder.RegisterType<WindowsStartupVM>().AsSelf().SingleInstance();
-            builder.RegisterSingleton<ILanguageVM, WindowsLanguageVM>();
-            builder.RegisterType<ApiVM>().AsSelf().SingleInstance(); // TODO define interface for ApiVM
+            builder.RegisterType<WindowsStartupVm>().AsSelf().SingleInstance();
+            builder.RegisterSingleton<ILanguageVM, WindowsLanguageVm>();
+            builder.RegisterType<ApiVm>().AsSelf().SingleInstance(); // TODO define interface for ApiVM
 
             return builder;
         }
