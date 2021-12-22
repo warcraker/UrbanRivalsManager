@@ -1,0 +1,41 @@
+GetCharacters (ok)
+-------------
+[id] => 317 
+[name] => A Award Cr 
+[clan_id] => 30 
+[level_min] => 1 
+[level_max] => 3 
+[rarity] => cr 
+[ability] => +1 Life 
+[ability_unlock_level] => 3 
+[release_date] => 1159135200 
+
+GetCharacterLevels (ok)
+------------------
+[id] => 1059 
+[level] => 5 
+[power] => 7 
+[damage] => 6 
+[ability] => -5 Opp Damage, Min 2 
+
+
+[id] => 270 
+[name] => Bridget 
+[clan_id] => 36 
+[level_min] => 1 
+[level_max] => 5 
+[power] => 7 
+[damage] => 5 
+[rarity] => r 
+[ability_id] => 119 
+[ability] => +1 Life Per Round 
+[ability_unlock_level] => 5 
+[bonus] => Cancel Leader 
+[bank_price] => 0 
+[distrib] => 1 
+[kind] => normal 
+[offer_at_level] => 20 [
+is_tradable] => 1 
+[release_date] => 1147039200 
+[is_standard] => [penalty] => 
+[characterPictUrl] => http://s.ccdn.ur-img.com/urimages/perso/LEADER/LEADER_BRIDGET_N5_STD_128.png [clanPictUrl] => http://s.ccdn.ur-img.com/urimages/clan/LEADER_128.png [description] => Providing medical care is a difficult job. Providing medical care in the middle of a battle field, while bullets are flying and bombs are exploding, is nothing short of heroic, and it's what Bridget does every day. If you need emergency care in the middle of a combat, only she can help you. [abilityLongDescription] => At the start of each round after the first one, the player with Bridget in their team receives one extra Life point. [bonusLongDescription] => Your Leader Bonuses are deactivated if you have more than one Leader in your team. ) )

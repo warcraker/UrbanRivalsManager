@@ -1,0 +1,21 @@
+blob["characters.getCharacters"].items
+blob["characters.getClans"].items
+blob["urc.getCharacters"].items
+
+// ** characters.getCharacters
+"id"			// int: CharacterId 
+"ability" 		// string: AbilityText
+"ability_unlock_level"	// int: UnlockLevel
+
+// ** urc.getCharacters
+"id"		// int: CardId
+"name"		// string: CardName
+"clanID"	// int: ClanId
+"rarity"	// string: Rarity
+"levels"
+	"level", "power", "damage", "pictureURL"
+
+// ** characters.getClans
+"id"			// int: ClanId
+"name"			// string: ClanName
+"bonusDescription"	// string: BonusText

@@ -1,0 +1,22 @@
+1 Deck      -> Selection
+2 Deck      -> Preset
+3 Preset    -> Deck
+4 Preset    -> Selection
+5 Selection -> Deck
+6 Selection -> Preset
+---
+1- Load Current Deck
+3- Set Preset    as Current Deck
+5- Set Selection as Current Deck
+4- Load   Preset
+2- Save   Preset from Deck
+6- Save   Preset from Selection
+
+
+1* Delete Preset
+2* Include Card in   Current Deck
+3* Exclude Card from Current Deck
+
+[{"call":"collections.deleteSavedPreset","params":{"presetID":@PRESET_ID@}}]
+[{"call":"collections.alterCharacterDeckState","params" {"characterInCollectionID":@INSTANCE_ID@,"newDeckState":true}}]
+[{"call":"collections.alterCharacterDeckState","params" {"characterInCollectionID":@INSTANCEID@,"newDeckState":false}}]

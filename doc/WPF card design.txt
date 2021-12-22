@@ -1,0 +1,90 @@
+ALL
+HorizontalAlignment: Left
+VerticalAlignment: Top
+AllowDrop: false
+Focusable: false
+IsHitTestVisible: false
+
+IsTabStop: false
+
+---
+
+Grid	// border
+H 155 T 216
+
+Image	// back
+H 155 T 216
+
+Image	// clan
+H 17	T 15
+< 11	^ 11
+
+Label	// name
+H 112 T 13
+< 36	^ 6
+Background: No brush
+Foreground: #00 FFFFFF
+HorizontalContentAlignment: Center
+Padding: 0 0 0 0
+Font: Arial, 11px
+FontWeight: Bold
+
+Image	// portrait
+H 140	T 112
+< 8	^ 22
+
+Image	// winner
+H 17	T 22
+< 120	^ 27
+
+Border	// pillz
+H 32	T 26
+< 113	^ 54
+Background: #7F 000000
+BorderThickness: 1 1 1 1
+CornerRadius: 5
+
+Image	// pillz
+H 9		T 17
+< 117	^ 58
+
+Label	// pillz
+H 16	T 16
+< 125	^ 59
+Background: No brush
+Foreground: #00 FFFFFF
+HorizontalContentAlignment: Center
+Padding: 0 0 0 0
+Font: Arial, 14px
+
+Image	// level
+H 120	T 17
+< 31	^ 138
+
+Label	// power & damage
+H 14	T 12
+< 9		^ 140
+< 9		^ 178
+Background: No brush
+Foreground: #00 FFFFFF
+BorderThickness: 0 0 0 0
+HorizontalContentAlignment: Center
+Padding: 0 0 0 0
+Font: Arial, 12px
+FontWeight: Bold
+
+TextBox	// ability & bonus
+H 97	 T 27
+< 52	^ 156
+< 52	^ 182
+Background: No brush
+BorderBrush: No brush
+Foreground: #00 FFFFFF
+BorderThickness: 0 0 0 0
+VerticalContentAlignment: Center
+Padding: 0 0 0 0
+Font: Arial, 9px
+IsReadOnly: true
+IsUndoEnabled: false
+MaxLines: 2
+TextWrapping: Wrap

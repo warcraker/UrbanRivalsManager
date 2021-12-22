@@ -1,0 +1,25 @@
+CARDS:
+
+Clan Image
+Card Name
+Card Image
+Power
+Damage
+Level
+Ability
+Bonus
+
+PLAYER_STATUS:
+Life
+Pillz
+
+Rounds
+Used pillz
+Used fury
+
+CurrentRound
+Courage
+Reprisal
+Confidence
+Revenge
+Supports

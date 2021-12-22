@@ -1,0 +1,13 @@
+[LCard] - [RCard]
+Used {Pillz} [LUsedPillz] - [RUsedPillz]
+Final {Attack} [LAttack] - [RAttack]
+Winner [LCard|RCard]
+[LCard] Player
+{Life} [InitialLLife] {->} [FinalLLife]
+{Pillz} [InitialLPillz] {->} [FinalLPillz]
+*LPoison*
+*LHeal*
+{Life} [InitialRLife] {->} [FinalRLife]
+{Pillz} [InitialRPillz] {->} [FinalRPillz]
+*RPoison*
+*RHeal*

@@ -1,0 +1,65 @@
+Urban Rivals 
+http://www.urban-rivals.com/
+
+USERS
+-----
+
+(Special thanks)
+Memento mori
+http://www.urban-rivals.com/en/player/?id_player=360390
+
+(Special thanks)
+IceAngel1987
+http://www.urban-rivals.com/en/player/?id_player=1385949
+
+Hossmi (inspiración)
+https://github.com/hossmi
+
+SOFTWARE
+--------
+
+Wireshark
+https://www.wireshark.org/about.html
+
+Microsoft
+Visual Studio
+
+Fossil
+http://fossil-scm.org/
+
+CODE
+----
+
+EnumToItemsSource (y mirar el resto)
+http://stackoverflow.com/a/17405771/2215451
+
+Matthew Shapiro
+scatteredcode.wordpress.com/2011/12/21/testing-oauth-apis-without-coding/
+
+Eran Sandler
+http://oauth.googlecode.com/svn/code/csharp/
+http://oauth.net/code/
+
+Patrick van Bergen
+JSON parser
+http://techblog.procurios.nl/k/n618/news/view/14605/14863/how-do-i-write-my-own-parser-(for-json).html
+
+Desarrollar (Chrome frame)
+http://stackoverflow.com/questions/15316592/wpf-custom-chrome-window
+
+IMAGES
+------
+
+Letters
+http://www.wpclipart.com/terms.html
+
+WEBS/WEBAPPS
+------------
+
+Grant Skinner
+https://twitter.com/gskinner/
+http://www.regexr.com/
+
+Regex101 (?)
+http://regex101.com/
+https://twitter.com/regex101

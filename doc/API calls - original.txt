@@ -1,0 +1,522 @@
+Characters
+characters.getCharacterLevels - requires Public access to the Api, returns Items & Context.
+• characterID
+• levelMax (optional, default value: [integer 0])
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get the details for the levels of a specific character, up to a optional level. If no level is specified, -1: get all levels, 0: get up to the max level owned by the player (or the min level of the character if not owned).
+characters.getCharacters - requires Public access to the Api, returns Items & Context.
+• charactersIDs (optional, default value: [integer 0])
+• clanID (optional, default value: [integer 0])
+• sortby (optional, default value: [string name])
+• orderby (optional, default value: [string asc])
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+• maxLevels (optional, default value: [boolean ])
+Get the list of availables characters, with an optional list of characterIDs or an optional clanID filter and sorting options.
+If both clanID & charactersID are not provided, then the function will return all characters. CharacterIDs is prioritized over clanID.
+sortby can be 'name', 'id', 'level', 'level_min', 'level_max', 'clan', 'clan_name', 'rarity'
+orderby can be 'asc' or 'desc'
+Set the maxLevels params to true if you want the fully levelled character.
+characters.getClans - requires Public access to the Api, returns Items & Context.
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get the details for the list of current clans.
+characters.getDeckFormats - requires Public access to the Api, returns Items & Context.
+• deckFormatID (optional, default value: [integer 0])
+• characterIDs (optional, default value: [boolean ])
+Get deck format(s) available to the players details
+Pass an id to get one deck format, 0 for all deck formats
+Pass a list of charactersIDs to check the validity, pass nothing, it will check the player's current deck
+characters.getDetails - requires Public access to the Api, returns Items & Context.
+• charactersIDs
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+DEPRECATED - USE characters.getCharacters instead.
+Get the details for a list of characters (pass an id or an array of ids).
+characters.getPenalizedCharacters - requires Public access to the Api, returns Items & Context.
+(No parameters)
+Get the penalized characters in DT.
+Collections
+collections.alterCharacterDeckState - requires User access to the Api, returns Context.
+• characterInCollectionID
+• newDeckState (optional, default value: [boolean ])
+Alter the deck state of a character in the player collection.
+collections.checkPresetIsStillValid - requires User access to the Api, returns Context.
+• presetID
+Check if a preset is still valid.
+collections.deleteSavedPreset - requires User access to the Api, returns Context.
+• presetID
+Delete one of the player saved presets.
+collections.getBestCharacterVariationsWithoutEvoMax - requires User access to the Api, returns Items & Context.
+• nbItems (optional, default value: [integer 10])
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get the best variations for each character not yet owned to level max by the player.
+collections.getCharacterVariations - requires User access to the Api, returns Items & Context.
+• characterID
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get the the player's varations for a specific character.
+collections.getClanSummary - requires User access to the Api, returns Items & Context.
+• clanID (optional, default value: [integer 0])
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+• addBestCharacter (optional, default value: [boolean ])
+• ownedOnly (optional, default value: [boolean ])
+Get the the player's collection Summary for a clan or some clans (if clanID is 0).
+@params addBestCharacter set to true to get the full properties of the best variation in the collection of the owned characters
+@params ownedOnly set to true to get only the characters owned by the player
+collections.getCollectionPage - requires User access to the Api, returns Items & Context.
+• deckOnly (optional, default value: [boolean ])
+• page (optional, default value: [integer 0])
+• nbPerPage (optional, default value: [integer 12])
+• clanID (optional, default value: [integer 0])
+• groupBy (optional, default value: [string all])
+• sortBy (optional, default value: [string clan])
+• orderBy (optional, default value: [string asc])
+• search (optional, default value: [string ])
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get a page of the player collection. Many parameters.
+deckOnly : true / false
+page : 0.. 1..
+nbPerPage : 12, 20, 28, 36, 52 (fixed for performance reason)
+clanID : 0 for all clans or the clanID for a specific clan
+groupBy : all, double (only the doubles), evolve (only the evolving characters), maxed (only the maxxed characters), nodeck (only thoses out of the deck), best (only the best variation of each)
+sortBy: clan, name, date, level, levelmax, xp
+orderBy: asc, desc
+search: part of of character name to filter the list
+collections.getDeck - requires User access to the Api, returns Items & Context.
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+• presetID (optional, default value: [integer 0])
+Get the the player's current Deck or a saved Deck if supplied a presetID
+collections.getPresets - requires User access to the Api, returns Items & Context.
+(No parameters)
+Get the the player's current Presets list.
+collections.getSelectionFormatsCompatibility - requires User access to the Api, returns Items & Context.
+• characterInCollectionsIDs (optional, default value: [array Array])
+Get the deck formats compatibility for a set of characters in collection
+collections.getSummary - requires User access to the Api, returns Items & Context.
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get the the player's collection Summary (clans and numbers of totals & distincts cards per clans).
+collections.giveXPFromReserve - requires Action access to the Api, returns Context.
+• characterInCollectionID
+• battleID (optional, default value: [integer 0])
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Give all XP from the player's reserve to level up the character, or, if there is not enough to level up, all xp from the reserve.
+collections.loadSavedPreset - requires User access to the Api, returns Context.
+• presetID (optional, default value: [integer 0])
+Load one of the player's saved Decks and set it as the current Deck.
+collections.saveDeckAsPreset - requires User access to the Api, returns Context.
+• presetID
+• presetName
+Save the current preset as a new deck or update an existing deck.
+collections.saveSelectionAsPreset - requires User access to the Api, returns Context.
+• characterInCollectionsIDs (optional, default value: [array Array])
+• presetID (optional, default value: [integer 0])
+• presetName (optional, default value: [string ])
+Save a selection of cards belonging from the player collection as a new deck or update an existing deck.
+collections.search - requires User access to the Api, returns Items & Context.
+• searchText
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Search for characters in all the characters availables using the characters names only (for now).
+The search text must be at least 2 characters.
+For each character in the resulsts it indicates if the player owns the character (in that case, the character will be returned at their owned max level).
+collections.setSelectionAsDeck - requires User access to the Api, returns Context.
+• characterInCollectionIDs (optional, default value: [array Array])
+Set a selection of characters in collection as the player deck.
+Forums
+forums.createMessage - requires User access to the Api, returns Context.
+• subjectID
+• message
+Create a new message.
+forums.createSubject - requires User access to the Api, returns Context.
+• themeID
+• title
+• message
+Create a new subject.
+forums.getMessagesPage - requires Public access to the Api, returns Items & Context.
+• subjectID
+• page (optional, default value: [integer 0])
+• nbPerPage (optional, default value: [integer 10])
+Get the forum messages for a specific subject
+forums.getSubjectsPage - requires Public access to the Api, returns Items & Context.
+• themeID
+• page (optional, default value: [integer 0])
+• nbPerPage (optional, default value: [integer 20])
+Get the forum subjects for a specific theme
+forums.getThemes - requires Public access to the Api, returns Items & Context.
+(No parameters)
+Get all the forums themes.
+General
+general.findPlayersByName - requires Public access to the Api, returns Items & Context.
+• partOfName
+Search players with nicknames containing partOfName. (partOfName must be at least 5 characters)
+general.getCountries - requires Public access to the Api, returns Items & Context.
+(No parameters)
+Return the list of availables countries.
+general.getDailyReward - requires User access to the Api, returns Items & Context.
+• notified (optional, default value: [integer 0])
+Retrieve the daily reward.
+
+@return array( items, context )
+general.getNewCharactersAdParams - requires Public access to the Api, returns Context.
+(No parameters)
+Get all the required infos to integrate the flash client
+general.getNews - requires Public access to the Api, returns Items & Context.
+• nbNews (optional, default value: [integer 10])
+• type (optional, default value: [string news])
+Retrieve the last X editorial content.
+
+@param int $nbNews
+@param string $type ("news", "events" or "presets" at the moment)
+@return void
+@author Sebastien Flory
+general.getPlayer - requires User access to the Api, returns Context.
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get all sort of informations about the current player.
+Also returns the url of the host for all static content (images, swf etc..).
+general.getPlayersPoints - requires Public access to the Api, returns Context.
+• playerIDs (optional, default value: [array Array])
+Get multiples players scores for day, week, month, overall.
+general.getSpecialEventStatus - requires Public access to the Api, returns Items & Context.
+(No parameters)
+Get missions stats for $codename special Event
+general.getSupportedLanguages - requires Public access to the Api, returns Items & Context.
+(No parameters)
+Get all supported languages on Urban Rivals
+general.getTips - requires Public access to the Api, returns Items & Context.
+(No parameters)
+Return a set of tips to display at random
+general.getTournamentsPeriods - requires Public access to the Api, returns Context.
+(No parameters)
+Return a list of items with all tournaments periods for today
+general.removePresence - requires User access to the Api, returns Context.
+(No parameters)
+Remove the player presence. (ie: will show as status "offline")
+Note: battles.getStatus will update the presence, so the status will be overrided as online with the current room name if you are calling getStatus frequently.
+general.setPresenceVisibility - requires User access to the Api, returns Context.
+• visible
+Set the player "presence" visibility. (ie: will show as status "offline" even if updating the presence or playing)
+general.updatePresence - requires User access to the Api, returns Context.
+• apiConsumerMedium (optional, default value: [string web])
+• apiConsumerID (optional, default value: [string ])
+• apiConsumerExtraInfos (optional, default value: [string ])
+Update the player presence. (ie: will show as status "online - surfing the website")
+@param apiConsumerMedium Optional, Set the current medium used by the api (allowed: web, iphone, facebook)
+@param apiConsumerID Optional, Set the medium specific ID
+@param apiConsumerExtraInfos Optional, Any useful extra infos
+Note: battles.getStatus will also update the presence, so no need to use this call if you are already getting the in-game status frequently.
+Guilds
+guilds.getGuild - requires Public access to the Api, returns Items & Context.
+• guildID (optional, default value: [integer 0])
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get a guild, pass 0 as the guildID for the current player guild.
+Warning: this method is a little bit slow for the moment, please use with caution.
+If the guild is the player's guild, you'll get the 'guildMsgStatus' in the context.
+Return validated members as items.
+guilds.getGuildsPage - requires Public access to the Api, returns Items & Context.
+• page (optional, default value: [integer 0])
+• nbPerPage (optional, default value: [integer 12])
+• country (optional, default value: [string ])
+• recruiting (optional, default value: [boolean ])
+Return a page from the list of guilds.
+Can be filtered by country and if recruiting or not.
+@params string sortBy can be: id, avgPoints, totalMembers, name, avgStars, avgELO
+@params string orderBy can be: asc, desc
+guilds.joinGuild - requires Action access to the Api, returns Context.
+• guildID
+Join a guild
+guilds.leaveGuild - requires Action access to the Api, returns Context.
+(No parameters)
+Leave the current guild
+guilds.sendGuildMsg - requires Action access to the Api, returns Context.
+• msg
+Send a msg to the Guild
+guilds.switchGuildMsgSetting - requires Action access to the Api, returns Context.
+(No parameters)
+Switch guild message status for the player
+Market
+market.cancelSale - requires Action access to the Api, returns Context.
+• characterInMarketID
+Cancel one of the player sale on the Market.
+market.getCharactersPricesCurrent - requires Public access to the Api, returns Context.
+• charactersIDs
+• charactersLevels (optional, default value: [boolean ])
+• clanID (optional, default value: [integer 0])
+Get the current offers prices of character(s)
+Optionnaly pass the characters levels for more specific prices.
+If you pass a clanID, it will override any params you might have set for charactersIDs or charactersLevels and return all the prices for the clan's characters.
+market.getCurrentSales - requires User access to the Api, returns Items & Context.
+• page (optional, default value: [integer 0])
+• nbPerPage (optional, default value: [integer 12])
+• clanID (optional, default value: [integer 0])
+• groupType (optional, default value: [string all])
+• sortBy (optional, default value: [string price])
+• orderBy (optional, default value: [string asc])
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get the outstanding private sales offered to the player on the market.
+Try to not call this method more than once every 30 secs - you will be blocked at some point.
+You can filter by clanID.
+groupType can be "all" or "missing"
+sortBy can be "price" or "date"
+orderBy can be "asc" or "desc"
+market.getHistoryPurchases - requires User access to the Api, returns Items & Context.
+• page (optional, default value: [integer 0])
+• nbPerPage (optional, default value: [integer 12])
+• clanID (optional, default value: [integer 0])
+• sortBy (optional, default value: [string price])
+• orderBy (optional, default value: [string asc])
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get the history of the player purchases on the market.
+Try to not call this method more than once every 30 secs - you will be blocked at some point.
+You can filter by clanID.
+sortBy can be "price" or "date"
+orderBy can be "asc" or "desc"
+market.getHistorySales - requires User access to the Api, returns Items & Context.
+• page (optional, default value: [integer 0])
+• nbPerPage (optional, default value: [integer 12])
+• clanID (optional, default value: [integer 0])
+• sortBy (optional, default value: [string price])
+• orderBy (optional, default value: [string asc])
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get the history of the player sales on the market.
+Try to not call this method more than once every 30 secs - you will be blocked at some point.
+You can filter by clanID.
+sortBy can be "price" or "date"
+orderBy can be "asc" or "desc"
+market.getMarketPage - requires Public access to the Api, returns Items & Context.
+• page (optional, default value: [integer 0])
+• nbPerPage (optional, default value: [integer 12])
+• clanID (optional, default value: [integer 0])
+• groupType (optional, default value: [string all])
+• sortBy (optional, default value: [string price])
+• orderBy (optional, default value: [string asc])
+• filter (optional, default value: [string ])
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get an offers page from the market, ie: a list of distinct character, sorted and filtered by the criterias
+Try to not call this method more than once every 30 secs - you will be blocked at some point.
+You can filter by clanID and/or by a character name
+groupType can be "all" or "missing"
+sortBy can be "price" or "date"
+orderBy can be "asc" or "desc"
+filter can be a characterID or part of the character or clan name (as string)
+market.getOffersForCharacter - requires Public access to the Api, returns Items & Context.
+• characterID
+• onlyAtLevel (optional, default value: [integer 0])
+• maxResults (optional, default value: [integer 50])
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get the offers available for a specific Character, with an optional filter on the level
+market.getWaitingPrivateSales - requires User access to the Api, returns Items & Context.
+• page (optional, default value: [integer 0])
+• nbPerPage (optional, default value: [integer 12])
+• clanID (optional, default value: [integer 0])
+• groupType (optional, default value: [string all])
+• sortBy (optional, default value: [string price])
+• orderBy (optional, default value: [string asc])
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get the offers from the market.
+Try to not call this method more than once every 30 secs - you will be blocked at some point.
+You can filter by clanID.
+groupType can be "all" or "missing"
+sortBy can be "price" or "date"
+orderBy can be "asc" or "desc"
+market.purchaseOffer - requires Action access to the Api, returns Context.
+• characterInMarketID
+• verificationCode
+• addToDeck (optional, default value: [boolean ])
+Buy a character from the Market, adding it to the player's collection (and Deck if that's the player's preference).
+In order to protect the market from Bots, you must supply the correct verification code that correspond to the "captcha" image of the offer on the market (the URL is supplied in various markets.getOffersXXXXXX output).
+market.sellCharacter - requires Action access to the Api, returns Context.
+• characterInCollectionID
+• priceInClintz (optional, default value: [integer 0])
+• destNickname (optional, default value: [string ])
+Sell a character on the Market, set an destNickname if the character must be sold to someone in particular (it will fail if the nickname doesn't match anyone).
+market.sellCharacterToBank - requires Action access to the Api, returns Context.
+• characterInCollectionID
+Sell a character on the Market to the bank for a fixed price.
+Missions
+missions.getCategories - requires User access to the Api, returns Items & Context.
+(No parameters)
+Get the list of existing mission categories
+missions.getMissions - requires User access to the Api, returns Items & Context.
+• group (optional, default value: [string all])
+Get the list of missions of the players
+group can be 'all', 'inprogress' or 'completed'
+You can either use the groups or do the grouping yourself client-side.
+missions.getMissionsInCategory - requires User access to the Api, returns Items & Context.
+• categoryID
+Get the list of missions for a given category.
+Each item in the list will be either a MissionOfPlayer or a Mission depending on wether
+the player has unlocked the mission.
+missions.getMissionsRanking - requires User access to the Api, returns Items & Context.
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get the rankings of missions for the player: friends ranking, guild ranking, global ranking
+missions.getMissionsSummary - requires User access to the Api, returns Context.
+(No parameters)
+Get the various stats about the player's missions progress
+Players
+players.addFriend - requires User access to the Api, returns Context.
+• playerID
+Add a player to the friends list.
+players.addPlayerToPersonnalBlacklist - requires User access to the Api, returns Context.
+• playerID
+Add a player to the player's personnal blacklist.
+players.deletePrivatesMessages - requires Action access to the Api, returns Context.
+• privateMessageIDs
+• msgBox (optional, default value: [string inbox])
+• emptyMsgBox (optional, default value: [boolean ])
+Delete one or more private(s) message(s).
+privateMessageIDs can be a single ID or an array of IDs.
+msgBox can be "inbox" or "outbox"
+If emptyMsgBox is true, then we will empty the box of all messages, regardless of the ids.
+players.getAppNotificationsContent - requires User access to the Api, returns Context.
+• appNotifIDs
+Get the content to display for each app notification ID we receive.
+players.getBattleHistoryPage - requires User access to the Api, returns Items & Context.
+• page (optional, default value: [integer 0])
+• nbPerPage (optional, default value: [integer 30])
+• battleRuleID (optional, default value: [integer 0])
+Get the battle history of a player (in descending order).
+Battles history is deleted every X days.
+players.getBattleRuleInfos - requires User access to the Api, returns Context.
+• battleRuleID
+Get the battlerule infos for a player.
+players.getFeed - requires User access to the Api, returns Items & Context.
+• nbStoriesMax (optional, default value: [integer 10])
+• highestID (optional, default value: [integer 0])
+Get the feed of events for the player. To get only the new item since your last request, sent the highest feed item id that you have received client side.
+players.getFeedFilters - requires User access to the Api, returns Items & Context.
+(No parameters)
+Return all the availables filters for the feed and the current setting of each filter.
+players.getFriends - requires User access to the Api, returns Items & Context.
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get the list of friends for the player.
+players.getFriendsLight - requires User access to the Api, returns Items & Context.
+(No parameters)
+Get the list of friends for the player, just the id and the mutual status. Avoid using the "real" api call if you just need thoses infos, it will be much lighter.
+players.getNextDuelObjective - requires User access to the Api, returns Context.
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Add a player to the friends list.
+players.getPersonnalBlacklist - requires User access to the Api, returns Items & Context.
+(No parameters)
+Get the personnal blacklist of a player.
+players.getPlayerProfile - requires User access to the Api, returns Context.
+• playerID
+• imageSize (optional, default value: [string small])
+• imageFormat (optional, default value: [string png])
+Get the profile of a player (rankings, competitives modes etc..).
+players.getPrivatesMessages - requires Action access to the Api, returns Items & Context.
+• page (optional, default value: [integer 0])
+• nbPerPage (optional, default value: [integer 20])
+• msgBox (optional, default value: [string inbox])
+• unreadOnly (optional, default value: [boolean ])
+Get the privates messages of the player.
+msgBox is either "inbox" or "outbox"
+players.getTotalOnlineFriends - requires User access to the Api, returns Context.
+(No parameters)
+Get the list of friends for the player.
+players.getTotalUnreadPrivatesMessages - requires User access to the Api, returns Context.
+(No parameters)
+Get the number of unread message(s) in the player inbox.
+players.getTutorialProgress - requires User access to the Api, returns Context.
+(No parameters)
+Get the current step of the player in the tutorial.
+players.removeFriend - requires User access to the Api, returns Context.
+• playerID
+Remove a player to the friends list.
+players.removePlayerFromPersonnalBlacklist - requires User access to the Api, returns Context.
+• playerID
+Remove a player from the player's personnal blacklist.
+players.sendPlayerLostPasswordMail - requires User access to the Api, returns Context.
+• pseudo
+Send a password reset process by mail
+@param string $pseudo pseudo or email to found
+@return array
+players.sendPrivateMessage - requires Action access to the Api, returns Context.
+• destPlayerIDorPlayerNickname
+• msgBody
+• msgSubject (optional, default value: [string ])
+Send a private message to one of the player.
+If the destPlayerIDorPlayerNickname parameter is numeric, it will be considered as the playerID, otherwise, we'll try to lookup the playerID first from the nickname.
+players.setFeedFilter - requires User access to the Api, returns Context.
+• filterKind
+• activityTypeID
+• filterState
+Set the state of a feed filter
+@params filterKind "out" or "in"
+@params activityTypeID the id of the kind of feed activity you want to change
+@params filterState a boolean indicating if you want to filter or not
+players.setLanguage - requires User access to the Api, returns Context.
+• languages
+Set the player's language in ISO 639-1 format (2 letters).
+Pass a list of languages, in order of preference.
+The first to be supported on the Urban Rivals plateform will be used.
+Reference of ISO 639-1 languages codes
+Will also default to "en" (english) if no languages is supported by the Urban Rivals plateform.
+In that later case, an error will be returned as well as a list of supported languages.
+players.setPicture - requires User access to the Api, returns Context.
+• fileInBase64
+Set the player's picture by submitted a base64 encoded jpg, gif or png (prefered).
+200ko max size.
+It will be automatically resized but square ratio is better.
+players.setPrivatesMessagesReadStatus - requires Action access to the Api, returns Context.
+• privateMessageIDs
+• msgBox (optional, default value: [string inbox])
+• readStatus (optional, default value: [boolean ])
+Change the status of one or more private(s) message(s).
+msgBox can be "inbox" or "outbox"
+privateMessageIDs can be a single ID or an array of IDs.
+players.writeFeedMsg - requires User access to the Api, returns Context.
+• msg (optional, default value: [string ])
+Write a new message in the player feed.
+Slotmachine
+slotmachine.buyTickets - requires Action access to the Api, returns Context.
+(No parameters)
+Buy 10 Tickets
+slotmachine.drawResult - requires Action access to the Api, returns Context.
+• activeLines (optional, default value: [array Array])
+Draw result from the slot machine
+slotmachine.getSettingsAndPrizes - requires Public access to the Api, returns Items & Context.
+(No parameters)
+Returns the settings of the slot machine and the table prizes
+Tombola
+tombola.getAvailableTickets - requires User access to the Api, returns Items & Context.
+(No parameters)
+Returns the list of available tombola tickets
+tombola.getCurrentTombola - requires Public access to the Api, returns Items & Context.
+(No parameters)
+Returns all relevant informations about the tombola which is currently in progress
+tombola.getPlayedTickets - requires User access to the Api, returns Items & Context.
+(No parameters)
+Returns the list of tickets that the user has already used on the current tombola
+tombola.getPreviousTombolas - requires Public access to the Api, returns Items & Context.
+• nb
+Returns a list of past tombolas
+@params nb the number of tombolas to return
+tombola.hasFreeTicket - requires User access to the Api, returns Context.
+(No parameters)
+Checks if the user has a free tombola ticket he can use on the current tombola
+tombola.playTicket - requires Action access to the Api, returns Context.
+• ticketID
+Use one of the user's tombola tickets on the current tombola
+@params ticketID the ID of the ticket to use
+tombola.useFreeTicket - requires Action access to the Api, returns Context.
+(No parameters)
+Use the user's free tombola ticket for the current tombola

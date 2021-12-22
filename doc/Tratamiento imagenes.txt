@@ -1,0 +1,23 @@
+Imagenes a cargar premanentemente en memoria
+
+[05] Fondos carta (rareza)
+[25] Clanes
+[14] Estrellas (2+3+4+5)
+
+ORDEN CAPAS: (back <-> front)
+
+img-personaje
+
+img-fondo
+
+img-clan
+txt-nombre
+txt-poder
+txt-daño
+img-estrellas
+txt-habilidad
+brd-habilidad
+txt-bonus
+brd-bonus
+brd-exterior
+

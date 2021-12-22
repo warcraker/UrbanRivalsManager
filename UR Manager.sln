@@ -7,15 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UR Manager", "UR Simulator\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanRivalsCore", "UrbanRivalsCore\UrbanRivalsCore.csproj", "{EEA283D8-1F37-4F9D-8292-BCD541546903}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{95C79914-BE28-4005-AF9B-61F1706D9F75}"
-	ProjectSection(SolutionItems) = preProject
-		Creating new clan.txt = Creating new clan.txt
-		Creating new skill.txt = Creating new skill.txt
-		Misc.txt = Misc.txt
-		Modify leader ability.txt = Modify leader ability.txt
-		PreviewRound() Steps.txt = PreviewRound() Steps.txt
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanRivalsApiToCoreAdapter", "UrbanRivalsApiToCoreAdapter\UrbanRivalsApiToCoreAdapter.csproj", "{69942A29-C91A-433A-B915-D1839264C9B8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Warcraker.Utils", "Warcraker.Utils\Warcraker.Utils.csproj", "{881F9B55-679F-4163-A464-57C62BC3C7A3}"
@@ -42,7 +33,36 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Warcraker.Wpf.Utils", "Warc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Warcraker.UrbanRivals.URManager.Settings", "Warcraker.UrbanRivals.URManager.Settings\Warcraker.UrbanRivals.URManager.Settings.csproj", "{0BF20D9F-3885-441F-BA93-84AF6F959FC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warcraker.UrbanRivals.Interfaces", "Warcraker.UrbanRivals.Interfaces\Warcraker.UrbanRivals.Interfaces.csproj", "{E9E723AB-FF03-40C0-A43F-8213F99AEC1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Warcraker.UrbanRivals.Interfaces", "Warcraker.UrbanRivals.Interfaces\Warcraker.UrbanRivals.Interfaces.csproj", "{E9E723AB-FF03-40C0-A43F-8213F99AEC1E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{C8016B89-A2A7-4AEE-B03B-5A0A7CC38039}"
+	ProjectSection(SolutionItems) = preProject
+		doc\Acciones para barajas.txt = doc\Acciones para barajas.txt
+		doc\Agradecimientos.txt = doc\Agradecimientos.txt
+		doc\API calls - favs.txt = doc\API calls - favs.txt
+		doc\API calls - original.txt = doc\API calls - original.txt
+		doc\API items.txt = doc\API items.txt
+		doc\Blob hierarchy.txt = doc\Blob hierarchy.txt
+		doc\boceto UI combat calculator.png = doc\boceto UI combat calculator.png
+		doc\Cases Stops and Protection.xlsb = doc\Cases Stops and Protection.xlsb
+		doc\Combat steps.txt = doc\Combat steps.txt
+		doc\Creating new clan.txt = doc\Creating new clan.txt
+		doc\Creating new skill.txt = doc\Creating new skill.txt
+		doc\Database.txt = doc\Database.txt
+		doc\Espaciado cartas calculator.txt = doc\Espaciado cartas calculator.txt
+		doc\EULA.txt = doc\EULA.txt
+		doc\ExistingCardBaseIds refactor.txt = doc\ExistingCardBaseIds refactor.txt
+		doc\Experience.txt = doc\Experience.txt
+		doc\INotifyChange properties.txt = doc\INotifyChange properties.txt
+		doc\Known issues.txt = doc\Known issues.txt
+		doc\Misc.txt = doc\Misc.txt
+		doc\Modify leader ability.txt = doc\Modify leader ability.txt
+		doc\PreviewRound() Steps.txt = doc\PreviewRound() Steps.txt
+		doc\Profiling API.xlsx = doc\Profiling API.xlsx
+		doc\Round results template.txt = doc\Round results template.txt
+		doc\Tratamiento imagenes.txt = doc\Tratamiento imagenes.txt
+		doc\WPF card design.txt = doc\WPF card design.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

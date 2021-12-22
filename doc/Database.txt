@@ -1,0 +1,35 @@
+BASECARD
+*card_id		: short
+name			: str
+clan_id			: byte	[enum: clan_list]
+level_min		: byte 	[1-5]
+level_max 		: byte 	[1-5]
+rarity			: byte	[enum: 0=common, 1=uncommon, 2=rare, 3=collector, 4=legendary]
+release_date		: date
+ability_unlock		: byte	[1-5]
+ability_prefix		: byte	[enum: skill_prefix]
+ability_sufix		: byte	[enum: skill_sufix]
+ability_x		: byte
+ability_y		: byte
+ability_leader		: byte	[enum: leader_list]
+
+CARDLEVEL
+*card_id		: short
+*level			: byte	[1-5]
+power			: byte
+damage 			: byte
+
+CARDINSTANCE
+*instance_id		: int
+card_id			: short
+level			: byte	[1-5]
+exp			: short
+
+CLAN
+*clan_id		: byte	[enum: clan_list]
+*support_index		: byte	[enum: support_index
+name			: str
+bonus_prefix		: int	[enum: skill_prefix]
+bonus_sufix		: int	[enum: skill_sufix]
+bonus_x			: int
+bonus_y			: int

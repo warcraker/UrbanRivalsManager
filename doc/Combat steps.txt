@@ -1,0 +1,89 @@
+
+// Protect does not stop exchange
+// Cancel does stop exchange
+// Double exchange apply exchange just once
+// Exchange does cancel copy
+
+throw new NotImplementedException("Implement Day/Night Prefix");
+throw new NotImplementedException("Implement Cancel Pillz&Life Suffix"); 
+throw new NotImplementedException("Implement Exchange Damage Suffix"); 
+throw new NotImplementedException("Implement Cancel Power and Damage Suffix"); 
+throw new NotImplementedException("Implement Decrease Atk Per Pillz Left Suffix"); 
+throw new NotImplementedException("Implement Infection Suffix"); 
+throw new NotImplementedException("Implement DecreaseLifeAndPillzXMinY Suffix"); 
+throw new NotImplementedException("Implement Leaders John Doom, Mr Big Duke and Robbert Cobb"); 
+throw new NotImplementedException("Implement Reanimate suffix"); 
+throw new NotImplementedException("Implement Rebirth suffix"); 
+throw new NotImplementedException("Implement Corrosion suffix");
+throw new NotImplementedException("Implement Xantiax suffix");
+
+// --- Check for invalid calls and parameters ---
+// --- PREPARATION STEP: Initial arrangements ---
+// --- STEP 1: Apply Preround Prefixes
+// --- STEP 1.1: Apply Confidence, Courage, Reprisal, Revenge Prefixes ---
+// --- STEP 1.2: Apply Brawl, Equalizer, Degrowth, Growth, Support Prefixes ---
+// --- STEP 2: Apply Copy Bonus Suffix ---
+// --- STEP 3: Apply Stop Skill ---
+// --- STEP 3.1: Apply Protect Skill Suffix ---
+// --- STEP 3.2: Apply Stop Skill Suffix (Counter: Protect Skill) ---
+// --- STEP 3.3: Apply Stop Prefix ---
+// --- STEP 4: Apply Stop Attribute Modifiers ---
+// --- STEP 4.1: Apply Protect Attribute Suffixes ---
+// --- STEP 4.2: Apply Cancel Attribute Suffixes (Counter: Protect) ---
+// --- STEP 5: Calculate Power ---
+// --- STEP 5.1: Calculate Base Power ---
+// --- STEP 5.2: Apply Exchange Power (Counter: Cancel) ---
+// --- STEP 5.3: Apply Copy Power (Counter: Cancel, Exchange) ---
+// --- STEP 5.4: Calculate Power Increments (Counter: Cancel) ---
+// --- STEP 5.4.1: Ambre ---
+// --- STEP 5.4.2: Other Skills ---
+// --- STEP 5.4.3: Apply Increments ---
+// --- STEP 5.5: Calculate Power Decrements (Counter: Cancel, Protect) ---
+// --- STEP 5.5.1: Eyrik ---
+// --- STEP 5.5.2: Other Skills ---
+// --- STEP 5.5.3: Apply Decrements ---
+// --- STEP 6: Calculate Attack ---
+// --- STEP 6.1: Calculate Base Attack ---
+// --- STEP 6.2: Calculate Attack Increments (Counter: Cancel) ---
+// --- STEP 6.2.1: Hugo ---
+// --- STEP 6.2.2: Other Skills ---
+// --- STEP 6.2.3: Apply Increments ---
+// --- STEP 6.3: Calculate Attack Decrements (Counter: Cancel, Protect) ---
+// --- STEP 6.3.1: Apply Decrements ---
+// --- STEP 7: Determine Round Winner ---
+// --- STEP 8: Calculate Killshot Prefix ---
+// --- STEP 9: Calculate Damage ---
+// --- STEP 9.1: Calculate Base Damage ---
+// --- STEP 9.2: Apply Exchange Damage (Counter: Cancel) ---
+// --- STEP 9.3: Apply Copy Damage (Counter: Cancel, Exchange) ---
+// --- STEP 9.4: Calculate Damage Increments (Counter: Cancel) ---
+// --- STEP 9.4.1: Fury ---
+// --- STEP 9.4.2: Timber ---
+// --- STEP 9.4.3: Other Skills ---
+// --- STEP 9.4.4: Apply Increments ---
+// --- STEP 9.5: Calculate Damage Decrements (Counter: Cancel, Protect) ---
+// --- STEP 9.5.1: Vholt ---
+// --- STEP 9.5.2: Other Skills ---
+// --- STEP 9.5.3: Apply Decrements ---
+// --- STEP 10: Apply Damage ---
+// --- STEP 11: Calculate Backlash, Defeat and VictoryOrDefeat Prefixes ---
+// --- STEP 12: Calculate Post-Round Suffixes ---
+// --- STEP 12.1: Melody ---
+// --- STEP 12.2: Other Skills ---
+// --- STEP 13: Apply Pillz Changes ---
+// --- STEP 13.1: Apply Pillz Increments ---
+// --- STEP 13.2: Apply Pillz Decrements ---
+// --- STEP 14: Apply Life Changes --- [Pun not intended =]
+// --- STEP 14.1: Apply Life Increments (Counter: Cancel) ---
+// --- STEP 14.2: Apply Life Decrements (Counter: Cancel, Protect) ---
+// --- STEP 15: Apply Pillz Over Time ---
+// --- STEP 15.1: Apply Dope (Counter: Cancel) ---
+// --- STEP 15.2: Apply Consume, Corrosion (Counter: Cancel, Protect) ---
+// --- STEP 16: Apply Life Over Time --
+// --- STEP 16.1: Apply Heal, Reanimate, Rebirth, Regen ---
+// --- STEP 16.6: Apply Infection, Poison, Toxin ---
+// --- STEP 17 Apply Over Time Leaders
+// --- STEP 17.1: Bridget (Counter: Cancel) ---
+// --- STEP 17.2: Morphun (Counter: Cancel) ---
+// --- STEP 17.3: Eklore (Counter: Cancel, Protect) ---
+// --- LAST STEP: Final arrangements ---

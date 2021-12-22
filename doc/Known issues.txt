@@ -1,0 +1,5 @@
+KNOWN ISSUES
+
+Gameplay
+- When a player with "Backlash: Poison" wins a player with "Defeat: Poison". The right player poison will be aplied, no matter who has what card. The UR staff said that in that specific case, both poisons would stack
+- When applying "Stop Opp Life Modifier" it will stop enemy Heal and own Poison, regardless who applied it (for example with Backlash)
