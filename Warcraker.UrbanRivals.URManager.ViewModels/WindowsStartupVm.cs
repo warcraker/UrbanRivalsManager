@@ -8,7 +8,7 @@ namespace Warcraker.UrbanRivals.URManager.ViewModels
 {
     public class WindowsStartupVm
     {
-        private readonly ILogger _log;
+        private readonly ILogger<WindowsStartupVm> _log;
         private readonly ILanguageVM _languageVm;
 
         public WindowsStartupVm(ILogger<WindowsStartupVm> log, ILanguageVM languageVm)
@@ -22,6 +22,8 @@ namespace Warcraker.UrbanRivals.URManager.ViewModels
 
         public bool IsLanguageDefined()
         {
+            _log.LogTrace($"Entering {nameof(IsLanguageDefined)}");
+
             switch (_languageVm.GetLanguage())
             {
                 case SupportedLanguages.ENGLISH:
@@ -33,12 +35,13 @@ namespace Warcraker.UrbanRivals.URManager.ViewModels
         }
         public bool IsOAuthSesionValidated()
         {
+            _log.LogTrace($"Entering {nameof(IsOAuthSesionValidated)}");
+
             return false; // TODO
         }
         public void OnApplicationStart()
         {
-            string assemblyFullName = Assembly.GetCallingAssembly().GetName().FullName;
-            _log.LogInformation("Starting application... {assembly}", assemblyFullName);
+            _log.LogTrace($"Entering {nameof(OnApplicationStart)}");
 
             if (!IsLanguageDefined())
             {
