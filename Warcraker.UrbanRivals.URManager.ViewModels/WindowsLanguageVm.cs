@@ -6,7 +6,7 @@ using Warcraker.Utils;
 
 namespace Warcraker.UrbanRivals.URManager.ViewModels
 {
-    public class WindowsLanguageVm : ILanguageVM
+    public class WindowsLanguageVm : ILanguageVm
     {
         private readonly ILogger<WindowsLanguageVm> _log;
         private readonly ISettingsManager _settings;

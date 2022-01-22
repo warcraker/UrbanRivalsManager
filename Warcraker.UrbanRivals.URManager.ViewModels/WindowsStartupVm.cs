@@ -9,9 +9,9 @@ namespace Warcraker.UrbanRivals.URManager.ViewModels
     public class WindowsStartupVm
     {
         private readonly ILogger<WindowsStartupVm> _log;
-        private readonly ILanguageVM _languageVm;
+        private readonly ILanguageVm _languageVm;
 
-        public WindowsStartupVm(ILogger<WindowsStartupVm> log, ILanguageVM languageVm)
+        public WindowsStartupVm(ILogger<WindowsStartupVm> log, ILanguageVm languageVm)
         {
             AssertArgument.CheckIsNotNull(log, nameof(log));
             AssertArgument.CheckIsNotNull(languageVm, nameof(languageVm));

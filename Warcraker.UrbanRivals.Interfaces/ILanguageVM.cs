@@ -2,7 +2,7 @@
 
 namespace Warcraker.UrbanRivals.Interfaces
 {
-    public interface ILanguageVM
+    public interface ILanguageVm
     {
         string GetLanguage();
         void SetLanguage(string language);

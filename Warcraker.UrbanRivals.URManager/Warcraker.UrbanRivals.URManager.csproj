@@ -21,17 +21,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\Text\Text.en.Designer.cs">
+    <Compile Update="Resources\Text\Game.en.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Text.en.resx</DependentUpon>
+      <DependentUpon>Game.en.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Text\Text.en.resx">
+    <EmbeddedResource Update="Resources\Text\Game.en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Text.en.Designer.cs</LastGenOutput>
+      <LastGenOutput>Game.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
