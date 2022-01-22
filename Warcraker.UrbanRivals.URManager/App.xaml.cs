@@ -1,17 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
+using Warcraker.UrbanRivals.URManager.View.ExceptionHandler;
 
 namespace Warcraker.UrbanRivals.URManager
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        private void Application_DispatcherUnhandledException(object sender,
+            System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            try
+            {
+                var window = new ExceptionHandlerWindow(e.Exception);
+                window.ShowDialog();
+                e.Handled = true;
+            }
+            finally
+            {
+                Current.Shutdown();
+            }
+
+            // TODO: Press Close application
+            // TODO: Press Continue
+            // TODO: Close window
+            // TODO: Send email
+        }
     }
 }

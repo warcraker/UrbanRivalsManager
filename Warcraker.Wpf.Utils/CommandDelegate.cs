@@ -6,7 +6,7 @@ namespace Warcraker.Wpf.Utils
 {
     public class CommandDelegate : ICommand
     {
-        private static readonly Func<object, bool> RETURN_TRUE = new Func<object, bool>((x) => true);
+        private static readonly Func<object, bool> RETURN_TRUE = (_) => true;
 
         public event EventHandler CanExecuteChanged;
 

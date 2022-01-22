@@ -11,6 +11,7 @@ namespace Warcraker.UrbanRivals.URManager.Bootstrap
             builder.RegisterType<WindowsStartupVm>().AsSelf().SingleInstance();
             builder.RegisterSingleton<ILanguageVm, WindowsLanguageVm>();
             builder.RegisterType<ApiVm>().AsSelf().SingleInstance(); // TODO define interface for ApiVM
+            builder.RegisterType<MailExceptionHandlerVm>().As<ExceptionHandlerVmBase>(); 
 
             return builder;
         }

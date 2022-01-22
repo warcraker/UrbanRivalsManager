@@ -9,13 +9,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Warcraker.UrbanRivals.URManager.ViewModels;
 
-namespace Warcraker.UrbanRivals.URManager.View.LanguageSelection
+namespace Warcraker.UrbanRivals.URManager.View.Main
 {
-    public partial class LanguageSelectionWindow : Window
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
-        public LanguageSelectionWindow()
+        public MainWindow()
         {
             InitializeComponent();
         }

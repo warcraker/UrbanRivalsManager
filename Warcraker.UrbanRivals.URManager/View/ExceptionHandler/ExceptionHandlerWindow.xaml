@@ -1,0 +1,27 @@
+﻿<Window x:Class="Warcraker.UrbanRivals.URManager.View.ExceptionHandler.ExceptionHandlerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Warcraker.UrbanRivals.URManager.ViewModels;assembly=Warcraker.UrbanRivals.URManager.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance vm:ExceptionHandlerVmBase, IsDesignTimeCreatable=True}"
+        Title="ExceptionHandlerWindow" 
+        SizeToContent="Height"
+        Width="500"
+        >
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" TextWrapping="Wrap">
+            An unexpected error occurred and the application needs to be closed. A crash report has been generated. Please do send it as it helps in fixing errors.
+        </TextBlock>
+        <CheckBox Grid.Row="1" IsChecked="{Binding ShouldSendCrashReport}">Send crash report.</CheckBox>
+        <Button Grid.Row="2">Close application</Button>
+        <TextBox Grid.Row="3" Text="{Binding CrashLog, Mode=OneWay}" />
+    </Grid>
+</Window>

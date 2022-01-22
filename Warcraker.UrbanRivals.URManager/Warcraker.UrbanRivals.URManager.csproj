@@ -26,12 +26,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Game.en.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Text\UI.en.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UI.en.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\Text\Game.en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Game.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Text\UI.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UI.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
